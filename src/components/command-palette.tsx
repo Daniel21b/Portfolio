@@ -15,7 +15,6 @@ import {
   BarChart3,
   Book,
   Code2,
-  Edit,
   Fingerprint,
   Folder,
   Home,
@@ -86,12 +85,6 @@ export default function CommandPalette({
         action: Actions.Router,
         args: '/blog',
         icon: <Book strokeWidth={1.5} className="mr-2 mt-[0.12rem] h-5 w-5" />,
-      },
-      {
-        title: t('guestbook.title'),
-        action: Actions.Router,
-        args: '/guestbook',
-        icon: <Edit strokeWidth={1.5} className="mr-2 mt-[0.12rem] h-5 w-5" />,
       },
       {
         title: 'Dashboard',
