@@ -5,7 +5,7 @@ import { getTranslations } from 'next-intl/server';
 import env from '@/env.mjs';
 import { FeaturedProjectCard } from '@/components/projects/featured-project-card';
 import { ProjectCard } from '@/components/projects/project-card';
-import type { Project } from '@/components/projects/types';
+import { featuredProject, projects } from '@/data/portfolio';
 
 import type { Metadata } from 'next/types';
 
@@ -32,49 +32,6 @@ export async function generateMetadata({
     },
   };
 }
-
-// Featured project - spans full width
-const featuredProject: Project = {
-  title: 'Automated Invoice Processing Pipeline',
-  description: [
-    'Designed an event-driven architecture that eliminates manual data entry by automatically triggering extraction pipelines upon file upload, reducing processing time by 95%.',
-    'Migrated real-time invoice processing to a scheduled Airflow batch architecture, optimizing compute resource usage by processing uploads in hourly micro-batches.',
-    'Implemented unstructured-to-structured data transformation using AI-based OCR to parse PDF invoices and normalize them into a relational PostgreSQL schema.',
-  ],
-  technologies: ['Python', 'PostgreSQL', 'Streamlit', 'AWS Lambda', 'AWS S3', 'AWS RDS', 'AWS Textract'],
-  github: 'https://github.com/Daniel21b/invoice_pipeline',
-  featured: true,
-};
-
-// Other projects
-const projects: Project[] = [
-  {
-    title: 'Tech Job Market Trends Dashboard',
-    description:
-      'Scraped job postings from career sites using BeautifulSoup to track company hiring patterns. Standardized company names with Pandas and analyzed month-over-month position changes with NumPy. Visualized hiring trends using Matplotlib.',
-    technologies: ['Python', 'Pandas', 'BeautifulSoup', 'Matplotlib', 'NumPy'],
-    period: 'Jan 2024 - Mar 2024',
-    github: 'https://github.com/Daniel21b/Job-Market-Analytics',
-    liveDemo: 'https://job-market-analytics-fx.streamlit.app/',
-  },
-  {
-    title: 'DC Bikeshare Demand & Peak Usage Analysis',
-    description:
-      'Processed 2+ million Bikeshare trips using Pandas to identify usage patterns across DC metro stations. Calculated statistical correlations between weather and ridership. Generated Seaborn heatmaps and Plotly interactive visualizations.',
-    technologies: ['Python', 'Pandas', 'Seaborn', 'Plotly', 'Looker'],
-    period: 'Aug 2024 - Oct 2024',
-    github: 'https://github.com/Daniel21b/DC-Bikeshare-Demand-Analysis',
-    liveDemo: 'https://dc-bikeshare-demand-analysis-ycklasmcgsozwy87bsdgzr.streamlit.app/',
-  },
-  {
-    title: 'Open Source Contribution - Crawl4AI',
-    description:
-      'Built async scraping pipelines with Crawl4AI handling 500+ pages, implementing session management. Enhanced FastAPI endpoints with JWT authentication, reducing unauthorized access attempts by 95%.',
-    technologies: ['Python', 'Crawl4AI', 'FastAPI', 'JWT', 'AsyncIO'],
-    period: 'Mar 2025 - May 2025',
-    github: 'https://github.com/unclecode/crawl4ai/pull/1630',
-  },
-];
 
 const services = [
   {

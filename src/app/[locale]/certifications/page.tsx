@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 
 import env from '@/env.mjs';
+import { certifications } from '@/data/portfolio';
 
 import type { Metadata } from 'next/types';
 
@@ -26,40 +27,6 @@ export async function generateMetadata({
     },
   };
 }
-
-const certifications = [
-  {
-    name: 'IBM Accelerate Consulting Certification',
-    issuer: 'IBM',
-    date: 'November 2024',
-    credentialId: 'c92e8117-05a0-4063-be5e-f67be8cb36e9',
-    credentialUrl: 'https://www.credly.com/badges/c92e8117-05a0-4063-be5e-f67be8cb36e9',
-    description: 'Completed IBM Accelerate Consulting program, demonstrating expertise in business consulting, technology solutions, and strategic problem-solving.',
-    skills: ['Consulting', 'Business Strategy', 'Technology Solutions', 'Problem Solving'],
-    color: 'from-blue-500 to-blue-600',
-  },
-  {
-    name: 'Data Scientist in Python',
-    issuer: 'Dataquest',
-    date: '2024',
-    credentialId: 'DBLZAYJ1P5UOS5MSXM9I',
-    credentialUrl: 'https://app.dataquest.io/view_cert/DBLZAYJ1P5UOS5MSXM9I',
-    description: 'Completed comprehensive data science path covering Python programming, data analysis, machine learning, statistics, and data visualization.',
-    skills: ['Python', 'Pandas', 'Machine Learning', 'Statistics', 'Data Visualization'],
-    color: 'from-purple-500 to-purple-600',
-  },
-  {
-    name: 'AWS Certified Solutions Architect',
-    issuer: 'Amazon Web Services',
-    date: 'Coming Soon',
-    credentialId: null,
-    credentialUrl: null,
-    description: 'Currently preparing for this certification to demonstrate expertise in designing distributed systems on AWS.',
-    skills: ['AWS', 'Cloud Architecture', 'System Design', 'Infrastructure'],
-    color: 'from-orange-500 to-orange-600',
-    comingSoon: true,
-  },
-];
 
 const CertificationsPage = () => {
   const t = useTranslations();

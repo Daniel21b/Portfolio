@@ -63,19 +63,11 @@ export default function MobileMenu({ isMenuOpen, toggle }: Props) {
       id: 'mobile-nav-startups',
       transitionDelay: '250ms',
     },
-    {
-      href: '/blog',
-      text: t('main.books'),
-      id: 'mobile-nav-books',
-      transitionDelay: '275ms',
-    },
   ];
 
   function go(href: typeof path) {
-    if (href !== '/blog/[slug]') {
-      router.push(href);
-      toggle();
-    }
+    router.push(href);
+    toggle();
   }
 
   return (

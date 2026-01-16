@@ -4,23 +4,9 @@ import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 
 import env from '@/env.mjs';
+import { startups } from '@/data/portfolio';
 
 import type { Metadata } from 'next/types';
-
-interface Startup {
-  name: string;
-  tagline: string;
-  description: string;
-  website?: string;
-  founded: string;
-  role: string;
-  status: 'Active' | 'Acquired' | 'Stealth' | 'Building';
-  industry: string;
-  teamSize?: string;
-  highlights: string[];
-  technologies: string[];
-  color: string;
-}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -43,24 +29,6 @@ export async function generateMetadata({
     },
   };
 }
-
-// Startup entries - Add your startups here
-// Example structure:
-// {
-//   name: 'Startup Name',
-//   tagline: 'Short description of what the startup does',
-//   description: 'Detailed description of the startup, its mission, and your role',
-//   website: 'https://example.com',
-//   founded: '2024',
-//   role: 'Co-Founder & CTO',
-//   status: 'Active' | 'Acquired' | 'Stealth' | 'Building',
-//   industry: 'FinTech' | 'HealthTech' | 'EdTech' | 'AI/ML' | etc.,
-//   teamSize: '1-5',
-//   highlights: ['Highlight 1', 'Highlight 2'],
-//   technologies: ['Tech 1', 'Tech 2'],
-//   color: 'from-blue-500 to-indigo-600',
-// }
-const startups: Startup[] = [];
 
 const StartupsPage = () => {
   const t = useTranslations();

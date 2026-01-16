@@ -3,64 +3,17 @@ import { ArrowRight, ExternalLink, Github, Sparkles } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 
-import FeaturedPost from '@/components/blog/featured-post';
 import HeroSection from '@/components/hero-section';
 import { TechBadge } from '@/components/projects/tech-badge';
-import { getBlogPosts } from '@/lib/blog';
+import { homepageFeaturedProject, homepageSecondaryProjects } from '@/data/portfolio';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-// Featured project for homepage (the main showcase)
-const featuredProject = {
-  title: 'Automated Invoice Processing Pipeline',
-  description: [
-    'Event-driven architecture eliminating manual data entry, reducing processing time by 95%.',
-    'AI-based OCR parsing PDF invoices into structured PostgreSQL schema.',
-  ],
-  technologies: ['Python', 'PostgreSQL', 'Streamlit', 'AWS Lambda', 'AWS S3', 'AWS Textract'],
-  github: 'https://github.com/Daniel21b/invoice_pipeline',
-};
-
-// Secondary projects for the grid
-const secondaryProjects = [
-  {
-    name: 'Tech Job Market Trends',
-    description:
-      'Scraped job postings to track hiring patterns and visualize trends using Python, Pandas, and Matplotlib.',
-    url: 'https://github.com/Daniel21b/Job-Market-Analytics',
-    liveDemo: 'https://job-market-analytics-fx.streamlit.app/',
-    technologies: ['Python', 'Pandas', 'Matplotlib'],
-  },
-  {
-    name: 'DC Bikeshare Analysis',
-    description:
-      'Processed 2M+ trips to identify peak usage patterns. Discovered 8 stations account for 60% of rush-hour demand.',
-    url: 'https://github.com/Daniel21b/DC-Bikeshare-Demand-Analysis',
-    liveDemo: 'https://dc-bikeshare-demand-analysis-ycklasmcgsozwy87bsdgzr.streamlit.app/',
-    technologies: ['Python', 'Pandas', 'Plotly'],
-  },
-];
-
 const Index = async ({ params }: PageProps<'/[locale]'>) => {
   const locale = (await params).locale as (typeof routing.locales)[number];
   const t = await getTranslations({ locale });
-  
-  const allPosts = getBlogPosts()
-    .filter((post) => post.language === locale)
-    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
-    .slice(0, 3);
-
-  const gradients = [
-    'from-[#D8B4FE] via-[#726dde] to-[#818CF8]',
-    'from-[#FDE68A] via-[#FCA5A5] to-[#FBBF24]',
-    'from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]',
-  ] as const;
-  
-  const getGradient = (index: number): string => {
-    return gradients[index % gradients.length] ?? gradients[0];
-  };
 
   return (
     <>
@@ -69,28 +22,6 @@ const Index = async ({ params }: PageProps<'/[locale]'>) => {
         title={t('index-page.title')}
         intro={t('index-page.intro')}
       />
-
-      <h3 className="mb-6 text-2xl font-bold tracking-tight text-zinc-900 dark:text-white md:text-4xl">
-        Latest Posts
-      </h3>
-
-      <div className="flex flex-col gap-6 md:flex-row">
-        {allPosts.map((post, index) => (
-          <FeaturedPost
-            key={post.slug}
-            title={post.title}
-            slug={post.slug}
-            gradient={getGradient(index)}
-          />
-        ))}
-      </div>
-
-      <Link
-        href={`/${locale}/blog`}
-        className="mb-16 mt-8 flex h-6 cursor-pointer items-center rounded-lg leading-7 text-zinc-500 transition-all hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200">
-        {t('index-page.posts.read-all')}
-        <ArrowRight strokeWidth={1.5} className="ml-1 h-4 w-4" />
-      </Link>
 
       <h3
         id="projects"
@@ -116,10 +47,10 @@ const Index = async ({ params }: PageProps<'/[locale]'>) => {
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <h4 className="mb-2 text-xl font-bold text-zinc-900 dark:text-white md:text-2xl">
-                  {featuredProject.title}
+                  {homepageFeaturedProject.title}
                 </h4>
                 <ul className="mb-4 space-y-1.5">
-                  {featuredProject.description.map((point, idx) => (
+                  {homepageFeaturedProject.description.map((point, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-indigo-500" />
                       <span className="text-sm text-zinc-600 dark:text-zinc-400">{point}</span>
@@ -127,13 +58,13 @@ const Index = async ({ params }: PageProps<'/[locale]'>) => {
                   ))}
                 </ul>
                 <div className="flex flex-wrap gap-2">
-                  {featuredProject.technologies.map((tech) => (
+                  {homepageFeaturedProject.technologies.map((tech) => (
                     <TechBadge key={tech} tech={tech} />
                   ))}
                 </div>
               </div>
               <a
-                href={featuredProject.github}
+                href={homepageFeaturedProject.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ml-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-200/50 bg-white/80 text-zinc-500 transition-all duration-200 hover:scale-110 hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-700/50 dark:bg-zinc-800/50 dark:hover:bg-zinc-700 dark:hover:text-white"
@@ -146,7 +77,7 @@ const Index = async ({ params }: PageProps<'/[locale]'>) => {
         </div>
 
         {/* Secondary Projects */}
-        {secondaryProjects.map((project) => (
+        {homepageSecondaryProjects.map((project) => (
           <div
             key={project.name}
             className="group relative"

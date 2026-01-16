@@ -3,7 +3,6 @@
     "home": "Home",
     "about": "About",
     "projects": "Projects",
-    "books": "Blog",
     "certifications": "Certifications",
     "startups": "Startups"
   },
@@ -19,14 +18,7 @@
   },
   "index-page": {
     "title": "Data Analyst & Aspiring Data Engineer",
-    "intro": "Experienced in cloud-based analytics, ETL pipeline development, and business intelligence. Building dashboards, data pipelines, and automating workflows that drive data-driven decisions.",
-    "posts": {
-      "read-all": "View all posts",
-      "1": {
-        "title": "M2 MacBook Pro Dev Setup",
-        "slug": "m2-macbook-pro-dev-setup"
-      }
-    }
+    "intro": "Experienced in cloud-based analytics, ETL pipeline development, and business intelligence. Building dashboards, data pipelines, and automating workflows that drive data-driven decisions."
   },
   "about-page": {
     "text-1": "Hey, I'm Daniel. I'm a data analyst with experience in cloud-based analytics, ETL pipeline development, and business intelligence. I'm passionate about turning data into actionable insights that drive operational decisions across healthcare and business environments.",
@@ -77,18 +69,6 @@
     "description": "I'm sorry, but something went wrong. Please try again later.",
     "return-home": "Return home"
   },
-  "blog": {
-    "description": "Technical articles and guides about data analysis, machine learning, software engineering, and technology. In total, I've written {amount} posts. Use the search below to filter by title.",
-    "no-posts": "No posts found.",
-    "all-posts": "All Posts",
-    "search": "Search",
-    "filter": {
-      "by-name": "By name",
-      "by-tag": "By tag"
-    },
-    "views": "views",
-    "reading-time": "{minutes} min read"
-  },
   "guestbook": {
     "title": "Guestbook",
     "login": "Sign in with ",
@@ -111,9 +91,7 @@
     "stats": "Stats",
     "top-tracks": "Top Spotify Tracks",
     "metrics": {
-      "blog-views": "Blog views",
-      "guestbook-entries": "Guestbook entries",
-      "posts-count": "Amount of all posts (EN)"
+      "guestbook-entries": "Guestbook entries"
     }
   },
   "projects": {

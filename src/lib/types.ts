@@ -71,15 +71,3 @@ export interface ResponseTrackType {
     }[];
   };
 }
-
-export interface BlogPost {
-  content: string;
-  title: string;
-  translation: string;
-  publishedAt: string;
-  summary: string;
-  language: string;
-  tags: string[];
-  slug: string;
-  readingTime: number;
-}
