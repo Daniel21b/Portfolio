@@ -7,7 +7,6 @@ export default function sitemap() {
     '/projects',
     '/certifications',
     '/startups',
-    '/guestbook',
   ].map((route) => ({
     url: `${env.NEXT_PUBLIC_WEBSITE_URL}${route}`,
     lastModified: new Date().toISOString().split('T')[0],

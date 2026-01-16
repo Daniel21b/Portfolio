@@ -1,15 +1,11 @@
 import { routing } from '@/i18n/routing';
-import { count } from 'drizzle-orm';
 import { getTranslations } from 'next-intl/server';
 import { redirect } from 'next/navigation';
 
 import env from '@/env.mjs';
-import Metric from '@/components/metric';
 import { SignOutButton } from '@/components/sign-out';
 import Track from '@/components/track';
 import { auth } from '@/lib/auth';
-import { db } from '@/lib/db';
-import { guestbook } from '@/lib/db/schema';
 import { getTopTracks } from '@/lib/spotify';
 
 import type { Metadata } from 'next/types';
@@ -30,26 +26,13 @@ export function generateMetadata(): Metadata {
   };
 }
 
-const getGuestbookEntriesCount = async () => {
-  const data = await db
-    .select({
-      total: count(guestbook.id),
-    })
-    .from(guestbook)
-    .execute();
-
-  return data[0]?.total ?? 0;
-};
-
 const DashboardPage = async ({ params }: PageProps<'/[locale]/dashboard'>) => {
   const locale = (await params).locale as (typeof routing.locales)[number];
-  const [session, t, guestbookEntriesCount, topTracks] =
-    await Promise.all([
-      auth(),
-      getTranslations({ locale, namespace: 'dashboard' }),
-      getGuestbookEntriesCount(),
-      getTopTracks(),
-    ]);
+  const [session, t, topTracks] = await Promise.all([
+    auth(),
+    getTranslations({ locale, namespace: 'dashboard' }),
+    getTopTracks(),
+  ]);
 
   if (!session) {
     return redirect('/api/auth/signin?callbackUrl=/dashboard');
@@ -68,13 +51,7 @@ const DashboardPage = async ({ params }: PageProps<'/[locale]/dashboard'>) => {
         {t('logged-in')} {session.user.email} (
         <SignOutButton />)
       </p>
-      <div className="my-2 grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
-        <h2 className="mt-3 text-xl font-bold sm:col-span-2">{t('stats')}</h2>
-        <Metric title={t('metrics.guestbook-entries')}>
-          {guestbookEntriesCount}
-        </Metric>
-      </div>
-      <h2 className="mb-4 mt-16 text-3xl font-bold tracking-tight text-black dark:text-white">
+      <h2 className="mb-4 mt-8 text-3xl font-bold tracking-tight text-black dark:text-white">
         {t('top-tracks')}
       </h2>
       {topTracks.tracks.map((track, index) => (

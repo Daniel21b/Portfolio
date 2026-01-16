@@ -69,30 +69,11 @@
     "description": "I'm sorry, but something went wrong. Please try again later.",
     "return-home": "Return home"
   },
-  "guestbook": {
-    "title": "Guestbook",
-    "login": "Sign in with ",
-    "logout": "Sign out",
-    "form": {
-      "title": "Sign the Guestbook",
-      "description": "Share a message for a future visitor of my site.",
-      "input": "Your message...",
-      "submit": "Send",
-      "info": "Your information is only used to display your name."
-    },
-    "success": "Hooray! Thanks for signing my Guestbook.",
-    "error": "Please enter a message.",
-    "delete": "Delete"
-  },
   "dashboard": {
     "unauthorized": "You are not authorized to view this page.",
     "logout": "Sign out",
     "logged-in": "Logged in as",
-    "stats": "Stats",
-    "top-tracks": "Top Spotify Tracks",
-    "metrics": {
-      "guestbook-entries": "Guestbook entries"
-    }
+    "top-tracks": "Top Spotify Tracks"
   },
   "projects": {
     "not-found": "No projects found",
