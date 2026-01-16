@@ -1,4 +1,7 @@
+'use client';
+
 import { Github, Home, StarIcon } from 'lucide-react';
+import { motion } from 'motion/react';
 
 import type { Projects } from '@/lib/types';
 
@@ -8,26 +11,28 @@ const Project = ({ projects }: { projects: Projects[] | null }) => {
       {projects &&
         projects.length > 0 &&
         projects.map((project: Projects, index: number) => (
-          <div
+          <motion.div
             key={index}
             id={project.name}
-            className="my-3 rounded-lg border border-gray-200 bg-white p-6 shadow-sm hover:border-indigo-500 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-indigo-500">
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+            whileHover={{ scale: 1.02 }}
+            className="group my-3 rounded-xl border border-zinc-200/80 bg-white/60 p-6 shadow-sm backdrop-blur-xl transition-all duration-300 hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/5 dark:border-white/10 dark:bg-zinc-900/50 dark:hover:border-indigo-400/50 dark:hover:shadow-indigo-500/10">
             <div className="flex justify-between">
-              <div className="flex items-center text-lg font-semibold tracking-tight">
+              <div className="flex items-center text-lg font-semibold tracking-tight text-zinc-900 dark:text-white">
                 {project.name}
               </div>
 
-              <div className="gap-4 flex">
+              <div className="flex gap-3">
                 {project.homepage && project.homepage !== '' && (
                   <a
                     href={project.homepage}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="homepage">
-                    <Home
-                      strokeWidth={1.5}
-                      className="default-transition default-focus relative inline-flex h-10 w-10 justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-400 hover:bg-gray-50 hover:text-gray-700 dark:border-gray-500 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white sm:w-10"
-                    />
+                    aria-label="homepage"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-400 transition-all hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600 dark:border-zinc-700 dark:bg-zinc-800/50 dark:hover:border-indigo-500/50 dark:hover:bg-indigo-500/10 dark:hover:text-indigo-400">
+                    <Home strokeWidth={1.5} className="h-5 w-5" />
                   </a>
                 )}
 
@@ -35,30 +40,43 @@ const Project = ({ projects }: { projects: Projects[] | null }) => {
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="GitHub">
-                  <Github className="default-transition default-focus relative inline-flex h-10 w-10 justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-400 hover:bg-gray-50 hover:text-gray-700 dark:border-gray-500 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white sm:w-10" />
+                  aria-label="GitHub"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-400 transition-all hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/50 dark:hover:border-zinc-600 dark:hover:bg-zinc-700/50 dark:hover:text-white">
+                  <Github strokeWidth={1.5} className="h-5 w-5" />
                 </a>
               </div>
             </div>
-            <div className="mt-1 text-balance">{project.description}</div>
-            <div className="flex gap-10 mt-3">
-              <div className="flex items-center">
-                {project.language.color !== '' && (
+
+            <p className="mt-2 text-balance text-zinc-600 dark:text-zinc-400">
+              {project.description}
+            </p>
+
+            <div className="mt-4 flex flex-wrap items-center gap-4">
+              {/* Language pill */}
+              {project.language.color !== '' && (
+                <div
+                  className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium"
+                  style={{
+                    backgroundColor: `${project.language.color}15`,
+                    color: project.language.color,
+                  }}
+                >
                   <div
-                    className="inline-block w-3 h-3 rounded-full mr-2"
-                    style={{ backgroundColor: project.language.color }}></div>
-                )}
-                {project.language.name}
-              </div>
+                    className="mr-1.5 h-2 w-2 rounded-full"
+                    style={{ backgroundColor: project.language.color }}
+                  />
+                  {project.language.name}
+                </div>
+              )}
 
               {project.stargazerCount > 0 && (
-                <div className="flex items-center">
-                  <StarIcon className="w-5 h-5 mr-2 text-indigo-500" />
+                <div className="flex items-center text-sm text-zinc-500 dark:text-zinc-400">
+                  <StarIcon className="mr-1.5 h-4 w-4 text-amber-500" />
                   {project.stargazerCount}
                 </div>
               )}
             </div>
-          </div>
+          </motion.div>
         ))}
     </>
   );

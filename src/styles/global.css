@@ -8,16 +8,18 @@
 @theme {
   --color-blue-opaque: rgb(13 42 148 / 18%);
 
-  --color-gray-0: #fff;
-  --color-gray-100: #fafafa;
-  --color-gray-200: #eaeaea;
-  --color-gray-300: #999999;
-  --color-gray-400: #888888;
-  --color-gray-500: #666666;
-  --color-gray-600: #444444;
-  --color-gray-700: #333333;
-  --color-gray-800: #222222;
-  --color-gray-900: #111111;
+  /* Use Tailwind's Zinc palette for better contrast */
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f4f4f5;
+  --color-gray-200: #e4e4e7;
+  --color-gray-300: #d4d4d8;
+  --color-gray-400: #a1a1aa;
+  --color-gray-500: #71717a;
+  --color-gray-600: #52525b;
+  --color-gray-700: #3f3f46;
+  --color-gray-800: #27272a;
+  --color-gray-900: #18181b;
+  --color-gray-950: #09090b;
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -38,6 +40,23 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
+  }
+
+  /* Light mode background */
+  body {
+    @apply bg-gray-50 text-gray-900;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.08), transparent);
+  }
+
+  /* Dark mode background with subtle gradient mesh */
+  .dark body {
+    @apply bg-gray-950 text-gray-100;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(139, 92, 246, 0.1), transparent),
+      radial-gradient(ellipse 50% 30% at 0% 100%, rgba(59, 130, 246, 0.08), transparent);
+    background-attachment: fixed;
   }
 }
 
