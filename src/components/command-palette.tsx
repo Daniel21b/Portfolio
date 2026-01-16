@@ -194,9 +194,7 @@ export default function CommandPalette({
 
     switch (action) {
       case Actions.Router:
-        if (valuePath !== '/blog/[slug]') {
-          router.push(valuePath);
-        }
+        router.push(valuePath);
         break;
       case Actions.Theme:
         setTheme(theme === 'light' ? 'dark' : 'light');
