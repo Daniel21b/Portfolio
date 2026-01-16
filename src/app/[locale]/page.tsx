@@ -1,52 +1,45 @@
 import { routing } from '@/i18n/routing';
-import { ArrowRight, ExternalLink, Github } from 'lucide-react';
+import { ArrowRight, ExternalLink, Github, Sparkles } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 
 import FeaturedPost from '@/components/blog/featured-post';
 import HeroSection from '@/components/hero-section';
+import { TechBadge } from '@/components/projects/tech-badge';
 import { getBlogPosts } from '@/lib/blog';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-const featuredProjects = [
+// Featured project for homepage (the main showcase)
+const featuredProject = {
+  title: 'Automated Invoice Processing Pipeline',
+  description: [
+    'Event-driven architecture eliminating manual data entry, reducing processing time by 95%.',
+    'AI-based OCR parsing PDF invoices into structured PostgreSQL schema.',
+  ],
+  technologies: ['Python', 'PostgreSQL', 'Streamlit', 'AWS Lambda', 'AWS S3', 'AWS Textract'],
+  github: 'https://github.com/Daniel21b/invoice_pipeline',
+};
+
+// Secondary projects for the grid
+const secondaryProjects = [
   {
-    name: 'Streaming Service Content Performance Pipeline',
-    description:
-      'Orchestrated automated ETL workflows using n8n to ingest 50K+ daily viewer events. Built Python scripts with Pandas transforming raw event data into aggregated metrics. Designed pipeline loading clean data into Snowflake for real-time analytics.',
-    url: 'https://github.com/Daniel21b',
-    stargazerCount: 0,
-    language: {
-      name: 'Python + Snowflake',
-      color: '#3572A5',
-    },
-    tags: ['n8n', 'Python', 'Snowflake', 'ETL'],
-  },
-  {
-    name: 'Tech Job Market Trends Dashboard',
+    name: 'Tech Job Market Trends',
     description:
       'Scraped job postings to track hiring patterns and visualize trends using Python, Pandas, and Matplotlib.',
     url: 'https://github.com/Daniel21b/Job-Market-Analytics',
     liveDemo: 'https://job-market-analytics-fx.streamlit.app/',
-    stargazerCount: 0,
-    language: {
-      name: 'Python',
-      color: '#3572A5',
-    },
+    technologies: ['Python', 'Pandas', 'Matplotlib'],
   },
   {
-    name: 'DC Bikeshare Demand Analysis',
+    name: 'DC Bikeshare Analysis',
     description:
-      'Processed 2+ million Bikeshare trips using Pandas and SQL to identify peak usage patterns, discovering 8 stations account for 60% of rush-hour demand. Engineered data transformations calculating temporal and geographic metrics. Validated findings through correlation analysis.',
+      'Processed 2M+ trips to identify peak usage patterns. Discovered 8 stations account for 60% of rush-hour demand.',
     url: 'https://github.com/Daniel21b/DC-Bikeshare-Demand-Analysis',
     liveDemo: 'https://dc-bikeshare-demand-analysis-ycklasmcgsozwy87bsdgzr.streamlit.app/',
-    stargazerCount: 0,
-    language: {
-      name: 'Python',
-      color: '#3572A5',
-    },
+    technologies: ['Python', 'Pandas', 'Plotly'],
   },
 ];
 
@@ -101,68 +94,100 @@ const Index = async ({ params }: PageProps<'/[locale]'>) => {
 
       <h3
         id="projects"
-        className="mb-4 text-2xl font-bold tracking-tight text-zinc-900 dark:text-white md:text-4xl">
+        className="mb-6 text-2xl font-bold tracking-tight text-zinc-900 dark:text-white md:text-4xl">
         Featured Projects
       </h3>
 
-      <div className="mb-8 space-y-4">
-        {featuredProjects.map((project, index) => (
-          <div
-            key={index}
-            className="group rounded-xl border border-zinc-200/80 bg-white/60 p-6 shadow-sm backdrop-blur-xl transition-all duration-300 hover:scale-[1.01] hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/5 dark:border-white/10 dark:bg-zinc-900/50 dark:hover:border-indigo-400/50 dark:hover:shadow-indigo-500/10">
+      {/* Bento Grid Layout */}
+      <div className="mb-8 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+        {/* Featured Project - Full Width */}
+        <div className="group relative col-span-1 md:col-span-2">
+          {/* Gradient glow */}
+          <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-20 blur-lg transition-opacity duration-500 group-hover:opacity-40" />
+          <div className="absolute -inset-px rounded-2xl bg-gradient-to-r from-indigo-500/50 via-purple-500/50 to-pink-500/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+          <div className="relative rounded-2xl border border-white/20 bg-white/50 p-6 shadow-xl backdrop-blur-xl transition-all duration-300 group-hover:shadow-2xl dark:border-white/10 dark:bg-zinc-900/50">
+            {/* Featured badge */}
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-indigo-200/50 bg-gradient-to-r from-indigo-50 to-purple-50 px-3 py-1 dark:border-indigo-500/30 dark:from-indigo-500/10 dark:to-purple-500/10">
+              <Sparkles className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400" />
+              <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">Featured</span>
+            </div>
+
             <div className="flex items-start justify-between">
               <div className="flex-1">
-                <h4 className="mb-2 text-lg font-semibold text-zinc-900 dark:text-white">
-                  {project.name}
+                <h4 className="mb-2 text-xl font-bold text-zinc-900 dark:text-white md:text-2xl">
+                  {featuredProject.title}
                 </h4>
-                <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-400">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap items-center gap-3">
-                  {/* Language pill */}
-                  <div
-                    className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium"
-                    style={{
-                      backgroundColor: `${project.language.color}15`,
-                      color: project.language.color,
-                    }}
-                  >
-                    <div
-                      className="mr-1.5 h-2 w-2 rounded-full"
-                      style={{ backgroundColor: project.language.color }}
-                    />
-                    {project.language.name}
-                  </div>
-                  {/* Tag pills */}
-                  {project.tags?.map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"
-                    >
-                      {tag}
-                    </span>
+                <ul className="mb-4 space-y-1.5">
+                  {featuredProject.description.map((point, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-indigo-500" />
+                      <span className="text-sm text-zinc-600 dark:text-zinc-400">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex flex-wrap gap-2">
+                  {featuredProject.technologies.map((tech) => (
+                    <TechBadge key={tech} tech={tech} />
                   ))}
                 </div>
               </div>
-              <div className="ml-4 flex gap-2">
-                {project.liveDemo && (
+              <a
+                href={featuredProject.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-200/50 bg-white/80 text-zinc-500 transition-all duration-200 hover:scale-110 hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-700/50 dark:bg-zinc-800/50 dark:hover:bg-zinc-700 dark:hover:text-white"
+                aria-label="View on GitHub"
+              >
+                <Github className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Secondary Projects */}
+        {secondaryProjects.map((project) => (
+          <div
+            key={project.name}
+            className="group relative"
+          >
+            <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
+
+            <div className="relative h-full rounded-2xl border border-white/20 bg-white/40 p-5 shadow-lg backdrop-blur-xl transition-all duration-300 group-hover:scale-[1.02] group-hover:border-indigo-500/30 group-hover:shadow-xl dark:border-white/10 dark:bg-zinc-900/40 dark:group-hover:border-indigo-400/30">
+              <div className="flex items-start justify-between">
+                <h4 className="text-lg font-bold text-zinc-900 dark:text-white">
+                  {project.name}
+                </h4>
+                <div className="ml-3 flex gap-2">
+                  {project.liveDemo && (
+                    <a
+                      href={project.liveDemo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-indigo-200/50 bg-indigo-50/80 text-indigo-600 transition-all hover:scale-110 dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-400"
+                      aria-label="Live Demo"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  )}
                   <a
-                    href={project.liveDemo}
+                    href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-lg border border-indigo-200 bg-indigo-50 p-2 text-indigo-600 transition-colors hover:bg-indigo-100 hover:text-indigo-700 dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-400 dark:hover:bg-indigo-500/20 dark:hover:text-indigo-300"
-                    aria-label="View Live Demo">
-                    <ExternalLink className="h-5 w-5" />
+                    className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200/50 bg-white/80 text-zinc-500 transition-all hover:scale-110 hover:text-zinc-900 dark:border-zinc-700/50 dark:bg-zinc-800/50 dark:hover:text-white"
+                    aria-label="GitHub"
+                  >
+                    <Github className="h-4 w-4" />
                   </a>
-                )}
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-lg border border-zinc-200 bg-white p-2 text-zinc-400 transition-colors hover:bg-zinc-50 hover:text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/50 dark:hover:bg-zinc-700/50 dark:hover:text-white"
-                  aria-label="View on GitHub">
-                  <Github className="h-5 w-5" />
-                </a>
+                </div>
+              </div>
+              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                {project.description}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {project.technologies.map((tech) => (
+                  <TechBadge key={tech} tech={tech} size="sm" />
+                ))}
               </div>
             </div>
           </div>
