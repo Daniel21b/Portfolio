@@ -4,14 +4,14 @@ import { SkillIcon } from './skill-icons';
 import type { SkillCardProps, ProficiencyLevel } from './types';
 
 const proficiencyColors: Record<ProficiencyLevel, string> = {
-  Expert: 'bg-green-500',
   Advanced: 'bg-blue-500',
-  Proficient: 'bg-amber-500',
+  Intermediate: 'bg-amber-500',
+  Beginner: 'bg-zinc-500',
 };
 
 const SkillCard = ({ skill }: SkillCardProps) => {
   return (
-    <div className="group h-40 w-full [perspective:1000px]">
+    <div className="group h-40 w-full rounded-xl transition-shadow duration-300 ease-out hover:shadow-[0_0_20px_rgba(99,102,241,0.5)] [perspective:1000px]">
       <div className="relative h-full w-full transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
         {/* Front Face */}
         <div

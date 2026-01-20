@@ -70,6 +70,9 @@ const iconPaths: Record<string, React.ReactNode> = {
   fastapi: (
     <path d="M12 0C5.375 0 0 5.375 0 12c0 6.627 5.375 12 12 12 6.626 0 12-5.373 12-12 0-6.625-5.373-12-12-12zm-.624 21.62v-7.528H7.19L13.203 2.38v7.528h4.029L11.376 21.62z" />
   ),
+  apachespark: (
+    <path d="M12 2L4 6v6l8 4 8-4V6l-8-4zm0 2.5L17 7l-5 2.5L7 7l5-2.5zM6 8.5l5 2.5v5l-5-2.5v-5zm12 0v5l-5 2.5v-5l5-2.5z" />
+  ),
 };
 
 export const SkillIcon = ({ name, className = '' }: SkillIconProps) => {
