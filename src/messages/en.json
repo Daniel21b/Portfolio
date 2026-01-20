@@ -51,7 +51,7 @@
       },
       "2": {
         "title": "Data Analytics Consultant at ICATT Consulting",
-        "description": "Designed and implemented ETL workflows using AWS Glue & Lambda. Built real-time Power BI dashboards connected to Snowflake. Implemented dbt data quality checks to ensure reporting pipeline integrity."
+        "description": "Engineered a dimensional data model in AWS Redshift Serverless optimized for Power BI ingestion, cutting the revenue reporting cycle from 5 days to 2 days."
       },
       "3": {
         "title": "Data Analyst Intern at University of Maryland Career Center",

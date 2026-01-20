@@ -6,6 +6,8 @@ import Image from 'next/image';
 import env from '@/env.mjs';
 import Tools from '@/components/tools';
 import Timeline from '@/components/timeline';
+import { SkillsGrid } from '@/components/skills';
+import { AboutSection } from '@/components/about';
 
 import type { Metadata } from 'next/types';
 
@@ -57,14 +59,10 @@ const AboutPage = () => {
 
   return (
     <>
-      <h1 className="mb-4 text-3xl font-bold tracking-tight text-zinc-900 dark:text-white md:text-5xl">
+      <h1 className="mb-6 text-3xl font-bold tracking-tight text-zinc-900 dark:text-white md:text-5xl">
         {t('main.about')}
       </h1>
-      <div className="mb-16 text-zinc-600 dark:text-zinc-400">
-        <p className="mb-6">{t('about-page.text-1')}</p>
-        <p className="mb-6">{t('about-page.text-2')}</p>
-        <p>{t('about-page.text-3')}</p>
-      </div>
+      <AboutSection />
       <h2 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white md:text-3xl">
         Links
       </h2>
@@ -120,45 +118,10 @@ const AboutPage = () => {
         Skills & Technologies
       </h2>
       <p className="mb-6 text-zinc-500 dark:text-zinc-400">
-        Here&apos;s my technical stack for data analysis and engineering.
+        Here&apos;s my technical stack for data analysis and engineering. Hover over each card to see proficiency and usage context.
       </p>
-      <div className="prose mb-16 text-zinc-600 dark:text-zinc-400">
-        <h3 className="text-lg font-bold tracking-tight text-zinc-900 dark:text-white md:text-xl">
-          Programming Languages
-        </h3>
-        <ul className="list-disc">
-          <li>Python, SQL, R, JavaScript, Java</li>
-        </ul>
-
-        <h3 className="text-lg font-bold tracking-tight text-zinc-900 dark:text-white md:text-xl">
-          Data Analysis & Visualization
-        </h3>
-        <ul className="list-disc">
-          <li>Pandas, NumPy, Matplotlib, Seaborn</li>
-          <li>Power BI, Tableau, Looker</li>
-        </ul>
-
-        <h3 className="text-lg font-bold tracking-tight text-zinc-900 dark:text-white md:text-xl">
-          Data Pipeline & Cloud
-        </h3>
-        <ul className="list-disc">
-          <li>dbt, AWS (Glue, Lambda, EC2), Snowflake</li>
-        </ul>
-
-        <h3 className="text-lg font-bold tracking-tight text-zinc-900 dark:text-white md:text-xl">
-          Machine Learning & MLOps
-        </h3>
-        <ul className="list-disc">
-          <li>scikit-learn, MLflow</li>
-        </ul>
-
-        <h3 className="text-lg font-bold tracking-tight text-zinc-900 dark:text-white md:text-xl">
-          Databases & Tools
-        </h3>
-        <ul className="list-disc">
-          <li>MySQL, PostgreSQL, MongoDB</li>
-          <li>Git, GitHub Actions, FastAPI</li>
-        </ul>
+      <div className="mb-16">
+        <SkillsGrid />
       </div>
 
       <h2 className="mb-4 text-xl font-bold tracking-tight text-zinc-900 dark:text-white md:text-3xl">
