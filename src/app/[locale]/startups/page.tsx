@@ -44,7 +44,7 @@ const StartupsPage = () => {
 
       {startups.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 py-16 dark:border-gray-700 dark:bg-gray-800/50">
-          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg">
+          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-indigo-500 to-purple-600 text-white shadow-lg">
             <Rocket className="h-8 w-8" />
           </div>
           <h2 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
@@ -64,7 +64,7 @@ const StartupsPage = () => {
                 {/* Header */}
                 <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                   <div className="flex items-start gap-4">
-                    <div className={`flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br ${startup.color} text-white shadow-md`}>
+                    <div className={`flex h-14 w-14 items-center justify-center rounded-xl bg-linear-to-br ${startup.color} text-white shadow-md`}>
                       <Rocket className="h-7 w-7" />
                     </div>
                     <div>
@@ -124,8 +124,43 @@ const StartupsPage = () => {
                     <p className="font-semibold text-gray-900 dark:text-white">{startup.industry}</p>
                   </div>
                 </div>
+
+                {/* Detailed highlights */}
+                {startup.highlights.length > 0 && (
+                  <div>
+                    <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-700 dark:text-gray-200">
+                      Highlights
+                    </h3>
+                    <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                      {startup.highlights.map((highlight) => (
+                        <li key={highlight} className="flex items-start gap-2">
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Technologies */}
+                {startup.technologies.length > 0 && (
+                  <div>
+                    <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-700 dark:text-gray-200">
+                      Technologies
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {startup.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 dark:border-indigo-500/40 dark:bg-indigo-900/30 dark:text-indigo-300">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-              <div className={`absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r ${startup.color} opacity-0 transition-opacity duration-300 group-hover:opacity-100`} />
+              <div className={`absolute bottom-0 left-0 h-1 w-full bg-linear-to-r ${startup.color} opacity-0 transition-opacity duration-300 group-hover:opacity-100`} />
             </div>
           ))}
         </div>

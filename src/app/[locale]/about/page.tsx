@@ -37,7 +37,7 @@ const AboutPage = () => {
   // Timeline data for the animated component
   const timelineItems = [
     {
-      date: 'June 2025 - September 2025',
+      date: 'September 2025 - January 2026',
       title: t('about-page.timeline.2.title'),
       description: t('about-page.timeline.2.description'),
       link: {
@@ -129,7 +129,7 @@ const AboutPage = () => {
       </h2>
       <div className="relative inline-block">
         {/* Glowing background spot */}
-        <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-indigo-500/20 via-purple-500/15 to-pink-500/20 blur-2xl" />
+        <div className="absolute -inset-4 rounded-full bg-linear-to-br from-indigo-500/20 via-purple-500/15 to-pink-500/20 blur-2xl" />
         <Image
           alt="Daniel Berhane profile"
           width={200}

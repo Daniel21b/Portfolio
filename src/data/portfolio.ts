@@ -1,6 +1,6 @@
 /**
  * Centralized Portfolio Data
- * 
+ *
  * This file contains all the portfolio data for Projects, Certifications, and Startups.
  * Import from this file to maintain consistency across the site.
  */
@@ -20,43 +20,71 @@ export interface Project {
 }
 
 export const featuredProject: Project = {
-  title: 'Automated Invoice Processing Pipeline',
+  title: 'AI Invoice Processing Pipeline',
   description: [
-    'Designed an event-driven architecture that eliminates manual data entry by automatically triggering extraction pipelines upon file upload, reducing processing time by 95%.',
-    'Migrated real-time invoice processing to a scheduled Airflow batch architecture, optimizing compute resource usage by processing uploads in hourly micro-batches.',
-    'Implemented unstructured-to-structured data transformation using AI-based OCR to parse PDF invoices and normalize them into a relational PostgreSQL schema.',
+    'Architected an event-driven pipeline with AWS Textract to parse PDF invoices into a normalized PostgreSQL schema, cutting end-to-end processing time by 95%.',
+    'Migrated orchestration from AWS Lambda to Apache Airflow and integrated a Streamlit interface for human-in-the-loop validation before database commits.',
+    'Built transformation layers in Python and PySpark to standardize extracted invoice fields for analytics-ready downstream reporting.',
   ],
-  technologies: ['Python', 'PostgreSQL', 'Streamlit', 'AWS Lambda', 'AWS S3', 'AWS RDS', 'AWS Textract'],
+  technologies: [
+    'Python',
+    'PySpark',
+    'PostgreSQL',
+    'Streamlit',
+    'AWS Textract',
+    'Airflow',
+  ],
   github: 'https://github.com/Daniel21b/invoice_pipeline',
   featured: true,
 };
 
 export const projects: Project[] = [
   {
+    title: 'AI Invoice Processing Pipeline',
+    description:
+      'Architected an event-driven pipeline using AWS Textract to parse PDF invoices into a normalized PostgreSQL schema, reducing processing time by 95%. Migrated orchestration from AWS Lambda to Airflow and added a Streamlit HITL validation layer before commits.',
+    technologies: [
+      'Python',
+      'PySpark',
+      'PostgreSQL',
+      'Streamlit',
+      'AWS Textract',
+      'Airflow',
+    ],
+    period: '2025',
+    github: 'https://github.com/Daniel21b/invoice_pipeline',
+  },
+  {
+    title: 'PreClear AI - Permit Compliance Platform',
+    description:
+      'Built Python and Apify scrapers to extract and normalize permit compliance requirements across 50+ municipalities. Developed a FastAPI backend for compliance cross-referencing with CI/CD automation via GitHub Actions.',
+    technologies: [
+      'Python',
+      'PostgreSQL',
+      'FastAPI',
+      'JavaScript',
+      'Apify',
+      'GitHub Actions',
+    ],
+    period: '2025',
+    github: 'https://github.com/Daniel21b',
+    liveDemo: 'https://www.preclearai.net/',
+  },
+  {
     title: 'Tech Job Market Trends Dashboard',
     description:
-      'Scraped job postings from career sites using BeautifulSoup to track company hiring patterns. Standardized company names with Pandas and analyzed month-over-month position changes with NumPy. Visualized hiring trends using Matplotlib.',
-    technologies: ['Python', 'Pandas', 'BeautifulSoup', 'Matplotlib', 'NumPy'],
-    period: 'Jan 2024 - Mar 2024',
+      'Scraped and cleaned thousands of job postings using BeautifulSoup and Pandas to track in-demand skills and hiring patterns. Visualized month-over-month hiring trends with Matplotlib in an interactive Streamlit dashboard.',
+    technologies: [
+      'Python',
+      'Pandas',
+      'BeautifulSoup',
+      'Matplotlib',
+      'Docker',
+      'Streamlit',
+    ],
+    period: '2024',
     github: 'https://github.com/Daniel21b/Job-Market-Analytics',
     liveDemo: 'https://job-market-analytics-fx.streamlit.app/',
-  },
-  {
-    title: 'DC Bikeshare Demand & Peak Usage Analysis',
-    description:
-      'Processed 2+ million Bikeshare trips using Pandas to identify usage patterns across DC metro stations. Calculated statistical correlations between weather and ridership. Generated Seaborn heatmaps and Plotly interactive visualizations.',
-    technologies: ['Python', 'Pandas', 'Seaborn', 'Plotly', 'Looker'],
-    period: 'Aug 2024 - Oct 2024',
-    github: 'https://github.com/Daniel21b/DC-Bikeshare-Demand-Analysis',
-    liveDemo: 'https://dc-bikeshare-demand-analysis-ycklasmcgsozwy87bsdgzr.streamlit.app/',
-  },
-  {
-    title: 'Open Source Contribution - Crawl4AI',
-    description:
-      'Built async scraping pipelines with Crawl4AI handling 500+ pages, implementing session management. Enhanced FastAPI endpoints with JWT authentication, reducing unauthorized access attempts by 95%.',
-    technologies: ['Python', 'Crawl4AI', 'FastAPI', 'JWT', 'AsyncIO'],
-    period: 'Mar 2025 - May 2025',
-    github: 'https://github.com/unclecode/crawl4ai/pull/1630',
   },
 ];
 
@@ -65,29 +93,36 @@ export const homepageSecondaryProjects = [
   {
     name: 'Tech Job Market Trends',
     description:
-      'Scraped job postings to track hiring patterns and visualize trends using Python, Pandas, and Matplotlib.',
+      'Scraped and cleaned thousands of job postings to track in-demand skills and visualize hiring trends in Streamlit.',
     url: 'https://github.com/Daniel21b/Job-Market-Analytics',
     liveDemo: 'https://job-market-analytics-fx.streamlit.app/',
-    technologies: ['Python', 'Pandas', 'Matplotlib'],
+    technologies: ['Python', 'Pandas', 'BeautifulSoup', 'Matplotlib'],
   },
   {
-    name: 'DC Bikeshare Analysis',
+    name: 'PreClear AI',
     description:
-      'Processed 2M+ trips to identify peak usage patterns. Discovered 8 stations account for 60% of rush-hour demand.',
-    url: 'https://github.com/Daniel21b/DC-Bikeshare-Demand-Analysis',
-    liveDemo: 'https://dc-bikeshare-demand-analysis-ycklasmcgsozwy87bsdgzr.streamlit.app/',
-    technologies: ['Python', 'Pandas', 'Plotly'],
+      'Built permit compliance data scrapers and a FastAPI backend to cross-reference project descriptions against municipal requirements.',
+    url: 'https://github.com/Daniel21b',
+    liveDemo: 'https://www.preclearai.net/',
+    technologies: ['Python', 'PostgreSQL', 'FastAPI', 'Apify'],
   },
 ];
 
 // Homepage featured project (simplified for homepage display)
 export const homepageFeaturedProject = {
-  title: 'Automated Invoice Processing Pipeline',
+  title: 'AI Invoice Processing Pipeline',
   description: [
-    'Event-driven architecture eliminating manual data entry, reducing processing time by 95%.',
-    'AI-based OCR parsing PDF invoices into structured PostgreSQL schema.',
+    'Event-driven invoice ingestion with AWS Textract reduced end-to-end processing time by 95%.',
+    'Added Airflow orchestration and Streamlit human-in-the-loop validation before database commits.',
   ],
-  technologies: ['Python', 'PostgreSQL', 'Streamlit', 'AWS Lambda', 'AWS S3', 'AWS Textract'],
+  technologies: [
+    'Python',
+    'PySpark',
+    'PostgreSQL',
+    'Streamlit',
+    'AWS Textract',
+    'Airflow',
+  ],
   github: 'https://github.com/Daniel21b/invoice_pipeline',
 };
 
@@ -113,9 +148,16 @@ export const certifications: Certification[] = [
     issuer: 'IBM',
     date: 'November 2024',
     credentialId: 'c92e8117-05a0-4063-be5e-f67be8cb36e9',
-    credentialUrl: 'https://www.credly.com/badges/c92e8117-05a0-4063-be5e-f67be8cb36e9',
-    description: 'Completed IBM Accelerate Consulting program, demonstrating expertise in business consulting, technology solutions, and strategic problem-solving.',
-    skills: ['Consulting', 'Business Strategy', 'Technology Solutions', 'Problem Solving'],
+    credentialUrl:
+      'https://www.credly.com/badges/c92e8117-05a0-4063-be5e-f67be8cb36e9',
+    description:
+      'Completed IBM Accelerate Consulting program, demonstrating expertise in business consulting, technology solutions, and strategic problem-solving.',
+    skills: [
+      'Consulting',
+      'Business Strategy',
+      'Technology Solutions',
+      'Problem Solving',
+    ],
     color: 'from-blue-500 to-blue-600',
   },
   {
@@ -124,8 +166,15 @@ export const certifications: Certification[] = [
     date: '2024',
     credentialId: 'DBLZAYJ1P5UOS5MSXM9I',
     credentialUrl: 'https://app.dataquest.io/view_cert/DBLZAYJ1P5UOS5MSXM9I',
-    description: 'Completed comprehensive data science path covering Python programming, data analysis, machine learning, statistics, and data visualization.',
-    skills: ['Python', 'Pandas', 'Machine Learning', 'Statistics', 'Data Visualization'],
+    description:
+      'Completed comprehensive data science path covering Python programming, data analysis, machine learning, statistics, and data visualization.',
+    skills: [
+      'Python',
+      'Pandas',
+      'Machine Learning',
+      'Statistics',
+      'Data Visualization',
+    ],
     color: 'from-purple-500 to-purple-600',
   },
   {
@@ -134,7 +183,8 @@ export const certifications: Certification[] = [
     date: 'Coming Soon',
     credentialId: null,
     credentialUrl: null,
-    description: 'Currently preparing for this certification to demonstrate expertise in designing distributed systems on AWS.',
+    description:
+      'Currently preparing for this certification to demonstrate expertise in designing distributed systems on AWS.',
     skills: ['AWS', 'Cloud Architecture', 'System Design', 'Infrastructure'],
     color: 'from-orange-500 to-orange-600',
     comingSoon: true,
@@ -161,5 +211,24 @@ export interface Startup {
 }
 
 // Startup entries - Add your startups here when ready
-export const startups: Startup[] = [];
-
+export const startups: Startup[] = [
+  {
+    name: 'PreClear AI',
+    tagline: 'Permit Compliance Intelligence Platform',
+    description:
+      'PreClear AI is a permit compliance platform that automates how teams research and validate municipal requirements before project kickoff. It consolidates fragmented jurisdiction rules into a searchable workflow so builders can reduce compliance risk and speed up planning.',
+    website: 'https://www.preclearai.net/',
+    founded: '2025',
+    role: 'Builder & Data/Backend Engineer',
+    status: 'Active',
+    industry: 'GovTech / Compliance Automation',
+    highlights: [
+      'Built Python and Apify scraping pipelines to extract and normalize permit requirements across 50+ municipalities.',
+      'Developed a FastAPI backend to cross-reference project descriptions against regulatory datasets and return compliance checks.',
+      'Implemented CI/CD automation with GitHub Actions to improve deployment reliability and release velocity.',
+      'Designed PostgreSQL data models to support structured querying across heterogeneous rule sets and frequent updates.',
+    ],
+    technologies: ['Python', 'PostgreSQL', 'FastAPI', 'JavaScript', 'Apify', 'GitHub Actions'],
+    color: 'from-indigo-500 to-cyan-500',
+  },
+];
