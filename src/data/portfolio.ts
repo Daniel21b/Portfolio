@@ -22,17 +22,17 @@ export interface Project {
 export const featuredProject: Project = {
   title: 'AI Invoice Processing Pipeline',
   description: [
-    'Architected an event-driven pipeline with AWS Textract to parse PDF invoices into a normalized PostgreSQL schema and expose the processing path for review.',
-    'Migrated orchestration from AWS Lambda to Apache Airflow and integrated a Streamlit interface for human-in-the-loop validation before database commits.',
-    'Built transformation layers in Python and PySpark to standardize extracted invoice fields for analytics-ready downstream reporting.',
+    'Built three authenticated invoice intake paths that converge on a normalized PostgreSQL schema for traceable review.',
+    'Connected encrypted S3 uploads to Lambda through ObjectCreated notifications and parsed synchronous Textract LINE blocks into invoice fields.',
+    'Built Streamlit analytics, record details, audit views, lifecycle actions, and CSV export over the shared data model.',
   ],
   technologies: [
     'Python',
-    'PySpark',
     'PostgreSQL',
     'Streamlit',
     'AWS Textract',
-    'Airflow',
+    'AWS Lambda',
+    'AWS CDK',
   ],
   github: 'https://github.com/Daniel21b/invoice_pipeline',
   featured: true,
@@ -42,14 +42,14 @@ export const projects: Project[] = [
   {
     title: 'AI Invoice Processing Pipeline',
     description:
-      'Architected an event-driven pipeline using AWS Textract to parse PDF invoices into a normalized PostgreSQL schema. Added orchestration and a Streamlit validation layer before commits.',
+      'Built document, spreadsheet, and manual invoice intake paths that normalize classified records into PostgreSQL for analytics, search, audit, and export.',
     technologies: [
       'Python',
-      'PySpark',
       'PostgreSQL',
       'Streamlit',
       'AWS Textract',
-      'Airflow',
+      'AWS Lambda',
+      'AWS CDK',
     ],
     period: '2025',
     github: 'https://github.com/Daniel21b/invoice_pipeline',
@@ -112,16 +112,16 @@ export const homepageSecondaryProjects = [
 export const homepageFeaturedProject = {
   title: 'AI Invoice Processing Pipeline',
   description: [
-    'Event-driven invoice ingestion with AWS Textract creates a reviewable path from upload to structured records.',
-    'Added Airflow orchestration and Streamlit human-in-the-loop validation before database commits.',
+    'Document, spreadsheet, and manual invoice intake converge on one classified PostgreSQL record model.',
+    'S3 events invoke Lambda directly for synchronous Textract extraction; Streamlit provides analytics, record review, audit, and export.',
   ],
   technologies: [
     'Python',
-    'PySpark',
     'PostgreSQL',
     'Streamlit',
     'AWS Textract',
-    'Airflow',
+    'AWS Lambda',
+    'AWS CDK',
   ],
   github: 'https://github.com/Daniel21b/invoice_pipeline',
 };

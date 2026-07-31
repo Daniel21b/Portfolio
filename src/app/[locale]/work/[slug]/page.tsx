@@ -15,6 +15,12 @@ import { notFound } from 'next/navigation';
 
 import { ArchitectureRail } from '@/components/portfolio/architecture-rail';
 import { CaseLink } from '@/components/portfolio/case-link';
+import {
+  InvoiceArchitectureMap,
+  InvoiceBoundaryWalkthrough,
+  InvoiceImplementationMap,
+  InvoiceSectionIndex,
+} from '@/components/portfolio/invoice-case-detail';
 
 import type { EvidenceStatus } from '@/data/case-studies';
 import type { Metadata } from 'next';
@@ -64,6 +70,7 @@ export default async function CaseStudyPage({
   }
 
   const adjacent = getAdjacentCases(caseStudy.slug);
+  const isInvoiceCase = caseStudy.slug === 'invoice-pipeline';
 
   return (
     <article className="case-page">
@@ -112,6 +119,8 @@ export default async function CaseStudyPage({
         </dl>
       </header>
 
+      {isInvoiceCase ? <InvoiceSectionIndex /> : null}
+
       <section
         className="case-section case-section--split"
         aria-labelledby="problem">
@@ -129,10 +138,14 @@ export default async function CaseStudyPage({
         </div>
       </section>
 
-      <section className="case-section" aria-labelledby="boundary">
+      <section
+        className="case-section"
+        aria-labelledby={isInvoiceCase ? 'contribution' : 'boundary'}>
         <div className="case-section__label">
           <span>02</span>
-          <h2 id="boundary">Contribution boundary</h2>
+          <h2 id={isInvoiceCase ? 'contribution' : 'boundary'}>
+            Contribution boundary
+          </h2>
         </div>
         <div className="claim-boundary">
           <div className="claim-boundary__mine">
@@ -160,21 +173,32 @@ export default async function CaseStudyPage({
         </div>
       </section>
 
-      <section className="case-section" aria-labelledby="architecture">
+      <section
+        className="case-section"
+        aria-labelledby={isInvoiceCase ? 'system-map' : 'architecture'}>
         <div className="case-section__label">
           <span>03</span>
-          <h2 id="architecture">Architecture</h2>
+          <h2 id={isInvoiceCase ? 'system-map' : 'architecture'}>
+            {isInvoiceCase ? 'System map' : 'Architecture'}
+          </h2>
         </div>
         <p className="section-intro">
-          The system path at a glance. Each box names a boundary; each caption
-          names the job it performs.
+          {isInvoiceCase
+            ? 'The implemented system, including payload handoffs, CDK ownership, external infrastructure, and review outputs.'
+            : 'The system path at a glance. Each box names a boundary; each caption names the job it performs.'}
         </p>
-        <ArchitectureRail steps={caseStudy.architecture} />
+        {isInvoiceCase ? (
+          <InvoiceArchitectureMap />
+        ) : (
+          <ArchitectureRail steps={caseStudy.architecture} />
+        )}
       </section>
+
+      {isInvoiceCase ? <InvoiceBoundaryWalkthrough /> : null}
 
       <section className="case-section" aria-labelledby="decisions">
         <div className="case-section__label">
-          <span>04</span>
+          <span>{isInvoiceCase ? '05' : '04'}</span>
           <h2 id="decisions">Decisions + tradeoffs</h2>
         </div>
         <div className="decision-list">
@@ -196,7 +220,7 @@ export default async function CaseStudyPage({
 
       <section className="case-section" aria-labelledby="evidence">
         <div className="case-section__label">
-          <span>05</span>
+          <span>{isInvoiceCase ? '06' : '05'}</span>
           <h2 id="evidence">Evidence ledger</h2>
         </div>
         <p className="section-intro">
@@ -237,10 +261,14 @@ export default async function CaseStudyPage({
         </div>
       </section>
 
-      <section className="case-section" aria-labelledby="limitations">
+      <section
+        className="case-section"
+        aria-labelledby={isInvoiceCase ? 'limits' : 'limitations'}>
         <div className="case-section__label">
-          <span>06</span>
-          <h2 id="limitations">Not production-ready</h2>
+          <span>{isInvoiceCase ? '07' : '06'}</span>
+          <h2 id={isInvoiceCase ? 'limits' : 'limitations'}>
+            Not production-ready
+          </h2>
         </div>
         <div className="limitations-grid">
           <div>
@@ -261,6 +289,8 @@ export default async function CaseStudyPage({
           </div>
         </div>
       </section>
+
+      {isInvoiceCase ? <InvoiceImplementationMap /> : null}
 
       <nav className="case-navigation" aria-label="Case study navigation">
         {adjacent.previous ? (

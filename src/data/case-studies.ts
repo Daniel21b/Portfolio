@@ -65,24 +65,23 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     shortTitle: 'Invoice pipeline',
     year: '2025',
     role: 'Independent end-to-end builder',
-    scope: 'Application, data path, infrastructure, persistence, interface',
-    evidenceStatus: 'Public implementation; benchmark gap disclosed',
+    scope: 'Portal, three intake paths, event handler, schema, review surfaces',
+    evidenceStatus: 'Public code + demo; 51 focused local tests',
     outcome:
-      'Built an upload-to-structured-data workflow that makes invoice extraction reviewable from ingestion through dashboard output.',
+      'Built three invoice intake paths that converge on one traceable PostgreSQL record model, then feed analytics, search, audit, and export.',
     summary:
-      'A Streamlit upload flow hands work to AWS storage and orchestration, extracts fields with Textract, and persists normalized records in PostgreSQL.',
+      'An authenticated Streamlit portal accepts documents, spreadsheets, or manual entries. Each path validates and normalizes its input before persisting a classified invoice record.',
     contributionSummary:
-      'I designed and built the application flow, transformation path, infrastructure definition, persistence layer, and interface.',
+      'I independently built the portal, intake logic, CDK-defined AWS path, parser, database layer, analytics, audit, and export surfaces.',
     architecture: [
-      { name: 'Streamlit', detail: 'Upload' },
-      { name: 'S3', detail: 'Object store' },
-      { name: 'Step Functions', detail: 'Orchestrate' },
-      { name: 'Textract', detail: 'Extract' },
-      { name: 'PostgreSQL', detail: 'Persist' },
-      { name: 'Dashboard', detail: 'Review' },
+      { name: 'Streamlit', detail: '3 intake modes' },
+      { name: 'S3 / Pandas / SQL', detail: 'Validate by path' },
+      { name: 'Lambda + Textract', detail: 'Document path' },
+      { name: 'PostgreSQL', detail: 'Shared schema' },
+      { name: 'Review surfaces', detail: 'Analyze + audit' },
     ],
     homepageLimitation:
-      'Processing time and OCR quality are not publicly benchmarked; the performance claim is withheld.',
+      'Accuracy, runtime, cost, throughput, and scale remain withheld until dated measurement artifacts exist.',
     links: [
       {
         label: 'Watch 45-sec demo',
@@ -96,89 +95,132 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       },
     ],
     problem:
-      'Invoice intake is easy to automate badly: uploads, extraction, normalization, persistence, and review can become disconnected steps with no legible failure path. The project tests a traceable path from a document upload to structured records and a human-readable output.',
+      'Invoice intake arrives in three different shapes: documents need OCR, spreadsheets need schema validation, and manual records need form validation. The engineering problem is not simply extraction; it is making every path produce one reviewable, classified record with a visible source and audit trail.',
     constraints: [
-      'OCR output is probabilistic and invoice layouts vary.',
-      'The build uses cost-conscious AWS resources rather than a production availability tier.',
-      'Long-running document jobs must fit within serverless execution limits.',
-      'Public evidence needs to be inspectable from the repository, not inferred from a portfolio claim.',
+      'Synchronous Textract accepts a single-page document up to 10 MB, while the CDK-configured Lambda timeout is 120 seconds.',
+      'S3 notifications are delivered at least once and can arrive more than once or out of order.',
+      'OCR LINE blocks are interpreted with heuristics, so layout variation can produce incomplete or incorrect fields.',
+      'PostgreSQL, networking, and credentials sit outside the CDK stack and must be configured separately.',
     ],
     contribution: [
-      'Designed the end-to-end upload and processing flow.',
-      'Defined the infrastructure and orchestration path.',
-      'Built the extraction transformation and PostgreSQL persistence layers.',
-      'Built the Streamlit interface and dashboard output.',
+      'Designed and built the authenticated Streamlit portal with document, spreadsheet, and manual intake.',
+      'Defined S3, Lambda, IAM, event notifications, configuration, and the psycopg2 layer in AWS CDK.',
+      'Built the Lambda validation path, Textract call, heuristic field parser, and PostgreSQL persistence.',
+      'Built the shared schema, analytics, search/details, soft-delete/restore, audit, and CSV export flows.',
     ],
     outsideClaim: [
-      'No client production rollout or service-level agreement.',
-      'No independently audited accuracy or performance benchmark.',
-      'No claim that the current infrastructure is production-ready.',
+      'Production adoption, business outcome, uptime, and service-level guarantees.',
+      'AWS account setup, RDS provisioning, VPC/networking, and a public application endpoint.',
+      'Independently audited accuracy, runtime, cost, throughput, or scale results.',
+      'Production readiness or complete deployment integration coverage.',
     ],
     decisions: [
       {
-        title: 'Presigned upload before orchestration',
+        title: 'Direct S3 notification instead of an orchestrator',
         detail:
-          'The application sends invoice objects to S3, then hands a stable object reference to the workflow.',
+          'The portal uploads with server-side boto3; an ObjectCreated notification invokes the processor Lambda directly.',
         tradeoff:
-          'This separates file transfer from processing, but introduces object lifecycle and retry concerns.',
+          'The path is short and legible, but it has no durable queue, replay control, or state machine between storage and processing.',
       },
       {
-        title: 'Managed OCR over custom extraction',
+        title: 'Synchronous Textract for the document path',
         detail:
-          'Textract provides document-aware extraction without training and serving a bespoke model.',
+          'The handler calls DetectDocumentText and converts returned LINE blocks during the same Lambda invocation.',
         tradeoff:
-          'Faster to assemble, but accuracy remains layout-dependent and each page carries cost.',
+          'The implementation is straightforward, but it inherits the 10 MB single-page boundary and ties extraction time to the 120-second Lambda window.',
       },
       {
-        title: 'Normalized persistence before reporting',
+        title: 'One invoice schema for all three inputs',
         detail:
-          'Extracted fields are transformed into a PostgreSQL schema before dashboard consumption.',
+          'Document parsing, confirmed spreadsheet rows, and manual form entries converge on the same invoices table with source metadata.',
         tradeoff:
-          'Downstream reporting becomes predictable, but schema evolution needs explicit migrations.',
+          'Analytics and review queries stay consistent, but the shared model must retain enough provenance to explain how each field was produced.',
+      },
+      {
+        title: 'Route bulk writes at 100 rows',
+        detail:
+          'Spreadsheet imports use row-wise INSERT below 100 rows and PostgreSQL COPY at 100 rows or above.',
+        tradeoff:
+          'Small imports keep simple error behavior while larger ones use a faster path; maintaining two write paths increases test surface.',
+      },
+      {
+        title: 'Configuration-backed credentials',
+        detail:
+          'The portal administrator credential comes from Streamlit secrets, while database credentials are supplied through environment configuration.',
+        tradeoff:
+          'This is workable for a development deployment, but production would require managed secret rotation and private database networking.',
       },
     ],
     evidence: [
       {
         id: 'E-01',
         status: 'verified',
-        label: 'End-to-end architecture',
+        label: 'Architecture wiring',
         finding:
-          'The public repository documents upload, AWS orchestration, Textract extraction, PostgreSQL persistence, and dashboard output.',
+          'The repository contains the portal, CDK stack, S3 notification, Lambda handler, parser, shared schema, database manager, and review pages.',
         method:
-          'Repository structure and README architecture were inspected as the evidence surface.',
-        source: 'README plus /src, /infrastructure, /database, and /app.py',
+          'Read the implementation at each boundary and traced its input into the next component.',
+        source:
+          'invoice_pipeline_stack.py; app.py; invoice_processor.py; database.py; schema.sql',
       },
       {
         id: 'E-02',
         status: 'verified',
-        label: 'Working artifact',
+        label: 'Handler and parser behavior',
         finding:
-          'A short repository-hosted demonstration shows the application workflow.',
-        method: 'Visual review of the README demo artifact.',
-        source: 'README demo',
+          'The focused local verification completed with 51 passing unit tests.',
+        method:
+          'Ran the handler and parser unit-test files locally on July 30, 2026; this is not a public CI result.',
+        source:
+          'tests/unit/test_invoice_processor.py; tests/unit/test_textract_parser.py',
       },
       {
         id: 'E-03',
-        status: 'withheld',
-        label: 'Processing-time improvement',
+        status: 'verified',
+        label: 'Demonstrated workflow',
         finding:
-          'No performance result is published because the public repository does not contain a defensible benchmark.',
+          'A repository-hosted 45-second recording shows the application workflow in use.',
         method:
-          'A publishable result would require a named baseline, timing protocol, sample count, and results file.',
-        source: 'Evidence gap; no benchmark artifact found',
+          'Reviewed the video artifact linked from the repository README.',
+        source: 'README demo video',
+      },
+      {
+        id: 'E-04',
+        status: 'limited',
+        label: 'Deployment integration',
+        finding:
+          'The component implementation is public, but end-to-end deployment behavior is not fully proven.',
+        method:
+          'Integration tests in the repository are explicitly skipped; no complete public CI run is presented.',
+        source: 'Integration-test configuration and repository test suite',
+      },
+      {
+        id: 'E-05',
+        status: 'withheld',
+        label: 'Performance and quality outcomes',
+        finding:
+          'Accuracy, runtime, cost, throughput, and scale claims are withheld.',
+        method:
+          'Publish a dated fixture corpus, environment, baseline, sample count, measurement protocol, and raw result artifact.',
+        source: 'Evidence gap; no publishable result artifact',
       },
     ],
     limitations: [
-      'Lambda polling has a 15-minute ceiling for long-running jobs.',
-      'Free-tier database idle behavior is not a production availability model.',
-      'Textract creates a per-page operating cost.',
-      'OCR field accuracy, exception rate, PII governance, and load behavior are not publicly benchmarked.',
+      'At-least-once S3 events can duplicate or reorder work; the generated idempotency string is neither checked nor persisted.',
+      'There is no queue, dead-letter path, replay mechanism, or workflow state between S3 and Lambda.',
+      'Synchronous Textract and a regex-style LINE parser limit document size, layout tolerance, and failure recovery.',
+      'No confidence-based review routing is active, even though a confidence accessor exists.',
+      'Lambda receives database credentials through environment configuration; RDS and networking remain external.',
+      'The development bucket uses a destructive removal policy and wildcard CORS.',
+      'No dated accuracy, latency, cost, throughput, or load artifact is published.',
     ],
     scaleRedesign: [
-      'Replace long polling with asynchronous job state and resumable workers.',
-      'Add field-level confidence thresholds and an explicit human review queue.',
-      'Make database writes idempotent and add a dead-letter path for failed documents.',
-      'Publish a structured quality benchmark with trace IDs from upload through persistence.',
+      'Add a durable queue or orchestration layer with retries, a dead-letter queue, and replayable execution state.',
+      'Enforce idempotency with an object-version or content-hash key before any database write.',
+      'Move large or multi-page documents to asynchronous Textract and resumable status handling.',
+      'Record field-level confidence and route uncertain invoices to explicit human review.',
+      'Use Secrets Manager, private networking, and RDS Proxy for credential and connection control.',
+      'Adopt non-destructive retention, a fixture corpus, and dated accuracy, latency, and cost reporting.',
     ],
   },
   {

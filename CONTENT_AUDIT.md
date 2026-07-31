@@ -15,6 +15,22 @@ redesign. It is a maintainer artifact, not public marketing copy.
 - Evidence required to restore it: a reproducible benchmark that names the
   baseline implementation, the measured interval, input sample, environment,
   summary statistic, and raw results.
+- Corrected the architecture to match the implementation: the portal uploads
+  through server-side `boto3`, S3 invokes Lambda directly, and Lambda calls
+  synchronous Textract. The repository does not implement presigned uploads or
+  a Step Functions state machine.
+- Corrected the infrastructure boundary: CDK defines S3, Lambda, IAM,
+  notifications, Lambda configuration, and the psycopg2 layer. RDS,
+  VPC/networking, credentials, and a public endpoint are external.
+- Withheld the README's cost, runtime, throughput, scale, and production-readiness
+  language because no dated measurement or deployment artifact supports it.
+- Idempotency is not claimed: the handler creates a string for logging but does
+  not check or persist it. Confidence-based review routing is also not active.
+- Focused local verification on July 30, 2026:
+  `python -m pytest tests/unit/test_invoice_processor.py
+  tests/unit/test_textract_parser.py -q` returned `51 passed`. This is recorded
+  as local verification, not public CI or full-suite evidence; repository
+  integration tests are explicitly skipped.
 
 ### PreClear AI
 
