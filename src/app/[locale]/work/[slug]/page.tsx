@@ -21,6 +21,12 @@ import {
   InvoiceImplementationMap,
   InvoiceSectionIndex,
 } from '@/components/portfolio/invoice-case-detail';
+import {
+  PreClearArchitectureMap,
+  PreClearBoundaryWalkthrough,
+  PreClearImplementationMap,
+  PreClearSectionIndex,
+} from '@/components/portfolio/preclear-case-detail';
 
 import type { EvidenceStatus } from '@/data/case-studies';
 import type { Metadata } from 'next';
@@ -71,6 +77,8 @@ export default async function CaseStudyPage({
 
   const adjacent = getAdjacentCases(caseStudy.slug);
   const isInvoiceCase = caseStudy.slug === 'invoice-pipeline';
+  const isPreClearCase = caseStudy.slug === 'preclear-ai';
+  const isDeepCase = isInvoiceCase || isPreClearCase;
 
   return (
     <article className="case-page">
@@ -120,6 +128,7 @@ export default async function CaseStudyPage({
       </header>
 
       {isInvoiceCase ? <InvoiceSectionIndex /> : null}
+      {isPreClearCase ? <PreClearSectionIndex /> : null}
 
       <section
         className="case-section case-section--split"
@@ -140,10 +149,10 @@ export default async function CaseStudyPage({
 
       <section
         className="case-section"
-        aria-labelledby={isInvoiceCase ? 'contribution' : 'boundary'}>
+        aria-labelledby={isDeepCase ? 'contribution' : 'boundary'}>
         <div className="case-section__label">
           <span>02</span>
-          <h2 id={isInvoiceCase ? 'contribution' : 'boundary'}>
+          <h2 id={isDeepCase ? 'contribution' : 'boundary'}>
             Contribution boundary
           </h2>
         </div>
@@ -175,30 +184,35 @@ export default async function CaseStudyPage({
 
       <section
         className="case-section"
-        aria-labelledby={isInvoiceCase ? 'system-map' : 'architecture'}>
+        aria-labelledby={isDeepCase ? 'system-map' : 'architecture'}>
         <div className="case-section__label">
           <span>03</span>
-          <h2 id={isInvoiceCase ? 'system-map' : 'architecture'}>
-            {isInvoiceCase ? 'System map' : 'Architecture'}
+          <h2 id={isDeepCase ? 'system-map' : 'architecture'}>
+            {isDeepCase ? 'System map' : 'Architecture'}
           </h2>
         </div>
         <p className="section-intro">
           {isInvoiceCase
             ? 'The implemented system, including payload handoffs, CDK ownership, external infrastructure, and review outputs.'
-            : 'The system path at a glance. Each box names a boundary; each caption names the job it performs.'}
+            : isPreClearCase
+              ? 'The implemented scheduled and request-time paths, including payloads, private code ownership, external services, failure boundaries, and the final decision record.'
+              : 'The system path at a glance. Each box names a boundary; each caption names the job it performs.'}
         </p>
         {isInvoiceCase ? (
           <InvoiceArchitectureMap />
+        ) : isPreClearCase ? (
+          <PreClearArchitectureMap />
         ) : (
           <ArchitectureRail steps={caseStudy.architecture} />
         )}
       </section>
 
       {isInvoiceCase ? <InvoiceBoundaryWalkthrough /> : null}
+      {isPreClearCase ? <PreClearBoundaryWalkthrough /> : null}
 
       <section className="case-section" aria-labelledby="decisions">
         <div className="case-section__label">
-          <span>{isInvoiceCase ? '05' : '04'}</span>
+          <span>{isDeepCase ? '05' : '04'}</span>
           <h2 id="decisions">Decisions + tradeoffs</h2>
         </div>
         <div className="decision-list">
@@ -220,7 +234,7 @@ export default async function CaseStudyPage({
 
       <section className="case-section" aria-labelledby="evidence">
         <div className="case-section__label">
-          <span>{isInvoiceCase ? '06' : '05'}</span>
+          <span>{isDeepCase ? '06' : '05'}</span>
           <h2 id="evidence">Evidence ledger</h2>
         </div>
         <p className="section-intro">
@@ -263,10 +277,10 @@ export default async function CaseStudyPage({
 
       <section
         className="case-section"
-        aria-labelledby={isInvoiceCase ? 'limits' : 'limitations'}>
+        aria-labelledby={isDeepCase ? 'limits' : 'limitations'}>
         <div className="case-section__label">
-          <span>{isInvoiceCase ? '07' : '06'}</span>
-          <h2 id={isInvoiceCase ? 'limits' : 'limitations'}>
+          <span>{isDeepCase ? '07' : '06'}</span>
+          <h2 id={isDeepCase ? 'limits' : 'limitations'}>
             Not production-ready
           </h2>
         </div>
@@ -291,6 +305,7 @@ export default async function CaseStudyPage({
       </section>
 
       {isInvoiceCase ? <InvoiceImplementationMap /> : null}
+      {isPreClearCase ? <PreClearImplementationMap /> : null}
 
       <nav className="case-navigation" aria-label="Case study navigation">
         {adjacent.previous ? (

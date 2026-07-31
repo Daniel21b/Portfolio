@@ -226,27 +226,28 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
   {
     slug: 'preclear-ai',
     number: '02',
-    title: 'PreClear AI',
+    title: 'PreClear Permit Compliance Platform',
     shortTitle: 'PreClear AI',
     year: '2025–present',
-    role: 'Builder and data/backend engineer',
-    scope: 'Ingestion, normalization, compliance API, workflow automation',
-    evidenceStatus: 'Live product verified; implementation evidence private',
+    role: 'Independent builder · data/backend engineer',
+    scope: 'Scheduled ingestion, compliance schema, permit decision service',
+    evidenceStatus: 'Live surface + private code trace; limits disclosed',
     outcome:
-      'Built the municipal-data path behind a live permit pre-check product, turning fragmented source pages into structured compliance checks.',
+      'Built two separately clocked paths—scheduled ordinance ingestion and request-time permit resolution—that converge on one cited compliance decision.',
     summary:
-      'Python and Apify collectors normalize municipal requirements into PostgreSQL, where a FastAPI service cross-references project details for the product interface.',
+      'Python prepares versionable ordinance knowledge in Supabase/PostgreSQL. A Next.js and TypeScript route resolves requests through deterministic rules first, then jurisdiction-scoped hybrid retrieval with an explicit uncertainty fallback.',
     contributionSummary:
-      'I built the municipal ingestion, normalization, PostgreSQL rule store, compliance cross-reference service, and GitHub Actions automation.',
+      'GitHub history attributes all 47 commits across the two audited private repositories to me; I built the scoped ingestion, schema, decision, retrieval, and weekly automation paths described here.',
     architecture: [
-      { name: 'Source pages', detail: 'Municipal rules' },
-      { name: 'Python / Apify', detail: 'Collect' },
-      { name: 'PostgreSQL', detail: 'Normalize' },
-      { name: 'FastAPI', detail: 'Cross-reference' },
-      { name: 'Product UI', detail: 'Pre-check' },
+      { name: 'JSONL snapshot', detail: 'Scraper-produced input' },
+      { name: 'Python ingestion', detail: 'Filter + normalize' },
+      { name: 'Supabase / pgvector', detail: 'Rules + knowledge' },
+      { name: 'Next.js route', detail: 'Authorize + resolve' },
+      { name: 'Rules / hybrid search', detail: 'Two-track decision' },
+      { name: 'Decision record', detail: 'Result + citation' },
     ],
     homepageLimitation:
-      'Source drift, coverage, and classification error rates still need public quality reporting.',
+      'Current retrieval calibration, scheduled reliability, test health, release parity, coverage, and accuracy are disclosed as unresolved.',
     links: [
       {
         label: 'Open live product',
@@ -255,45 +256,60 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       },
     ],
     problem:
-      'Permit requirements are fragmented across municipal websites and change over time. The system needs to collect inconsistent source material, preserve enough structure to compare it against a project, and surface useful conflicts without hiding uncertainty.',
+      'Permit requirements live in jurisdiction-specific documents that change independently and use inconsistent language. The system must prepare source-backed knowledge on one clock, resolve project questions on another, and stop rather than fabricate certainty when rules or retrieval evidence are insufficient.',
     constraints: [
-      'Jurisdiction sites differ in structure, terminology, and update cadence.',
-      'Implementation repositories are private, so public proof is limited to the live product and scoped contribution statements.',
-      'Regulatory results need provenance and freshness to be trustworthy.',
-      'Product design, brand, and customer operations are team-owned work.',
+      'The checked-in artifact contains 354 raw chunks from 39 distinct source URLs and 21 county values; it is not proof of active production coverage.',
+      'The source-collection implementation is private or absent from the audited repositories, so the scraper boundary remains unproven.',
+      'The live product and audited private commit are not proven to be the same release.',
+      'Permit output needs dated source provenance, calibrated retrieval, and legal review; none is represented as a legal determination.',
     ],
     contribution: [
-      'Built Python and Apify collectors for municipal source pages.',
-      'Normalized heterogeneous requirements into PostgreSQL.',
-      'Built FastAPI cross-referencing for project and rule inputs.',
-      'Added GitHub Actions automation for the backend workflow.',
+      'Built Python filtering, county normalization, content-hash deduplication, batched embedding, retry, and Supabase/PostgreSQL upsert logic.',
+      'Designed the jurisdiction, rule, document, ordinance-chunk, retrieval, provenance, project, and access-control schema.',
+      'Built the Next.js/TypeScript permit-check route with Zod validation, session and entitlement checks, deterministic rule evaluation, and guarded hybrid retrieval.',
+      'Configured the manual and weekly GitHub Actions ingestion workflow.',
     ],
     outsideClaim: [
-      'Product design and brand system.',
-      'Customer operations and go-to-market work.',
-      'Other team-owned product implementation not listed above.',
+      'Legal or permitting accuracy, professional advice, or approval authority.',
+      'Production adoption, business impact, uptime, latency, or service levels.',
+      'Product design, brand, and customer or go-to-market work.',
+      'Coverage beyond the checked-in snapshot or exact parity between the audited commit and live domain.',
     ],
     decisions: [
       {
-        title: 'Normalize before cross-referencing',
+        title: 'Deterministic rules before generation',
         detail:
-          'Collectors map heterogeneous municipal material into a shared rule shape before the API compares it with project details.',
+          'The request path queries active permit_rules and evaluates explicit project thresholds before hybrid retrieval or an LLM is considered.',
         tradeoff:
-          'A consistent API becomes possible, but the shared schema can erase jurisdiction-specific nuance if provenance is weak.',
+          'Auditable rules can resolve known cases without generation, but the current first-match behavior lacks explicit precedence and compound-rule handling.',
       },
       {
-        title: 'Separate collection from serving',
+        title: 'Content hashes before embedding and upsert',
         detail:
-          'Ingestion jobs update the rule store independently from the FastAPI request path.',
+          'Normalized chunk text is hashed and existing hashes are skipped before paid embedding and database writes.',
         tradeoff:
-          'Product requests stay responsive, but stale data can persist unless freshness is monitored.',
+          'Exact duplicate work is avoided, but meaningful source revisions still need document-level versioning and review.',
       },
       {
-        title: 'Automate the repeatable workflow',
+        title: 'Jurisdiction-scoped hybrid retrieval',
         detail:
-          'GitHub Actions handles repeatable backend checks and workflow automation.',
+          'The database RPC fuses pgvector similarity with PostgreSQL full-text ranking instead of relying on vector proximity alone.',
         tradeoff:
-          'Automation reduces manual release work, but it does not replace source-level quality monitoring.',
+          'Lexical and semantic signals can complement one another, but RRF scores require calibration against a labeled retrieval set.',
+      },
+      {
+        title: 'Make uncertainty an explicit product state',
+        detail:
+          'Insufficient retrieval returns VERIFY_WITH_COUNTY instead of asking the model to produce an ungrounded compliance answer.',
+        tradeoff:
+          'The system declines more requests, but preserves a visible distinction between evidence and guesswork.',
+      },
+      {
+        title: 'Separate scheduled knowledge work from serving',
+        detail:
+          'A weekly Python workflow prepares ordinance chunks independently from the authenticated Next.js request path.',
+        tradeoff:
+          'Request latency does not absorb crawl and embedding work, but failed schedules can silently leave the serving path stale without monitoring.',
       },
     ],
     evidence: [
@@ -302,42 +318,88 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
         status: 'verified',
         label: 'Live product surface',
         finding:
-          'The live site exposes a Maryland permit pre-check flow and product/project tracking interface.',
+          'The live site exposes a Maryland permit pre-check surface and project-tracking examples.',
         method: 'Direct product audit completed on July 30, 2026.',
         source: 'preclearai.net',
       },
       {
         id: 'E-02',
-        status: 'limited',
-        label: 'Implementation contribution',
+        status: 'verified',
+        label: 'Private architecture trace',
         finding:
-          'Backend and data contribution is stated precisely, but the supporting repository is not public.',
+          'The two audited private repositories contain the scheduled ingestion path, database migrations, permit-check route, hybrid retrieval function, prompt constraint, entitlements, and tests.',
         method:
-          'Contribution is bounded to named ingestion, storage, API, and automation components.',
-        source: 'Private implementation; public code evidence pending',
+          'Traced each boundary to a private repository path; GitHub attributes all 38 SaaS commits and all 9 pipeline commits to Daniel21b.',
+        source: 'Private permitsaas and PreClear_pipeline repositories',
       },
       {
         id: 'E-03',
-        status: 'withheld',
-        label: 'Jurisdiction coverage',
+        status: 'verified',
+        label: 'Repository source snapshot',
         finding:
-          'A public coverage count is withheld until a dated, reproducible jurisdiction export is available.',
+          'The checked-in JSONL contains 354 raw chunks from 39 unique document/source URLs across 21 county values; 331 passed filters in the latest inspected run.',
         method:
-          'Publish a deduplicated export with source URL, jurisdiction, last-seen date, and rule version.',
-        source: 'Evidence gap; dated coverage export needed',
+          'Counted repository records, distinct source URLs, and county values, then compared the latest workflow log.',
+        source: 'PreClear_pipeline/data/chunks.jsonl; latest ingestion log',
+      },
+      {
+        id: 'E-04',
+        status: 'limited',
+        label: 'Local test health',
+        finding:
+          'The inspected local Vitest run completed with 274 tests passing and 5 failing across 6 files, plus unhandled mock errors.',
+        method:
+          'Ran the private application test suite locally on July 30, 2026; the suite is not green.',
+        source: 'permitsaas/__tests__; local Vitest output',
+      },
+      {
+        id: 'E-05',
+        status: 'limited',
+        label: 'Scheduled automation reliability',
+        finding:
+          'GitHub records 33 ingestion runs: 6 successes, 26 failures, and 1 cancellation; the latest ten inspected schedules failed.',
+        method:
+          'Inspected GitHub Actions run history on July 30, 2026; the July 26 run stopped at database authentication.',
+        source: 'PreClear_pipeline GitHub Actions history',
+      },
+      {
+        id: 'E-06',
+        status: 'limited',
+        label: 'Deployment artifact',
+        finding:
+          'Vercel records a successful production deployment for private application commit c840010 on March 9, 2026.',
+        method:
+          'Inspected the private repository deployment record; no evidence binds that commit to the current live domain.',
+        source: 'Private GitHub/Vercel deployment record',
+      },
+      {
+        id: 'E-07',
+        status: 'withheld',
+        label: 'Quality and business outcomes',
+        finding:
+          'Accuracy, freshness, active coverage, latency, adoption, and business impact remain withheld.',
+        method:
+          'Publish a dated labeled evaluation set, coverage manifest, freshness definition, environment, baselines, sample counts, and raw results.',
+        source: 'Evidence gap; no reproducible measurement artifact',
       },
     ],
     limitations: [
-      'Regulatory source drift can make stored requirements stale.',
-      'Results need source-level citations and freshness metadata.',
-      'False-positive and false-negative rates have not been publicly evaluated.',
-      'Jurisdiction coverage and scraper failures need monitored reporting.',
+      'The RRF score has a theoretical maximum near 0.041 while the route compares it with 0.35, likely making the generated-answer branch unreachable.',
+      'Any non-VERIFY_WITH_COUNTY generated answer is normalized to permit_required, so a generated “not required” answer can be misclassified.',
+      'Deterministic resolution returns the first matching rule without explicit precedence or compound-rule handling; seeded rules are labeled examples requiring verification.',
+      'The latest ten scheduled ingestion runs failed, most recently at database authentication.',
+      'The local suite is not green: 274 tests passed and 5 failed, with additional unhandled mock errors.',
+      'Build-time Stripe initialization requires a local secret during page-data collection instead of being lazy at the service boundary.',
+      'Live-release parity, the private source collector, and dated accuracy/freshness/coverage evaluation remain unverified.',
     ],
     scaleRedesign: [
-      'Version every rule with source provenance and effective dates.',
-      'Use diff-based recrawls to isolate changed source material.',
-      'Route low-confidence extraction to a human review queue.',
-      'Add jurisdiction-level freshness, coverage, and quality dashboards.',
+      'Calibrate hybrid ranking and its gate against a labeled jurisdiction-level retrieval set, then version the chosen threshold.',
+      'Represent answer polarity as a typed result and test required, not-required, and uncertain outcomes end to end.',
+      'Add rule priority, compound-condition evaluation, effective dates, and a verification workflow for seeded rules.',
+      'Repair database credentials, add schedule-health alerts, and publish freshness/coverage manifests for every run.',
+      'Make Stripe and other service clients initialize lazily so builds and isolated tests do not require production secrets.',
+      'Publish release SHAs beside the live surface and bind deployment records to a visible application version.',
+      'Add source versioning, human legal review, and dated precision, recall, freshness, and latency reporting with baselines.',
     ],
   },
   {
