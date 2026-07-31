@@ -13,8 +13,8 @@ export default function Navbar() {
           className="site-mark"
           href={`/${locale}/`}
           aria-label="Daniel Berhane home">
-          <span>DB—01</span>
-          <small>Daniel Berhane</small>
+          <span>Daniel Berhane</span>
+          <small>Portfolio</small>
         </a>
         <div className="site-nav__links">
           <a href={`/${locale}/#work`}>Work</a>

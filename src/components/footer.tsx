@@ -9,13 +9,10 @@ export default function Footer() {
     <footer className="site-footer">
       <div>
         <a className="site-mark site-mark--footer" href={`/${locale}/`}>
-          <span>DB—01</span>
-          <small>Daniel Berhane</small>
+          <span>Daniel Berhane</span>
+          <small>Portfolio</small>
         </a>
-        <p>
-          Data pipelines, analytics workflows, and compliance systems with the
-          evidence attached.
-        </p>
+        <p>A small collection of my work in data and backend engineering.</p>
       </div>
       <div className="site-footer__links">
         <a href={`/${locale}/projects`}>Selected work</a>

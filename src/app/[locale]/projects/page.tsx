@@ -6,9 +6,9 @@ import { CaseOverview } from '@/components/portfolio/case-overview';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Selected work',
+  title: 'Projects',
   description:
-    'An index of Daniel Berhane’s selected data pipeline and compliance system case studies.',
+    'A few data engineering and backend projects built by Daniel Berhane.',
 };
 
 export function generateStaticParams() {
@@ -23,13 +23,13 @@ export default async function ProjectsPage({
   return (
     <div className="index-page">
       <header className="index-page__header">
-        <p className="eyebrow">Work index / 03 selected cases</p>
-        <h1>Systems with the proof attached.</h1>
+        <p className="eyebrow">Selected projects</p>
+        <h1>A few things I&apos;ve built.</h1>
         <p>
-          This is the compact index. Each case opens into the contribution
-          boundary, architecture, decisions, evidence, and limitations.
+          Each project includes a closer look at what I worked on, the choices I
+          made, and what I learned along the way.
         </p>
-        <a href={`/${locale}/#work`}>Return to homepage selection →</a>
+        <a href={`/${locale}/#work`}>Back to the homepage →</a>
       </header>
 
       <section className="case-list" aria-label="Selected case studies">

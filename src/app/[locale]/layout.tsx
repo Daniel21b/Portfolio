@@ -29,11 +29,11 @@ export async function generateMetadata({
     authors: [{ name: 'Daniel Berhane' }],
     applicationName: 'Daniel Berhane',
     description:
-      'Data pipelines, cloud workflows, and compliance systems by Daniel Berhane.',
+      'Daniel Berhane’s portfolio of data engineering, backend, and software projects.',
     openGraph: {
       title: 'Daniel Berhane',
       description:
-        'Data pipelines, cloud workflows, and compliance systems by Daniel Berhane.',
+        'Daniel Berhane’s portfolio of data engineering, backend, and software projects.',
       url: env.NEXT_PUBLIC_WEBSITE_URL,
       siteName: 'Daniel Berhane',
       images: [
@@ -61,7 +61,7 @@ export async function generateMetadata({
       title: 'Daniel Berhane',
       card: 'summary_large_image',
       description:
-        'Data pipelines, cloud workflows, and compliance systems by Daniel Berhane.',
+        'Daniel Berhane’s portfolio of data engineering, backend, and software projects.',
       images: [`${env.NEXT_PUBLIC_WEBSITE_URL}/api/og`],
     },
     manifest: '/static/site.webmanifest',
@@ -81,7 +81,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   width: 'device-width',
   colorScheme: 'light',
-  themeColor: '#f2f0e8',
+  themeColor: '#f7f4ee',
 };
 
 export default async function RootLayout({

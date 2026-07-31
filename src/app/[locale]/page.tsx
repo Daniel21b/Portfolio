@@ -8,39 +8,39 @@ import { SectionHeading } from '@/components/portfolio/section-heading';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Data pipelines and compliance systems',
+  title: 'Data and backend engineering',
   description:
-    'Selected case studies in data pipelines, compliance systems, cloud workflows, and audit-friendly interfaces by Daniel Berhane.',
+    'Daniel Berhane’s portfolio of data engineering, backend, and software projects.',
 };
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-const operatingPrinciples = [
+const workingPrinciples = [
   {
-    index: 'P-01',
-    title: 'Traceable transformations',
+    index: '01',
+    title: 'Understand the path',
     detail:
-      'A result should be traceable back through the schema, transformation, and source that produced it.',
+      'I like being able to follow a result back through the code, transformations, and source that produced it.',
   },
   {
-    index: 'P-02',
-    title: 'Human review at uncertain edges',
+    index: '02',
+    title: 'Leave room for review',
     detail:
-      'OCR and model confidence should decide what is automated and what is routed to a person.',
+      'When an automated result is uncertain, I would rather make that visible and give someone a clear way to review it.',
   },
   {
-    index: 'P-03',
-    title: 'Measured claims',
+    index: '03',
+    title: 'Measure before claiming',
     detail:
-      'A metric needs a baseline, protocol, sample, and evidence path before it becomes portfolio copy.',
+      'I try to keep metrics tied to a clear baseline, method, and sample instead of treating them as decoration.',
   },
   {
-    index: 'P-04',
-    title: 'Explicit failure modes',
+    index: '04',
+    title: 'Write down the tradeoffs',
     detail:
-      'Constraints and non-production-ready decisions are part of the system description, not fine print.',
+      'Constraints and unfinished parts are useful context, so I include them alongside the decisions that shaped the work.',
   },
 ] as const;
 
@@ -51,62 +51,36 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
     <>
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero__copy">
-          <p className="hero__kicker">
-            Daniel Berhane — Data + backend systems
-          </p>
+          <p className="hero__kicker">Daniel Berhane · Portfolio</p>
           <h1 id="hero-title">
-            Data pipelines and compliance systems that hold up under real
-            constraints.
+            Hi, I&apos;m Daniel. I work in data and backend engineering.
           </h1>
           <p className="hero__intro">
-            I build Python and SQL data systems, cloud workflows, and
-            audit-friendly interfaces—and I show where the evidence ends.
+            I&apos;m a computer science graduate who enjoys building useful data
+            tools, backend services, and clear interfaces. Here are a few
+            projects I&apos;ve worked on.
           </p>
           <div className="hero__actions">
             <a className="button button--signal" href="#work">
-              Read the case studies
+              View my work
               <ArrowRight aria-hidden="true" size={17} />
             </a>
             <a
               className="button button--text"
               href="mailto:dberhane@terpmail.umd.edu">
-              Email Daniel
+              Email me
               <Mail aria-hidden="true" size={16} />
             </a>
           </div>
         </div>
-
-        <aside className="proof-rail" aria-label="Portfolio proof summary">
-          <div className="proof-rail__header">
-            <span>Proof index</span>
-            <span>Current selection</span>
-          </div>
-          <dl>
-            <div>
-              <dt>Selected cases</dt>
-              <dd>03</dd>
-            </div>
-            <div>
-              <dt>Public source repositories</dt>
-              <dd>02</dd>
-            </div>
-            <div>
-              <dt>Live product / demo links</dt>
-              <dd>02</dd>
-            </div>
-          </dl>
-          <p>
-            <span aria-hidden="true">↳</span> The Streamlit deployment currently
-            requires authentication; the static report remains open.
-          </p>
-        </aside>
       </section>
 
       <section className="home-section" id="work" aria-labelledby="work-title">
         <SectionHeading
+          id="work-title"
           index="01"
           title="Selected work"
-          description="Three systems, presented as cases: outcome, ownership, architecture, proof, and limits."
+          description="A few projects I've worked on, with notes on what I built and learned."
         />
         <div className="case-list">
           {selectedCaseStudies.map((caseStudy) => (
@@ -122,14 +96,15 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
       <section
         className="home-section"
         id="about"
-        aria-labelledby="principles-title">
+        aria-labelledby="approach-title">
         <SectionHeading
+          id="approach-title"
           index="02"
-          title="Operating principles"
-          description="The standards I use to decide whether a data system—and the story told about it—deserves trust."
+          title="How I work"
+          description="A few habits that guide how I build and explain technical work."
         />
         <div className="principles-grid">
-          {operatingPrinciples.map((principle) => (
+          {workingPrinciples.map((principle) => (
             <article key={principle.index}>
               <span>{principle.index}</span>
               <h3>{principle.title}</h3>
@@ -138,18 +113,18 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
           ))}
         </div>
         <p className="about-note">
-          I earned a B.S. in Computer Science in August 2025 and focus on data
-          engineering, analytics engineering, and backend systems where
-          traceability matters. The work above is deliberately narrow; the goal
-          is to make my judgment inspectable.
+          I earned a B.S. in Computer Science in August 2025. I&apos;m
+          interested in data engineering, analytics engineering, and backend
+          roles where I can keep learning and contribute to useful systems.
         </p>
       </section>
 
       <section className="home-section" aria-labelledby="other-work-title">
         <SectionHeading
+          id="other-work-title"
           index="03"
           title="Other work"
-          description="Employer work is included at the level I can support publicly."
+          description="A little more of the work I've contributed to."
         />
         <div className="other-work-list">
           {otherWork.map((item) => (
@@ -164,19 +139,21 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
       </section>
 
       <section className="contact-block" aria-labelledby="contact-title">
-        <p className="eyebrow">Available for data + backend roles</p>
-        <h2 id="contact-title">
-          Need someone who can build the system and explain its failure modes?
-        </h2>
+        <p className="eyebrow">Get in touch</p>
+        <h2 id="contact-title">Thanks for stopping by.</h2>
+        <p className="contact-block__intro">
+          If you&apos;d like to talk about a role, a project, or the work here,
+          feel free to reach out.
+        </p>
         <div>
           <a
             className="button button--signal"
             href="mailto:dberhane@terpmail.umd.edu">
-            Start a conversation
+            Email me
             <Mail aria-hidden="true" size={17} />
           </a>
           <a
-            className="button button--dark"
+            className="button button--text"
             href="https://github.com/Daniel21b"
             target="_blank"
             rel="noreferrer noopener">
