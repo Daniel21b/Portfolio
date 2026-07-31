@@ -74,18 +74,19 @@ export const projects: Project[] = [
     liveDemo: 'https://www.preclearai.net/',
   },
   {
-    title: 'Tech Job Market Trends Dashboard',
+    title: 'Tech Skill Demand Platform',
     description:
-      'Scraped and cleaned thousands of job postings using BeautifulSoup and Pandas to track in-demand skills and hiring patterns. Visualized month-over-month hiring trends with Matplotlib in an interactive Streamlit dashboard.',
+      'Built a traceable two-source Python workflow that validates and deduplicates job postings into a checked-in 4,137-row artifact, then applies a 135-pattern role-family taxonomy for review in notebooks, Streamlit, and a static report.',
     technologies: [
       'Python',
       'Pandas',
+      'NumPy',
       'BeautifulSoup',
-      'Matplotlib',
-      'Docker',
+      'Jupyter',
+      'Plotly',
       'Streamlit',
     ],
-    period: '2024',
+    period: '2025',
     github: 'https://github.com/Daniel21b/Job-Market-Analytics',
     liveDemo: 'https://job-market-analytics-fx.streamlit.app/',
   },
@@ -94,12 +95,12 @@ export const projects: Project[] = [
 // Homepage secondary projects (simplified version)
 export const homepageSecondaryProjects = [
   {
-    name: 'Tech Job Market Trends',
+    name: 'Tech Skill Demand Platform',
     description:
-      'Scraped and cleaned thousands of job postings to track in-demand skills and visualize hiring trends in Streamlit.',
+      'Built a two-source Python workflow that validates and deduplicates postings into a checked-in 4,137-row artifact with an explicit role-family taxonomy.',
     url: 'https://github.com/Daniel21b/Job-Market-Analytics',
     liveDemo: 'https://job-market-analytics-fx.streamlit.app/',
-    technologies: ['Python', 'Pandas', 'BeautifulSoup', 'Matplotlib'],
+    technologies: ['Python', 'Pandas', 'BeautifulSoup', 'Plotly', 'Streamlit'],
   },
   {
     name: 'PreClear AI',

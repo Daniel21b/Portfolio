@@ -96,8 +96,8 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
             </div>
           </dl>
           <p>
-            <span aria-hidden="true">↳</span> The Streamlit demo may need to
-            wake.
+            <span aria-hidden="true">↳</span> The Streamlit deployment currently
+            requires authentication; the static report remains open.
           </p>
         </aside>
       </section>

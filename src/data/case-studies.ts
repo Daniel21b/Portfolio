@@ -1,7 +1,7 @@
 export type CaseSlug =
   | 'invoice-pipeline'
   | 'preclear-ai'
-  | 'job-market-analytics';
+  | 'tech-skill-demand-platform';
 
 export type EvidenceStatus = 'verified' | 'limited' | 'withheld';
 
@@ -403,36 +403,36 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     ],
   },
   {
-    slug: 'job-market-analytics',
+    slug: 'tech-skill-demand-platform',
     number: '03',
-    title: 'Job Market Analytics',
-    shortTitle: 'Job market analytics',
-    year: '2024',
-    role: 'Independent data project',
-    scope: 'Collection, cleaning, categorization, analysis, dashboard',
-    evidenceStatus: 'Public source and methodology; disputed result withheld',
+    title: 'Tech Skill Demand Platform',
+    shortTitle: 'Skill demand',
+    year: '2025',
+    role: 'Independent data workflow · sole public author',
+    scope: 'Two-source collection, validation, taxonomy, analysis, reporting',
+    evidenceStatus: 'Public code + checked-in data; scale claims withheld',
     outcome:
-      'Analyzed 4,100+ postings remaining after the documented validation and cleaning workflow, using Hacker News and Adzuna data from October 2023 through October 2024.',
+      'Built a traceable Python workflow that turns two noisy job-posting sources into a checked-in 4,137-row analysis artifact, then exposes exactly where the data is strong enough to inspect—and where trend claims must stop.',
     summary:
-      'The workflow collects two distinct job-posting sources, cleans and deduplicates records, categorizes roles, runs statistical analysis, and publishes an interactive dashboard and report.',
+      'Adzuna API pages and Hacker News hiring threads land as raw CSV checkpoints. Pandas validates, aligns, and deduplicates the sources; an explicit regex taxonomy separates AI/ML, general IT, hybrid, and non-tech roles; notebooks and Streamlit turn the retained records into reviewable analysis surfaces.',
     contributionSummary:
-      'I built the collection, validation, cleaning, role categorization, statistical analysis, dashboard, and written report.',
+      'I built the collection notebooks, validation and deduplication path, role-family taxonomy, analysis notebooks, Streamlit dashboard, and static report. GitHub attributes all nine public commits to my Git identity.',
     architecture: [
-      { name: 'HN + Adzuna', detail: 'Collect' },
-      { name: 'Validation', detail: 'Clean' },
-      { name: 'Deduplication', detail: 'Shape' },
-      { name: 'Taxonomy', detail: 'Categorize' },
-      { name: 'Analysis', detail: 'Measure' },
-      { name: 'Dashboard', detail: 'Report' },
+      { name: 'HN + Adzuna', detail: 'Raw checkpoints' },
+      { name: 'Pandas contract', detail: 'Validate + align' },
+      { name: 'Deduplication', detail: '4,137 retained' },
+      { name: '135-pattern taxonomy', detail: 'Score role families' },
+      { name: 'Notebooks', detail: 'Analyze carefully' },
+      { name: 'Dashboard + report', detail: 'Expose proof' },
     ],
     homepageLimitation:
-      'The sample is not the entire labor market, and one headline trend is withheld pending dataset reconciliation.',
+      'The cleaned row count and code path are inspectable; the proposed cloud stack, large-scale metrics, and longitudinal trend claims remain withheld until implementation and dated measurement artifacts exist.',
     links: [
       {
-        label: 'Open live demo',
+        label: 'Dashboard deployment',
         href: 'https://job-market-analytics-fx.streamlit.app/',
         kind: 'live',
-        note: 'May need to wake',
+        note: 'Current auth redirect; availability limited',
       },
       {
         label: 'Browse source',
@@ -440,95 +440,142 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
         kind: 'source',
       },
       {
-        label: 'Read report',
+        label: 'Read static report',
         href: 'https://daniel21b.github.io/Job-Market-Analytics/',
         kind: 'report',
       },
     ],
     problem:
-      'Job-market claims are easy to overstate when sources, dates, cleaning, and taxonomy are implicit. This project builds a visible path from raw postings to categorized observations while keeping the sample boundary explicit.',
+      'Job-market claims become fragile when source windows, parser behavior, cleaning rules, and data dates disappear behind a chart. This project creates an inspectable path from two noisy inputs to a pinned analytical artifact—and treats unresolved date and result conflicts as a stop condition, not a footnote.',
     constraints: [
-      'Hacker News and Adzuna represent different, incomplete slices of the market.',
-      'Keyword taxonomies can drift as role language changes.',
-      'API access and historical windows constrain reproducibility.',
-      'A free-tier Streamlit app may be asleep when a reviewer opens it.',
+      'Hacker News prose and Adzuna API records have different schemas, collection failure modes, and audience bias.',
+      'The final artifact has only three material month buckets—298 rows in 2024-05, 231 in 2024-10, and 3,608 in 2025-10—contradicting the README’s 13-month range.',
+      'Several Hacker News files contain false positives, and only May and October contribute materially to the retained source data.',
+      'The dashboard deployment currently enters an authentication redirect loop and can silently generate synthetic data when expected source files are absent.',
     ],
     contribution: [
-      'Built collectors for Hacker News and Adzuna inputs.',
-      'Implemented validation, cleaning, and deduplication.',
-      'Defined role categorization and ran the statistical analysis.',
-      'Built the dashboard, notebooks, and detailed report.',
+      'Built the rate-limited Hacker News parser and paginated Adzuna API collector with ID deduplication and checkpoints.',
+      'Built the source-specific validation, 21-column schema alignment, source-prefixed IDs, and multi-stage deduplication path.',
+      'Defined the 135-pattern role-family scoring taxonomy and authored the statistical-analysis notebooks.',
+      'Built the Streamlit dashboard and published the final report; GitHub attributes all 9/9 public commits to me.',
     ],
     outsideClaim: [
-      'No claim that the sample represents the full labor market.',
-      'No causal inference from observed posting trends.',
-      'No publication of a disputed growth result until it is reconciled.',
+      'The proposed skill-demand-platform repository and PySpark, Airbyte, Airflow, dbt, BigQuery, or Docker implementation.',
+      '120K+ postings, eight months of queryable history, 18% duplicate removal, or 500+ normalized skill tags.',
+      '40-to-12-minute runtime, 40+ dbt tests, Airflow freshness alerts, or 4 GB-to-1.5 GB query-scan improvements.',
+      'Full-labor-market representation, causal inference, or unreconciled longitudinal growth findings.',
     ],
     decisions: [
       {
-        title: 'Keep source windows explicit',
+        title: 'Checkpoint API collection',
         detail:
-          'The analysis names the two sources and the October 2023–October 2024 observation window.',
+          'Adzuna results are persisted as collection progresses instead of waiting for one terminal export.',
         tradeoff:
-          'The boundary improves interpretability while limiting generalization beyond those sources and dates.',
+          'Partial work survives a later request failure, but checkpoints need run manifests and immutable load timestamps to become an auditable ingestion layer.',
       },
       {
-        title: 'Clean before counting',
+        title: 'Prefix source IDs before union',
         detail:
-          'The reported volume refers to records remaining after the documented validation and cleaning workflow.',
+          'Identifiers are namespaced before Hacker News and Adzuna rows share one schema.',
         tradeoff:
-          'The number is more defensible, but changes to validation rules can change the resulting population.',
+          'Cross-source collisions are prevented, but identity still depends on later business-key and similarity rules for reposts.',
       },
       {
-        title: 'Withhold unreconciled analysis',
+        title: 'Validate Hacker News separately',
         detail:
-          'A conflicting headline trend in the README is not repeated as a portfolio result.',
+          'Free-text comment parsing receives content, role, company, and job-signal checks before schema union.',
         tradeoff:
-          'The case presents less spectacle, but preserves a clear evidence standard.',
+          'Source-specific checks isolate parser failures, but heuristic validation can still retain false positives or reject legitimate prose.',
+      },
+      {
+        title: 'Use an explicit scoring taxonomy',
+        detail:
+          'An explicit set of 135 regex patterns scores four role families instead of hiding classification inside an opaque model call.',
+        tradeoff:
+          'Rules are inspectable and cheap to rerun, but language drift and overlapping patterns require labeled regression fixtures.',
+      },
+      {
+        title: 'Publish surfaces; withhold conclusions',
+        detail:
+          'The repository, dashboard, and report stay public while conflicting time windows and headline results are called out.',
+        tradeoff:
+          'A reviewer can inspect the work now, but longitudinal conclusions remain unpublished until a pinned reproducible rerun resolves the conflict.',
       },
     ],
     evidence: [
       {
         id: 'E-01',
         status: 'verified',
-        label: 'Cleaned posting volume',
+        label: 'Cleaned artifact and source split',
         finding:
-          'The repository documents more than 4,100 records after validation and cleaning.',
+          'jobs_cleaned.csv contains 4,137 rows: 3,608 Adzuna and 529 Hacker News, with zero exact or company+role+location duplicates.',
         method:
-          'Count is scoped to Hacker News and Adzuna inputs over October 2023–October 2024 and attributed to the public README workflow.',
-        source: 'Public repository README',
+          'Counted the checked-in CSV and grouped its source values on July 31, 2026.',
+        source: 'notebooks/data/processed/jobs_cleaned.csv',
       },
       {
         id: 'E-02',
         status: 'verified',
-        label: 'Analysis workflow',
+        label: 'Source-specific filtering results',
         finding:
-          'Collectors, preprocessing, classification, analysis, notebooks, processed data, and reporting surfaces are publicly inspectable.',
-        method: 'Repository directory and README review.',
-        source: 'Public source repository',
+          'Saved outputs record Adzuna 5,000 candidates → 3,691 unique IDs in 10.6 minutes (1,309 repeats / 26.2%) and HN 711 → 611 (100 invalid / 14.1%).',
+        method:
+          'Inspected the persisted run output in the public collection and cleaning notebooks.',
+        source:
+          'notebooks/02_api_data_collection.ipynb · notebooks/03_data_cleaning.ipynb',
       },
       {
         id: 'E-03',
-        status: 'withheld',
-        label: 'Headline growth result',
+        status: 'verified',
+        label: 'Architecture and public authorship',
         finding:
-          'The result is withheld because the README presents internally conflicting values.',
+          'The repository exposes collection, cleaning, taxonomy, analysis, application, and report boundaries; GitHub attributes all nine public commits to Daniel Berhane.',
         method:
-          'Recompute from a pinned processed dataset with a single metric definition and reproducible notebook.',
-        source: 'Evidence conflict in public README',
+          'Traced the seven notebooks and app, then verified the full public GitHub commit history.',
+        source: 'Public repository tree and 9/9 GitHub commits',
+      },
+      {
+        id: 'E-04',
+        status: 'limited',
+        label: 'Published dashboard and report',
+        finding:
+          'The static report is reachable. The Streamlit URL and implementation exist, but the deployment currently enters an authentication redirect loop; data version, parity, and freshness are not proven.',
+        method:
+          'Checked both public URLs and traced their implementation paths without treating a deployment link as release provenance.',
+        source: 'Streamlit app · GitHub Pages report · app.py',
+      },
+      {
+        id: 'E-05',
+        status: 'withheld',
+        label: 'Platform-scale claims',
+        finding:
+          'The proposed enterprise stack, large-scale counts, performance gains, test volume, alerting, and BigQuery scan reductions are not published as implemented results.',
+        method:
+          'Restore only with component configs, run history, a dated data manifest, test output, query plans/bytes billed, and a benchmark protocol naming environment, baseline, sample size, and raw results.',
+        source:
+          'Evidence gap; exact skill-demand-platform repository does not exist',
       },
     ],
     limitations: [
-      'Hacker News and Adzuna introduce sampling and audience bias.',
-      'Keyword-based role taxonomy can drift.',
-      'API access and historical date windows constrain exact reproduction.',
-      'The free-tier demo may need to wake before it loads.',
+      'The proposed skill-demand-platform repository does not exist; the audited source remains Job-Market-Analytics.',
+      'PySpark, Airbyte, Airflow, dbt, BigQuery, and Docker are not implemented in the current repository.',
+      'The final artifact contains only 298 rows in 2024-05, 231 in 2024-10, and 3,608 in 2025-10, contradicting the README’s 13-month framing.',
+      'Hacker News collection succeeded materially for only two months, and several checked-in files contain false positives.',
+      'The date filter mixes timezone-aware API timestamps with naive bounds, catches the comparison error, and returns true, allowing 2025 records through the intended 2023–2024 filter.',
+      'Notebook execution stops before saved deduplication or taxonomy outputs in places; the final CSV exists without a complete run record.',
+      'There are no automated tests or CI checks for collection, validation, taxonomy, or report generation.',
+      'Streamlit can silently replace missing source data with randomized synthetic data.',
+      'A committed Adzuna credential must be rotated or revoked and removed from Git history before this repository is promoted as safe public proof.',
+      'The README lists directories and files that are absent from the repository.',
     ],
     scaleRedesign: [
-      'Schedule immutable raw-data snapshots partitioned by source and collection date.',
-      'Version the classification taxonomy with every published result.',
-      'Add labeled fixtures and regression tests for categorization.',
-      'Publish a reproducible metric notebook with data-quality checks.',
+      'Future state — use Airbyte incremental ingestion with immutable source/load timestamps and per-run manifests.',
+      'Future state — separate BigQuery raw, staging, and mart layers; partition by posting date and cluster only after workload evidence supports it.',
+      'Future state — introduce PySpark parsing or deduplication only when row volume and profiling justify distributed execution, then publish Spark UI and benchmark artifacts.',
+      'Future state — build dbt models, tests, and source-freshness checks with committed manifests and results.',
+      'Future state — orchestrate retries, idempotency, failure alerts, and backfill semantics in Airflow.',
+      'Future state — Dockerize local and runtime environments for dependency parity.',
+      'Future state — add a dated measurement harness for row counts, duplicate rates, runtimes, bytes billed, baselines, and sample sizes.',
     ],
   },
 ] as const;

@@ -1799,6 +1799,345 @@ main {
   border-left: 1px solid #5d6058;
 }
 
+.skill-demand-map {
+  margin: 2.5rem 0 0;
+  border: 1px solid var(--ink);
+  background: var(--paper-raised);
+}
+
+.skill-demand-map figcaption {
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid var(--ink);
+  font-size: 0.95rem;
+  font-weight: 620;
+  line-height: 1.5;
+}
+
+.skill-demand-map__legend {
+  display: flex;
+  min-height: 44px;
+  padding: 0.55rem 1.15rem;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+}
+
+.skill-demand-map__legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+}
+
+.skill-demand-map__legend i {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 1px solid var(--ink);
+}
+
+.skill-demand-map__legend i[data-key='code'] {
+  background: var(--ink);
+}
+
+.skill-demand-map__legend i[data-key='artifact'] {
+  background: var(--signal);
+}
+
+.skill-demand-map__legend i[data-key='surface'] {
+  background: transparent;
+}
+
+.skill-demand-map__legend i[data-key='risk'] {
+  background: var(--warning);
+}
+
+.skill-demand-map__band {
+  display: grid;
+  margin: 1.15rem;
+  border: 1px solid var(--ink);
+  grid-template-columns: minmax(9.5rem, 0.22fr) minmax(0, 1fr);
+}
+
+.skill-demand-map__band > header {
+  min-width: 0;
+  padding: 1rem;
+  border-right: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper-raised);
+}
+
+.skill-demand-map__band > header > span,
+.skill-demand-map__lane > header > span {
+  display: block;
+  color: var(--signal);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.skill-demand-map__band > header h3 {
+  margin: 0.4rem 0 0;
+  font-size: 1.05rem;
+  letter-spacing: -0.025em;
+}
+
+.skill-demand-map__band > header p {
+  margin: 0.55rem 0 0;
+  color: #b8bab2;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+}
+
+.skill-demand-map__lanes {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 1fr 1fr;
+}
+
+.skill-demand-map__lane {
+  display: grid;
+  min-width: 0;
+  grid-template-rows: auto 1fr auto;
+}
+
+.skill-demand-map__lane + .skill-demand-map__lane {
+  border-left: 1px solid var(--ink);
+}
+
+.skill-demand-map__lane > header {
+  min-height: 7.6rem;
+  padding: 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.skill-demand-map__lane > header > span {
+  color: var(--warning);
+}
+
+.skill-demand-map__lane h4 {
+  margin: 0.45rem 0 0;
+  font-size: 0.92rem;
+  letter-spacing: -0.02em;
+}
+
+.skill-demand-map__lane > header p {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+}
+
+.skill-demand-map__lane > div {
+  display: flex;
+  min-width: 0;
+  padding: 0.75rem;
+  align-items: stretch;
+}
+
+.skill-demand-map__flow {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 0;
+  align-items: stretch;
+}
+
+.skill-demand-map__flow > span,
+.skill-demand-map__band--contract li > span {
+  display: grid;
+  width: 2rem;
+  flex: 0 0 auto;
+  place-items: center;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.78rem;
+}
+
+.skill-demand-map__node {
+  min-width: 0;
+  padding: 0.72rem;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  flex: 1 1 0;
+}
+
+.skill-demand-map__node[data-state='code'] {
+  box-shadow: inset 0 4px 0 var(--ink);
+}
+
+.skill-demand-map__node[data-state='artifact'] {
+  box-shadow: inset 0 4px 0 var(--signal);
+}
+
+.skill-demand-map__node[data-state='surface'] {
+  box-shadow: inset 0 4px 0 var(--line-strong);
+}
+
+.skill-demand-map__node[data-state='risk'] {
+  box-shadow: inset 0 4px 0 var(--warning);
+}
+
+.skill-demand-map__node > span {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.skill-demand-map__node strong {
+  display: block;
+  overflow-wrap: anywhere;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.skill-demand-map__node p {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.48;
+}
+
+.skill-demand-map__risk {
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  border-top: 1px solid var(--line);
+  background: #fff0e7;
+  color: #7b2f22;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.skill-demand-map__handoff {
+  position: relative;
+  display: grid;
+  min-height: 3.25rem;
+  place-items: center;
+}
+
+.skill-demand-map__handoff::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  border-left: 1px solid var(--ink);
+  content: '';
+}
+
+.skill-demand-map__handoff::after {
+  position: absolute;
+  bottom: -0.08rem;
+  left: 50%;
+  content: '↓';
+  background: var(--paper-raised);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.75rem;
+  transform: translateX(-50%);
+}
+
+.skill-demand-map__handoff span {
+  z-index: 1;
+  padding: 0.25rem 0.45rem;
+  border: 1px solid var(--line-strong);
+  background: var(--paper-raised);
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.skill-demand-map__band--contract ol {
+  display: flex;
+  min-width: 0;
+  margin: 0;
+  padding: 1rem 1rem 4.7rem;
+  list-style: none;
+}
+
+.skill-demand-map__band--contract li {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 0;
+  align-items: stretch;
+}
+
+.skill-demand-map__band--contract .skill-demand-map__node {
+  min-height: 10.5rem;
+}
+
+.skill-demand-map__artifact-note {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  left: calc(22% + 1rem);
+  display: grid;
+  margin: 0;
+  padding: 0.75rem;
+  border: 1px solid var(--ink);
+  background: var(--signal);
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.skill-demand-map__band--contract {
+  position: relative;
+}
+
+.skill-demand-map__artifact-note strong,
+.skill-demand-map__artifact-note span {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+}
+
+.skill-demand-map__artifact-note strong {
+  text-transform: uppercase;
+}
+
+.skill-demand-map__band--interpretation > div,
+.skill-demand-map__band--proof > div {
+  display: grid;
+  min-width: 0;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.skill-demand-map__band--interpretation > div {
+  grid-template-columns: 0.8fr 1.2fr;
+}
+
+.skill-demand-map__band--proof > div {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.implementation-map > li > a {
+  color: var(--ink);
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 0.2rem;
+}
+
+.implementation-map > li > a:hover {
+  text-decoration-color: var(--ink);
+}
+
 .boundary-walkthrough,
 .implementation-map {
   margin: 2.2rem 0 0;
@@ -2434,6 +2773,39 @@ main {
     grid-template-columns: 1fr;
   }
 
+  .skill-demand-map__band {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-demand-map__band > header {
+    border-right: 0;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .skill-demand-map__band--contract ol {
+    display: grid;
+    padding-bottom: 1rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .skill-demand-map__band--contract li {
+    display: block;
+  }
+
+  .skill-demand-map__band--contract li > span {
+    display: none;
+  }
+
+  .skill-demand-map__band--contract .skill-demand-map__node {
+    min-height: 9.5rem;
+  }
+
+  .skill-demand-map__artifact-note {
+    position: static;
+    margin: 0 1rem 1rem;
+  }
+
   .implementation-map > li {
     grid-template-columns: minmax(7rem, 0.7fr) minmax(10rem, 1.1fr) minmax(
         12rem,
@@ -2584,6 +2956,10 @@ main {
 
   .case-hero__title {
     grid-template-columns: 1fr;
+  }
+
+  .case-hero--skill-demand .case-hero__title {
+    margin-top: 1.5rem;
   }
 
   .case-number--large {
@@ -2757,6 +3133,57 @@ main {
   .preclear-map__resolution > div + div {
     border-top: 1px solid #5d6058;
     border-left: 0;
+  }
+
+  .skill-demand-map figcaption,
+  .skill-demand-map__legend {
+    padding-right: 0.8rem;
+    padding-left: 0.8rem;
+  }
+
+  .skill-demand-map__band {
+    margin-right: 0.65rem;
+    margin-left: 0.65rem;
+  }
+
+  .skill-demand-map__lanes,
+  .skill-demand-map__band--contract ol,
+  .skill-demand-map__band--interpretation > div,
+  .skill-demand-map__band--proof > div {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-demand-map__lane + .skill-demand-map__lane {
+    border-top: 1px solid var(--ink);
+    border-left: 0;
+  }
+
+  .skill-demand-map__lane > header {
+    min-height: auto;
+  }
+
+  .skill-demand-map__lane > div {
+    flex-direction: column;
+  }
+
+  .skill-demand-map__flow {
+    flex-direction: column;
+  }
+
+  .skill-demand-map__flow > span {
+    width: auto;
+    min-height: 2.7rem;
+    transform: rotate(90deg);
+  }
+
+  .skill-demand-map__band--contract .skill-demand-map__node {
+    min-height: auto;
+  }
+
+  .skill-demand-map__artifact-note {
+    margin-right: 0.65rem;
+    margin-left: 0.65rem;
+    grid-template-columns: 1fr;
   }
 
   .boundary-walkthrough > li {

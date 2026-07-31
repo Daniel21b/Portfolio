@@ -11,7 +11,7 @@ import {
   Check,
   Minus,
 } from 'lucide-react';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 import { ArchitectureRail } from '@/components/portfolio/architecture-rail';
 import { CaseLink } from '@/components/portfolio/case-link';
@@ -27,24 +27,33 @@ import {
   PreClearImplementationMap,
   PreClearSectionIndex,
 } from '@/components/portfolio/preclear-case-detail';
+import {
+  SkillDemandArchitectureMap,
+  SkillDemandBoundaryWalkthrough,
+  SkillDemandImplementationMap,
+  SkillDemandSectionIndex,
+} from '@/components/portfolio/skill-demand-case-detail';
 
 import type { EvidenceStatus } from '@/data/case-studies';
 import type { Metadata } from 'next';
 
 export function generateStaticParams() {
-  return routing.locales.flatMap((locale) =>
-    selectedCaseStudies.map((caseStudy) => ({
+  return routing.locales.flatMap((locale) => [
+    ...selectedCaseStudies.map((caseStudy) => ({
       locale,
       slug: caseStudy.slug,
     })),
-  );
+    { locale, slug: 'job-market-analytics' },
+  ]);
 }
 
 export async function generateMetadata({
   params,
 }: PageProps<'/[locale]/work/[slug]'>): Promise<Metadata> {
   const { slug } = await params;
-  const caseStudy = getCaseStudy(slug);
+  const caseStudy = getCaseStudy(
+    slug === 'job-market-analytics' ? 'tech-skill-demand-platform' : slug,
+  );
 
   if (!caseStudy) {
     return {};
@@ -69,6 +78,11 @@ export default async function CaseStudyPage({
   params,
 }: PageProps<'/[locale]/work/[slug]'>) {
   const { locale, slug } = await params;
+
+  if (slug === 'job-market-analytics') {
+    redirect(`/${locale}/work/tech-skill-demand-platform`);
+  }
+
   const caseStudy = getCaseStudy(slug);
 
   if (!caseStudy) {
@@ -78,11 +92,13 @@ export default async function CaseStudyPage({
   const adjacent = getAdjacentCases(caseStudy.slug);
   const isInvoiceCase = caseStudy.slug === 'invoice-pipeline';
   const isPreClearCase = caseStudy.slug === 'preclear-ai';
-  const isDeepCase = isInvoiceCase || isPreClearCase;
+  const isSkillDemandCase = caseStudy.slug === 'tech-skill-demand-platform';
+  const isDeepCase = isInvoiceCase || isPreClearCase || isSkillDemandCase;
 
   return (
     <article className="case-page">
-      <header className="case-hero">
+      <header
+        className={`case-hero${isSkillDemandCase ? ' case-hero--skill-demand' : ''}`}>
         <div className="case-hero__topline">
           <a href={`/${locale}/#work`}>
             <ArrowLeft aria-hidden="true" size={15} /> Selected work
@@ -129,6 +145,7 @@ export default async function CaseStudyPage({
 
       {isInvoiceCase ? <InvoiceSectionIndex /> : null}
       {isPreClearCase ? <PreClearSectionIndex /> : null}
+      {isSkillDemandCase ? <SkillDemandSectionIndex /> : null}
 
       <section
         className="case-section case-section--split"
@@ -196,12 +213,16 @@ export default async function CaseStudyPage({
             ? 'The implemented system, including payload handoffs, CDK ownership, external infrastructure, and review outputs.'
             : isPreClearCase
               ? 'The implemented scheduled and request-time paths, including payloads, private code ownership, external services, failure boundaries, and the final decision record.'
-              : 'The system path at a glance. Each box names a boundary; each caption names the job it performs.'}
+              : isSkillDemandCase
+                ? 'The repository-backed source-to-proof contract, including observed artifacts, transformation boundaries, published surfaces, and the evidence gaps that stop the trend claims.'
+                : 'The system path at a glance. Each box names a boundary; each caption names the job it performs.'}
         </p>
         {isInvoiceCase ? (
           <InvoiceArchitectureMap />
         ) : isPreClearCase ? (
           <PreClearArchitectureMap />
+        ) : isSkillDemandCase ? (
+          <SkillDemandArchitectureMap />
         ) : (
           <ArchitectureRail steps={caseStudy.architecture} />
         )}
@@ -209,6 +230,7 @@ export default async function CaseStudyPage({
 
       {isInvoiceCase ? <InvoiceBoundaryWalkthrough /> : null}
       {isPreClearCase ? <PreClearBoundaryWalkthrough /> : null}
+      {isSkillDemandCase ? <SkillDemandBoundaryWalkthrough /> : null}
 
       <section className="case-section" aria-labelledby="decisions">
         <div className="case-section__label">
@@ -306,6 +328,7 @@ export default async function CaseStudyPage({
 
       {isInvoiceCase ? <InvoiceImplementationMap /> : null}
       {isPreClearCase ? <PreClearImplementationMap /> : null}
+      {isSkillDemandCase ? <SkillDemandImplementationMap /> : null}
 
       <nav className="case-navigation" aria-label="Case study navigation">
         {adjacent.previous ? (
