@@ -1,138 +1,190 @@
+import { otherWork, selectedCaseStudies } from '@/data/case-studies';
 import { routing } from '@/i18n/routing';
-import { ArrowRight, ExternalLink, Github, Sparkles } from 'lucide-react';
-import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
+import { ArrowRight, Github, Mail } from 'lucide-react';
 
-import HeroSection from '@/components/hero-section';
-import { TechBadge } from '@/components/projects/tech-badge';
-import { homepageFeaturedProject, homepageSecondaryProjects } from '@/data/portfolio';
+import { CaseOverview } from '@/components/portfolio/case-overview';
+import { SectionHeading } from '@/components/portfolio/section-heading';
+
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Data pipelines and compliance systems',
+  description:
+    'Selected case studies in data pipelines, compliance systems, cloud workflows, and audit-friendly interfaces by Daniel Berhane.',
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-const Index = async ({ params }: PageProps<'/[locale]'>) => {
-  const locale = (await params).locale as (typeof routing.locales)[number];
-  const t = await getTranslations({ locale });
+const operatingPrinciples = [
+  {
+    index: 'P-01',
+    title: 'Traceable transformations',
+    detail:
+      'A result should be traceable back through the schema, transformation, and source that produced it.',
+  },
+  {
+    index: 'P-02',
+    title: 'Human review at uncertain edges',
+    detail:
+      'OCR and model confidence should decide what is automated and what is routed to a person.',
+  },
+  {
+    index: 'P-03',
+    title: 'Measured claims',
+    detail:
+      'A metric needs a baseline, protocol, sample, and evidence path before it becomes portfolio copy.',
+  },
+  {
+    index: 'P-04',
+    title: 'Explicit failure modes',
+    detail:
+      'Constraints and non-production-ready decisions are part of the system description, not fine print.',
+  },
+] as const;
+
+export default async function HomePage({ params }: PageProps<'/[locale]'>) {
+  const { locale } = await params;
 
   return (
     <>
-      <HeroSection
-        name="Daniel Berhane"
-        title={t('index-page.title')}
-        intro={t('index-page.intro')}
-      />
-
-      <h3
-        id="projects"
-        className="mb-6 text-2xl font-bold tracking-tight text-zinc-900 dark:text-white md:text-4xl">
-        Featured Projects
-      </h3>
-
-      {/* Bento Grid Layout */}
-      <div className="mb-8 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-        {/* Featured Project - Full Width */}
-        <div className="group relative col-span-1 md:col-span-2">
-          {/* Gradient glow */}
-          <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-20 blur-lg transition-opacity duration-500 group-hover:opacity-40" />
-          <div className="absolute -inset-px rounded-2xl bg-gradient-to-r from-indigo-500/50 via-purple-500/50 to-pink-500/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-          <div className="relative rounded-2xl border border-white/20 bg-white/50 p-6 shadow-xl backdrop-blur-xl transition-all duration-300 group-hover:shadow-2xl dark:border-white/10 dark:bg-zinc-900/50">
-            {/* Featured badge */}
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-indigo-200/50 bg-gradient-to-r from-indigo-50 to-purple-50 px-3 py-1 dark:border-indigo-500/30 dark:from-indigo-500/10 dark:to-purple-500/10">
-              <Sparkles className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400" />
-              <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">Featured</span>
-            </div>
-
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <h4 className="mb-2 text-xl font-bold text-zinc-900 dark:text-white md:text-2xl">
-                  {homepageFeaturedProject.title}
-                </h4>
-                <ul className="mb-4 space-y-1.5">
-                  {homepageFeaturedProject.description.map((point, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-indigo-500" />
-                      <span className="text-sm text-zinc-600 dark:text-zinc-400">{point}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="flex flex-wrap gap-2">
-                  {homepageFeaturedProject.technologies.map((tech) => (
-                    <TechBadge key={tech} tech={tech} />
-                  ))}
-                </div>
-              </div>
-              <a
-                href={homepageFeaturedProject.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ml-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-200/50 bg-white/80 text-zinc-500 transition-all duration-200 hover:scale-110 hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-700/50 dark:bg-zinc-800/50 dark:hover:bg-zinc-700 dark:hover:text-white"
-                aria-label="View on GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-            </div>
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="hero__copy">
+          <p className="hero__kicker">
+            Daniel Berhane — Data + backend systems
+          </p>
+          <h1 id="hero-title">
+            Data pipelines and compliance systems that hold up under real
+            constraints.
+          </h1>
+          <p className="hero__intro">
+            I build Python and SQL data systems, cloud workflows, and
+            audit-friendly interfaces—and I show where the evidence ends.
+          </p>
+          <div className="hero__actions">
+            <a className="button button--signal" href="#work">
+              Read the case studies
+              <ArrowRight aria-hidden="true" size={17} />
+            </a>
+            <a
+              className="button button--text"
+              href="mailto:dberhane@terpmail.umd.edu">
+              Email Daniel
+              <Mail aria-hidden="true" size={16} />
+            </a>
           </div>
         </div>
 
-        {/* Secondary Projects */}
-        {homepageSecondaryProjects.map((project) => (
-          <div
-            key={project.name}
-            className="group relative"
-          >
-            <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
-
-            <div className="relative h-full rounded-2xl border border-white/20 bg-white/40 p-5 shadow-lg backdrop-blur-xl transition-all duration-300 group-hover:scale-[1.02] group-hover:border-indigo-500/30 group-hover:shadow-xl dark:border-white/10 dark:bg-zinc-900/40 dark:group-hover:border-indigo-400/30">
-              <div className="flex items-start justify-between">
-                <h4 className="text-lg font-bold text-zinc-900 dark:text-white">
-                  {project.name}
-                </h4>
-                <div className="ml-3 flex gap-2">
-                  {project.liveDemo && (
-                    <a
-                      href={project.liveDemo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-indigo-200/50 bg-indigo-50/80 text-indigo-600 transition-all hover:scale-110 dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-400"
-                      aria-label="Live Demo"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  )}
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200/50 bg-white/80 text-zinc-500 transition-all hover:scale-110 hover:text-zinc-900 dark:border-zinc-700/50 dark:bg-zinc-800/50 dark:hover:text-white"
-                    aria-label="GitHub"
-                  >
-                    <Github className="h-4 w-4" />
-                  </a>
-                </div>
-              </div>
-              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                {project.description}
-              </p>
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {project.technologies.map((tech) => (
-                  <TechBadge key={tech} tech={tech} size="sm" />
-                ))}
-              </div>
-            </div>
+        <aside className="proof-rail" aria-label="Portfolio proof summary">
+          <div className="proof-rail__header">
+            <span>Proof index</span>
+            <span>Current selection</span>
           </div>
-        ))}
-      </div>
+          <dl>
+            <div>
+              <dt>Selected cases</dt>
+              <dd>03</dd>
+            </div>
+            <div>
+              <dt>Public source repositories</dt>
+              <dd>02</dd>
+            </div>
+            <div>
+              <dt>Live product / demo links</dt>
+              <dd>02</dd>
+            </div>
+          </dl>
+          <p>
+            <span aria-hidden="true">↳</span> The Streamlit demo may need to
+            wake.
+          </p>
+        </aside>
+      </section>
 
-      <Link
-        href={`/${locale}/projects`}
-        className="mb-16 mt-4 flex h-6 cursor-pointer items-center rounded-lg leading-7 text-zinc-500 transition-all hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200">
-        {t('projects.see-more')}
-        <ArrowRight strokeWidth={1.5} className="ml-1 h-4 w-4" />
-      </Link>
+      <section className="home-section" id="work" aria-labelledby="work-title">
+        <SectionHeading
+          index="01"
+          title="Selected work"
+          description="Three systems, presented as cases: outcome, ownership, architecture, proof, and limits."
+        />
+        <div className="case-list">
+          {selectedCaseStudies.map((caseStudy) => (
+            <CaseOverview
+              key={caseStudy.slug}
+              caseStudy={caseStudy}
+              locale={locale}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section
+        className="home-section"
+        id="about"
+        aria-labelledby="principles-title">
+        <SectionHeading
+          index="02"
+          title="Operating principles"
+          description="The standards I use to decide whether a data system—and the story told about it—deserves trust."
+        />
+        <div className="principles-grid">
+          {operatingPrinciples.map((principle) => (
+            <article key={principle.index}>
+              <span>{principle.index}</span>
+              <h3>{principle.title}</h3>
+              <p>{principle.detail}</p>
+            </article>
+          ))}
+        </div>
+        <p className="about-note">
+          I earned a B.S. in Computer Science in August 2025 and focus on data
+          engineering, analytics engineering, and backend systems where
+          traceability matters. The work above is deliberately narrow; the goal
+          is to make my judgment inspectable.
+        </p>
+      </section>
+
+      <section className="home-section" aria-labelledby="other-work-title">
+        <SectionHeading
+          index="03"
+          title="Other work"
+          description="Employer work is included at the level I can support publicly."
+        />
+        <div className="other-work-list">
+          {otherWork.map((item) => (
+            <article key={item.organization}>
+              <h3>{item.organization}</h3>
+              <p>{item.work}</p>
+              <span>{item.stack}</span>
+              <small>{item.note}</small>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="contact-block" aria-labelledby="contact-title">
+        <p className="eyebrow">Available for data + backend roles</p>
+        <h2 id="contact-title">
+          Need someone who can build the system and explain its failure modes?
+        </h2>
+        <div>
+          <a
+            className="button button--signal"
+            href="mailto:dberhane@terpmail.umd.edu">
+            Start a conversation
+            <Mail aria-hidden="true" size={17} />
+          </a>
+          <a
+            className="button button--dark"
+            href="https://github.com/Daniel21b"
+            target="_blank"
+            rel="noreferrer noopener">
+            GitHub
+            <Github aria-hidden="true" size={17} />
+          </a>
+        </div>
+      </section>
     </>
   );
-};
-
-export default Index;
+}

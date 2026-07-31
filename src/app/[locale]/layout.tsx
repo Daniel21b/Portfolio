@@ -5,19 +5,14 @@ import clsx from 'clsx';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { ThemeProvider } from 'next-themes';
-import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
 
 import env from '@/env.mjs';
 import AnalyticsWrapper from '@/components/analytics';
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
-import { auth } from '@/lib/auth';
 
 import type { Metadata, Viewport } from 'next/types';
-
-const CommandPalette = dynamic(() => import('@/components/command-palette'));
 
 export async function generateMetadata({
   params,
@@ -33,10 +28,12 @@ export async function generateMetadata({
     },
     authors: [{ name: 'Daniel Berhane' }],
     applicationName: 'Daniel Berhane',
-    description: 'Data Analyst specializing in cloud-based analytics and ETL pipelines',
+    description:
+      'Data pipelines, cloud workflows, and compliance systems by Daniel Berhane.',
     openGraph: {
       title: 'Daniel Berhane',
-      description: 'Data Analyst specializing in cloud-based analytics and ETL pipelines',
+      description:
+        'Data pipelines, cloud workflows, and compliance systems by Daniel Berhane.',
       url: env.NEXT_PUBLIC_WEBSITE_URL,
       siteName: 'Daniel Berhane',
       images: [
@@ -63,18 +60,9 @@ export async function generateMetadata({
     twitter: {
       title: 'Daniel Berhane',
       card: 'summary_large_image',
-      description: 'Data Analyst specializing in cloud-based analytics and ETL pipelines',
+      description:
+        'Data pipelines, cloud workflows, and compliance systems by Daniel Berhane.',
       images: [`${env.NEXT_PUBLIC_WEBSITE_URL}/api/og`],
-    },
-    icons: {
-      icon: [
-        {
-          rel: 'icon',
-          type: 'image/png',
-          url: '/favicon.png',
-        },
-      ],
-      apple: '/favicon.png',
     },
     manifest: '/static/site.webmanifest',
     verification: {
@@ -92,7 +80,8 @@ export async function generateMetadata({
 export const viewport: Viewport = {
   initialScale: 1,
   width: 'device-width',
-  colorScheme: 'light dark',
+  colorScheme: 'light',
+  themeColor: '#f2f0e8',
 };
 
 export default async function RootLayout({
@@ -100,41 +89,25 @@ export default async function RootLayout({
   params,
 }: LayoutProps<'/[locale]'>) {
   const { locale } = await params;
+  const isVercelDeployment = process.env.VERCEL === '1';
+
   if (!hasLocale(routing.locales, locale)) {
     notFound();
-  }
-
-  let session = null;
-  try {
-    session = await auth();
-  } catch {
-    // Auth may fail during build/static generation
-    console.log('Auth skipped during static generation');
   }
 
   return (
     <html
       lang={locale}
-      className={clsx(GeistSans.variable, GeistMono.variable)}
-      suppressHydrationWarning>
-      <body className="bg-gray-50 dark:bg-gray-800">
+      className={clsx(GeistSans.variable, GeistMono.variable)}>
+      <body>
         <NextIntlClientProvider>
-          <ThemeProvider attribute="class">
-            <a
-              href="#skip"
-              className="absolute -top-8 left-1/4 -translate-y-12 px-4 py-2 transition-transform duration-200 focus:translate-y-3">
-              Skip to content
-            </a>
-            <CommandPalette session={session} />
-            <Navbar />
-            <main
-              className="mx-auto mb-16 flex max-w-3xl flex-col justify-center px-8 dark:bg-gray-800 md:mt-6 md:px-0"
-              id="skip">
-              {children}
-              <AnalyticsWrapper />
-            </main>
-            <Footer />
-          </ThemeProvider>
+          <a href="#main-content" className="skip-link">
+            Skip to content
+          </a>
+          <Navbar />
+          <main id="main-content">{children}</main>
+          {isVercelDeployment ? <AnalyticsWrapper /> : null}
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>

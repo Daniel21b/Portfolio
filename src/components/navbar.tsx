@@ -1,154 +1,33 @@
 'use client';
 
-import styles from '@/styles/mobile-menu.module.css';
+import { ArrowUpRight } from 'lucide-react';
+import { useLocale } from 'next-intl';
 
-import clsx from 'clsx';
-import { Command, X } from 'lucide-react';
-import { useLocale, useTranslations } from 'next-intl';
-import { useTheme } from 'next-themes';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-
-import { useUrlState } from '@/lib/use-url-state';
-import MenuIcon from './icons/menu-icon';
-import ThemeToggleIcon from './icons/theme-icon';
-import MobileMenu from './mobile-menu';
-
-const Navbar = () => {
-  const [commandPaletteOpen, setCommandPaletteOpen] =
-    useUrlState<boolean>('menu');
-  const { resolvedTheme, setTheme } = useTheme();
-  const t = useTranslations();
+export default function Navbar() {
   const locale = useLocale();
-  const path = usePathname();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  useEffect(() => {
-    const themeColor = window.document.querySelector('meta[name=theme-color]');
-    if (themeColor) {
-      themeColor.setAttribute(
-        'content',
-        resolvedTheme === 'dark' ? '#222222' : '#f9fafb',
-      );
-    } else {
-      const newThemeColor = window.document.createElement('meta');
-      newThemeColor.name = 'theme-color';
-      newThemeColor.content = resolvedTheme === 'dark' ? '#222222' : '#f9fafb';
-      window.document.head.appendChild(newThemeColor);
-    }
-  }, [resolvedTheme]);
-
-  const NavLinks = [
-    {
-      href: '/',
-      text: t('main.home'),
-      id: 'nav-home',
-    },
-    {
-      href: '/about',
-      text: t('main.about'),
-      id: 'nav-about',
-    },
-    {
-      href: '/projects',
-      text: t('main.projects'),
-      id: 'nav-projects',
-    },
-    {
-      href: '/certifications',
-      text: t('main.certifications'),
-      id: 'nav-certifications',
-    },
-    {
-      href: '/startups',
-      text: t('main.startups'),
-      id: 'nav-startups',
-    },
-  ];
-
-  function toggleMenu() {
-    if (isMenuOpen) {
-      setIsMenuOpen(false);
-      document.body.style.overflow = '';
-    } else {
-      setIsMenuOpen(true);
-      document.body.style.overflow = 'hidden';
-    }
-  }
 
   return (
-    <div
-      className={clsx(
-        !commandPaletteOpen && 'z-50',
-        'sticky top-0 bg-gray-50 bg-opacity-50 backdrop-blur-lg dark:bg-gray-800 dark:bg-opacity-60',
-      )}>
-      <nav
-        className={clsx(
-          !commandPaletteOpen && 'z-50',
-          'sticky top-0 mx-auto my-0 w-full max-w-3xl items-center justify-between px-4 pb-6 pt-1 text-gray-900 dark:text-gray-100 md:my-4 md:flex md:py-4 xl:px-0',
-        )}>
-        <div>
-          {NavLinks.map(({ href, text, id }) => (
-            <Link
-              key={id}
-              href={`/${locale}${href}`}
-              id={id}
-              className={clsx(
-                'invisible mr-1 text-gray-900 sm:mr-8 md:visible',
-                path.includes(href) && !(path.length > 3 && href === '/')
-                  ? 'font-semibold dark:text-indigo-500'
-                  : 'dark:text-gray-100',
-              )}>
-              <span className="dark:link-underline link-underline-black py-1">
-                {text}
-              </span>
-            </Link>
-          ))}
-        </div>
-
-        <div className="flex justify-between">
-          <button
-            id="burger"
-            data-umami-event="mobile-menu-click"
-            className={clsx(styles.burger, 'visible md:hidden cursor-pointer')}
-            aria-label="Toggle menu"
-            type="button"
-            onClick={toggleMenu}>
-            <MenuIcon data-hide={isMenuOpen} />
-            <X
-              data-hide={!isMenuOpen}
-              className="absolute h-5 w-5 text-gray-900 dark:text-gray-100"
-            />
-          </button>
-
-          <div>
-            <button
-              aria-label="Open Command Palette"
-              type="button"
-              onClick={() => setCommandPaletteOpen(true)}
-              data-umami-event="command-palette-click"
-              className="mr-3 h-10 w-10 cursor-pointer rounded-lg bg-gray-200 p-3 text-3xl ring-gray-300 hover:ring-4 dark:bg-gray-700">
-              <Command className="h-4 w-4 text-gray-800 dark:text-gray-200" />
-            </button>
-            <button
-              id="dark-mode-toggle"
-              aria-label="Toggle Dark Mode"
-              type="button"
-              data-umami-event="theme-switcher-click"
-              className="mr-3 cursor-pointer h-10 w-10 rounded-lg bg-gray-200 p-3 ring-gray-300 hover:ring-4 dark:bg-gray-700"
-              onClick={() =>
-                setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
-              }>
-              {mounted && <ThemeToggleIcon theme={resolvedTheme} />}
-            </button>
-          </div>
+    <header className="site-header">
+      <nav className="site-nav" aria-label="Primary navigation">
+        <a
+          className="site-mark"
+          href={`/${locale}/`}
+          aria-label="Daniel Berhane home">
+          <span>DB—01</span>
+          <small>Daniel Berhane</small>
+        </a>
+        <div className="site-nav__links">
+          <a href={`/${locale}/#work`}>Work</a>
+          <a href={`/${locale}/#about`}>About</a>
+          <a
+            href="https://github.com/Daniel21b"
+            target="_blank"
+            rel="noreferrer noopener">
+            GitHub <ArrowUpRight aria-hidden="true" size={12} />
+          </a>
+          <a href="mailto:dberhane@terpmail.umd.edu">Email</a>
         </div>
       </nav>
-      <MobileMenu isMenuOpen={isMenuOpen} toggle={toggleMenu} />
-    </div>
+    </header>
   );
-};
-
-export default Navbar;
+}

@@ -22,7 +22,7 @@ export interface Project {
 export const featuredProject: Project = {
   title: 'AI Invoice Processing Pipeline',
   description: [
-    'Architected an event-driven pipeline with AWS Textract to parse PDF invoices into a normalized PostgreSQL schema, cutting end-to-end processing time by 95%.',
+    'Architected an event-driven pipeline with AWS Textract to parse PDF invoices into a normalized PostgreSQL schema and expose the processing path for review.',
     'Migrated orchestration from AWS Lambda to Apache Airflow and integrated a Streamlit interface for human-in-the-loop validation before database commits.',
     'Built transformation layers in Python and PySpark to standardize extracted invoice fields for analytics-ready downstream reporting.',
   ],
@@ -42,7 +42,7 @@ export const projects: Project[] = [
   {
     title: 'AI Invoice Processing Pipeline',
     description:
-      'Architected an event-driven pipeline using AWS Textract to parse PDF invoices into a normalized PostgreSQL schema, reducing processing time by 95%. Migrated orchestration from AWS Lambda to Airflow and added a Streamlit HITL validation layer before commits.',
+      'Architected an event-driven pipeline using AWS Textract to parse PDF invoices into a normalized PostgreSQL schema. Added orchestration and a Streamlit validation layer before commits.',
     technologies: [
       'Python',
       'PySpark',
@@ -57,7 +57,7 @@ export const projects: Project[] = [
   {
     title: 'PreClear AI - Permit Compliance Platform',
     description:
-      'Built Python and Apify scrapers to extract and normalize permit compliance requirements across 50+ municipalities. Developed a FastAPI backend for compliance cross-referencing with CI/CD automation via GitHub Actions.',
+      'Built Python and Apify scrapers to extract and normalize municipal permit compliance requirements. Developed a FastAPI backend for compliance cross-referencing with CI/CD automation via GitHub Actions.',
     technologies: [
       'Python',
       'PostgreSQL',
@@ -112,7 +112,7 @@ export const homepageSecondaryProjects = [
 export const homepageFeaturedProject = {
   title: 'AI Invoice Processing Pipeline',
   description: [
-    'Event-driven invoice ingestion with AWS Textract reduced end-to-end processing time by 95%.',
+    'Event-driven invoice ingestion with AWS Textract creates a reviewable path from upload to structured records.',
     'Added Airflow orchestration and Streamlit human-in-the-loop validation before database commits.',
   ],
   technologies: [
@@ -223,12 +223,19 @@ export const startups: Startup[] = [
     status: 'Active',
     industry: 'GovTech / Compliance Automation',
     highlights: [
-      'Built Python and Apify scraping pipelines to extract and normalize permit requirements across 50+ municipalities.',
+      'Built Python and Apify scraping pipelines to extract and normalize municipal permit requirements.',
       'Developed a FastAPI backend to cross-reference project descriptions against regulatory datasets and return compliance checks.',
       'Implemented CI/CD automation with GitHub Actions to improve deployment reliability and release velocity.',
       'Designed PostgreSQL data models to support structured querying across heterogeneous rule sets and frequent updates.',
     ],
-    technologies: ['Python', 'PostgreSQL', 'FastAPI', 'JavaScript', 'Apify', 'GitHub Actions'],
+    technologies: [
+      'Python',
+      'PostgreSQL',
+      'FastAPI',
+      'JavaScript',
+      'Apify',
+      'GitHub Actions',
+    ],
     color: 'from-indigo-500 to-cyan-500',
   },
 ];
