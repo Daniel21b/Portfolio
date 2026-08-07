@@ -8,7 +8,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Projects',
   description:
-    'A few data engineering and backend projects built by Daniel Berhane.',
+    'A few software, backend, and distributed data projects built by Daniel Berhane.',
 };
 
 export function generateStaticParams() {

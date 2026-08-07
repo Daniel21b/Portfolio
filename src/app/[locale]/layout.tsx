@@ -29,11 +29,11 @@ export async function generateMetadata({
     authors: [{ name: 'Daniel Berhane' }],
     applicationName: 'Daniel Berhane',
     description:
-      'Daniel Berhane’s portfolio of data engineering, backend, and software projects.',
+      'Daniel Berhane’s portfolio of software, backend, and distributed data projects.',
     openGraph: {
       title: 'Daniel Berhane',
       description:
-        'Daniel Berhane’s portfolio of data engineering, backend, and software projects.',
+        'Daniel Berhane’s portfolio of software, backend, and distributed data projects.',
       url: env.NEXT_PUBLIC_WEBSITE_URL,
       siteName: 'Daniel Berhane',
       images: [
@@ -61,7 +61,7 @@ export async function generateMetadata({
       title: 'Daniel Berhane',
       card: 'summary_large_image',
       description:
-        'Daniel Berhane’s portfolio of data engineering, backend, and software projects.',
+        'Daniel Berhane’s portfolio of software, backend, and distributed data projects.',
       images: [`${env.NEXT_PUBLIC_WEBSITE_URL}/api/og`],
     },
     manifest: '/static/site.webmanifest',

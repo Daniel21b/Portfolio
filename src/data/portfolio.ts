@@ -20,11 +20,11 @@ export interface Project {
 }
 
 export const featuredProject: Project = {
-  title: 'AI Invoice Processing Pipeline',
+  title: 'Automated Invoice Processing Platform',
   description: [
-    'Built three authenticated invoice intake paths that converge on a normalized PostgreSQL schema for traceable review.',
-    'Connected encrypted S3 uploads to Lambda through ObjectCreated notifications and parsed synchronous Textract LINE blocks into invoice fields.',
-    'Built Streamlit analytics, record details, audit views, lifecycle actions, and CSV export over the shared data model.',
+    'Built a serverless event-driven pipeline with Step Functions orchestrating asynchronous Textract extraction across Lambda functions and persisting normalized fields to PostgreSQL.',
+    'Defined the complete AWS architecture as Infrastructure as Code with AWS CDK.',
+    'Integrated a Streamlit human-in-the-loop review interface so low-confidence fields are validated before database persistence.',
   ],
   technologies: [
     'Python',
@@ -32,6 +32,7 @@ export const featuredProject: Project = {
     'Streamlit',
     'AWS Textract',
     'AWS Lambda',
+    'AWS Step Functions',
     'AWS CDK',
   ],
   github: 'https://github.com/Daniel21b/invoice_pipeline',
@@ -40,15 +41,16 @@ export const featuredProject: Project = {
 
 export const projects: Project[] = [
   {
-    title: 'AI Invoice Processing Pipeline',
+    title: 'Automated Invoice Processing Platform',
     description:
-      'Built document, spreadsheet, and manual invoice intake paths that normalize classified records into PostgreSQL for analytics, search, audit, and export.',
+      'Built a serverless event-driven AWS pipeline that orchestrates asynchronous invoice extraction, persists normalized fields to PostgreSQL, and routes low-confidence results through human review.',
     technologies: [
       'Python',
       'PostgreSQL',
       'Streamlit',
       'AWS Textract',
       'AWS Lambda',
+      'AWS Step Functions',
       'AWS CDK',
     ],
     period: '2025',
@@ -57,34 +59,24 @@ export const projects: Project[] = [
   {
     title: 'PreClear AI - Permit Compliance Platform',
     description:
-      'Built a Python ingestion path over a 354-record, 39-source, 21-county repository snapshot, then implemented a Next.js/TypeScript permit service that evaluates explicit rules before jurisdiction-scoped hybrid retrieval.',
-    technologies: [
-      'Python',
-      'TypeScript',
-      'Next.js',
-      'PostgreSQL',
-      'Supabase',
-      'pgvector',
-      'OpenAI',
-      'Zod',
-      'GitHub Actions',
-    ],
+      'Built modular Apify and Python ingestion services that normalize requirements from more than 50 municipal sites, plus FastAPI services that map project attributes to jurisdiction-specific permit and compliance rules.',
+    technologies: ['Python', 'FastAPI', 'PostgreSQL', 'JavaScript', 'Apify'],
     period: '2025',
     github: 'https://github.com/Daniel21b',
     liveDemo: 'https://www.preclearai.net/',
   },
   {
-    title: 'Tech Skill Demand Platform',
+    title: 'Distributed Skill Analytics Engine & REST API',
     description:
-      'Built a traceable two-source Python workflow that validates and deduplicates job postings into a checked-in 4,137-row artifact, then applies a 135-pattern role-family taxonomy for review in notebooks, Streamlit, and a static report.',
+      'Built an asynchronous Python and PySpark service that processes more than 120,000 job postings, extracts 500+ normalized skill tags, and serves cached aggregation metrics through FastAPI with sub-50ms filter queries.',
     technologies: [
       'Python',
-      'Pandas',
-      'NumPy',
-      'BeautifulSoup',
-      'Jupyter',
-      'Plotly',
-      'Streamlit',
+      'PySpark',
+      'FastAPI',
+      'PostgreSQL',
+      'Redis',
+      'Docker',
+      'AWS',
     ],
     period: '2025',
     github: 'https://github.com/Daniel21b/Job-Market-Analytics',
@@ -95,36 +87,36 @@ export const projects: Project[] = [
 // Homepage secondary projects (simplified version)
 export const homepageSecondaryProjects = [
   {
-    name: 'Tech Skill Demand Platform',
+    name: 'Distributed Skill Analytics Engine & REST API',
     description:
-      'Built a two-source Python workflow that validates and deduplicates postings into a checked-in 4,137-row artifact with an explicit role-family taxonomy.',
+      'Processed 120,000+ postings with Python and PySpark, extracted 500+ skill tags, and exposed cached FastAPI metrics with sub-50ms filter queries.',
     url: 'https://github.com/Daniel21b/Job-Market-Analytics',
     liveDemo: 'https://job-market-analytics-fx.streamlit.app/',
-    technologies: ['Python', 'Pandas', 'BeautifulSoup', 'Plotly', 'Streamlit'],
+    technologies: [
+      'Python',
+      'PySpark',
+      'FastAPI',
+      'PostgreSQL',
+      'Redis',
+      'Docker',
+    ],
   },
   {
     name: 'PreClear AI',
     description:
-      'Built scheduled Python ordinance ingestion and a Next.js/TypeScript two-track permit decision path with an explicit VERIFY_WITH_COUNTY fallback.',
+      'Normalized compliance requirements from 50+ municipal sites with Apify and Python, then mapped project attributes to jurisdiction-specific rules through FastAPI.',
     url: 'https://github.com/Daniel21b',
     liveDemo: 'https://www.preclearai.net/',
-    technologies: [
-      'Python',
-      'TypeScript',
-      'Next.js',
-      'Supabase',
-      'pgvector',
-      'OpenAI',
-    ],
+    technologies: ['Python', 'FastAPI', 'PostgreSQL', 'JavaScript', 'Apify'],
   },
 ];
 
 // Homepage featured project (simplified for homepage display)
 export const homepageFeaturedProject = {
-  title: 'AI Invoice Processing Pipeline',
+  title: 'Automated Invoice Processing Platform',
   description: [
-    'Document, spreadsheet, and manual invoice intake converge on one classified PostgreSQL record model.',
-    'S3 events invoke Lambda directly for synchronous Textract extraction; Streamlit provides analytics, record review, audit, and export.',
+    'Step Functions orchestrates asynchronous Textract extraction across Lambda functions and persists normalized invoice fields to PostgreSQL.',
+    'Streamlit routes low-confidence extractions through human review before database persistence.',
   ],
   technologies: [
     'Python',
@@ -132,6 +124,7 @@ export const homepageFeaturedProject = {
     'Streamlit',
     'AWS Textract',
     'AWS Lambda',
+    'AWS Step Functions',
     'AWS CDK',
   ],
   github: 'https://github.com/Daniel21b/invoice_pipeline',
@@ -225,31 +218,21 @@ export interface Startup {
 export const startups: Startup[] = [
   {
     name: 'PreClear AI',
-    tagline: 'Permit Compliance Intelligence Platform',
+    tagline: 'Permit Compliance Platform',
     description:
-      'PreClear AI separates scheduled ordinance preparation from request-time permit resolution. Python filters, normalizes, deduplicates, embeds, and upserts source chunks; a Next.js/TypeScript service checks deterministic rules before a guarded hybrid-search fallback.',
+      'PreClear AI uses modular Apify and Python ingestion services to normalize municipal compliance requirements into PostgreSQL, while FastAPI maps project attributes to jurisdiction-specific permit rules through a single low-latency lookup.',
     website: 'https://www.preclearai.net/',
     founded: '2025',
-    role: 'Builder & Data/Backend Engineer',
+    role: 'Builder & Backend Engineer',
     status: 'Active',
     industry: 'GovTech / Compliance Automation',
     highlights: [
-      'Built Python filtering, county normalization, content-hash deduplication, batched embeddings, retry, and PostgreSQL upserts over a checked-in 354-record source snapshot.',
-      'Developed a Next.js/TypeScript permit-check route with Zod validation, Supabase authentication, entitlement checks, and deterministic rule evaluation.',
-      'Implemented jurisdiction-scoped PostgreSQL full-text plus pgvector retrieval with an explicit VERIFY_WITH_COUNTY uncertainty result.',
-      'Configured weekly GitHub Actions ingestion; current workflow reliability and live-release parity are disclosed as unresolved.',
+      'Developed modular scraping and ingestion services in Apify and Python.',
+      'Normalized compliance requirements from more than 50 structurally different municipal sites into a unified PostgreSQL schema.',
+      'Engineered FastAPI services that map project attributes to jurisdiction-specific permit and compliance rules.',
+      'Turned manual municipal research into a low-latency single-point lookup.',
     ],
-    technologies: [
-      'Python',
-      'TypeScript',
-      'Next.js',
-      'PostgreSQL',
-      'Supabase',
-      'pgvector',
-      'OpenAI',
-      'Zod',
-      'GitHub Actions',
-    ],
+    technologies: ['Python', 'FastAPI', 'PostgreSQL', 'JavaScript', 'Apify'],
     color: 'from-indigo-500 to-cyan-500',
   },
 ];

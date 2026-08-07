@@ -2551,6 +2551,54 @@ main {
   font-size: 0.9rem;
 }
 
+.about-page__experience h3 a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 160ms ease;
+}
+
+.about-page__experience h3 a:hover,
+.about-page__experience h3 a:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+.about-page__experience h3 small {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.58rem;
+  font-weight: 500;
+}
+
+.about-page__experience ul {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  grid-column: 2 / -1;
+  gap: 0.65rem;
+  list-style: none;
+}
+
+.about-page__experience li {
+  position: relative;
+  margin: 0;
+  padding-left: 1rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.about-page__experience li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--signal);
+  content: '↳';
+}
+
 .about-page__experience p {
   margin: 0;
   grid-column: 2 / -1;
@@ -3256,7 +3304,8 @@ main {
   }
 
   .about-page__experience h3,
-  .about-page__experience p {
+  .about-page__experience p,
+  .about-page__experience ul {
     grid-column: 1 / -1;
   }
 
