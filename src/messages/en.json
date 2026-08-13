@@ -17,13 +17,13 @@
     "hosted": "Hosted on "
   },
   "index-page": {
-    "title": "ETL Developer & Analytics Engineer",
-    "intro": "I build reliable data pipelines, dimensional models, and BI workflows that turn messy operational data into decision-ready insights. Recently focused on Python/SQL ETL, dbt quality checks, and cloud automation across AWS and modern data tools."
+    "title": "Software Developer & Backend Engineer",
+    "intro": "I build reliable backend services, data integration systems, and cloud workflows with Python, SQL, FastAPI, PostgreSQL, Redis, Docker, and AWS."
   },
   "about-page": {
-    "text-1": "Hey, I'm Daniel. I'm an ETL Developer and Analytics Engineer focused on Python/SQL pipelines, dimensional modeling, and business intelligence workflows.",
-    "text-2": "I graduated from the University of Maryland with a Bachelor of Science in Computer Science (GPA: 3.5) in August 2025.",
-    "text-3": "My stack includes Python, SQL, dbt, AWS, Airflow, FastAPI, Power BI, and Tableau for building reliable analytics systems end to end.",
+    "text-1": "Hey, I'm Daniel. I'm a Software Developer focused on backend services, data integration, and reliable Python and SQL systems.",
+    "text-2": "I graduated from the University of Maryland with a Bachelor of Science in Computer Science (GPA: 3.5) in May 2025.",
+    "text-3": "My stack includes Python, SQL, FastAPI, PostgreSQL, Redis, Docker, PySpark, and AWS for building reliable systems end to end.",
     "website": "Website",
     "tools": {
       "title": "Tools",
@@ -45,17 +45,17 @@
       "title": "Timeline",
       "learn-more": "Learn more",
       "1": {
-        "date": "August 2025",
+        "date": "May 2025",
         "title": "Graduated from University of Maryland",
         "description": "Completed Bachelor of Science in Computer Science with a 3.5 GPA. Coursework included Algorithms, Software Engineering, Statistics, Data Science, and Data Visualization."
       },
       "2": {
-        "title": "ETL Developer (Contract) at ICATT Consulting",
-        "description": "Engineered Python and SQL pipelines for 10,000+ financial records, modeled star schemas for Power BI, implemented dbt test coverage, and automated reconciliation workflows across internal systems."
+        "title": "Software Developer at ICATT Consulting",
+        "description": "Architected Python and SQL integration services that consolidated three financial systems into one storage layer, designed indexed relational schemas, added CI/CD validation gates, and automated real-time reconciliation—cutting processing from multiple days to under three hours."
       },
       "3": {
-        "title": "Analytics Engineering Intern at Boost Labs",
-        "description": "Automated weekly reporting pipelines with Python and SQL, resolved legacy data quality issues, improved report generation performance by 3x, and built Tableau dashboards for self-service KPI tracking."
+        "title": "Software Engineer at Cube Money",
+        "description": "Built a Python identity-resolution algorithm across eight backend systems for more than 3,000 accounts, unified 15 query implementations, and automated consistency checks across 120 account groups—cutting analysis turnaround from two days to under one hour."
       }
     }
   },

@@ -8,9 +8,9 @@ import { SectionHeading } from '@/components/portfolio/section-heading';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Data and backend engineering',
+  title: 'Software and backend engineering',
   description:
-    'Daniel Berhane’s portfolio of data engineering, backend, and software projects.',
+    'Daniel Berhane’s portfolio of software, backend, and distributed data projects.',
 };
 
 export function generateStaticParams() {
@@ -53,12 +53,12 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
         <div className="hero__copy">
           <p className="hero__kicker">Daniel Berhane · Portfolio</p>
           <h1 id="hero-title">
-            Hi, I&apos;m Daniel. I work in data and backend engineering.
+            Hi, I&apos;m Daniel. I work in software and backend engineering.
           </h1>
           <p className="hero__intro">
-            I&apos;m a computer science graduate who enjoys building useful data
-            tools, backend services, and clear interfaces. Here are a few
-            projects I&apos;ve worked on.
+            I&apos;m a computer science graduate who builds backend services,
+            distributed data systems, cloud workflows, and useful interfaces.
+            Here are a few projects I&apos;ve worked on.
           </p>
           <div className="hero__actions">
             <a className="button button--signal" href="#work">
@@ -113,9 +113,9 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
           ))}
         </div>
         <p className="about-note">
-          I earned a B.S. in Computer Science in August 2025. I&apos;m
-          interested in data engineering, analytics engineering, and backend
-          roles where I can keep learning and contribute to useful systems.
+          I earned a B.S. in Computer Science in May 2025. I&apos;m interested
+          in software, backend, and distributed-systems roles where I can keep
+          learning and contribute to useful systems.
         </p>
       </section>
 

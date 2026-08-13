@@ -1,6 +1,7 @@
 # Portfolio content audit
 
 Audit date: July 31, 2026
+Skill analytics reconciliation: August 13, 2026
 
 This file records claims that were removed or withheld during the case-study
 redesign. It is a maintainer artifact, not public marketing copy.
@@ -79,56 +80,37 @@ tests/unit/test_textract_parser.py -q` returned `51 passed`. This is recorded
 
 ### Tech Skill Demand Platform
 
-- The requested `Daniel21b/skill-demand-platform` repository does not exist.
-  The portfolio case is therefore grounded in the public
-  `Daniel21b/Job-Market-Analytics` repository and does not link to the missing
-  URL.
-- Withheld PySpark, Airbyte, Airflow, dbt, BigQuery, and Docker as implemented
-  components. The audited repository contains no corresponding runtime,
-  configuration, model, DAG, or container artifacts.
-- Withheld `120K+` postings, eight months of queryable history, `18%` duplicate
-  removal, `500+` skill tags, the `40`-to-`12`-minute runtime, `40+` dbt tests,
-  freshness alerts, and the `4 GB`-to-`1.5 GB` scan reduction. No matching
-  repository, run history, manifest, test output, query plan, bytes-billed
-  record, or benchmark protocol exists.
-- Verified the checked-in `jobs_cleaned.csv` on July 31, 2026: 4,137 rows,
-  including 3,608 Adzuna and 529 Hacker News rows, with zero exact or
-  company+role+location duplicates.
-- Verified the saved source-specific run outputs: Adzuna returned 5,000
-  candidates and retained 3,691 unique IDs in 10.6 minutes, rejecting 1,309
-  repeats (`26.2%`); Hacker News validation retained 611 of 711 rows, removing
-  100 (`14.1%`). None of these methods produces the proposed `18%` metric.
-- Corrected the implemented taxonomy to 135 regex patterns: 49 AI/ML, 60
-  general IT, 7 hybrid, and 19 non-tech. This is a four-family role taxonomy,
-  not 500+ normalized skill tags.
-- Verified all nine commits in the full public GitHub history are authored by
-  Daniel Berhane.
-- Withheld both README growth figures (`42%` and `82.4%`) and the sample-results
-  table. The final artifact has only three material month buckets: 298 rows in
-  May 2024, 231 in October 2024, and 3,608 in October 2025. That contradicts
-  the stated October 2023–October 2024 / 13-month frame.
-- The date filter compares timezone-aware API timestamps with naive bounds,
-  catches the resulting error, and returns `True`. That behavior admits 2025
-  records through the intended 2023–2024 filter.
-- Some notebooks stop before saved deduplication or taxonomy output. The final
-  CSV is inspectable, but there is no fully reproducible end-to-end run record,
-  automated test suite, or CI workflow.
-- The Streamlit app can silently generate randomized synthetic data if source
-  files are absent. Direct verification also found the deployment entering an
-  authentication redirect loop, so it is labeled as a limited deployment link,
-  not a currently open demo.
-- The public collection notebook contains a committed Adzuna credential. The
-  value is intentionally not reproduced here. Rotation/revocation and Git
-  history cleanup are release blockers before the repository is promoted as
-  safe public proof.
-- Evidence required to publish a longitudinal result: a corrected date filter,
-  immutable data/run manifest, pinned processed artifact, one metric
-  definition, reproducible executed notebook, and dated output.
+- The public `Daniel21b/Job-Market-Analytics` repository now implements the
+  Python, FastAPI, PySpark, PostgreSQL, Redis, Docker, GitHub Actions, and AWS
+  EMR Serverless adapter described by this case study. The notebooks and
+  Streamlit dashboard remain explicitly labeled as legacy analysis surfaces.
+- The August 7, 2026 local validation ran the asynchronous API → Redis queue →
+  worker → PySpark → PostgreSQL path on the checked-in 4,137-row fixture. It
+  produced 4,135 canonical postings and two duplicate decisions (`0.0483%`).
+- The same run produced 2,164 posting-to-skill matches across 65 distinct
+  canonical skills. The portfolio does not describe the 135-pattern legacy
+  role-family taxonomy as 500+ normalized skill tags.
+- One optimized local Spark run completed in `17.627` seconds and recorded
+  partition-skew ratios of `1.644` before and `1.060` after. Because there is
+  no repeated same-input baseline series, no runtime reduction is claimed.
+- A populated local benchmark sent 100 warm multi-attribute requests through
+  FastAPI and recorded 100 Redis hits, `0.898 ms` p50, `1.989 ms` p95, and
+  `4.013 ms` maximum latency. This is labeled development-scale, not an SLA.
+- Quality gates passed for Ruff, eight non-Spark unit tests, four Spark contract
+  tests, the PostgreSQL/Redis service integration test, and both Docker image
+  builds.
+- `120K+` postings, `18%` duplicate removal, `500+` matched skills, and the
+  `40`-to-`12`-minute Spark reduction remain withheld until an immutable larger
+  dataset and repeated same-input benchmark artifacts exist.
+- The AWS surface is an implemented EMR Serverless adapter plus deployment and
+  IAM contracts. No cloud deployment, production adoption, uptime, cost, or
+  long-term service-level result is claimed.
 
 ## Resume status
 
-No resume PDF is present in the repository. The portfolio does not add a
-resume link, and no resume artifact was edited.
+No resume PDF is present in this repository. The public portfolio copy uses
+the measured local results above; any separately maintained resume should use
+the same evidence boundary before the next application.
 
 ## Live artifact status
 
@@ -136,6 +118,6 @@ As audited on July 31, 2026:
 
 - PreClear AI was reachable and exposed a Maryland permit pre-check flow plus
   product/project tracking surfaces.
-- The Tech Skill Demand Streamlit deployment entered an authentication redirect
-  loop. The link is retained as a limited deployment artifact; the static
-  GitHub Pages report returned successfully.
+- The Tech Skill Demand Streamlit deployment is a legacy analysis surface, not
+  evidence for the distributed API. The measured results come from the dated
+  local validation record in the public repository.

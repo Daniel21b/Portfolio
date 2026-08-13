@@ -12,7 +12,9 @@ export default function Footer() {
           <span>Daniel Berhane</span>
           <small>Portfolio</small>
         </a>
-        <p>A small collection of my work in data and backend engineering.</p>
+        <p>
+          A small collection of my work in software and backend engineering.
+        </p>
       </div>
       <div className="site-footer__links">
         <a href={`/${locale}/projects`}>Selected work</a>

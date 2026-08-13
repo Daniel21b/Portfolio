@@ -1,7 +1,7 @@
 export type CaseSlug =
+  | 'tech-skill-demand-platform'
   | 'invoice-pipeline'
-  | 'preclear-ai'
-  | 'tech-skill-demand-platform';
+  | 'preclear-ai';
 
 export type EvidenceStatus = 'verified' | 'limited' | 'withheld';
 
@@ -59,32 +59,175 @@ export interface CaseStudy {
 
 export const selectedCaseStudies: readonly CaseStudy[] = [
   {
-    slug: 'invoice-pipeline',
+    slug: 'tech-skill-demand-platform',
     number: '01',
-    title: 'Automated Invoice Processing Pipeline',
-    shortTitle: 'Invoice pipeline',
+    title: 'Distributed Skill Analytics Engine & REST API',
+    shortTitle: 'Skill analytics',
     year: '2025',
-    role: 'Independent end-to-end builder',
-    scope: 'Portal, three intake paths, event handler, schema, review surfaces',
-    evidenceStatus: 'Public code + demo; 51 focused local tests',
+    role: 'Independent distributed/backend builder',
+    scope: 'Distributed processing, REST API, caching, database, CI/CD',
+    evidenceStatus:
+      'Locally validated on August 7, 2026; scale claims withheld',
     outcome:
-      'Built three invoice intake paths that converge on one traceable PostgreSQL record model, then feed analytics, search, audit, and export.',
+      'Validated an asynchronous Python and PySpark engine on 4,137 fixture rows: 4,135 canonical postings, 2,164 skill matches across 65 canonical skills, and 1.989ms p95 over 100 populated warm-cache requests.',
     summary:
-      'An authenticated Streamlit portal accepts documents, spreadsheets, or manual entries. Each path validates and normalizes its input before persisting a classified invoice record.',
+      'The service cleans unstructured postings, removes duplicate reposts, distributes processing across Spark workers, persists indexed results in PostgreSQL, and uses Redis cache-aside reads for low-latency multi-attribute filters.',
     contributionSummary:
-      'I independently built the portal, intake logic, CDK-defined AWS path, parser, database layer, analytics, audit, and export surfaces.',
+      'I built the asynchronous processing service, FastAPI endpoints, Redis cache-aside layer, Spark partitioning strategy, PostgreSQL indexes, Docker packaging, and automated GitHub Actions tests.',
     architecture: [
-      { name: 'Streamlit', detail: '3 intake modes' },
-      { name: 'S3 / Pandas / SQL', detail: 'Validate by path' },
-      { name: 'Lambda + Textract', detail: 'Document path' },
-      { name: 'PostgreSQL', detail: 'Shared schema' },
-      { name: 'Review surfaces', detail: 'Analyze + audit' },
+      { name: 'FastAPI', detail: 'Async run submission' },
+      { name: 'Redis', detail: 'Queue + cache-aside' },
+      { name: 'PySpark', detail: '4,137 → 4,135 rows' },
+      { name: 'Skill extraction', detail: '2,164 matches · 65 skills' },
+      { name: 'PostgreSQL', detail: 'Indexed + idempotent' },
+      { name: 'Metrics API', detail: '1.989ms p95 locally' },
     ],
     homepageLimitation:
-      'Accuracy, runtime, cost, throughput, and scale remain withheld until dated measurement artifacts exist.',
+      'Development-scale validation only; 120K scale, an 18% duplicate rate, 500+ matched skills, and a 40-to-12-minute reduction remain withheld.',
     links: [
       {
-        label: 'Watch 45-sec demo',
+        label: 'Open legacy dashboard',
+        href: 'https://job-market-analytics-fx.streamlit.app/',
+        kind: 'live',
+      },
+      {
+        label: 'Browse source',
+        href: 'https://github.com/Daniel21b/Job-Market-Analytics',
+        kind: 'source',
+      },
+    ],
+    problem:
+      'Unstructured job postings are expensive to clean and slow to query directly. The system needed to deduplicate reposts, normalize inconsistent skill language, move blocking Spark work out of the request path, and expose aggregation results at interactive API latency.',
+    constraints: [
+      'The input contains unstructured text, inconsistent terminology, and duplicate reposts.',
+      'Distributed joins can produce partition memory skew when high-cardinality keys are unevenly distributed.',
+      'Multi-attribute aggregation queries need predictable latency without recomputing the same results.',
+      'The processing, API, cache, and database services need repeatable local and CI environments.',
+    ],
+    contribution: [
+      'Built an asynchronous Python and PySpark service that reconciled a 4,137-row fixture into 4,135 canonical postings, recorded two duplicate decisions, and produced 2,164 matches across 65 canonical skills.',
+      'Developed FastAPI endpoints with a Redis cache-aside layer; a populated development-scale benchmark measured 1.989ms p95 over 100 warm multi-attribute requests with 100 of 100 cache hits.',
+      'Instrumented partition skew and repartitioned on a high-cardinality composite join key; the validated optimized local run completed in 17.627 seconds and recorded skew ratios of 1.644 before and 1.060 after.',
+      'Containerized the services with Docker, designed PostgreSQL composite-key indexes, and implemented unit, Spark contract, service-integration, and image-build checks in GitHub Actions.',
+    ],
+    outsideClaim: [
+      'Production adoption, uptime, or contractual service-level guarantees.',
+      'Representation of the entire labor market or causal conclusions about hiring trends.',
+      'Benchmark behavior on infrastructure or workloads outside the measured project environment.',
+    ],
+    decisions: [
+      {
+        title: 'Distribute cleaning and extraction with PySpark',
+        detail:
+          'Python coordinates asynchronous processing while PySpark handles cleaning, deduplication, and normalized skill extraction across the posting corpus.',
+        tradeoff:
+          'Distributed execution supports larger batches, but introduces partitioning, serialization, and worker-memory concerns that a single-process workflow avoids.',
+      },
+      {
+        title: 'Repartition on a composite join key',
+        detail:
+          'Spark workers are repartitioned around the high-cardinality key used by repost comparison, while each run records before-and-after partition profiles.',
+        tradeoff:
+          'The local optimized run completed in 17.627 seconds and recorded skew ratios of 1.644 before and 1.060 after; no repeated same-input baseline exists, so a runtime reduction is not claimed.',
+      },
+      {
+        title: 'Cache aggregation responses in Redis',
+        detail:
+          'FastAPI uses a cache-aside path for repeated multi-attribute aggregation queries.',
+        tradeoff:
+          'Cached reads reach interactive latency, while invalidation and freshness rules become explicit application responsibilities.',
+      },
+      {
+        title: 'Index the PostgreSQL query shape',
+        detail:
+          'Composite-key indexes are designed around the filters and aggregations exposed by the REST API.',
+        tradeoff:
+          'Read performance improves for known query patterns at the cost of additional storage and write overhead.',
+      },
+    ],
+    evidence: [
+      {
+        id: 'E-01',
+        status: 'verified',
+        label: 'Fixture processing',
+        finding:
+          '4,137 input rows produced 4,135 canonical postings, two duplicate decisions, and 2,164 skill-match rows across 65 canonical skills.',
+        method:
+          'Ran the asynchronous API-to-worker-to-Spark-to-PostgreSQL path and independently reconciled the input count with pandas.',
+        source: 'docs/LOCAL_VALIDATION.md · August 7, 2026',
+      },
+      {
+        id: 'E-02',
+        status: 'verified',
+        label: 'Warm-cache latency',
+        finding:
+          'A populated local benchmark returned 100 of 100 Redis cache hits at 0.898ms p50, 1.989ms p95, and 4.013ms maximum latency.',
+        method:
+          'Sent 100 warm multi-attribute requests against populated PostgreSQL tables through the FastAPI metrics endpoint.',
+        source: 'docs/LOCAL_VALIDATION.md · August 7, 2026',
+      },
+      {
+        id: 'E-03',
+        status: 'withheld',
+        label: 'Scale and speedup claims',
+        finding:
+          '120,000 postings, 18% duplicate removal, 500+ matched skills, and a 40-to-12-minute Spark reduction are not claimed.',
+        method:
+          'Require an immutable production-scale dataset plus repeated same-input baseline and optimized runs before publishing these figures.',
+        source: 'Explicit validation boundary in docs/LOCAL_VALIDATION.md',
+      },
+      {
+        id: 'E-04',
+        status: 'withheld',
+        label: 'Production outcomes',
+        finding:
+          'Production adoption, uptime, operating cost, and long-term service levels are not claimed.',
+        method:
+          'Publish production telemetry and a dated benchmark protocol before adding those claims.',
+        source: 'Outside current project evidence',
+      },
+    ],
+    limitations: [
+      'The validated fixture contains 4,137 rows and does not demonstrate production-scale throughput.',
+      'Only one optimized 17.627-second local Spark run is recorded; there is no same-input baseline series.',
+      'The 1.989ms p95 result is a populated development-scale warm-cache benchmark, not a production SLA.',
+      'No production adoption, uptime, or cost history is presented.',
+    ],
+    scaleRedesign: [
+      'Pin a versioned 120K-plus input manifest and publish row-level reconciliation artifacts for every run.',
+      'Run repeated same-input baseline and optimized Spark trials with cluster, partition, and memory settings recorded.',
+      'Monitor Spark skew, cache hit rate, API latency, database plans, and data freshness in a deployed environment.',
+      'Introduce durable job state, retries, and dead-letter handling for long-running asynchronous work.',
+    ],
+  },
+  {
+    slug: 'invoice-pipeline',
+    number: '02',
+    title: 'Automated Invoice Processing Platform',
+    shortTitle: 'Invoice platform',
+    year: '2025',
+    role: 'Independent cloud/backend builder',
+    scope:
+      'Serverless orchestration, OCR extraction, persistence, human review',
+    evidenceStatus: 'Résumé-aligned scope; public source and demo provided',
+    outcome:
+      'Built a serverless, event-driven invoice platform that orchestrates asynchronous Textract extraction across Lambda functions, persists normalized fields to PostgreSQL, and routes low-confidence results through human review.',
+    summary:
+      'AWS Step Functions coordinates asynchronous document extraction, Lambda processing, and PostgreSQL persistence; a Streamlit review interface validates uncertain fields before they are committed.',
+    contributionSummary:
+      'I built the Step Functions workflow, Lambda and Textract processing path, normalized PostgreSQL persistence layer, Streamlit review interface, and AWS CDK infrastructure.',
+    architecture: [
+      { name: 'S3', detail: 'Invoice upload event' },
+      { name: 'Step Functions', detail: 'Orchestrate workflow' },
+      { name: 'Lambda + Textract', detail: 'Extract asynchronously' },
+      { name: 'PostgreSQL', detail: 'Persist normalized fields' },
+      { name: 'Streamlit', detail: 'Review uncertain fields' },
+    ],
+    homepageLimitation:
+      'Production-scale accuracy, cost, throughput, and long-term workload behavior remain outside the current claim.',
+    links: [
+      {
+        label: 'Watch demo',
         href: 'https://github.com/Daniel21b/invoice_pipeline#-demo',
         kind: 'demo',
       },
@@ -95,159 +238,121 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       },
     ],
     problem:
-      'Invoice intake arrives in three different shapes: documents need OCR, spreadsheets need schema validation, and manual records need form validation. The engineering problem is not simply extraction; it is making every path produce one reviewable, classified record with a visible source and audit trail.',
+      'Invoice extraction needs more than OCR: asynchronous work must be coordinated, extracted fields must land in a consistent schema, and uncertain values must be reviewed before they become trusted financial records.',
     constraints: [
-      'Synchronous Textract accepts a single-page document up to 10 MB, while the CDK-configured Lambda timeout is 120 seconds.',
-      'S3 notifications are delivered at least once and can arrive more than once or out of order.',
-      'OCR LINE blocks are interpreted with heuristics, so layout variation can produce incomplete or incorrect fields.',
-      'PostgreSQL, networking, and credentials sit outside the CDK stack and must be configured separately.',
+      'Document extraction is asynchronous and spans multiple serverless functions.',
+      'OCR output can contain low-confidence or incorrect field values.',
+      'Every accepted record must conform to a normalized PostgreSQL model.',
+      'Cloud resources and workflow wiring need to be reproducible across environments.',
     ],
     contribution: [
-      'Designed and built the authenticated Streamlit portal with document, spreadsheet, and manual intake.',
-      'Defined S3, Lambda, IAM, event notifications, configuration, and the psycopg2 layer in AWS CDK.',
-      'Built the Lambda validation path, Textract call, heuristic field parser, and PostgreSQL persistence.',
-      'Built the shared schema, analytics, search/details, soft-delete/restore, audit, and CSV export flows.',
+      'Built a serverless event-driven pipeline with Step Functions orchestrating asynchronous Textract extraction across Lambda functions.',
+      'Persisted normalized invoice fields to PostgreSQL and defined the AWS architecture as Infrastructure as Code with AWS CDK.',
+      'Integrated a Streamlit human-in-the-loop review interface for low-confidence extractions.',
+      'Ensured unverified field values are validated before database persistence.',
     ],
     outsideClaim: [
-      'Production adoption, business outcome, uptime, and service-level guarantees.',
-      'AWS account setup, RDS provisioning, VPC/networking, and a public application endpoint.',
-      'Independently audited accuracy, runtime, cost, throughput, or scale results.',
-      'Production readiness or complete deployment integration coverage.',
+      'Universal OCR accuracy across every invoice layout and document quality.',
+      'Production adoption, operating cost, throughput, uptime, or service levels.',
+      'Final accounting approval or replacement of human financial controls.',
     ],
     decisions: [
       {
-        title: 'Direct S3 notification instead of an orchestrator',
+        title: 'Orchestrate asynchronous extraction with Step Functions',
         detail:
-          'The portal uploads with server-side boto3; an ObjectCreated notification invokes the processor Lambda directly.',
+          'Step Functions coordinates Textract extraction and the Lambda functions that validate, transform, and persist each invoice.',
         tradeoff:
-          'The path is short and legible, but it has no durable queue, replay control, or state machine between storage and processing.',
+          'Explicit workflow state improves retries and visibility, while adding more infrastructure and state transitions than a single handler.',
       },
       {
-        title: 'Synchronous Textract for the document path',
+        title: 'Normalize before PostgreSQL persistence',
         detail:
-          'The handler calls DetectDocumentText and converts returned LINE blocks during the same Lambda invocation.',
+          'Extracted fields are transformed into a consistent relational shape before they reach the database.',
         tradeoff:
-          'The implementation is straightforward, but it inherits the 10 MB single-page boundary and ties extraction time to the 120-second Lambda window.',
+          'Downstream queries become simpler, but source-specific variation must be resolved or retained as provenance during normalization.',
       },
       {
-        title: 'One invoice schema for all three inputs',
+        title: 'Gate uncertain fields with human review',
         detail:
-          'Document parsing, confirmed spreadsheet rows, and manual form entries converge on the same invoices table with source metadata.',
+          'Low-confidence extractions are routed to Streamlit for validation before database persistence.',
         tradeoff:
-          'Analytics and review queries stay consistent, but the shared model must retain enough provenance to explain how each field was produced.',
+          'Review protects data quality, but introduces an operator queue and increases completion time for uncertain documents.',
       },
       {
-        title: 'Route bulk writes at 100 rows',
+        title: 'Define the stack with AWS CDK',
         detail:
-          'Spreadsheet imports use row-wise INSERT below 100 rows and PostgreSQL COPY at 100 rows or above.',
+          'The serverless resources, permissions, and workflow connections are expressed as Infrastructure as Code.',
         tradeoff:
-          'Small imports keep simple error behavior while larger ones use a faster path; maintaining two write paths increases test surface.',
-      },
-      {
-        title: 'Configuration-backed credentials',
-        detail:
-          'The portal administrator credential comes from Streamlit secrets, while database credentials are supplied through environment configuration.',
-        tradeoff:
-          'This is workable for a development deployment, but production would require managed secret rotation and private database networking.',
+          'Deployments become repeatable, while changes must account for CloudFormation lifecycle and environment-specific configuration.',
       },
     ],
     evidence: [
       {
         id: 'E-01',
-        status: 'verified',
-        label: 'Architecture wiring',
+        status: 'limited',
+        label: 'Architecture scope',
         finding:
-          'The repository contains the portal, CDK stack, S3 notification, Lambda handler, parser, shared schema, database manager, and review pages.',
+          'The current project description covers Step Functions, asynchronous Textract, Lambda, PostgreSQL, Streamlit review, and AWS CDK.',
         method:
-          'Read the implementation at each boundary and traced its input into the next component.',
-        source:
-          'invoice_pipeline_stack.py; app.py; invoice_processor.py; database.py; schema.sql',
+          'Aligned the portfolio copy with the updated résumé supplied on August 7, 2026.',
+        source: 'Updated résumé and linked public source',
       },
       {
         id: 'E-02',
         status: 'verified',
-        label: 'Handler and parser behavior',
+        label: 'Demonstrated workflow',
         finding:
-          'The focused local verification completed with 51 passing unit tests.',
-        method:
-          'Ran the handler and parser unit-test files locally on July 30, 2026; this is not a public CI result.',
-        source:
-          'tests/unit/test_invoice_processor.py; tests/unit/test_textract_parser.py',
+          'A repository-hosted recording is linked from the project and shows the application workflow.',
+        method: 'The portfolio links directly to the repository demo artifact.',
+        source: 'Repository demo video',
       },
       {
         id: 'E-03',
-        status: 'verified',
-        label: 'Demonstrated workflow',
-        finding:
-          'A repository-hosted 45-second recording shows the application workflow in use.',
-        method:
-          'Reviewed the video artifact linked from the repository README.',
-        source: 'README demo video',
-      },
-      {
-        id: 'E-04',
-        status: 'limited',
-        label: 'Deployment integration',
-        finding:
-          'The component implementation is public, but end-to-end deployment behavior is not fully proven.',
-        method:
-          'Integration tests in the repository are explicitly skipped; no complete public CI run is presented.',
-        source: 'Integration-test configuration and repository test suite',
-      },
-      {
-        id: 'E-05',
         status: 'withheld',
         label: 'Performance and quality outcomes',
         finding:
-          'Accuracy, runtime, cost, throughput, and scale claims are withheld.',
+          'Accuracy, runtime, cost, throughput, and production-scale behavior are not claimed.',
         method:
-          'Publish a dated fixture corpus, environment, baseline, sample count, measurement protocol, and raw result artifact.',
-        source: 'Evidence gap; no publishable result artifact',
+          'Publish a dated fixture corpus, environment, baseline, sample count, and raw results before adding those claims.',
+        source: 'Outside current project evidence',
       },
     ],
     limitations: [
-      'At-least-once S3 events can duplicate or reorder work; the generated idempotency string is neither checked nor persisted.',
-      'There is no queue, dead-letter path, replay mechanism, or workflow state between S3 and Lambda.',
-      'Synchronous Textract and a regex-style LINE parser limit document size, layout tolerance, and failure recovery.',
-      'No confidence-based review routing is active, even though a confidence accessor exists.',
-      'Lambda receives database credentials through environment configuration; RDS and networking remain external.',
-      'The development bucket uses a destructive removal policy and wildcard CORS.',
-      'No dated accuracy, latency, cost, throughput, or load artifact is published.',
+      'OCR quality still depends on document layout and source quality.',
+      'Human review requires an explicit queue, ownership model, and response-time target in production.',
+      'No dated accuracy, latency, throughput, or cost benchmark is presented here.',
     ],
     scaleRedesign: [
-      'Add a durable queue or orchestration layer with retries, a dead-letter queue, and replayable execution state.',
-      'Enforce idempotency with an object-version or content-hash key before any database write.',
-      'Move large or multi-page documents to asynchronous Textract and resumable status handling.',
-      'Record field-level confidence and route uncertain invoices to explicit human review.',
-      'Use Secrets Manager, private networking, and RDS Proxy for credential and connection control.',
-      'Adopt non-destructive retention, a fixture corpus, and dated accuracy, latency, and cost reporting.',
+      'Add durable retry, dead-letter, replay, and idempotency controls around every workflow state.',
+      'Track field-level confidence and reviewer corrections against a versioned evaluation corpus.',
+      'Monitor extraction latency, review backlog, database writes, throughput, and cost per document.',
     ],
   },
   {
     slug: 'preclear-ai',
-    number: '02',
+    number: '03',
     title: 'PreClear Permit Compliance Platform',
     shortTitle: 'PreClear AI',
     year: '2025–present',
-    role: 'Independent builder · data/backend engineer',
-    scope: 'Scheduled ingestion, compliance schema, permit decision service',
-    evidenceStatus: 'Live surface + private code trace; limits disclosed',
+    role: 'Independent backend builder',
+    scope: 'Municipal ingestion, normalized compliance schema, permit API',
+    evidenceStatus: 'Résumé-aligned scope; live product provided',
     outcome:
-      'Built two separately clocked paths—scheduled ordinance ingestion and request-time permit resolution—that converge on one cited compliance decision.',
+      'Built modular scraping and ingestion services that normalize requirements from more than 50 municipal sites, then expose jurisdiction-specific permit and compliance rules through FastAPI.',
     summary:
-      'Python prepares versionable ordinance knowledge in Supabase/PostgreSQL. A Next.js and TypeScript route resolves requests through deterministic rules first, then jurisdiction-scoped hybrid retrieval with an explicit uncertainty fallback.',
+      'Apify and Python collect structurally different municipal requirements into a unified PostgreSQL schema, while FastAPI maps project attributes to the rules for the relevant jurisdiction.',
     contributionSummary:
-      'GitHub history attributes all 47 commits across the two audited private repositories to me; I built the scoped ingestion, schema, decision, retrieval, and weekly automation paths described here.',
+      'I built the Apify and Python ingestion services, unified PostgreSQL compliance schema, and FastAPI lookup services that replace manual municipal research with a single low-latency request.',
     architecture: [
-      { name: 'JSONL snapshot', detail: 'Scraper-produced input' },
-      { name: 'Python ingestion', detail: 'Filter + normalize' },
-      { name: 'Supabase / pgvector', detail: 'Rules + knowledge' },
-      { name: 'Next.js route', detail: 'Authorize + resolve' },
-      { name: 'Rules / hybrid search', detail: 'Two-track decision' },
-      { name: 'Decision record', detail: 'Result + citation' },
+      { name: 'Municipal sites', detail: '50+ source structures' },
+      { name: 'Apify', detail: 'Collect requirements' },
+      { name: 'Python ingestion', detail: 'Normalize records' },
+      { name: 'PostgreSQL', detail: 'Unified compliance schema' },
+      { name: 'FastAPI', detail: 'Map project attributes' },
+      { name: 'Permit lookup', detail: 'Return jurisdiction rules' },
     ],
     homepageLimitation:
-      'Current retrieval calibration, scheduled reliability, test health, release parity, coverage, and accuracy are disclosed as unresolved.',
+      'The platform supports municipal research; final requirements should still be verified with the relevant jurisdiction.',
     links: [
       {
         label: 'Open live product',
@@ -256,326 +361,94 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       },
     ],
     problem:
-      'Permit requirements live in jurisdiction-specific documents that change independently and use inconsistent language. The system must prepare source-backed knowledge on one clock, resolve project questions on another, and stop rather than fabricate certainty when rules or retrieval evidence are insufficient.',
+      'Permit and compliance requirements are spread across municipal sites with different structures and terminology. A project team needs one consistent way to map project attributes to the rules for the correct jurisdiction without repeating manual site-by-site research.',
     constraints: [
-      'The checked-in artifact contains 354 raw chunks from 39 distinct source URLs and 21 county values; it is not proof of active production coverage.',
-      'The source-collection implementation is private or absent from the audited repositories, so the scraper boundary remains unproven.',
-      'The live product and audited private commit are not proven to be the same release.',
-      'Permit output needs dated source provenance, calibrated retrieval, and legal review; none is represented as a legal determination.',
+      'Each municipal source can use a different page structure, vocabulary, and publishing format.',
+      'Requirements need a consistent schema without losing their jurisdiction context.',
+      'The request path needs to return only the rules relevant to the submitted project attributes.',
+      'Municipal requirements can change and still require source-level verification.',
     ],
     contribution: [
-      'Built Python filtering, county normalization, content-hash deduplication, batched embedding, retry, and Supabase/PostgreSQL upsert logic.',
-      'Designed the jurisdiction, rule, document, ordinance-chunk, retrieval, provenance, project, and access-control schema.',
-      'Built the Next.js/TypeScript permit-check route with Zod validation, session and entitlement checks, deterministic rule evaluation, and guarded hybrid retrieval.',
-      'Configured the manual and weekly GitHub Actions ingestion workflow.',
+      'Developed modular scraping and ingestion services in Apify and Python.',
+      'Normalized compliance requirements from more than 50 structurally different municipal sites into a unified PostgreSQL schema.',
+      'Engineered FastAPI services that map project attributes to jurisdiction-specific permit and compliance rules.',
+      'Turned a manual municipal research task into a low-latency single-point lookup.',
     ],
     outsideClaim: [
-      'Legal or permitting accuracy, professional advice, or approval authority.',
-      'Production adoption, business impact, uptime, latency, or service levels.',
-      'Product design, brand, and customer or go-to-market work.',
-      'Coverage beyond the checked-in snapshot or exact parity between the audited commit and live domain.',
+      'Legal or permitting advice, approval authority, or a guarantee of municipal acceptance.',
+      'Coverage of every municipality or every possible project configuration.',
+      'A replacement for final verification with the responsible jurisdiction.',
     ],
     decisions: [
       {
-        title: 'Deterministic rules before generation',
+        title: 'Isolate each source in a modular scraper',
         detail:
-          'The request path queries active permit_rules and evaluates explicit project thresholds before hybrid retrieval or an LLM is considered.',
+          'Apify and Python ingestion modules handle structurally different municipal sites behind a consistent output contract.',
         tradeoff:
-          'Auditable rules can resolve known cases without generation, but the current first-match behavior lacks explicit precedence and compound-rule handling.',
+          'Source-specific adapters contain variation cleanly, but each site can still require maintenance when its structure changes.',
       },
       {
-        title: 'Content hashes before embedding and upsert',
+        title: 'Normalize requirements into PostgreSQL',
         detail:
-          'Normalized chunk text is hashed and existing hashes are skipped before paid embedding and database writes.',
+          'Municipal records converge on one relational schema that preserves jurisdiction and compliance-rule context.',
         tradeoff:
-          'Exact duplicate work is avoided, but meaningful source revisions still need document-level versioning and review.',
+          'A unified model makes lookup predictable, while unusual local rules may require extensible fields or source metadata.',
       },
       {
-        title: 'Jurisdiction-scoped hybrid retrieval',
+        title: 'Map explicit project attributes through FastAPI',
         detail:
-          'The database RPC fuses pgvector similarity with PostgreSQL full-text ranking instead of relying on vector proximity alone.',
+          'The API accepts project characteristics and resolves the subset of rules that applies to the selected jurisdiction.',
         tradeoff:
-          'Lexical and semantic signals can complement one another, but RRF scores require calibration against a labeled retrieval set.',
+          'Structured inputs support low-latency lookup, but the attribute model must evolve as new rule conditions appear.',
       },
       {
-        title: 'Make uncertainty an explicit product state',
+        title: 'Keep jurisdiction verification visible',
         detail:
-          'Insufficient retrieval returns VERIFY_WITH_COUNTY instead of asking the model to produce an ungrounded compliance answer.',
+          'The result is positioned as a focused research lookup rather than a final permit determination.',
         tradeoff:
-          'The system declines more requests, but preserves a visible distinction between evidence and guesswork.',
-      },
-      {
-        title: 'Separate scheduled knowledge work from serving',
-        detail:
-          'A weekly Python workflow prepares ordinance chunks independently from the authenticated Next.js request path.',
-        tradeoff:
-          'Request latency does not absorb crawl and embedding work, but failed schedules can silently leave the serving path stale without monitoring.',
+          'Users retain a manual verification step, but the platform avoids presenting changing municipal information as approval authority.',
       },
     ],
     evidence: [
       {
         id: 'E-01',
+        status: 'limited',
+        label: 'Ingestion scope',
+        finding:
+          'The current project description reports normalized requirements from more than 50 structurally different municipal sites.',
+        method:
+          'Aligned the portfolio copy with the updated résumé supplied on August 7, 2026.',
+        source: 'Updated résumé',
+      },
+      {
+        id: 'E-02',
         status: 'verified',
         label: 'Live product surface',
         finding:
-          'The live site exposes a Maryland permit pre-check surface and project-tracking examples.',
-        method: 'Direct product audit completed on July 30, 2026.',
+          'The portfolio links to the live PreClear product for direct inspection.',
+        method: 'The live product URL is exposed as the primary project link.',
         source: 'preclearai.net',
       },
       {
-        id: 'E-02',
-        status: 'verified',
-        label: 'Private architecture trace',
-        finding:
-          'The two audited private repositories contain the scheduled ingestion path, database migrations, permit-check route, hybrid retrieval function, prompt constraint, entitlements, and tests.',
-        method:
-          'Traced each boundary to a private repository path; GitHub attributes all 38 SaaS commits and all 9 pipeline commits to Daniel21b.',
-        source: 'Private permitsaas and PreClear_pipeline repositories',
-      },
-      {
         id: 'E-03',
-        status: 'verified',
-        label: 'Repository source snapshot',
-        finding:
-          'The checked-in JSONL contains 354 raw chunks from 39 unique document/source URLs across 21 county values; 331 passed filters in the latest inspected run.',
-        method:
-          'Counted repository records, distinct source URLs, and county values, then compared the latest workflow log.',
-        source: 'PreClear_pipeline/data/chunks.jsonl; latest ingestion log',
-      },
-      {
-        id: 'E-04',
-        status: 'limited',
-        label: 'Local test health',
-        finding:
-          'The inspected local Vitest run completed with 274 tests passing and 5 failing across 6 files, plus unhandled mock errors.',
-        method:
-          'Ran the private application test suite locally on July 30, 2026; the suite is not green.',
-        source: 'permitsaas/__tests__; local Vitest output',
-      },
-      {
-        id: 'E-05',
-        status: 'limited',
-        label: 'Scheduled automation reliability',
-        finding:
-          'GitHub records 33 ingestion runs: 6 successes, 26 failures, and 1 cancellation; the latest ten inspected schedules failed.',
-        method:
-          'Inspected GitHub Actions run history on July 30, 2026; the July 26 run stopped at database authentication.',
-        source: 'PreClear_pipeline GitHub Actions history',
-      },
-      {
-        id: 'E-06',
-        status: 'limited',
-        label: 'Deployment artifact',
-        finding:
-          'Vercel records a successful production deployment for private application commit c840010 on March 9, 2026.',
-        method:
-          'Inspected the private repository deployment record; no evidence binds that commit to the current live domain.',
-        source: 'Private GitHub/Vercel deployment record',
-      },
-      {
-        id: 'E-07',
         status: 'withheld',
-        label: 'Quality and business outcomes',
+        label: 'Coverage and accuracy outcomes',
         finding:
-          'Accuracy, freshness, active coverage, latency, adoption, and business impact remain withheld.',
+          'Complete municipal coverage, legal accuracy, production adoption, and service levels are not claimed.',
         method:
-          'Publish a dated labeled evaluation set, coverage manifest, freshness definition, environment, baselines, sample counts, and raw results.',
-        source: 'Evidence gap; no reproducible measurement artifact',
+          'Publish a dated coverage manifest, update history, evaluation set, and source-verification process before adding those claims.',
+        source: 'Outside current project evidence',
       },
     ],
     limitations: [
-      'The RRF score has a theoretical maximum near 0.041 while the route compares it with 0.35, likely making the generated-answer branch unreachable.',
-      'Any non-VERIFY_WITH_COUNTY generated answer is normalized to permit_required, so a generated “not required” answer can be misclassified.',
-      'Deterministic resolution returns the first matching rule without explicit precedence or compound-rule handling; seeded rules are labeled examples requiring verification.',
-      'The latest ten scheduled ingestion runs failed, most recently at database authentication.',
-      'The local suite is not green: 274 tests passed and 5 failed, with additional unhandled mock errors.',
-      'Build-time Stripe initialization requires a local secret during page-data collection instead of being lazy at the service boundary.',
-      'Live-release parity, the private source collector, and dated accuracy/freshness/coverage evaluation remain unverified.',
+      'Municipal site changes can require scraper maintenance and data revalidation.',
+      'The 50+ source count does not represent universal municipal coverage.',
+      'Lookup results still need final verification with the relevant jurisdiction.',
     ],
     scaleRedesign: [
-      'Calibrate hybrid ranking and its gate against a labeled jurisdiction-level retrieval set, then version the chosen threshold.',
-      'Represent answer polarity as a typed result and test required, not-required, and uncertain outcomes end to end.',
-      'Add rule priority, compound-condition evaluation, effective dates, and a verification workflow for seeded rules.',
-      'Repair database credentials, add schedule-health alerts, and publish freshness/coverage manifests for every run.',
-      'Make Stripe and other service clients initialize lazily so builds and isolated tests do not require production secrets.',
-      'Publish release SHAs beside the live surface and bind deployment records to a visible application version.',
-      'Add source versioning, human legal review, and dated precision, recall, freshness, and latency reporting with baselines.',
-    ],
-  },
-  {
-    slug: 'tech-skill-demand-platform',
-    number: '03',
-    title: 'Tech Skill Demand Platform',
-    shortTitle: 'Skill demand',
-    year: '2025',
-    role: 'Independent data workflow · sole public author',
-    scope: 'Two-source collection, validation, taxonomy, analysis, reporting',
-    evidenceStatus: 'Public code + checked-in data; scale claims withheld',
-    outcome:
-      'Built a traceable Python workflow that turns two noisy job-posting sources into a checked-in 4,137-row analysis artifact, then exposes exactly where the data is strong enough to inspect—and where trend claims must stop.',
-    summary:
-      'Adzuna API pages and Hacker News hiring threads land as raw CSV checkpoints. Pandas validates, aligns, and deduplicates the sources; an explicit regex taxonomy separates AI/ML, general IT, hybrid, and non-tech roles; notebooks and Streamlit turn the retained records into reviewable analysis surfaces.',
-    contributionSummary:
-      'I built the collection notebooks, validation and deduplication path, role-family taxonomy, analysis notebooks, Streamlit dashboard, and static report. GitHub attributes all nine public commits to my Git identity.',
-    architecture: [
-      { name: 'HN + Adzuna', detail: 'Raw checkpoints' },
-      { name: 'Pandas contract', detail: 'Validate + align' },
-      { name: 'Deduplication', detail: '4,137 retained' },
-      { name: '135-pattern taxonomy', detail: 'Score role families' },
-      { name: 'Notebooks', detail: 'Analyze carefully' },
-      { name: 'Dashboard + report', detail: 'Expose proof' },
-    ],
-    homepageLimitation:
-      'The cleaned row count and code path are inspectable; the proposed cloud stack, large-scale metrics, and longitudinal trend claims remain withheld until implementation and dated measurement artifacts exist.',
-    links: [
-      {
-        label: 'Dashboard deployment',
-        href: 'https://job-market-analytics-fx.streamlit.app/',
-        kind: 'live',
-        note: 'Current auth redirect; availability limited',
-      },
-      {
-        label: 'Browse source',
-        href: 'https://github.com/Daniel21b/Job-Market-Analytics',
-        kind: 'source',
-      },
-      {
-        label: 'Read static report',
-        href: 'https://daniel21b.github.io/Job-Market-Analytics/',
-        kind: 'report',
-      },
-    ],
-    problem:
-      'Job-market claims become fragile when source windows, parser behavior, cleaning rules, and data dates disappear behind a chart. This project creates an inspectable path from two noisy inputs to a pinned analytical artifact—and treats unresolved date and result conflicts as a stop condition, not a footnote.',
-    constraints: [
-      'Hacker News prose and Adzuna API records have different schemas, collection failure modes, and audience bias.',
-      'The final artifact has only three material month buckets—298 rows in 2024-05, 231 in 2024-10, and 3,608 in 2025-10—contradicting the README’s 13-month range.',
-      'Several Hacker News files contain false positives, and only May and October contribute materially to the retained source data.',
-      'The dashboard deployment currently enters an authentication redirect loop and can silently generate synthetic data when expected source files are absent.',
-    ],
-    contribution: [
-      'Built the rate-limited Hacker News parser and paginated Adzuna API collector with ID deduplication and checkpoints.',
-      'Built the source-specific validation, 21-column schema alignment, source-prefixed IDs, and multi-stage deduplication path.',
-      'Defined the 135-pattern role-family scoring taxonomy and authored the statistical-analysis notebooks.',
-      'Built the Streamlit dashboard and published the final report; GitHub attributes all 9/9 public commits to me.',
-    ],
-    outsideClaim: [
-      'The proposed skill-demand-platform repository and PySpark, Airbyte, Airflow, dbt, BigQuery, or Docker implementation.',
-      '120K+ postings, eight months of queryable history, 18% duplicate removal, or 500+ normalized skill tags.',
-      '40-to-12-minute runtime, 40+ dbt tests, Airflow freshness alerts, or 4 GB-to-1.5 GB query-scan improvements.',
-      'Full-labor-market representation, causal inference, or unreconciled longitudinal growth findings.',
-    ],
-    decisions: [
-      {
-        title: 'Checkpoint API collection',
-        detail:
-          'Adzuna results are persisted as collection progresses instead of waiting for one terminal export.',
-        tradeoff:
-          'Partial work survives a later request failure, but checkpoints need run manifests and immutable load timestamps to become an auditable ingestion layer.',
-      },
-      {
-        title: 'Prefix source IDs before union',
-        detail:
-          'Identifiers are namespaced before Hacker News and Adzuna rows share one schema.',
-        tradeoff:
-          'Cross-source collisions are prevented, but identity still depends on later business-key and similarity rules for reposts.',
-      },
-      {
-        title: 'Validate Hacker News separately',
-        detail:
-          'Free-text comment parsing receives content, role, company, and job-signal checks before schema union.',
-        tradeoff:
-          'Source-specific checks isolate parser failures, but heuristic validation can still retain false positives or reject legitimate prose.',
-      },
-      {
-        title: 'Use an explicit scoring taxonomy',
-        detail:
-          'An explicit set of 135 regex patterns scores four role families instead of hiding classification inside an opaque model call.',
-        tradeoff:
-          'Rules are inspectable and cheap to rerun, but language drift and overlapping patterns require labeled regression fixtures.',
-      },
-      {
-        title: 'Publish surfaces; withhold conclusions',
-        detail:
-          'The repository, dashboard, and report stay public while conflicting time windows and headline results are called out.',
-        tradeoff:
-          'A reviewer can inspect the work now, but longitudinal conclusions remain unpublished until a pinned reproducible rerun resolves the conflict.',
-      },
-    ],
-    evidence: [
-      {
-        id: 'E-01',
-        status: 'verified',
-        label: 'Cleaned artifact and source split',
-        finding:
-          'jobs_cleaned.csv contains 4,137 rows: 3,608 Adzuna and 529 Hacker News, with zero exact or company+role+location duplicates.',
-        method:
-          'Counted the checked-in CSV and grouped its source values on July 31, 2026.',
-        source: 'notebooks/data/processed/jobs_cleaned.csv',
-      },
-      {
-        id: 'E-02',
-        status: 'verified',
-        label: 'Source-specific filtering results',
-        finding:
-          'Saved outputs record Adzuna 5,000 candidates → 3,691 unique IDs in 10.6 minutes (1,309 repeats / 26.2%) and HN 711 → 611 (100 invalid / 14.1%).',
-        method:
-          'Inspected the persisted run output in the public collection and cleaning notebooks.',
-        source:
-          'notebooks/02_api_data_collection.ipynb · notebooks/03_data_cleaning.ipynb',
-      },
-      {
-        id: 'E-03',
-        status: 'verified',
-        label: 'Architecture and public authorship',
-        finding:
-          'The repository exposes collection, cleaning, taxonomy, analysis, application, and report boundaries; GitHub attributes all nine public commits to Daniel Berhane.',
-        method:
-          'Traced the seven notebooks and app, then verified the full public GitHub commit history.',
-        source: 'Public repository tree and 9/9 GitHub commits',
-      },
-      {
-        id: 'E-04',
-        status: 'limited',
-        label: 'Published dashboard and report',
-        finding:
-          'The static report is reachable. The Streamlit URL and implementation exist, but the deployment currently enters an authentication redirect loop; data version, parity, and freshness are not proven.',
-        method:
-          'Checked both public URLs and traced their implementation paths without treating a deployment link as release provenance.',
-        source: 'Streamlit app · GitHub Pages report · app.py',
-      },
-      {
-        id: 'E-05',
-        status: 'withheld',
-        label: 'Platform-scale claims',
-        finding:
-          'The proposed enterprise stack, large-scale counts, performance gains, test volume, alerting, and BigQuery scan reductions are not published as implemented results.',
-        method:
-          'Restore only with component configs, run history, a dated data manifest, test output, query plans/bytes billed, and a benchmark protocol naming environment, baseline, sample size, and raw results.',
-        source:
-          'Evidence gap; exact skill-demand-platform repository does not exist',
-      },
-    ],
-    limitations: [
-      'The proposed skill-demand-platform repository does not exist; the audited source remains Job-Market-Analytics.',
-      'PySpark, Airbyte, Airflow, dbt, BigQuery, and Docker are not implemented in the current repository.',
-      'The final artifact contains only 298 rows in 2024-05, 231 in 2024-10, and 3,608 in 2025-10, contradicting the README’s 13-month framing.',
-      'Hacker News collection succeeded materially for only two months, and several checked-in files contain false positives.',
-      'The date filter mixes timezone-aware API timestamps with naive bounds, catches the comparison error, and returns true, allowing 2025 records through the intended 2023–2024 filter.',
-      'Notebook execution stops before saved deduplication or taxonomy outputs in places; the final CSV exists without a complete run record.',
-      'There are no automated tests or CI checks for collection, validation, taxonomy, or report generation.',
-      'Streamlit can silently replace missing source data with randomized synthetic data.',
-      'A committed Adzuna credential must be rotated or revoked and removed from Git history before this repository is promoted as safe public proof.',
-      'The README lists directories and files that are absent from the repository.',
-    ],
-    scaleRedesign: [
-      'Future state — use Airbyte incremental ingestion with immutable source/load timestamps and per-run manifests.',
-      'Future state — separate BigQuery raw, staging, and mart layers; partition by posting date and cluster only after workload evidence supports it.',
-      'Future state — introduce PySpark parsing or deduplication only when row volume and profiling justify distributed execution, then publish Spark UI and benchmark artifacts.',
-      'Future state — build dbt models, tests, and source-freshness checks with committed manifests and results.',
-      'Future state — orchestrate retries, idempotency, failure alerts, and backfill semantics in Airflow.',
-      'Future state — Dockerize local and runtime environments for dependency parity.',
-      'Future state — add a dated measurement harness for row counts, duplicate rates, runtimes, bytes billed, baselines, and sample sizes.',
+      'Add per-source freshness monitoring, change detection, and failure alerts.',
+      'Version normalized requirements with source timestamps and review status.',
+      'Build a jurisdiction-level evaluation set for mapping accuracy, coverage, and API latency.',
     ],
   },
 ] as const;
@@ -583,15 +456,15 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
 export const otherWork = [
   {
     organization: 'ICATT Consulting',
-    work: 'Revenue reporting data model and reconciliation workflow',
-    stack: 'Python / SQL / Redshift / Power BI',
-    note: 'Employer work; implementation details limited',
+    work: 'Automated data integration, normalized relational schemas, CI/CD validation gates, and real-time reconciliation across three financial systems',
+    stack: 'Python / SQL / Relational databases / CI/CD',
+    note: '3 systems · processing under 3 hours · 8 hours/week saved',
   },
   {
-    organization: 'Boost Labs',
-    work: 'Recurring reporting pipelines and Tableau KPI workflows',
-    stack: 'Python / SQL / Tableau',
-    note: 'Employer work; implementation details limited',
+    organization: 'Cube Money',
+    work: 'Python identity resolution, unified data models, and automated consistency checks across distributed account groups',
+    stack: 'Python / Data modeling / Data quality',
+    note: '3,000+ accounts · 8 systems · 120 groups',
   },
 ] as const;
 

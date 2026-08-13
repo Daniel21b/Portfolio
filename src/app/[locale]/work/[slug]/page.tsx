@@ -15,24 +15,6 @@ import { notFound, redirect } from 'next/navigation';
 
 import { ArchitectureRail } from '@/components/portfolio/architecture-rail';
 import { CaseLink } from '@/components/portfolio/case-link';
-import {
-  InvoiceArchitectureMap,
-  InvoiceBoundaryWalkthrough,
-  InvoiceImplementationMap,
-  InvoiceSectionIndex,
-} from '@/components/portfolio/invoice-case-detail';
-import {
-  PreClearArchitectureMap,
-  PreClearBoundaryWalkthrough,
-  PreClearImplementationMap,
-  PreClearSectionIndex,
-} from '@/components/portfolio/preclear-case-detail';
-import {
-  SkillDemandArchitectureMap,
-  SkillDemandBoundaryWalkthrough,
-  SkillDemandImplementationMap,
-  SkillDemandSectionIndex,
-} from '@/components/portfolio/skill-demand-case-detail';
 
 import type { EvidenceStatus } from '@/data/case-studies';
 import type { Metadata } from 'next';
@@ -90,15 +72,10 @@ export default async function CaseStudyPage({
   }
 
   const adjacent = getAdjacentCases(caseStudy.slug);
-  const isInvoiceCase = caseStudy.slug === 'invoice-pipeline';
-  const isPreClearCase = caseStudy.slug === 'preclear-ai';
-  const isSkillDemandCase = caseStudy.slug === 'tech-skill-demand-platform';
-  const isDeepCase = isInvoiceCase || isPreClearCase || isSkillDemandCase;
 
   return (
     <article className="case-page">
-      <header
-        className={`case-hero${isSkillDemandCase ? ' case-hero--skill-demand' : ''}`}>
+      <header className="case-hero">
         <div className="case-hero__topline">
           <a href={`/${locale}/#work`}>
             <ArrowLeft aria-hidden="true" size={15} /> Selected work
@@ -143,10 +120,6 @@ export default async function CaseStudyPage({
         </dl>
       </header>
 
-      {isInvoiceCase ? <InvoiceSectionIndex /> : null}
-      {isPreClearCase ? <PreClearSectionIndex /> : null}
-      {isSkillDemandCase ? <SkillDemandSectionIndex /> : null}
-
       <section
         className="case-section case-section--split"
         aria-labelledby="problem">
@@ -164,14 +137,10 @@ export default async function CaseStudyPage({
         </div>
       </section>
 
-      <section
-        className="case-section"
-        aria-labelledby={isDeepCase ? 'contribution' : 'boundary'}>
+      <section className="case-section" aria-labelledby="boundary">
         <div className="case-section__label">
           <span>02</span>
-          <h2 id={isDeepCase ? 'contribution' : 'boundary'}>
-            Contribution boundary
-          </h2>
+          <h2 id="boundary">Contribution boundary</h2>
         </div>
         <div className="claim-boundary">
           <div className="claim-boundary__mine">
@@ -199,42 +168,21 @@ export default async function CaseStudyPage({
         </div>
       </section>
 
-      <section
-        className="case-section"
-        aria-labelledby={isDeepCase ? 'system-map' : 'architecture'}>
+      <section className="case-section" aria-labelledby="architecture">
         <div className="case-section__label">
           <span>03</span>
-          <h2 id={isDeepCase ? 'system-map' : 'architecture'}>
-            {isDeepCase ? 'System map' : 'Architecture'}
-          </h2>
+          <h2 id="architecture">Architecture</h2>
         </div>
         <p className="section-intro">
-          {isInvoiceCase
-            ? 'The implemented system, including payload handoffs, CDK ownership, external infrastructure, and review outputs.'
-            : isPreClearCase
-              ? 'The implemented scheduled and request-time paths, including payloads, private code ownership, external services, failure boundaries, and the final decision record.'
-              : isSkillDemandCase
-                ? 'The repository-backed source-to-proof contract, including observed artifacts, transformation boundaries, published surfaces, and the evidence gaps that stop the trend claims.'
-                : 'The system path at a glance. Each box names a boundary; each caption names the job it performs.'}
+          The system path at a glance. Each box names a boundary; each caption
+          names the job it performs.
         </p>
-        {isInvoiceCase ? (
-          <InvoiceArchitectureMap />
-        ) : isPreClearCase ? (
-          <PreClearArchitectureMap />
-        ) : isSkillDemandCase ? (
-          <SkillDemandArchitectureMap />
-        ) : (
-          <ArchitectureRail steps={caseStudy.architecture} />
-        )}
+        <ArchitectureRail steps={caseStudy.architecture} />
       </section>
-
-      {isInvoiceCase ? <InvoiceBoundaryWalkthrough /> : null}
-      {isPreClearCase ? <PreClearBoundaryWalkthrough /> : null}
-      {isSkillDemandCase ? <SkillDemandBoundaryWalkthrough /> : null}
 
       <section className="case-section" aria-labelledby="decisions">
         <div className="case-section__label">
-          <span>{isDeepCase ? '05' : '04'}</span>
+          <span>04</span>
           <h2 id="decisions">Decisions + tradeoffs</h2>
         </div>
         <div className="decision-list">
@@ -256,7 +204,7 @@ export default async function CaseStudyPage({
 
       <section className="case-section" aria-labelledby="evidence">
         <div className="case-section__label">
-          <span>{isDeepCase ? '06' : '05'}</span>
+          <span>05</span>
           <h2 id="evidence">Evidence ledger</h2>
         </div>
         <p className="section-intro">
@@ -297,14 +245,10 @@ export default async function CaseStudyPage({
         </div>
       </section>
 
-      <section
-        className="case-section"
-        aria-labelledby={isDeepCase ? 'limits' : 'limitations'}>
+      <section className="case-section" aria-labelledby="limitations">
         <div className="case-section__label">
-          <span>{isDeepCase ? '07' : '06'}</span>
-          <h2 id={isDeepCase ? 'limits' : 'limitations'}>
-            Not production-ready
-          </h2>
+          <span>06</span>
+          <h2 id="limitations">Not production-ready</h2>
         </div>
         <div className="limitations-grid">
           <div>
@@ -325,10 +269,6 @@ export default async function CaseStudyPage({
           </div>
         </div>
       </section>
-
-      {isInvoiceCase ? <InvoiceImplementationMap /> : null}
-      {isPreClearCase ? <PreClearImplementationMap /> : null}
-      {isSkillDemandCase ? <SkillDemandImplementationMap /> : null}
 
       <nav className="case-navigation" aria-label="Case study navigation">
         {adjacent.previous ? (
