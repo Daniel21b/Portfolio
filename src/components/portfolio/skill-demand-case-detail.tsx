@@ -12,226 +12,220 @@ const sectionLinks = [
   ['08', 'Code map', '#code-map'],
 ] as const;
 
-const acquisitionLanes = [
+const executionLanes = [
   {
-    id: 'hn',
-    label: 'Lane 01 · page parsing',
-    name: 'Hacker News “Who is Hiring?”',
-    input: 'Planned input · 13 thread IDs',
-    state: 'risk',
-    steps: [
-      {
-        name: 'Requests + BeautifulSoup',
-        detail: 'Rate-limited HTML fetch and comment parser.',
-        state: 'code',
-      },
-      {
-        name: 'Monthly raw CSVs',
-        detail: '711 rows across five checked-in files.',
-        state: 'artifact',
-      },
-    ],
-    output:
-      'Observed boundary · only May and October contribute materially; misses and false positives remain visible risks.',
-  },
-  {
-    id: 'adzuna',
-    label: 'Lane 02 · paginated API',
-    name: 'Adzuna keyword queries',
-    input: '10 keywords · up to 10 pages each · 50 results/page',
+    id: 'control-plane',
+    label: 'Lane 01 · control plane',
+    name: 'Asynchronous run submission',
+    input: 'POST /v1/runs · input URI + output URI + mode',
     state: 'code',
     steps: [
       {
-        name: 'Paginated collection',
-        detail: 'Requests each keyword/page combination.',
+        name: 'FastAPI',
+        detail: 'Validates the request and returns 202 with a run UUID.',
         state: 'code',
       },
       {
-        name: 'ID dedup + checkpoints',
-        detail: '5,000 candidates → 3,691 unique IDs in 10.6 min.',
+        name: 'PostgreSQL run record',
+        detail: 'Persists queued, running, succeeded, or failed state.',
         state: 'artifact',
       },
     ],
     output:
-      'Recorded run · 1,309 repeated IDs rejected (26.2%); checkpoints preserve partial progress if a later request fails.',
+      'Durable status boundary · the request path does not block on a Spark lifecycle.',
+  },
+  {
+    id: 'data-plane',
+    label: 'Lane 02 · data plane',
+    name: 'Queued distributed processing',
+    input: 'Redis list message · run UUID + immutable processing arguments',
+    state: 'code',
+    steps: [
+      {
+        name: 'Async Python worker',
+        detail: 'Consumes with BRPOP and owns the blocking job lifecycle.',
+        state: 'code',
+      },
+      {
+        name: 'PySpark 3.5',
+        detail:
+          'Canonicalizes, deduplicates, repartitions, and extracts skills.',
+        state: 'code',
+      },
+    ],
+    output:
+      'Curated boundary · Parquet, publication JSON, and dated pipeline metrics are written before database publication.',
   },
 ] as const;
 
 const contractSteps = [
   {
-    label: 'Validate HN',
-    detail: 'Content, role, company, and job-signal checks.',
-    result: '711 → 611 rows in saved output',
+    label: 'Canonicalize',
+    detail: 'Normalize source fields, text, locations, roles, and timestamps.',
+    result: '4,137 input rows reconciled',
     state: 'code',
   },
   {
-    label: 'Align schemas',
-    detail: 'Source-prefixed IDs, normalized dates, shared 21-column model.',
-    result: 'One cross-source contract',
-    state: 'code',
+    label: 'Classify reposts',
+    detail:
+      'Apply source-redelivery, exact-content, and bounded near-match rules.',
+    result: '2 decisions · 4,135 retained',
+    state: 'artifact',
   },
   {
-    label: 'Deduplicate',
-    detail: 'Exact → ID → business key → >90% description similarity.',
-    result: 'Multi-stage cleaning path',
-    state: 'code',
+    label: 'Repartition',
+    detail: 'Hash company, title, and location into a composite join key.',
+    result: 'skew 1.644 before · 1.060 after',
+    state: 'artifact',
   },
   {
-    label: 'Pin the artifact',
-    detail: '3,608 Adzuna + 529 Hacker News rows.',
-    result: 'jobs_cleaned.csv · 4,137 rows',
+    label: 'Extract + publish',
+    detail: 'Join 1–4-grams to a versioned taxonomy and upsert atomically.',
+    result: '2,164 matches · 65 skills',
     state: 'artifact',
   },
 ] as const;
 
 const walkthrough = [
   {
-    title: 'Select source windows and search terms',
+    title: 'Accept and persist a processing run',
+    input: 'An input URI, output URI, and optimized execution flag.',
+    transformation:
+      'FastAPI validates the payload, inserts a queued processing_runs row, and pushes a compact message to Redis.',
+    output: '202 Accepted with a UUID that can be polled independently.',
+    path: 'src/skill_analytics/api/routes/runs.py · services.py · repository.py',
+    failure:
+      'PostgreSQL is the durable status source; Redis carries the work message but is not treated as the run ledger.',
+  },
+  {
+    title: 'Move Spark outside the request path',
+    input: 'A run message consumed from the Redis queue with BRPOP.',
+    transformation:
+      'The asynchronous worker marks the run active and starts either the local Spark job or the EMR Serverless adapter.',
+    output: 'An isolated processing lifecycle with bounded failure details.',
+    path: 'src/skill_analytics/worker.py · aws/emr_serverless.py',
+    failure:
+      'Failed work is recorded as terminal, but automatic retry and dead-letter handling are not implemented yet.',
+  },
+  {
+    title: 'Canonicalize, deduplicate, and measure skew',
+    input: 'CSV, JSON, or Parquet records with source-specific schemas.',
+    transformation:
+      'PySpark normalizes the canonical fields, classifies source redeliveries and reposts, and repartitions on a composite key while capturing partition profiles.',
+    output:
+      'The validated fixture moved from 4,137 inputs to 4,135 canonical rows with two duplicate decisions; the optimized local run took 17.627 seconds.',
+    path: 'src/skill_analytics/spark/pipeline.py · normalization.py · job.py',
+    failure:
+      'One optimized run is not a speedup study; the former 40-to-12-minute claim remains withheld without repeated same-input baselines.',
+  },
+  {
+    title: 'Extract normalized skill relationships',
+    input: 'Canonical descriptions plus a versioned alias-to-skill taxonomy.',
+    transformation:
+      'Spark tokenizes descriptions, generates 1–4-grams, broadcasts the taxonomy, and joins normalized aliases to canonical skills.',
+    output:
+      '2,164 posting-to-skill matches across 65 distinct canonical skills.',
+    path: 'src/skill_analytics/spark/taxonomy.py · config/skill_taxonomy.csv',
+    failure:
+      'This run does not support a claim of 500+ matched skills; taxonomy size and observed distinct matches are different measures.',
+  },
+  {
+    title: 'Publish transactionally and invalidate safely',
     input:
-      'A planned Hacker News thread range and 10 Adzuna role/search keywords.',
+      'Canonical postings, normalized skills, bridge rows, and run metrics.',
     transformation:
-      'The notebooks make source-specific collection parameters explicit before requests begin.',
+      'The publisher derives deterministic posting UUIDs, uses PostgreSQL ON CONFLICT upserts, commits, then invalidates skill-demand cache keys.',
     output:
-      'A bounded collection plan: 13 HN thread IDs and up to 10 Adzuna pages per keyword at 50 results per page.',
-    path: 'notebooks/01_scraping_hackernews.ipynb · notebooks/02_api_data_collection.ipynb',
+      'Idempotent query tables plus a succeeded run record and metrics payload.',
+    path: 'src/skill_analytics/publisher.py · db/migrations/001_initial.sql',
     failure:
-      'The configured plan is not proof that every source window returned valid data; several checked-in HN files contain false positives.',
+      'Cache invalidation must follow the database commit or readers could repopulate cache entries from stale tables.',
   },
   {
-    title: 'Collect and checkpoint Adzuna pages',
-    input: 'Keyword/page requests plus Adzuna API credentials.',
+    title: 'Serve indexed aggregations through cache-aside reads',
+    input: 'Skill, role, location, and date filters.',
     transformation:
-      'Requests paginated results, rejects IDs already seen during collection, and writes checkpoint CSVs as work accumulates.',
+      'FastAPI hashes canonical filters, checks Redis, and queries indexed PostgreSQL aggregations only on a miss.',
     output:
-      'A saved 10.6-minute run with 5,000 candidates reduced to 3,691 unique IDs; 1,309 repeats rejected (26.2%).',
-    path: 'notebooks/02_api_data_collection.ipynb · notebooks/data/raw/',
+      'A populated local benchmark measured 100 of 100 warm hits at 0.898ms p50, 1.989ms p95, and 4.013ms maximum.',
+    path: 'src/skill_analytics/api/routes/metrics.py · cache.py · repository.py',
     failure:
-      'Checkpoints limit lost work, but there is no scheduler, retry policy, freshness monitor, or immutable run manifest.',
-  },
-  {
-    title: 'Parse and validate Hacker News threads',
-    input: 'HTML comments from the planned “Who is Hiring?” thread list.',
-    transformation:
-      'BeautifulSoup parses candidate posts; content, role, company, and job-signal checks remove obvious false positives.',
-    output:
-      '711 raw rows and a saved validation output of 611 retained / 100 removed / 14.1%.',
-    path: 'notebooks/01_scraping_hackernews.ipynb · notebooks/03_data_cleaning.ipynb',
-    failure:
-      'DOM and prose heuristics can miss postings or retain non-jobs, and only two months contribute materially in the checked-in files.',
-  },
-  {
-    title: 'Align and deduplicate the cleaned artifact',
-    input: 'Validated HN rows and raw Adzuna rows with different schemas.',
-    transformation:
-      'Prefixes IDs by source, aligns a 21-column schema, normalizes dates, then applies exact, ID, business-key, and description-similarity checks.',
-    output:
-      'jobs_cleaned.csv with 4,137 rows: 3,608 Adzuna and 529 HN; zero exact or company+role+location duplicates.',
-    path: 'notebooks/03_data_cleaning.ipynb · notebooks/data/processed/jobs_cleaned.csv',
-    failure:
-      'The final dedup notebook cell lacks saved output, so the checked-in CSV is inspectable but the end-to-end run is not fully reproducible.',
-  },
-  {
-    title: 'Score role families and run statistical notebooks',
-    input: 'Cleaned titles and descriptions.',
-    transformation:
-      'A transparent scoring taxonomy applies 135 regex patterns across AI/ML, general IT, hybrid, and non-tech; later notebooks contain regression and Mann–Kendall analysis code.',
-    output: 'Categorized records and candidate trend results for review.',
-    path: 'notebooks/05_job_role_categorization.ipynb · notebooks/06_time_series_analysis.ipynb',
-    failure:
-      'The taxonomy can drift, and conflicting data dates/report claims prevent the trend headlines from being published as verified results.',
-  },
-  {
-    title: 'Publish the review surfaces',
-    input: 'The cleaned or categorized artifact plus notebook results.',
-    transformation:
-      'Streamlit renders interactive filters and Plotly views; the report notebook publishes a static HTML surface.',
-    output: 'A dashboard deployment, static report, and public repository.',
-    path: 'app.py · notebooks/07_final_report.ipynb',
-    failure:
-      'The app can silently generate randomized synthetic data when source files are absent; the deployment currently enters an authentication redirect loop, and deployed-data parity is not proven.',
+      'The result is a development-scale warm-cache benchmark, not a production SLA or cold-query measurement.',
   },
 ] as const;
 
 const implementationMap = [
   {
-    boundary: 'HN acquisition',
-    path: 'notebooks/01_scraping_hackernews.ipynb',
-    href: `${repositoryBase}/notebooks/01_scraping_hackernews.ipynb`,
+    boundary: 'API lifecycle',
+    path: 'src/skill_analytics/main.py · api/routes/',
+    href: `${repositoryBase}/src/skill_analytics/main.py`,
     responsibility:
-      'Selects HN threads, rate-limits requests, parses comments, and writes monthly raw files.',
-    proof: 'Public code + raw files',
+      'Builds the FastAPI service and exposes health, run, status, and metrics endpoints.',
+    proof: 'Public implementation + contract tests',
   },
   {
-    boundary: 'Adzuna acquisition',
-    path: 'notebooks/02_api_data_collection.ipynb',
-    href: `${repositoryBase}/notebooks/02_api_data_collection.ipynb`,
+    boundary: 'Queue and cache',
+    path: 'src/skill_analytics/cache.py',
+    href: `${repositoryBase}/src/skill_analytics/cache.py`,
     responsibility:
-      'Paginates 10 keyword searches, deduplicates IDs, and checkpoints collection.',
-    proof: 'Public code + 3,691 rows',
+      'Owns the Redis run queue, canonical cache keys, TTL reads, and post-publish invalidation.',
+    proof: 'Public implementation + unit tests',
   },
   {
-    boundary: 'Cleaning contract',
-    path: 'notebooks/03_data_cleaning.ipynb',
-    href: `${repositoryBase}/notebooks/03_data_cleaning.ipynb`,
+    boundary: 'Worker lifecycle',
+    path: 'src/skill_analytics/worker.py',
+    href: `${repositoryBase}/src/skill_analytics/worker.py`,
     responsibility:
-      'Validates HN, aligns 21 columns, prefixes source IDs, and applies staged deduplication.',
-    proof: 'Public code · saved output partial',
+      'Consumes run messages, executes Spark, publishes results, and records terminal status.',
+    proof: 'Public implementation + integration test',
   },
   {
-    boundary: 'Company normalization',
-    path: 'notebooks/04_company_standardization.ipynb',
-    href: `${repositoryBase}/notebooks/04_company_standardization.ipynb`,
+    boundary: 'Spark pipeline',
+    path: 'src/skill_analytics/spark/pipeline.py',
+    href: `${repositoryBase}/src/skill_analytics/spark/pipeline.py`,
     responsibility:
-      'Standardizes company values before aggregation and analysis.',
-    proof: 'Public code',
+      'Canonicalizes postings, classifies reposts, profiles partitions, and repartitions on the composite key.',
+    proof: 'Public implementation + 4 contract tests',
   },
   {
-    boundary: 'Role taxonomy',
-    path: 'notebooks/05_job_role_categorization.ipynb',
-    href: `${repositoryBase}/notebooks/05_job_role_categorization.ipynb`,
+    boundary: 'Skill taxonomy',
+    path: 'src/skill_analytics/spark/taxonomy.py · config/skill_taxonomy.csv',
+    href: `${repositoryBase}/src/skill_analytics/spark/taxonomy.py`,
     responsibility:
-      'Scores four role families through 135 explicit regex patterns.',
-    proof: 'Public code · output not pinned',
+      'Loads normalized aliases and joins posting n-grams to canonical skills.',
+    proof: '2,164 matches · 65 observed skills',
   },
   {
-    boundary: 'Trend analysis',
-    path: 'notebooks/06_time_series_analysis.ipynb',
-    href: `${repositoryBase}/notebooks/06_time_series_analysis.ipynb`,
+    boundary: 'Publication and schema',
+    path: 'src/skill_analytics/publisher.py · db/migrations/001_initial.sql',
+    href: `${repositoryBase}/src/skill_analytics/publisher.py`,
     responsibility:
-      'Implements time-series, regression, and Mann–Kendall analysis.',
-    proof: 'Code verified · findings withheld',
+      'Publishes deterministic posting, skill, and bridge records with idempotent upserts and query indexes.',
+    proof: 'PostgreSQL/Redis integration passed',
   },
   {
-    boundary: 'Static report',
-    path: 'notebooks/07_final_report.ipynb',
-    href: `${repositoryBase}/notebooks/07_final_report.ipynb`,
+    boundary: 'Container topology',
+    path: 'docker-compose.yml · docker/',
+    href: `${repositoryBase}/docker-compose.yml`,
     responsibility:
-      'Assembles the published narrative and static analysis output.',
-    proof: 'Public notebook + URL',
+      'Runs separate non-root API and Java/PySpark worker images with healthy PostgreSQL and Redis dependencies.',
+    proof: 'Both images built locally and in CI',
   },
   {
-    boundary: 'Live surface',
-    path: 'app.py',
-    href: `${repositoryBase}/app.py`,
+    boundary: 'AWS execution adapter',
+    path: 'src/skill_analytics/aws/emr_serverless.py · infra/aws/',
+    href: `${repositoryBase}/src/skill_analytics/aws/emr_serverless.py`,
     responsibility:
-      'Loads the retained data, applies fallback categorization, and renders Streamlit/Plotly views.',
-    proof: 'Public code · parity limited',
+      'Submits and polls EMR Serverless jobs and documents the ECS, RDS, ElastiCache, S3, and IAM contract.',
+    proof: 'Adapter + contract · deployment withheld',
   },
   {
-    boundary: 'Checked-in evidence',
-    path: 'notebooks/data/raw/ · notebooks/data/processed/jobs_cleaned.csv',
-    href: `${repositoryBase}/notebooks/data/processed/jobs_cleaned.csv`,
+    boundary: 'Validation evidence',
+    path: 'docs/LOCAL_VALIDATION.md · benchmarks/',
+    href: `${repositoryBase}/docs/LOCAL_VALIDATION.md`,
     responsibility:
-      'Pins the raw source files and the 4,137-row cleaned artifact used for inspection.',
-    proof: 'Artifact counted July 31, 2026',
-  },
-  {
-    boundary: 'Runtime dependencies',
-    path: 'requirements.txt',
-    href: `${repositoryBase}/requirements.txt`,
-    responsibility:
-      'Declares the Python analysis, parsing, statistics, and reporting packages.',
-    proof: 'Public dependency manifest',
+      'Records the dated local run, reconciliation counts, partition profiles, cache latency, and explicit claim boundaries.',
+    proof: 'Validated August 7, 2026',
   },
 ] as const;
 
@@ -250,9 +244,9 @@ function FlowNode({
         {
           {
             code: 'Repository-backed',
-            artifact: 'Checked-in artifact',
+            artifact: 'Measured artifact',
             surface: 'Published surface',
-            risk: 'Evidence gap / risk',
+            risk: 'Evidence boundary',
           }[state]
         }
       </span>
@@ -286,9 +280,10 @@ export function SkillDemandArchitectureMap() {
       className="skill-demand-map"
       aria-labelledby="skill-demand-map-caption">
       <figcaption id="skill-demand-map-caption">
-        A source-to-proof data contract. Two collection lanes converge on a
-        pinned CSV, pass through explicit interpretation rules, and surface only
-        the conclusions the artifacts can support.
+        An asynchronous control plane feeds a measured Spark data plane. Durable
+        run state, transactional publication, and cache invalidation keep each
+        boundary inspectable without treating a local benchmark as production
+        proof.
       </figcaption>
 
       <div
@@ -298,13 +293,13 @@ export function SkillDemandArchitectureMap() {
           <i data-key="code" /> Repository-backed implementation
         </span>
         <span>
-          <i data-key="artifact" /> Checked-in data artifact
+          <i data-key="artifact" /> Measured artifact
         </span>
         <span>
           <i data-key="surface" /> Published surface
         </span>
         <span>
-          <i data-key="risk" /> Evidence gap / risk
+          <i data-key="risk" /> Evidence boundary
         </span>
       </div>
 
@@ -313,11 +308,11 @@ export function SkillDemandArchitectureMap() {
         aria-labelledby="acquisition-band-title">
         <header>
           <span>Band A</span>
-          <h3 id="acquisition-band-title">Acquisition</h3>
-          <p>Two sources · two distinct failure models</p>
+          <h3 id="acquisition-band-title">Ingress + execution</h3>
+          <p>Two planes · one durable run identity</p>
         </header>
         <div className="skill-demand-map__lanes">
-          {acquisitionLanes.map((lane) => (
+          {executionLanes.map((lane) => (
             <article className="skill-demand-map__lane" key={lane.id}>
               <header>
                 <span>{lane.label}</span>
@@ -341,7 +336,7 @@ export function SkillDemandArchitectureMap() {
       </section>
 
       <div className="skill-demand-map__handoff" aria-hidden="true">
-        <span>raw source checkpoints</span>
+        <span>versioned input + run UUID</span>
       </div>
 
       <section
@@ -349,8 +344,8 @@ export function SkillDemandArchitectureMap() {
         aria-labelledby="contract-band-title">
         <header>
           <span>Band B</span>
-          <h3 id="contract-band-title">Data contract</h3>
-          <p>Make source differences explicit before counting</p>
+          <h3 id="contract-band-title">Spark data contract</h3>
+          <p>Normalize, classify, balance, and match before counting</p>
         </header>
         <ol>
           {contractSteps.map((step, index) => (
@@ -367,16 +362,16 @@ export function SkillDemandArchitectureMap() {
           ))}
         </ol>
         <p className="skill-demand-map__artifact-note">
-          <strong>Observed invariant</strong>
+          <strong>Validated invariant · August 7, 2026</strong>
           <span>
-            4,137 retained rows · 3,608 Adzuna + 529 HN · zero exact and
-            company+role+location duplicates
+            4,137 input rows · 4,135 canonical postings · 2 duplicate decisions
+            · 2,164 matches · 65 skills
           </span>
         </p>
       </section>
 
       <div className="skill-demand-map__handoff" aria-hidden="true">
-        <span>pinned analytical input</span>
+        <span>commit, then invalidate</span>
       </div>
 
       <section
@@ -384,25 +379,25 @@ export function SkillDemandArchitectureMap() {
         aria-labelledby="interpretation-band-title">
         <header>
           <span>Band C</span>
-          <h3 id="interpretation-band-title">Interpretation</h3>
-          <p>Transparent taxonomy; bounded conclusions</p>
+          <h3 id="interpretation-band-title">Query path</h3>
+          <p>Indexed persistence behind canonical cache keys</p>
         </header>
         <div>
           <FlowNode
-            name="Regex-scored role taxonomy"
-            detail="135 patterns: 49 AI/ML · 60 general IT · 7 hybrid · 19 non-tech."
+            name="PostgreSQL fact + dimensions"
+            detail="Deterministic UUIDs, idempotent upserts, a posting-to-skill bridge, and composite filter indexes."
             state="code"
           />
           <FlowNode
-            name="Trend and statistical notebooks"
-            detail="Regression and Mann–Kendall code exists; headline results are withheld until source dates and report claims reconcile."
-            state="risk"
+            name="Redis cache-aside metrics"
+            detail="Canonical SHA-256 filter keys; 100/100 local warm hits measured at 1.989ms p95."
+            state="artifact"
           />
         </div>
       </section>
 
       <div className="skill-demand-map__handoff" aria-hidden="true">
-        <span>reviewable outputs</span>
+        <span>dated evidence</span>
       </div>
 
       <section
@@ -411,23 +406,23 @@ export function SkillDemandArchitectureMap() {
         <header>
           <span>Band D</span>
           <h3 id="proof-band-title">Proof surfaces</h3>
-          <p>Inspect the product, narrative, and source</p>
+          <p>Code, tests, and explicit claim boundaries</p>
         </header>
         <div>
           <FlowNode
-            name="Streamlit dashboard"
-            detail="Loads the cleaned CSV and applies a smaller fallback taxonomy; missing files trigger synthetic data, and the deployment currently loops through authentication."
+            name="Local validation record"
+            detail="Pins environment, counts, duration, partition profiles, latency distribution, and the claims these results do not support."
+            state="artifact"
+          />
+          <FlowNode
+            name="GitHub Actions"
+            detail="Runs lint, unit, Spark contract, PostgreSQL/Redis integration, and API/worker image-build checks."
+            state="surface"
+          />
+          <FlowNode
+            name="Production scale"
+            detail="120K rows, 18% duplicates, 500+ skills, a 40→12 minute speedup, and cloud service levels remain withheld."
             state="risk"
-          />
-          <FlowNode
-            name="Static report"
-            detail="Published HTML and final-report notebook expose the analytical narrative."
-            state="surface"
-          />
-          <FlowNode
-            name="Public repository"
-            detail="Raw/processed files, seven notebooks, app, and runtime manifest remain inspectable."
-            state="surface"
           />
         </div>
       </section>
@@ -446,9 +441,9 @@ export function SkillDemandBoundaryWalkthrough() {
         <h2 id="walkthrough-title">Boundary walkthrough</h2>
       </div>
       <p className="section-intro">
-        Six handoffs connect source selection to published analysis. Each row
-        names the payload, transformation, repository owner, and the point where
-        confidence must stop.
+        Six handoffs connect an accepted API request to cached analytics. Each
+        row names the payload, transformation, repository owner, and the point
+        where the evidence must stop.
       </p>
       <ol className="boundary-walkthrough">
         {walkthrough.map((item, index) => (
@@ -498,7 +493,8 @@ export function SkillDemandImplementationMap() {
       </div>
       <p className="section-intro">
         Every row opens the public file responsible for that boundary, so the
-        architecture can be checked without searching the repository tree.
+        architecture and its evidence can be checked without searching the
+        repository tree.
       </p>
       <ol className="implementation-map">
         <li className="implementation-map__header" aria-hidden="true">

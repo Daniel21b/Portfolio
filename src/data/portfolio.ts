@@ -68,7 +68,7 @@ export const projects: Project[] = [
   {
     title: 'Distributed Skill Analytics Engine & REST API',
     description:
-      'Built an asynchronous Python and PySpark service that processes more than 120,000 job postings, extracts 500+ normalized skill tags, and serves cached aggregation metrics through FastAPI with sub-50ms filter queries.',
+      'Validated an asynchronous Python and PySpark service on 4,137 fixture rows, producing 4,135 canonical postings and 2,164 skill matches across 65 skills; 100 populated warm-cache requests measured 1.989ms p95 locally.',
     technologies: [
       'Python',
       'PySpark',
@@ -80,7 +80,6 @@ export const projects: Project[] = [
     ],
     period: '2025',
     github: 'https://github.com/Daniel21b/Job-Market-Analytics',
-    liveDemo: 'https://job-market-analytics-fx.streamlit.app/',
   },
 ];
 
@@ -89,9 +88,8 @@ export const homepageSecondaryProjects = [
   {
     name: 'Distributed Skill Analytics Engine & REST API',
     description:
-      'Processed 120,000+ postings with Python and PySpark, extracted 500+ skill tags, and exposed cached FastAPI metrics with sub-50ms filter queries.',
+      'Reconciled 4,137 fixture rows into 4,135 canonical postings with PySpark, matched 65 skills, and served populated warm-cache FastAPI filters at 1.989ms p95 over 100 local requests.',
     url: 'https://github.com/Daniel21b/Job-Market-Analytics',
-    liveDemo: 'https://job-market-analytics-fx.streamlit.app/',
     technologies: [
       'Python',
       'PySpark',
