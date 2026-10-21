@@ -253,7 +253,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     constraints: [
       'Locally tested implementation; AWS execution and database integration still require deployment validation.',
       'Current AnalyzeExpense path is synchronous and supports single-page PDFs and supported images; multi-page asynchronous processing is not implemented.',
-      'Project dates reflect the r\u00e9sum\u00e9; the new Step Functions, review and Bedrock work was added in October 2026.',
+      'Project dates reflect the résumé; the new Step Functions, review and Bedrock work was added in October 2026.',
     ],
     contribution: [
       'Built a serverless invoice pipeline with AWS CDK and Step Functions coordinating Textract extraction and Lambda processing.',
@@ -311,7 +311,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     limitations: [
       'Locally tested implementation; AWS execution and database integration still require deployment validation.',
       'Current AnalyzeExpense path is synchronous and supports single-page PDFs and supported images; multi-page asynchronous processing is not implemented.',
-      'Project dates reflect the r\u00e9sum\u00e9; the new Step Functions, review and Bedrock work was added in October 2026.',
+      'Project dates reflect the résumé; the new Step Functions, review and Bedrock work was added in October 2026.',
     ],
     scaleRedesign: [
       'Run deployed integration checks with representative inputs and record dated results.',
@@ -361,7 +361,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       },
     ],
     homepageLimitation:
-      'The r\u00e9sum\u00e9 reports 50+ municipal sites; that historical coverage has not yet been substantiated by a supplied source manifest or a current ingestion report.',
+      'Municipal raw documents and chunks are stored in Supabase. Its database-size quota currently blocks verification of the résumé’s 50+ source-site count.',
     links: [
       {
         label: 'Open PreClear',
@@ -373,9 +373,9 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     problem:
       'Homeowners need to connect project details with changing jurisdiction-specific requirements and understand the sources behind the answer.',
     constraints: [
-      'The r\u00e9sum\u00e9 reports 50+ municipal sites; that historical coverage has not yet been substantiated by a supplied source manifest or a current ingestion report.',
+      'Municipal raw documents and chunks are stored in Supabase. Its database-size quota currently blocks verification of the résumé’s 50+ source-site count.',
       'New service and conversational UI are locally tested; deployed integration and live provider checks remain pending.',
-      'Project dates reflect the r\u00e9sum\u00e9; the new FastAPI, Apify and conversational features were added in October 2026.',
+      'Project dates reflect the résumé; the new FastAPI, Apify and conversational features were added in October 2026.',
     ],
     contribution: [
       'Added Python and Apify collection with source evidence, normalized rule candidates and reviewed PostgreSQL ingestion.',
@@ -432,9 +432,9 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       },
     ],
     limitations: [
-      'The r\u00e9sum\u00e9 reports 50+ municipal sites; that historical coverage has not yet been substantiated by a supplied source manifest or a current ingestion report.',
+      'Municipal raw documents and chunks are stored in Supabase. Its database-size quota currently blocks verification of the résumé’s 50+ source-site count.',
       'New service and conversational UI are locally tested; deployed integration and live provider checks remain pending.',
-      'Project dates reflect the r\u00e9sum\u00e9; the new FastAPI, Apify and conversational features were added in October 2026.',
+      'Project dates reflect the résumé; the new FastAPI, Apify and conversational features were added in October 2026.',
     ],
     scaleRedesign: [
       'Run deployed integration checks with representative inputs and record dated results.',

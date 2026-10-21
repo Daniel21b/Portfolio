@@ -27,8 +27,8 @@ source-host and jurisdiction counts. No sources or results were invented.
 
 `src/data/case-studies.ts` is the active homepage/projects/case-detail source.
 `src/data/portfolio.ts` also serves certifications and startups. Both have been
-aligned to the supplied titles and technologies. Historical unused detailed
-components retain earlier architecture snapshots and are not rendered by routes.
+aligned to the supplied titles and technologies. Unused historical invoice and permit diagram components were removed so the
+active case-study data is the only architecture source for these projects.
 
 The owner identified existing raw documents and chunks in Supabase. A read-only
 check returned HTTP 402 `exceed_db_size_quota` on all three inventory tables.
