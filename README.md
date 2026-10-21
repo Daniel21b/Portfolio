@@ -1,48 +1,58 @@
-![cover](https://repository-images.githubusercontent.com/386759878/da75b7f3-2f50-4797-a36a-0d6dd8f7c6b3)
+# Daniel Berhane — software and backend engineering portfolio
 
-# Portfolio
+A Next.js and TypeScript portfolio with project case studies, architecture diagrams,
+and implementation evidence. Styled with Tailwind CSS and deployed on Vercel.
 
-My own personal portfolio website
+## Featured projects
 
-Inspired by [leerob](https://github.com/leerob/leerob.io)
+### Paper-to-Digital Invoice Intelligence Platform
 
-- **Framework**: [Next.js](https://nextjs.org/)
-- **Database**: [Vercel Postgres](https://vercel.com)
-- **ORM**: [Drizzle](https://orm.drizzle.team/)
-- **Authentication**: [NextAuth.js](https://next-auth.js.org/)
-- **Deployment**: [Vercel](https://vercel.com)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+Python, PostgreSQL, AWS CDK, S3, Step Functions, Lambda, Textract,
+Amazon Bedrock and Streamlit. Textract extracts invoice fields; Bedrock proposes
+missing or low-confidence fields in the same schema. Low-confidence extractions
+and all model suggestions require human review before PostgreSQL persistence.
 
-## Overview
+[Implementation and architecture](https://github.com/Daniel21b/invoice_pipeline)
 
-- `src/content/*` - MDX data that is used for my blog
-- `src/lib/*` - Short for "library", a collection of helpful utilities or code for external services.
-- `src/app/*` - The actual pages.
-- `public/*` - Static assets including fonts and images.
-- `src/styles/*` - A small amount of global styles. I'm mostly using vanilla Tailwind CSS.
-- `src/messages/*` - All translations objects
+### Homeowner Permit Compliance Checker
 
-## Running Locally
+Python ingestion reuses municipal documents in Supabase or collects source pages
+with Apify. Reviewed rules are normalized into PostgreSQL. FastAPI maps project
+attributes to jurisdiction rules, and an OpenAI conversational agent calls database
+lookup tools and explains retrieved requirements through a JavaScript interface.
 
-```bash
-git clone https://github.com/alex289/Portfolio.git
+The existing product is [PreClear](https://www.preclearai.net/). The new FastAPI
+service and conversational integration still require production configuration.
+Supabase's database-size quota currently prevents verifying the claimed 50+ source
+sites. Invoice cloud deployment is also pending AWS deployment permissions.
+
+## Content and validation
+
+- `src/data/case-studies.ts`: active project descriptions, architecture, limitations.
+- `src/data/portfolio.ts`: shared portfolio and startup metadata.
+- [Résumé alignment](docs/RESUME_ALIGNMENT.md): implementation scope and validation.
+- `src/app/`: localized Next.js pages.
+
+The supplied project periods are Jul–Sep 2025 and Jan–Mar 2026. Features added in
+October 2026 are documented separately; these additions do not establish historical
+implementation dates. Descriptions distinguish implemented code from deployed
+functionality and measured results.
+
+## Run locally
+
+```sh
+git clone https://github.com/Daniel21b/Portfolio.git
 cd Portfolio
-pnpm i
-pnpm dev
+npm ci
+npm run dev
 ```
 
-Create a `.env` file similar to [`.env.example`](https://github.com/alex289/Portfolio/blob/main/.env.example)
+Use `.env.example` for optional service configuration. Never commit credentials.
+Run `npm run typecheck`, `npm run lint`, and `npm run build` for validation.
+Vercel builds the Next.js application; GitHub Pages publishes repository documentation.
 
-## Deploying to Vercel
+## Attribution
 
-For detailed instructions on deploying this portfolio to Vercel with all environment variables configured, see **[VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md)**.
-
-Quick deploy:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Daniel21b/daniel-portfolio)
-
-**Note**: The site will build successfully even without all environment variables. Features like authentication, guestbook, and Spotify integration require their respective API credentials to be configured.
-
-## Cloning / Forking
-
-Please review the [license](https://github.com/alex289/Portfolio/blob/main/LICENSE) and remove all of my personal information (resume, blog posts, images, etc.).
+Based on [alex289/Portfolio](https://github.com/alex289/Portfolio),
+with inspiration from [leerob](https://github.com/leerob/leerob.io).
+See [LICENSE](LICENSE) before reusing this repository, and replace personal content.
