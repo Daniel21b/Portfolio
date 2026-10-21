@@ -1,3 +1,15 @@
+# October 2026 implementation alignment
+
+The historical audit below describes older repository revisions. New invoice
+orchestration, Bedrock fallback, review-before-save, FastAPI permit lookups,
+Apify ingestion and the OpenAI conversational agent were implemented on review
+branches on October 21, 2026. The portfolio uses the supplied résumé titles and
+project periods, while explicitly dating the new implementation work. Deployment
+and live provider verification remain pending. The 50+ municipal source claim
+remains unverified without a source manifest and successful coverage report.
+
+See `docs/RESUME_ALIGNMENT.md` for the current architecture and verification map.
+
 # Portfolio content audit
 
 Audit date: July 31, 2026

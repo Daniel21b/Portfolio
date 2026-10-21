@@ -203,34 +203,45 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
   {
     slug: 'invoice-pipeline',
     number: '02',
-    title: 'Automated Invoice Processing Platform',
-    shortTitle: 'Invoice platform',
-    year: '2025',
-    role: 'Independent cloud/backend builder',
+    title: 'Paper-to-Digital Invoice Intelligence Platform',
+    shortTitle: 'Invoice intelligence',
+    year: 'Jul 2025 \u2013 Sep 2025',
+    role: 'Independent backend builder',
     scope:
-      'Serverless orchestration, OCR extraction, persistence, human review',
-    evidenceStatus: 'Résumé-aligned scope; public source and demo provided',
+      'Python, PostgreSQL, Lambda, Step Functions, S3, Textract, Amazon Bedrock, Streamlit',
+    evidenceStatus:
+      'Implementation added October 2026; local tests, cloud validation pending',
     outcome:
-      'Built a serverless, event-driven invoice platform that orchestrates asynchronous Textract extraction across Lambda functions, persists normalized fields to PostgreSQL, and routes low-confidence results through human review.',
+      'Built a CDK-defined serverless invoice workflow: Step Functions coordinates Textract and Lambda, Amazon Bedrock suggests missing or low-confidence fields, and Streamlit verifies uncertain values before PostgreSQL persistence.',
     summary:
-      'AWS Step Functions coordinates asynchronous document extraction, Lambda processing, and PostgreSQL persistence; a Streamlit review interface validates uncertain fields before they are committed.',
+      'Built a CDK-defined serverless invoice workflow: Step Functions coordinates Textract and Lambda, Amazon Bedrock suggests missing or low-confidence fields, and Streamlit verifies uncertain values before PostgreSQL persistence.',
     contributionSummary:
-      'I built the Step Functions workflow, Lambda and Textract processing path, normalized PostgreSQL persistence layer, Streamlit review interface, and AWS CDK infrastructure.',
+      'Built a serverless invoice pipeline with AWS CDK and Step Functions coordinating Textract extraction and Lambda processing. Added a Streamlit review screen that keeps uncertain extractions out of PostgreSQL until a reviewer validates them. Added Amazon Bedrock fallback extraction for missing or low-confidence fields using the existing invoice schema.',
     architecture: [
-      { name: 'S3', detail: 'Invoice upload event' },
-      { name: 'Step Functions', detail: 'Orchestrate workflow' },
-      { name: 'Lambda + Textract', detail: 'Extract asynchronously' },
-      { name: 'PostgreSQL', detail: 'Persist normalized fields' },
-      { name: 'Streamlit', detail: 'Review uncertain fields' },
+      {
+        name: 'S3',
+        detail: 'Private invoice upload',
+      },
+      {
+        name: 'Step Functions + Lambda',
+        detail: 'Coordinate Textract extraction',
+      },
+      {
+        name: 'Amazon Bedrock',
+        detail: 'Recover uncertain fields',
+      },
+      {
+        name: 'Review gate',
+        detail: 'Streamlit verifies candidates',
+      },
+      {
+        name: 'PostgreSQL',
+        detail: 'Save validated invoice fields',
+      },
     ],
     homepageLimitation:
-      'Production-scale accuracy, cost, throughput, and long-term workload behavior remain outside the current claim.',
+      'Locally tested implementation; AWS execution and database integration still require deployment validation.',
     links: [
-      {
-        label: 'Watch demo',
-        href: 'https://github.com/Daniel21b/invoice_pipeline#-demo',
-        kind: 'demo',
-      },
       {
         label: 'Browse source',
         href: 'https://github.com/Daniel21b/invoice_pipeline',
@@ -238,217 +249,196 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       },
     ],
     problem:
-      'Invoice extraction needs more than OCR: asynchronous work must be coordinated, extracted fields must land in a consistent schema, and uncertain values must be reviewed before they become trusted financial records.',
+      'Invoice OCR can miss fields or assign low confidence. Unverified values need review before they become database records.',
     constraints: [
-      'Document extraction is asynchronous and spans multiple serverless functions.',
-      'OCR output can contain low-confidence or incorrect field values.',
-      'Every accepted record must conform to a normalized PostgreSQL model.',
-      'Cloud resources and workflow wiring need to be reproducible across environments.',
+      'Locally tested implementation; AWS execution and database integration still require deployment validation.',
+      'Current AnalyzeExpense path is synchronous and supports single-page PDFs and supported images; multi-page asynchronous processing is not implemented.',
+      'Project dates reflect the r\u00e9sum\u00e9; the new Step Functions, review and Bedrock work was added in October 2026.',
     ],
     contribution: [
-      'Built a serverless event-driven pipeline with Step Functions orchestrating asynchronous Textract extraction across Lambda functions.',
-      'Persisted normalized invoice fields to PostgreSQL and defined the AWS architecture as Infrastructure as Code with AWS CDK.',
-      'Integrated a Streamlit human-in-the-loop review interface for low-confidence extractions.',
-      'Ensured unverified field values are validated before database persistence.',
+      'Built a serverless invoice pipeline with AWS CDK and Step Functions coordinating Textract extraction and Lambda processing.',
+      'Added a Streamlit review screen that keeps uncertain extractions out of PostgreSQL until a reviewer validates them.',
+      'Added Amazon Bedrock fallback extraction for missing or low-confidence fields using the existing invoice schema.',
     ],
     outsideClaim: [
-      'Universal OCR accuracy across every invoice layout and document quality.',
-      'Production adoption, operating cost, throughput, uptime, or service levels.',
-      'Final accounting approval or replacement of human financial controls.',
+      'Production adoption, uptime, accuracy or latency guarantees.',
+      'Retrospective proof that newly added features existed during the project dates.',
     ],
     decisions: [
       {
-        title: 'Orchestrate asynchronous extraction with Step Functions',
+        title: 'Hold uncertain records outside PostgreSQL',
         detail:
-          'Step Functions coordinates Textract extraction and the Lambda functions that validate, transform, and persist each invoice.',
-        tradeoff:
-          'Explicit workflow state improves retries and visibility, while adding more infrastructure and state transitions than a single handler.',
+          'Private S3 stores extraction candidates; the review gate writes only verified fields into the invoice table.',
+        tradeoff: 'Review adds operator effort and completion time.',
       },
       {
-        title: 'Normalize before PostgreSQL persistence',
+        title: 'Keep model suggestions reviewable',
         detail:
-          'Extracted fields are transformed into a consistent relational shape before they reach the database.',
+          'Bedrock recovers requested fields from OCR text without replacing high-confidence values. Model-derived fields always require review.',
         tradeoff:
-          'Downstream queries become simpler, but source-specific variation must be resolved or retained as provenance during normalization.',
+          'The model cannot recover text absent from the OCR transcript; the original document remains available to reviewers.',
       },
       {
-        title: 'Gate uncertain fields with human review',
+        title: 'Use an isolated CDK stack',
         detail:
-          'Low-confidence extractions are routed to Streamlit for validation before database persistence.',
+          'The intelligence stack defines S3, Lambda, Step Functions and scoped permissions. Existing PostgreSQL and its secret are deployment inputs.',
         tradeoff:
-          'Review protects data quality, but introduces an operator queue and increases completion time for uncertain documents.',
-      },
-      {
-        title: 'Define the stack with AWS CDK',
-        detail:
-          'The serverless resources, permissions, and workflow connections are expressed as Infrastructure as Code.',
-        tradeoff:
-          'Deployments become repeatable, while changes must account for CloudFormation lifecycle and environment-specific configuration.',
+          'Database networking and model access must be configured for the deployment.',
       },
     ],
     evidence: [
       {
         id: 'E-01',
         status: 'limited',
-        label: 'Architecture scope',
+        label: 'Implementation and local verification',
         finding:
-          'The current project description covers Step Functions, asynchronous Textract, Lambda, PostgreSQL, Streamlit review, and AWS CDK.',
+          'New implementation and focused tests were added in October 2026. Deployment and live provider validation remain pending.',
         method:
-          'Aligned the portfolio copy with the updated résumé supplied on August 7, 2026.',
-        source: 'Updated résumé and linked public source',
+          'Local domain, orchestration and API checks; provider responses are mocked.',
+        source: 'Repository implementation and test files',
       },
       {
         id: 'E-02',
-        status: 'verified',
-        label: 'Demonstrated workflow',
-        finding:
-          'A repository-hosted recording is linked from the project and shows the application workflow.',
-        method: 'The portfolio links directly to the repository demo artifact.',
-        source: 'Repository demo video',
-      },
-      {
-        id: 'E-03',
         status: 'withheld',
-        label: 'Performance and quality outcomes',
+        label: 'Deployment and measured outcomes',
         finding:
-          'Accuracy, runtime, cost, throughput, and production-scale behavior are not claimed.',
+          'No new cloud deployment, production benchmark or coverage measurement is claimed.',
         method:
-          'Publish a dated fixture corpus, environment, baseline, sample count, and raw results before adding those claims.',
-        source: 'Outside current project evidence',
+          'Verify deployed services and publish dated measurement artifacts before adding outcome claims.',
+        source: 'Explicit verification boundary',
       },
     ],
     limitations: [
-      'OCR quality still depends on document layout and source quality.',
-      'Human review requires an explicit queue, ownership model, and response-time target in production.',
-      'No dated accuracy, latency, throughput, or cost benchmark is presented here.',
+      'Locally tested implementation; AWS execution and database integration still require deployment validation.',
+      'Current AnalyzeExpense path is synchronous and supports single-page PDFs and supported images; multi-page asynchronous processing is not implemented.',
+      'Project dates reflect the r\u00e9sum\u00e9; the new Step Functions, review and Bedrock work was added in October 2026.',
     ],
     scaleRedesign: [
-      'Add durable retry, dead-letter, replay, and idempotency controls around every workflow state.',
-      'Track field-level confidence and reviewer corrections against a versioned evaluation corpus.',
-      'Monitor extraction latency, review backlog, database writes, throughput, and cost per document.',
+      'Run deployed integration checks with representative inputs and record dated results.',
+      'Monitor failures, retries and operating costs with a defined ownership process.',
     ],
   },
   {
     slug: 'preclear-ai',
     number: '03',
-    title: 'PreClear Permit Compliance Platform',
-    shortTitle: 'PreClear AI',
-    year: '2025–present',
+    title: 'Homeowner Permit Compliance Checker',
+    shortTitle: 'Permit compliance',
+    year: 'Jan 2026 \u2013 Mar 2026',
     role: 'Independent backend builder',
-    scope: 'Municipal ingestion, normalized compliance schema, permit API',
-    evidenceStatus: 'Résumé-aligned scope; live product provided',
+    scope: 'Python, PostgreSQL, FastAPI, JavaScript, Apify, OpenAI',
+    evidenceStatus:
+      'Implementation added October 2026; local tests, cloud validation pending',
     outcome:
-      'Built modular scraping and ingestion services that normalize requirements from more than 50 municipal sites, then expose jurisdiction-specific permit and compliance rules through FastAPI.',
+      'Built Python ingestion with Apify, a shared PostgreSQL rule schema, FastAPI project-attribute lookups, and an OpenAI conversational agent that calls database tools and explains retrieved requirements.',
     summary:
-      'Apify and Python collect structurally different municipal requirements into a unified PostgreSQL schema, while FastAPI maps project attributes to the rules for the relevant jurisdiction.',
+      'Built Python ingestion with Apify, a shared PostgreSQL rule schema, FastAPI project-attribute lookups, and an OpenAI conversational agent that calls database tools and explains retrieved requirements.',
     contributionSummary:
-      'I built the Apify and Python ingestion services, unified PostgreSQL compliance schema, and FastAPI lookup services that replace manual municipal research with a single low-latency request.',
+      'Added Python and Apify collection with source evidence, normalized rule candidates and reviewed PostgreSQL ingestion. Built FastAPI endpoints that map project attributes to jurisdiction-specific permit rules. Built a conversational OpenAI agent that calls a validated database lookup tool and explains retrieved requirements in plain language.',
     architecture: [
-      { name: 'Municipal sites', detail: '50+ source structures' },
-      { name: 'Apify', detail: 'Collect requirements' },
-      { name: 'Python ingestion', detail: 'Normalize records' },
-      { name: 'PostgreSQL', detail: 'Unified compliance schema' },
-      { name: 'FastAPI', detail: 'Map project attributes' },
-      { name: 'Permit lookup', detail: 'Return jurisdiction rules' },
+      {
+        name: 'Municipal sources',
+        detail: 'Apify + Python collection',
+      },
+      {
+        name: 'Review + normalization',
+        detail: 'Compound rules and provenance',
+      },
+      {
+        name: 'PostgreSQL',
+        detail: 'Jurisdiction-scoped rules',
+      },
+      {
+        name: 'FastAPI',
+        detail: 'Validated attribute lookup',
+      },
+      {
+        name: 'OpenAI agent',
+        detail: 'Tool calls and explanations',
+      },
+      {
+        name: 'JavaScript interface',
+        detail: 'Homeowner conversation',
+      },
     ],
     homepageLimitation:
-      'The platform supports municipal research; final requirements should still be verified with the relevant jurisdiction.',
+      'The r\u00e9sum\u00e9 reports 50+ municipal sites; that historical coverage has not yet been substantiated by a supplied source manifest or a current ingestion report.',
     links: [
       {
-        label: 'Open live product',
+        label: 'Open PreClear',
         href: 'https://www.preclearai.net/',
         kind: 'live',
+        note: 'Existing product; new service deployment is pending.',
       },
     ],
     problem:
-      'Permit and compliance requirements are spread across municipal sites with different structures and terminology. A project team needs one consistent way to map project attributes to the rules for the correct jurisdiction without repeating manual site-by-site research.',
+      'Homeowners need to connect project details with changing jurisdiction-specific requirements and understand the sources behind the answer.',
     constraints: [
-      'Each municipal source can use a different page structure, vocabulary, and publishing format.',
-      'Requirements need a consistent schema without losing their jurisdiction context.',
-      'The request path needs to return only the rules relevant to the submitted project attributes.',
-      'Municipal requirements can change and still require source-level verification.',
+      'The r\u00e9sum\u00e9 reports 50+ municipal sites; that historical coverage has not yet been substantiated by a supplied source manifest or a current ingestion report.',
+      'New service and conversational UI are locally tested; deployed integration and live provider checks remain pending.',
+      'Project dates reflect the r\u00e9sum\u00e9; the new FastAPI, Apify and conversational features were added in October 2026.',
     ],
     contribution: [
-      'Developed modular scraping and ingestion services in Apify and Python.',
-      'Normalized compliance requirements from more than 50 structurally different municipal sites into a unified PostgreSQL schema.',
-      'Engineered FastAPI services that map project attributes to jurisdiction-specific permit and compliance rules.',
-      'Turned a manual municipal research task into a low-latency single-point lookup.',
+      'Added Python and Apify collection with source evidence, normalized rule candidates and reviewed PostgreSQL ingestion.',
+      'Built FastAPI endpoints that map project attributes to jurisdiction-specific permit rules.',
+      'Built a conversational OpenAI agent that calls a validated database lookup tool and explains retrieved requirements in plain language.',
     ],
     outsideClaim: [
-      'Legal or permitting advice, approval authority, or a guarantee of municipal acceptance.',
-      'Coverage of every municipality or every possible project configuration.',
-      'A replacement for final verification with the responsible jurisdiction.',
+      'Production adoption, uptime, accuracy or latency guarantees.',
+      'Retrospective proof that newly added features existed during the project dates.',
     ],
     decisions: [
       {
-        title: 'Isolate each source in a modular scraper',
+        title: 'Preserve conditions and source provenance',
         detail:
-          'Apify and Python ingestion modules handle structurally different municipal sites behind a consistent output contract.',
+          'Normalized rules retain compound conditions, citations, source hashes, review dates and expiry.',
         tradeoff:
-          'Source-specific adapters contain variation cleanly, but each site can still require maintenance when its structure changes.',
+          'Source review and refresh are required before rules become queryable.',
       },
       {
-        title: 'Normalize requirements into PostgreSQL',
+        title: 'Keep decisions in the lookup service',
         detail:
-          'Municipal records converge on one relational schema that preserves jurisdiction and compliance-rule context.',
+          'FastAPI evaluates all applicable reviewed rules; missing inputs and conflicts require jurisdiction verification.',
         tradeoff:
-          'A unified model makes lookup predictable, while unusual local rules may require extensible fields or source metadata.',
+          'Unknown cases remain unresolved instead of receiving a guessed determination.',
       },
       {
-        title: 'Map explicit project attributes through FastAPI',
+        title: 'Constrain agent tools',
         detail:
-          'The API accepts project characteristics and resolves the subset of rules that applies to the selected jurisdiction.',
+          'The agent can call one read-only lookup tool, with jurisdiction fixed by the server and bounded tool rounds.',
         tradeoff:
-          'Structured inputs support low-latency lookup, but the attribute model must evolve as new rule conditions appear.',
-      },
-      {
-        title: 'Keep jurisdiction verification visible',
-        detail:
-          'The result is positioned as a focused research lookup rather than a final permit determination.',
-        tradeoff:
-          'Users retain a manual verification step, but the platform avoids presenting changing municipal information as approval authority.',
+          'The conversation can explain retrieved rules but cannot issue permits or modify the database.',
       },
     ],
     evidence: [
       {
         id: 'E-01',
         status: 'limited',
-        label: 'Ingestion scope',
+        label: 'Implementation and local verification',
         finding:
-          'The current project description reports normalized requirements from more than 50 structurally different municipal sites.',
+          'New implementation and focused tests were added in October 2026. Deployment and live provider validation remain pending.',
         method:
-          'Aligned the portfolio copy with the updated résumé supplied on August 7, 2026.',
-        source: 'Updated résumé',
+          'Local domain, orchestration and API checks; provider responses are mocked.',
+        source: 'Repository implementation and test files',
       },
       {
         id: 'E-02',
-        status: 'verified',
-        label: 'Live product surface',
-        finding:
-          'The portfolio links to the live PreClear product for direct inspection.',
-        method: 'The live product URL is exposed as the primary project link.',
-        source: 'preclearai.net',
-      },
-      {
-        id: 'E-03',
         status: 'withheld',
-        label: 'Coverage and accuracy outcomes',
+        label: 'Deployment and measured outcomes',
         finding:
-          'Complete municipal coverage, legal accuracy, production adoption, and service levels are not claimed.',
+          'No new cloud deployment, production benchmark or coverage measurement is claimed.',
         method:
-          'Publish a dated coverage manifest, update history, evaluation set, and source-verification process before adding those claims.',
-        source: 'Outside current project evidence',
+          'Verify deployed services and publish dated measurement artifacts before adding outcome claims.',
+        source: 'Explicit verification boundary',
       },
     ],
     limitations: [
-      'Municipal site changes can require scraper maintenance and data revalidation.',
-      'The 50+ source count does not represent universal municipal coverage.',
-      'Lookup results still need final verification with the relevant jurisdiction.',
+      'The r\u00e9sum\u00e9 reports 50+ municipal sites; that historical coverage has not yet been substantiated by a supplied source manifest or a current ingestion report.',
+      'New service and conversational UI are locally tested; deployed integration and live provider checks remain pending.',
+      'Project dates reflect the r\u00e9sum\u00e9; the new FastAPI, Apify and conversational features were added in October 2026.',
     ],
     scaleRedesign: [
-      'Add per-source freshness monitoring, change detection, and failure alerts.',
-      'Version normalized requirements with source timestamps and review status.',
-      'Build a jurisdiction-level evaluation set for mapping accuracy, coverage, and API latency.',
+      'Run deployed integration checks with representative inputs and record dated results.',
+      'Monitor failures, retries and operating costs with a defined ownership process.',
     ],
   },
 ] as const;
