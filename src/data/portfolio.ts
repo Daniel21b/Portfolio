@@ -72,7 +72,7 @@ export const projects: Project[] = [
       'OpenAI',
     ],
     period: 'Jan 2026 – Mar 2026',
-    github: 'https://github.com/Daniel21b',
+    github: 'https://github.com/Preclear/Preclear-Astra',
     liveDemo: 'https://www.preclearai.net/',
   },
   {
@@ -113,7 +113,7 @@ export const homepageSecondaryProjects = [
     name: 'Homeowner Permit Compliance Checker',
     description:
       'Collected municipal requirements with Apify and Python, normalized reviewed rules in PostgreSQL, and added FastAPI lookups with an OpenAI conversational agent.',
-    url: 'https://github.com/Daniel21b',
+    url: 'https://github.com/Preclear/Preclear-Astra',
     liveDemo: 'https://www.preclearai.net/',
     technologies: [
       'Python',

@@ -12,9 +12,11 @@ Invoice source: `Daniel21b/invoice_pipeline`; new CDK entry is
 `intelligence_app.py`. Review candidates stay in S3, not the invoice database.
 Model suggestions always require review. Existing legacy deployment is retained.
 
-Permit source: private `Daniel21b/permitsaas`; ingestion source: private
-`Daniel21b/PreClear_pipeline`. The new conversational UI is `/permit-agent`.
-The FastAPI service and migration are additive to the existing Next.js product.
+Canonical permit application and ingestion source: `Preclear/Preclear-Astra`.
+The JavaScript interface is React/Vite, with FastAPI served on the same Vercel
+domain. The new conversational UI is `/permit-agent` and replaces the scripted
+Aura chat. `Daniel21b/permitsaas` and `Daniel21b/PreClear_pipeline` are legacy
+repositories; the first implementation pass incorrectly targeted them.
 
 Validation includes focused Python tests, CDK template synthesis, TypeScript
 checks and isolated PostgreSQL checks for migrations, idempotency, review gates,
@@ -49,6 +51,9 @@ returned HTTP 200 and both updated project titles.
 
 The new application backends are not deployed. The configured AWS identity
 returns AccessDenied for deployment-resource inspection. Supabase returns HTTP
-402 `exceed_db_size_quota`. PreClear did not trigger a new Vercel deployment
-after merge, and deployment dashboard access requires sign-in. These are
-production blockers, not failed local implementation checks.
+402 `exceed_db_size_quota`. The original PreClear deployment did not trigger because the wrong repository
+was selected. After Vercel sign-in, its domain was verified as belonging to
+Preclear/Preclear-Astra. The implementation was ported there with 23 passing
+Python tests and a successful Vite build. A Vercel preview verified API health,
+401 responses without authentication, and the assistant page. Database and
+model configuration remain required for live sourced answers.

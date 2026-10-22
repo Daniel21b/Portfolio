@@ -21,8 +21,9 @@ with Apify. Reviewed rules are normalized into PostgreSQL. FastAPI maps project
 attributes to jurisdiction rules, and an OpenAI conversational agent calls database
 lookup tools and explains retrieved requirements through a JavaScript interface.
 
-The existing product is [PreClear](https://www.preclearai.net/). The new FastAPI
-service and conversational integration still require production configuration.
+The canonical repository is [Preclear/Preclear-Astra](https://github.com/Preclear/Preclear-Astra),
+serving [PreClear](https://www.preclearai.net/). Its React/Vite interface calls
+a same-origin FastAPI service. Live database and model integration still require configuration.
 Supabase's database-size quota currently prevents verifying the claimed 50+ source
 sites. Invoice cloud deployment is also pending AWS deployment permissions.
 

@@ -357,7 +357,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       },
       {
         name: 'JavaScript interface',
-        detail: 'Homeowner conversation',
+        detail: 'React/Vite Aura conversation',
       },
     ],
     homepageLimitation:
@@ -367,14 +367,19 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
         label: 'Open PreClear',
         href: 'https://www.preclearai.net/',
         kind: 'live',
-        note: 'Existing product; new service deployment is pending.',
+        note: 'Canonical app: Preclear/Preclear-Astra. Live data and model configuration are pending.',
+      },
+      {
+        label: 'Browse canonical source',
+        href: 'https://github.com/Preclear/Preclear-Astra',
+        kind: 'source',
       },
     ],
     problem:
       'Homeowners need to connect project details with changing jurisdiction-specific requirements and understand the sources behind the answer.',
     constraints: [
       'Municipal raw documents and chunks are stored in Supabase. Its database-size quota currently blocks verification of the résumé’s 50+ source-site count.',
-      'New service and conversational UI are locally tested; deployed integration and live provider checks remain pending.',
+      'Canonical implementation: Preclear/Preclear-Astra. API and UI preview checks passed; live database and model configuration remain pending.',
       'Project dates reflect the résumé; the new FastAPI, Apify and conversational features were added in October 2026.',
     ],
     contribution: [
@@ -415,7 +420,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
         status: 'limited',
         label: 'Implementation and local verification',
         finding:
-          'New implementation and focused tests were added in October 2026. Deployment and live provider validation remain pending.',
+          'Canonical React/Vite and FastAPI implementation added in October 2026: 23 Python tests, production build, and Vercel preview API checks passed. Live data/provider validation remains pending.',
         method:
           'Local domain, orchestration and API checks; provider responses are mocked.',
         source: 'Repository implementation and test files',
@@ -425,7 +430,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
         status: 'withheld',
         label: 'Deployment and measured outcomes',
         finding:
-          'No new cloud deployment, production benchmark or coverage measurement is claimed.',
+          'Vercel preview serves the API and interface. No successful live model/database integration, production benchmark or coverage measurement is claimed.',
         method:
           'Verify deployed services and publish dated measurement artifacts before adding outcome claims.',
         source: 'Explicit verification boundary',
@@ -433,7 +438,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     ],
     limitations: [
       'Municipal raw documents and chunks are stored in Supabase. Its database-size quota currently blocks verification of the résumé’s 50+ source-site count.',
-      'New service and conversational UI are locally tested; deployed integration and live provider checks remain pending.',
+      'Canonical implementation: Preclear/Preclear-Astra. API and UI preview checks passed; live database and model configuration remain pending.',
       'Project dates reflect the résumé; the new FastAPI, Apify and conversational features were added in October 2026.',
     ],
     scaleRedesign: [
