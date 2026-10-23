@@ -3358,3 +3358,489 @@ main {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* System design notebook: selectable stages, explicit branch lanes and tool roles. */
+.system-explainer {
+  margin-top: 2.5rem;
+  --diagram-accent: #255e50;
+  --diagram-soft: #e9f0e9;
+}
+.system-story {
+  max-width: 54rem;
+}
+.system-story > p:last-child {
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+}
+.system-status {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 1rem;
+  border-left: 3px solid var(--diagram-accent);
+  padding: 1rem 1.2rem;
+  margin: 2rem 0 3.5rem;
+  background: var(--diagram-soft);
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+.system-status strong {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--diagram-accent);
+}
+.system-map-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+.system-map-heading h3,
+.system-talk h3 {
+  font-size: clamp(1.4rem, 2.3vw, 1.9rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  margin: 0.5rem 0 0;
+}
+.system-map-heading > p {
+  max-width: 19rem;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0;
+}
+.system-example {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 1rem;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 1rem;
+}
+.system-example > span {
+  color: var(--diagram-accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.67rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.system-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20rem;
+  align-items: start;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.system-lanes {
+  min-width: 0;
+  padding-right: 1.5rem;
+  background-image: radial-gradient(var(--line) 0.65px, transparent 0.65px);
+  background-size: 14px 14px;
+}
+.system-lane {
+  padding: 1.6rem 0 0.8rem;
+  border-bottom: 1px solid var(--line-strong);
+}
+.system-lane:last-child {
+  border-bottom: 0;
+}
+.system-lane header {
+  background: var(--paper);
+  padding-bottom: 0.8rem;
+}
+.system-lane h4 {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.73rem;
+  font-weight: 600;
+  color: var(--diagram-accent);
+  margin: 0 0 0.6rem;
+}
+.system-lane header p {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+  max-width: 34rem;
+}
+.system-flow {
+  display: grid;
+  grid-template-columns: repeat(var(--flow-columns), minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: center;
+  padding: 0.65rem 0;
+}
+.system-column {
+  position: relative;
+  min-width: 0;
+}
+.system-connector {
+  position: absolute;
+  left: -1.3rem;
+  top: 50%;
+  color: var(--diagram-accent);
+  transform: translateY(-50%);
+}
+.system-connector > svg:last-child {
+  display: none;
+}
+.system-branch-label {
+  font-size: 0.62rem;
+  line-height: 1.5;
+  font-family: var(--font-geist-mono), monospace;
+  color: var(--diagram-accent);
+  background: var(--paper);
+  margin: 0 0 0.55rem;
+}
+.system-fork {
+  display: grid;
+  gap: 0.7rem;
+  border-left: 2px solid var(--diagram-accent);
+  padding-left: 0.5rem;
+}
+.system-node {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 100%;
+  min-height: 7.8rem;
+  padding: 0.75rem 0.65rem;
+  border: 1px solid var(--line-strong);
+  background: var(--paper-raised);
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+.system-node:hover {
+  background: var(--diagram-soft);
+  border-color: var(--diagram-accent);
+}
+.system-node[aria-pressed='true'] {
+  background: var(--diagram-accent);
+  color: #fffdf8;
+  border-color: var(--diagram-accent);
+}
+.system-node__number {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.62rem;
+  opacity: 0.85;
+  margin-bottom: 0.7rem;
+}
+.system-node strong {
+  font-size: 0.79rem;
+  line-height: 1.35;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.system-node small {
+  font-size: 0.68rem;
+  line-height: 1.45;
+  margin-top: 0.5rem;
+}
+.system-destination {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.62rem;
+  line-height: 1.65;
+  color: var(--diagram-accent);
+  background: var(--paper);
+  padding: 0.7rem 0;
+}
+.system-destination svg {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.system-detail {
+  position: sticky;
+  top: 6rem;
+  background: var(--paper-raised);
+  border-left: 1px solid var(--ink);
+  padding: 1.5rem;
+  min-width: 0;
+}
+.system-detail h4 {
+  font-size: 1.45rem;
+  letter-spacing: -0.04em;
+  margin: 0.7rem 0 0.3rem;
+  line-height: 1.2;
+}
+.system-detail__role {
+  font-size: 0.8rem;
+  color: var(--diagram-accent);
+  margin: 0 0 1.5rem;
+}
+.system-detail dl {
+  margin: 0;
+}
+.system-detail dl > div {
+  border-top: 1px solid var(--line);
+  padding: 0.8rem 0;
+}
+.system-detail dt,
+.system-detail__example strong,
+.system-detail__failure strong {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.system-detail dd,
+.system-detail__example p,
+.system-detail__failure p {
+  margin: 0.35rem 0 0;
+  font-size: 0.77rem;
+  line-height: 1.65;
+}
+.system-detail__example {
+  background: var(--diagram-soft);
+  padding: 0.85rem;
+  margin: 0.7rem 0 1rem;
+}
+.system-detail__failure strong {
+  color: var(--warning);
+}
+.system-source {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.59rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  margin: 1.2rem 0 0;
+  color: var(--muted);
+}
+.system-source span {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--ink);
+}
+.system-step-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.7rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+.system-step-controls button {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+  font-size: 0.66rem;
+  color: var(--diagram-accent);
+  background: transparent;
+  border: 0;
+  padding: 0.3rem 0;
+  cursor: pointer;
+}
+.system-step-controls button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.system-stack {
+  padding: 3.5rem 0;
+}
+.system-table-scroll {
+  overflow-x: auto;
+}
+.system-stack table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+  line-height: 1.65;
+  text-align: left;
+}
+.system-stack thead {
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.system-stack thead th {
+  font-family: var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  padding: 0.8rem 1rem 0.8rem 0;
+}
+.system-stack tbody tr {
+  border-bottom: 1px solid var(--line);
+}
+.system-stack tbody th,
+.system-stack td {
+  padding: 1.1rem 1.5rem 1.1rem 0;
+  vertical-align: top;
+}
+.system-stack tbody th {
+  width: 24%;
+  font-weight: 600;
+}
+.system-stack tbody th small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.67rem;
+  font-weight: 400;
+  margin-top: 0.25rem;
+}
+.system-stack td {
+  width: 38%;
+}
+.system-talk {
+  display: grid;
+  grid-template-columns: 1fr 1.65fr;
+  gap: 3rem;
+  background: var(--diagram-soft);
+  border-top: 2px solid var(--diagram-accent);
+  padding: 2rem;
+}
+.system-talk > div > p:last-child {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.system-talk ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.system-talk li {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.system-talk li:last-child {
+  margin: 0;
+}
+.system-talk li span {
+  color: var(--diagram-accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.65rem;
+}
+.system-talk li p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+@media (max-width: 1050px) {
+  .system-workbench {
+    grid-template-columns: minmax(0, 1fr) 17rem;
+  }
+  .system-detail {
+    padding: 1.1rem;
+  }
+  .system-flow {
+    gap: 1.2rem;
+  }
+  .system-connector {
+    left: -1.1rem;
+  }
+  .system-node {
+    padding: 0.6rem 0.45rem;
+  }
+}
+@media (max-width: 800px) {
+  .system-workbench {
+    display: flex;
+    flex-direction: column;
+  }
+  .system-lanes {
+    width: 100%;
+    padding: 0;
+  }
+  .system-detail {
+    width: 100%;
+    position: static;
+    border-left: 0;
+    border-top: 1px solid var(--ink);
+    padding: 1.5rem;
+  }
+  .system-detail dl {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .system-detail__example,
+  .system-detail__failure {
+    max-width: 40rem;
+  }
+  .system-map-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .system-map-heading > p {
+    max-width: 36rem;
+  }
+  .system-talk {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+@media (max-width: 520px) {
+  .system-status,
+  .system-example {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .system-flow {
+    grid-template-columns: 1fr;
+    gap: 1.7rem;
+    padding: 0.7rem 0;
+  }
+  .system-connector {
+    top: -1.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .system-connector > svg:first-child {
+    display: none;
+  }
+  .system-connector > svg:last-child {
+    display: block;
+  }
+  .system-node {
+    min-height: 0;
+    padding: 0.9rem;
+  }
+  .system-node__number {
+    margin-bottom: 0.4rem;
+  }
+  .system-node strong {
+    font-size: 0.88rem;
+  }
+  .system-node small {
+    margin-top: 0.3rem;
+  }
+  .system-fork {
+    grid-template-columns: 1fr 1fr;
+  }
+  .system-detail dl {
+    display: block;
+  }
+  .system-talk {
+    padding: 1.2rem;
+  }
+  .system-stack table {
+    min-width: 36rem;
+  }
+}
+@media print {
+  .system-detail {
+    position: static;
+  }
+  .system-step-controls {
+    display: none;
+  }
+  .system-workbench {
+    break-inside: avoid;
+  }
+}

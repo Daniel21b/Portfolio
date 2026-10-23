@@ -3,6 +3,7 @@ import {
   getCaseStudy,
   selectedCaseStudies,
 } from '@/data/case-studies';
+import { systemExplainers } from '@/data/system-explainers';
 import { routing } from '@/i18n/routing';
 import {
   AlertTriangle,
@@ -13,8 +14,8 @@ import {
 } from 'lucide-react';
 import { notFound, redirect } from 'next/navigation';
 
-import { ArchitectureRail } from '@/components/portfolio/architecture-rail';
 import { CaseLink } from '@/components/portfolio/case-link';
+import { SystemExplainer } from '@/components/portfolio/system-explainer';
 
 import type { EvidenceStatus } from '@/data/case-studies';
 import type { Metadata } from 'next';
@@ -171,13 +172,9 @@ export default async function CaseStudyPage({
       <section className="case-section" aria-labelledby="architecture">
         <div className="case-section__label">
           <span>03</span>
-          <h2 id="architecture">Architecture</h2>
+          <h2 id="architecture">System design, explained</h2>
         </div>
-        <p className="section-intro">
-          The system path at a glance. Each box names a boundary; each caption
-          names the job it performs.
-        </p>
-        <ArchitectureRail steps={caseStudy.architecture} />
+        <SystemExplainer data={systemExplainers[caseStudy.slug]} />
       </section>
 
       <section className="case-section" aria-labelledby="decisions">
