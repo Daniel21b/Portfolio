@@ -24,7 +24,7 @@ export default function Footer() {
           rel="noreferrer noopener">
           GitHub ↗
         </a>
-        <a href="mailto:dberhane@terpmail.umd.edu">Email</a>
+        <a href="mailto:d.asfaw10@gmail.com">Email</a>
       </div>
       <p className="site-footer__meta">
         © {new Date().getFullYear()} Daniel Berhane

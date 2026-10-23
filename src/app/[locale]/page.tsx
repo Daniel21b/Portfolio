@@ -67,7 +67,7 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
             </a>
             <a
               className="button button--text"
-              href="mailto:dberhane@terpmail.umd.edu">
+              href="mailto:d.asfaw10@gmail.com">
               Email me
               <Mail aria-hidden="true" size={16} />
             </a>
@@ -148,7 +148,7 @@ export default async function HomePage({ params }: PageProps<'/[locale]'>) {
         <div>
           <a
             className="button button--signal"
-            href="mailto:dberhane@terpmail.umd.edu">
+            href="mailto:d.asfaw10@gmail.com">
             Email me
             <Mail aria-hidden="true" size={17} />
           </a>

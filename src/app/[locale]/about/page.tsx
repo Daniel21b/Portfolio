@@ -15,28 +15,27 @@ export function generateStaticParams() {
 
 const experience = [
   {
-    period: 'Aug 2025–Jul 2026',
+    period: 'Aug 2025–Mar 2026',
     organization: 'ICATT Consulting',
     href: 'https://www.icattconsulting.com',
     location: 'Remote',
-    role: 'Software Developer',
+    role: 'Software Developer (Contract)',
     details: [
-      'Architected automated data integration services in Python and SQL, consolidating three decoupled financial systems into a unified storage layer and cutting end-to-end processing latency from multiple days to under three hours.',
-      'Engineered normalized relational database schemas with indexed transaction-grain tables, establishing a reusable data access layer that eliminated redundant one-off extraction code for new reporting requirements.',
-      'Implemented automated validation and integration test suites as CI/CD release gates—including uniqueness, not-null, and referential-integrity checks—catching more than 20 logic and data-integrity defects before production deployment.',
-      'Developed an automated background reconciliation service with real-time mismatch alerting between source systems and the storage layer, eliminating eight hours per week of manual operational checks.',
+      'Wrote Django APIs, views, and templates for a multi-vendor ecommerce store, including a vendor onboarding portal. Integrated Stripe and PayPal, with logging and tracking for signup and payments.',
+      'Worked on a Django + FastAPI accounting app deployed with Docker on AWS ECS. Django covered client portals, the ledger, and practice management; FastAPI handled third-party aggregation and reporting.',
+      'Wrote FastAPI endpoints aggregating three third-party financial systems, reducing manual pulls and reconciliation from days to minutes.',
+      'Wrote an Amazon EventBridge-scheduled reconciliation job comparing source systems to the ledger, saving about eight hours of manual checks per week.',
+      'Wrote pytest unit and integration tests in GitHub Actions. Error rates in app logs dropped by over 50%, with remaining failures flagged as tickets.',
     ],
   },
   {
     period: 'Jan–Jun 2025',
-    organization: 'Cube Money',
+    organization: 'Cube Money (UMD StartHub)',
     href: 'https://www.cubemoney.io',
     location: 'College Park, MD',
     role: 'Software Engineer',
     details: [
-      'Developed a multi-attribute identity-resolution algorithm in Python, matching on phone and group membership to deduplicate user records across eight backend systems and restore transactional accuracy for more than 3,000 accounts.',
-      'Abstracted core business logic into unified data models, consolidating 15 redundant query implementations into a single source of truth and cutting analysis turnaround from two days to under one hour.',
-      'Built automated consistency checkers that audited live transactional records across 120 distributed account groups, proactively flagging missing, late, and inconsistent state before it reached downstream decisions.',
+      'Wrote Flask APIs for a startup digitizing Ethiopian Ekub rotating savings, using SQLAlchemy and PostgreSQL for groups, members, contributions, payouts, late payments, and one seat per phone number.',
     ],
   },
 ] as const;
@@ -99,7 +98,7 @@ export default function AboutPage() {
       <section className="about-page__links" aria-labelledby="about-contact">
         <h2 id="about-contact">Contact</h2>
         <div>
-          <a href="mailto:dberhane@terpmail.umd.edu">
+          <a href="mailto:d.asfaw10@gmail.com">
             <Mail aria-hidden="true" size={17} /> Email
           </a>
           <a

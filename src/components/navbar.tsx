@@ -25,7 +25,7 @@ export default function Navbar() {
             rel="noreferrer noopener">
             GitHub <ArrowUpRight aria-hidden="true" size={12} />
           </a>
-          <a href="mailto:dberhane@terpmail.umd.edu">Email</a>
+          <a href="mailto:d.asfaw10@gmail.com">Email</a>
         </div>
       </nav>
     </header>
