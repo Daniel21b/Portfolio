@@ -61,9 +61,9 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
   {
     slug: 'tech-skill-demand-platform',
     number: '01',
-    title: 'Distributed Skill Analytics Engine & REST API',
+    title: 'Job Posting Skill Demand Analyzer Engine & REST API',
     shortTitle: 'Skill analytics',
-    year: '2025',
+    year: 'Jan 2025 – Mar 2025',
     role: 'Independent distributed/backend builder',
     scope: 'Distributed processing, REST API, caching, database, CI/CD',
     evidenceStatus:
@@ -451,15 +451,15 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
 export const otherWork = [
   {
     organization: 'ICATT Consulting',
-    work: 'Automated data integration, normalized relational schemas, CI/CD validation gates, and real-time reconciliation across three financial systems',
-    stack: 'Python / SQL / Relational databases / CI/CD',
-    note: '3 systems · processing under 3 hours · 8 hours/week saved',
+    work: 'Django ecommerce and accounting applications, FastAPI financial reporting, and EventBridge-scheduled ledger reconciliation',
+    stack: 'Django / FastAPI / SQL / Docker / AWS ECS / pytest',
+    note: 'Aug 2025–Mar 2026 · Contract software developer',
   },
   {
-    organization: 'Cube Money',
-    work: 'Python identity resolution, unified data models, and automated consistency checks across distributed account groups',
-    stack: 'Python / Data modeling / Data quality',
-    note: '3,000+ accounts · 8 systems · 120 groups',
+    organization: 'Cube Money (UMD StartHub)',
+    work: 'Flask APIs for Ethiopian Ekub rotating savings: groups, contributions, payouts, late payments, and one seat per phone number',
+    stack: 'Flask / SQLAlchemy / PostgreSQL',
+    note: 'Jan–Jun 2025 · Software engineer',
   },
 ] as const;
 

@@ -22,7 +22,7 @@
   },
   "about-page": {
     "text-1": "Hey, I'm Daniel. I'm a Software Developer focused on backend services, data integration, and reliable Python and SQL systems.",
-    "text-2": "I graduated from the University of Maryland with a Bachelor of Science in Computer Science (GPA: 3.5) in May 2025.",
+    "text-2": "I graduated from the University of Maryland with a B.S. in Computer Science in May 2025.",
     "text-3": "My stack includes Python, SQL, FastAPI, PostgreSQL, Redis, Docker, PySpark, and AWS for building reliable systems end to end.",
     "website": "Website",
     "tools": {
@@ -47,15 +47,17 @@
       "1": {
         "date": "May 2025",
         "title": "Graduated from University of Maryland",
-        "description": "Completed Bachelor of Science in Computer Science with a 3.5 GPA. Coursework included Algorithms, Software Engineering, Statistics, Data Science, and Data Visualization."
+        "description": "Completed a B.S. in Computer Science at the University of Maryland."
       },
       "2": {
-        "title": "Software Developer at ICATT Consulting",
-        "description": "Architected Python and SQL integration services that consolidated three financial systems into one storage layer, designed indexed relational schemas, added CI/CD validation gates, and automated real-time reconciliation—cutting processing from multiple days to under three hours."
+        "date": "Aug 2025 – Mar 2026",
+        "title": "Software Developer (Contract) at ICATT Consulting",
+        "description": "Built Django ecommerce and accounting features, FastAPI reporting across three financial systems, and EventBridge-scheduled ledger reconciliation. Used Docker on AWS ECS and pytest in GitHub Actions."
       },
       "3": {
-        "title": "Software Engineer at Cube Money",
-        "description": "Built a Python identity-resolution algorithm across eight backend systems for more than 3,000 accounts, unified 15 query implementations, and automated consistency checks across 120 account groups—cutting analysis turnaround from two days to under one hour."
+        "date": "Jan 2025 – Jun 2025",
+        "title": "Software Engineer at Cube Money (UMD StartHub)",
+        "description": "Wrote Flask APIs with SQLAlchemy and PostgreSQL for Ethiopian Ekub savings groups, members, contributions, payouts, late payments, and one seat per phone number."
       }
     }
   },

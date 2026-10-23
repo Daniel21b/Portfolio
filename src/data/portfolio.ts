@@ -76,7 +76,7 @@ export const projects: Project[] = [
     liveDemo: 'https://www.preclearai.net/',
   },
   {
-    title: 'Distributed Skill Analytics Engine & REST API',
+    title: 'Job Posting Skill Demand Analyzer Engine & REST API',
     description:
       'Validated an asynchronous Python and PySpark service on 4,137 fixture rows, producing 4,135 canonical postings and 2,164 skill matches across 65 skills; 100 populated warm-cache requests measured 1.989ms p95 locally.',
     technologies: [
@@ -96,7 +96,7 @@ export const projects: Project[] = [
 // Homepage secondary projects (simplified version)
 export const homepageSecondaryProjects = [
   {
-    name: 'Distributed Skill Analytics Engine & REST API',
+    name: 'Job Posting Skill Demand Analyzer Engine & REST API',
     description:
       'Reconciled 4,137 fixture rows into 4,135 canonical postings with PySpark, matched 65 skills, and served populated warm-cache FastAPI filters at 1.989ms p95 over 100 local requests.',
     url: 'https://github.com/Daniel21b/Job-Market-Analytics',
