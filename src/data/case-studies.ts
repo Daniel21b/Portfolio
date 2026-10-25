@@ -63,7 +63,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     number: '01',
     title: 'Job Posting Skill Demand Analyzer Engine & REST API',
     shortTitle: 'Skill analytics',
-    year: 'Jan 2025 – Mar 2025',
+    year: 'Jan–Mar 2025 · Updated Oct 2026',
     role: 'Independent distributed/backend builder',
     scope: 'Distributed processing, REST API, caching, database, CI/CD',
     evidenceStatus:
@@ -205,7 +205,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     number: '02',
     title: 'Paper-to-Digital Invoice Intelligence Platform',
     shortTitle: 'Invoice intelligence',
-    year: 'Jul 2025 \u2013 Sep 2025',
+    year: 'Jul–Sep 2025 · Updated Oct 2026',
     role: 'Independent backend builder',
     scope:
       'Python, PostgreSQL, Lambda, Step Functions, S3, Textract, Amazon Bedrock, Streamlit',
@@ -253,7 +253,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     constraints: [
       'Locally tested implementation; AWS execution and database integration still require deployment validation.',
       'Current AnalyzeExpense path is synchronous and supports single-page PDFs and supported images; multi-page asynchronous processing is not implemented.',
-      'Project dates reflect the résumé; the new Step Functions, review and Bedrock work was added in October 2026.',
+      'Initial project: July–September 2025. Further development in October 2026 added Step Functions orchestration, human review and Bedrock fallback.',
     ],
     contribution: [
       'Built a serverless invoice pipeline with AWS CDK and Step Functions coordinating Textract extraction and Lambda processing.',
@@ -311,7 +311,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     limitations: [
       'Locally tested implementation; AWS execution and database integration still require deployment validation.',
       'Current AnalyzeExpense path is synchronous and supports single-page PDFs and supported images; multi-page asynchronous processing is not implemented.',
-      'Project dates reflect the résumé; the new Step Functions, review and Bedrock work was added in October 2026.',
+      'Initial project: July–September 2025. Further development in October 2026 added Step Functions orchestration, human review and Bedrock fallback.',
     ],
     scaleRedesign: [
       'Run deployed integration checks with representative inputs and record dated results.',
@@ -323,7 +323,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     number: '03',
     title: 'Homeowner Permit Compliance Checker',
     shortTitle: 'Permit compliance',
-    year: 'Jan 2026 \u2013 Mar 2026',
+    year: 'Jan–Mar 2026 · Updated Oct 2026',
     role: 'Independent backend builder',
     scope: 'Python, PostgreSQL, FastAPI, JavaScript, Apify, OpenAI',
     evidenceStatus:
@@ -380,7 +380,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     constraints: [
       'Municipal raw documents and chunks are stored in Supabase. Its database-size quota currently blocks verification of the résumé’s 50+ source-site count.',
       'Canonical implementation: Preclear/Preclear-Astra. API and UI preview checks passed; live database and model configuration remain pending.',
-      'Project dates reflect the résumé; the new FastAPI, Apify and conversational features were added in October 2026.',
+      'Initial project: January–March 2026. Further development in October 2026 added FastAPI lookups, Apify ingestion and the conversational agent.',
     ],
     contribution: [
       'Added Python and Apify collection with source evidence, normalized rule candidates and reviewed PostgreSQL ingestion.',
@@ -420,7 +420,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
         status: 'limited',
         label: 'Implementation and local verification',
         finding:
-          'Canonical React/Vite and FastAPI implementation added in October 2026: 23 Python tests, production build, and Vercel preview API checks passed. Live data/provider validation remains pending.',
+          'Canonical React/Vite and FastAPI implementation added in October 2026: 24 Python tests, production build, and deployed API authentication checks passed. Live data/provider validation remains pending.',
         method:
           'Local domain, orchestration and API checks; provider responses are mocked.',
         source: 'Repository implementation and test files',
@@ -439,7 +439,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     limitations: [
       'Municipal raw documents and chunks are stored in Supabase. Its database-size quota currently blocks verification of the résumé’s 50+ source-site count.',
       'Canonical implementation: Preclear/Preclear-Astra. API and UI preview checks passed; live database and model configuration remain pending.',
-      'Project dates reflect the résumé; the new FastAPI, Apify and conversational features were added in October 2026.',
+      'Initial project: January–March 2026. Further development in October 2026 added FastAPI lookups, Apify ingestion and the conversational agent.',
     ],
     scaleRedesign: [
       'Run deployed integration checks with representative inputs and record dated results.',

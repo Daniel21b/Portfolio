@@ -56,7 +56,7 @@ export const projects: Project[] = [
       'Amazon Bedrock',
       'AWS CDK',
     ],
-    period: 'Jul 2025 – Sep 2025',
+    period: 'Jul–Sep 2025 · Updated Oct 2026',
     github: 'https://github.com/Daniel21b/invoice_pipeline',
   },
   {
@@ -71,7 +71,7 @@ export const projects: Project[] = [
       'Apify',
       'OpenAI',
     ],
-    period: 'Jan 2026 – Mar 2026',
+    period: 'Jan–Mar 2026 · Updated Oct 2026',
     github: 'https://github.com/Preclear/Preclear-Astra',
     liveDemo: 'https://www.preclearai.net/',
   },
@@ -88,7 +88,7 @@ export const projects: Project[] = [
       'Docker',
       'AWS',
     ],
-    period: '2025',
+    period: 'Jan–Mar 2025 · Updated Oct 2026',
     github: 'https://github.com/Daniel21b/Job-Market-Analytics',
   },
 ];
