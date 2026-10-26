@@ -58,7 +58,7 @@ A separate API request reads aggregated skill demand. Redis returns a cached
 answer when possible; on a miss, PostgreSQL computes the result and Redis stores
 it for subsequent requests. Queue and cache are separate roles, even though both
 use Redis. Processing happens outside the interactive request lifecycle.
-Existing results are development-fixture measurements, not proof of the larger
+Historical results were development-fixture measurements, not proof of the larger
 résumé dataset or production latency. Automatic worker retry/dead-letter handling
 is a future improvement, not an implemented guarantee.
 
@@ -160,3 +160,5 @@ flowchart TD
 | Redis queue | Hand work messages to the worker | Decouples request handling from processing |
 | Redis cache | Reuse frequent aggregation results | A cache miss still reads the source-of-truth database |
 | Docker / GitHub Actions | Reproducible services and automated checks | Supports repeatable development and validation |
+
+October 25, 2026 update: the actual pipeline processed a pinned 120,000-record real-posting sample, retained 107,330 canonical records, flagged 12,670 duplicate candidates, and produced 40,001 matches across 73 skills. See [benchmark methodology and evidence](https://github.com/Daniel21b/Job-Market-Analytics/blob/main/docs/BENCHMARK_2026-10-25.md). Local timings do not establish a production SLA.

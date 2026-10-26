@@ -67,9 +67,9 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     role: 'Independent distributed/backend builder',
     scope: 'Distributed processing, REST API, caching, database, CI/CD',
     evidenceStatus:
-      'Locally validated on August 7, 2026; scale claims withheld',
+      '120,000 real records validated locally on October 25, 2026',
     outcome:
-      'Validated an asynchronous Python and PySpark engine on 4,137 fixture rows: 4,135 canonical postings, 2,164 skill matches across 65 canonical skills, and 1.989ms p95 over 100 populated warm-cache requests.',
+      'Validated an asynchronous Python and PySpark engine on 120,000 real posting records: 107,330 canonical postings, 40,001 skill matches across 73 canonical skills, and 0.858ms p95 over 1,000 populated sequential warm-cache Python-skill requests.',
     summary:
       'The service cleans unstructured postings, removes duplicate reposts, distributes processing across Spark workers, persists indexed results in PostgreSQL, and uses Redis cache-aside reads for low-latency multi-attribute filters.',
     contributionSummary:
@@ -77,13 +77,13 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     architecture: [
       { name: 'FastAPI', detail: 'Async run submission' },
       { name: 'Redis', detail: 'Queue + cache-aside' },
-      { name: 'PySpark', detail: '4,137 → 4,135 rows' },
-      { name: 'Skill extraction', detail: '2,164 matches · 65 skills' },
+      { name: 'PySpark', detail: '120,000 → 107,330 rows' },
+      { name: 'Skill extraction', detail: '40,001 matches · 73 skills' },
       { name: 'PostgreSQL', detail: 'Indexed + idempotent' },
-      { name: 'Metrics API', detail: '1.989ms p95 locally' },
+      { name: 'Metrics API', detail: '0.858ms p95 locally' },
     ],
     homepageLimitation:
-      'Development-scale validation only; 120K scale, an 18% duplicate rate, 500+ matched skills, and a 40-to-12-minute reduction remain withheld.',
+      'Local 120K convenience sample; 10.56% heuristic duplicate candidates and 73 matched skills. No production SLA or optimization speedup claimed.',
     links: [
       {
         label: 'Open legacy dashboard',
@@ -91,8 +91,8 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
         kind: 'live',
       },
       {
-        label: 'Browse source',
-        href: 'https://github.com/Daniel21b/Job-Market-Analytics',
+        label: 'Read measured benchmark',
+        href: 'https://github.com/Daniel21b/Job-Market-Analytics/blob/main/docs/BENCHMARK_2026-10-25.md',
         kind: 'source',
       },
     ],
@@ -105,9 +105,9 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       'The processing, API, cache, and database services need repeatable local and CI environments.',
     ],
     contribution: [
-      'Built an asynchronous Python and PySpark service that reconciled a 4,137-row fixture into 4,135 canonical postings, recorded two duplicate decisions, and produced 2,164 matches across 65 canonical skills.',
-      'Developed FastAPI endpoints with a Redis cache-aside layer; a populated development-scale benchmark measured 1.989ms p95 over 100 warm multi-attribute requests with 100 of 100 cache hits.',
-      'Instrumented partition skew and repartitioned on a high-cardinality composite join key; the validated optimized local run completed in 17.627 seconds and recorded skew ratios of 1.644 before and 1.060 after.',
+      'Built an asynchronous Python and PySpark service that reconciled a 120,000-record real-posting sample into 107,330 canonical postings, recorded 12,670 heuristic duplicate candidates, and produced 40,001 matches across 73 canonical skills.',
+      'Developed FastAPI endpoints with a Redis cache-aside layer; a populated development-scale benchmark measured 0.858ms p95 over 1,000 sequential warm Python-skill requests with 1,000 of 1,000 cache hits.',
+      'Instrumented partition skew and repartitioned on a high-cardinality composite join key; the validated optimized local run completed in 467.244 seconds and recorded skew ratios of 1.122 before and 1.009 after.',
       'Containerized the services with Docker, designed PostgreSQL composite-key indexes, and implemented unit, Spark contract, service-integration, and image-build checks in GitHub Actions.',
     ],
     outsideClaim: [
@@ -128,7 +128,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
         detail:
           'Spark workers are repartitioned around the high-cardinality key used by repost comparison, while each run records before-and-after partition profiles.',
         tradeoff:
-          'The local optimized run completed in 17.627 seconds and recorded skew ratios of 1.644 before and 1.060 after; no repeated same-input baseline exists, so a runtime reduction is not claimed.',
+          'The local optimized run completed in 467.244 seconds and recorded skew ratios of 1.122 before and 1.009 after; no repeated same-input baseline exists, so a runtime reduction is not claimed.',
       },
       {
         title: 'Cache aggregation responses in Redis',
@@ -149,32 +149,32 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       {
         id: 'E-01',
         status: 'verified',
-        label: 'Fixture processing',
+        label: 'Real-posting processing',
         finding:
-          '4,137 input rows produced 4,135 canonical postings, two duplicate decisions, and 2,164 skill-match rows across 65 canonical skills.',
+          '120,000 input records produced 107,330 canonical postings, 12,670 heuristic duplicate candidates, and 40,001 skill-match rows across 73 canonical skills.',
         method:
-          'Ran the asynchronous API-to-worker-to-Spark-to-PostgreSQL path and independently reconciled the input count with pandas.',
-        source: 'docs/LOCAL_VALIDATION.md · August 7, 2026',
+          'Ran the asynchronous API-to-worker-to-Spark-to-PostgreSQL path and independently reconciled Parquet output counts with PostgreSQL.',
+        source: 'docs/BENCHMARK_2026-10-25.md · October 25, 2026',
       },
       {
         id: 'E-02',
         status: 'verified',
         label: 'Warm-cache latency',
         finding:
-          'A populated local benchmark returned 100 of 100 Redis cache hits at 0.898ms p50, 1.989ms p95, and 4.013ms maximum latency.',
+          'A populated local benchmark returned 1,000 of 1,000 Redis cache hits at 0.579ms p50, 0.858ms p95, and 1.995ms maximum latency.',
         method:
-          'Sent 100 warm multi-attribute requests against populated PostgreSQL tables through the FastAPI metrics endpoint.',
-        source: 'docs/LOCAL_VALIDATION.md · August 7, 2026',
+          'Sent 1,000 sequential warm Python-skill requests against populated PostgreSQL tables through the FastAPI metrics endpoint.',
+        source: 'docs/BENCHMARK_2026-10-25.md · October 25, 2026',
       },
       {
         id: 'E-03',
         status: 'withheld',
         label: 'Scale and speedup claims',
         finding:
-          '120,000 postings, 18% duplicate removal, 500+ matched skills, and a 40-to-12-minute Spark reduction are not claimed.',
+          '18% duplicate removal, 500+ matched skills, and a 40-to-12-minute Spark reduction are not claimed. The measured run processed 120,000 real records.',
         method:
           'Require an immutable production-scale dataset plus repeated same-input baseline and optimized runs before publishing these figures.',
-        source: 'Explicit validation boundary in docs/LOCAL_VALIDATION.md',
+        source: 'Explicit validation boundary in docs/BENCHMARK_2026-10-25.md',
       },
       {
         id: 'E-04',
@@ -188,13 +188,13 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       },
     ],
     limitations: [
-      'The validated fixture contains 4,137 rows and does not demonstrate production-scale throughput.',
-      'Only one optimized 17.627-second local Spark run is recorded; there is no same-input baseline series.',
-      'The 1.989ms p95 result is a populated development-scale warm-cache benchmark, not a production SLA.',
+      'The frozen real-posting sample contains 120,000 real records and does not demonstrate production-scale throughput.',
+      'Only one optimized 467.244-second local Spark run is recorded; there is no same-input baseline series.',
+      'The 0.858ms p95 result is a populated development-scale warm-cache benchmark, not a production SLA.',
       'No production adoption, uptime, or cost history is presented.',
     ],
     scaleRedesign: [
-      'Pin a versioned 120K-plus input manifest and publish row-level reconciliation artifacts for every run.',
+      'Extend the pinned 120K sample with representative sampling and audited duplicate labels.',
       'Run repeated same-input baseline and optimized Spark trials with cluster, partition, and memory settings recorded.',
       'Monitor Spark skew, cache hit rate, API latency, database plans, and data freshness in a deployed environment.',
       'Introduce durable job state, retries, and dead-letter handling for long-running asynchronous work.',

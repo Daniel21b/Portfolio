@@ -78,7 +78,7 @@ export const projects: Project[] = [
   {
     title: 'Job Posting Skill Demand Analyzer Engine & REST API',
     description:
-      'Validated an asynchronous Python and PySpark service on 4,137 fixture rows, producing 4,135 canonical postings and 2,164 skill matches across 65 skills; 100 populated warm-cache requests measured 1.989ms p95 locally.',
+      'Validated an asynchronous Python and PySpark service on 120,000 real posting records, producing 107,330 canonical postings and 40,001 skill matches across 73 skills; 1,000 populated sequential warm-cache Python-skill requests measured 0.858ms p95 locally.',
     technologies: [
       'Python',
       'PySpark',
@@ -98,7 +98,7 @@ export const homepageSecondaryProjects = [
   {
     name: 'Job Posting Skill Demand Analyzer Engine & REST API',
     description:
-      'Reconciled 4,137 fixture rows into 4,135 canonical postings with PySpark, matched 65 skills, and served populated warm-cache FastAPI filters at 1.989ms p95 over 100 local requests.',
+      'Reconciled 120,000 real posting records into 107,330 canonical postings with PySpark, matched 73 skills, and served populated warm-cache FastAPI filters at 0.858ms p95 over 1,000 local requests.',
     url: 'https://github.com/Daniel21b/Job-Market-Analytics',
     technologies: [
       'Python',
