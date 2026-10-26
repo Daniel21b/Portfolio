@@ -17,11 +17,11 @@ Analytics has a separately recorded August 2026 local validation. Keep that evid
 Python, PySpark, FastAPI, PostgreSQL, Redis
 
 - Built an asynchronous Python/PySpark pipeline that normalizes job postings, identifies duplicate reposts and maps skill text into a shared taxonomy, with PostgreSQL persistence.
-- Implemented FastAPI aggregation endpoints and Redis caching; a local 100-request warm-cache benchmark measured 1.989 ms p95 on the development fixture.
+- Implemented FastAPI aggregation endpoints and Redis caching; a local 1,000-request warm-cache benchmark measured 0.858 ms p95 on the populated local database.
 
-Optional measured processing bullet: Validated the pipeline on 4,137 fixture rows, producing 4,135 canonical postings and 2,164 skill matches across 65 skills.
+Optional measured processing bullet: Validated the pipeline on 120,000 real posting records, producing 107,330 canonical postings and 40,001 skill matches across 73 skills.
 
-Do not substitute these measurements for the original 120,000+ postings, 18% duplicates, or 500+ skills without checking the original run evidence. New code can support greater capacity, but only a measured run can establish these outcomes. A synthetic benchmark must be labeled synthetic; duplicating rows to hit a target is not evidence of processing that many distinct real postings.
+The October follow-up processed exactly 120,000 real records and flagged 12,670 heuristic duplicate candidates (10.56%). It matched 73 skills, not 500+. This supersedes the older fixture measurements; it does not establish historical 2025 results. See [the reproducible benchmark](https://github.com/Daniel21b/Job-Market-Analytics/blob/main/docs/BENCHMARK_2026-10-25.md).
 
 ### Paper-to-Digital Invoice Intelligence Platform
 
@@ -55,4 +55,4 @@ Do not claim 50+ normalized municipal sites until reviewed-rule coverage is coun
 
 Professional experience dates and metrics remain owner-provided and unchanged. Be prepared to explain the baseline and measurement for 3 financial systems, about 8 hours/week saved and over 50% fewer logged errors. Project tests do not verify employer outcomes.
 
-The original PDF has not been overwritten. This is an aligned replacement-project draft pending recovery of any historical measurements that support stronger wording.
+The original PDF has not been overwritten. A new verified-project résumé PDF is generated separately; the original PDF remains unchanged. Professional experience metrics are still owner-provided.

@@ -446,7 +446,7 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
     example:
       'Illustrative query: “Which skills appear in data engineer jobs in Maryland?” Example postings mention Python, SQL and a repeated advertisement; these are walkthrough inputs, not measured market findings.',
     status:
-      'Validated locally on a 4,137-row fixture. Warm-cache timings are development measurements, not production guarantees. AWS execution adapters are implemented but deployment is not verified.',
+      'Validated locally on a 120,000-record real-posting sample. Warm-cache timings are development measurements, not production guarantees. AWS execution adapters are implemented but deployment is not verified.',
     lanes: [
       {
         name: '01 / Submit background work',
@@ -518,7 +518,7 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
         'Canonicalizes fields, classifies exact and bounded near-match reposts, and repartitions on company, title and location.',
         'Canonical postings and partition measurements.',
         'Two copies of the same ad can become one canonical posting.',
-        'Duplicate rules have boundaries. The local fixture removed two rows; it does not establish a market-wide duplicate percentage.',
+        'Duplicate rules have boundaries. This sample flagged 12,670 candidates (10.56%); country-only locations can conflate distinct openings. This is not a market-wide duplicate percentage.',
         'src/skill_analytics/spark/pipeline.py',
       ),
       stage(
@@ -642,7 +642,7 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
       'I separate the write-heavy batch system from the read-heavy API. A run gets a durable ID, enters Redis, and is processed by a worker.',
       'PySpark cleans postings, detects reposts and maps aliases to skills. The publisher commits normalized tables before invalidating cached results.',
       'For a query, FastAPI checks Redis. A hit returns immediately; a miss queries indexed PostgreSQL tables and caches the response.',
-      'I can explain the local fixture and warm-cache measurements, but I would need repeated larger runs and production telemetry before claiming scale or a service guarantee.',
+      'I can explain the frozen real-posting sample and warm-cache measurements, but I would need repeated larger runs and production telemetry before claiming scale or a service guarantee.',
     ],
   },
 };
