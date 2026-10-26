@@ -62,26 +62,26 @@ const contractSteps = [
   {
     label: 'Canonicalize',
     detail: 'Normalize source fields, text, locations, roles, and timestamps.',
-    result: '120,000 input records reconciled',
+    result: '200,000 input records reconciled',
     state: 'code',
   },
   {
     label: 'Classify reposts',
     detail:
       'Apply source-redelivery, exact-content, and bounded near-match rules.',
-    result: '12,670 candidates · 107,330 retained',
+    result: '25,639 candidates · 174,361 retained',
     state: 'artifact',
   },
   {
     label: 'Repartition',
     detail: 'Hash company, title, and location into a composite join key.',
-    result: 'skew 1.122 before · 1.009 after',
+    result: 'skew 1.105 before · 1.01 after',
     state: 'artifact',
   },
   {
     label: 'Extract + publish',
     detail: 'Join 1–4-grams to a versioned taxonomy and upsert atomically.',
-    result: '40,001 matches · 73 skills',
+    result: '66,339 matches · 73 skills',
     state: 'artifact',
   },
 ] as const;
@@ -113,7 +113,7 @@ const walkthrough = [
     transformation:
       'PySpark normalizes the canonical fields, classifies source redeliveries and reposts, and repartitions on a composite key while capturing partition profiles.',
     output:
-      'The frozen real-posting sample moved from 120,000 inputs to 107,330 canonical rows with 12,670 heuristic duplicate candidates; the optimized local run took 467.244 seconds.',
+      'The frozen real-posting sample moved from 200,000 inputs to 174,361 canonical rows with 25,639 heuristic duplicate candidates; the optimized local run took 1130.362 seconds.',
     path: 'src/skill_analytics/spark/pipeline.py · normalization.py · job.py',
     failure:
       'One optimized run is not a speedup study; the former 40-to-12-minute claim remains withheld without repeated same-input baselines.',
@@ -124,7 +124,7 @@ const walkthrough = [
     transformation:
       'Spark tokenizes descriptions, generates 1–4-grams, broadcasts the taxonomy, and joins normalized aliases to canonical skills.',
     output:
-      '40,001 posting-to-skill matches across 73 distinct canonical skills.',
+      '66,339 posting-to-skill matches across 73 distinct canonical skills.',
     path: 'src/skill_analytics/spark/taxonomy.py · config/skill_taxonomy.csv',
     failure:
       'This run does not support a claim of 500+ matched skills; taxonomy size and observed distinct matches are different measures.',
@@ -147,7 +147,7 @@ const walkthrough = [
     transformation:
       'FastAPI hashes canonical filters, checks Redis, and queries indexed PostgreSQL aggregations only on a miss.',
     output:
-      'A populated local benchmark measured 1,000 of 1,000 warm hits at 0.579ms p50, 0.858ms p95, and 1.995ms maximum.',
+      'A populated local benchmark measured 1,000 of 1,000 warm hits at 0.669ms p50, 0.833ms p95, and 2.227ms maximum.',
     path: 'src/skill_analytics/api/routes/metrics.py · cache.py · repository.py',
     failure:
       'The result is a development-scale warm-cache benchmark, not a production SLA or cold-query measurement.',
@@ -193,7 +193,7 @@ const implementationMap = [
     href: `${repositoryBase}/src/skill_analytics/spark/taxonomy.py`,
     responsibility:
       'Loads normalized aliases and joins posting n-grams to canonical skills.',
-    proof: '40,001 matches · 73 observed skills',
+    proof: '66,339 matches · 73 observed skills',
   },
   {
     boundary: 'Publication and schema',
@@ -221,8 +221,8 @@ const implementationMap = [
   },
   {
     boundary: 'Validation evidence',
-    path: 'docs/BENCHMARK_2026-10-25.md · benchmarks/',
-    href: `${repositoryBase}/docs/BENCHMARK_2026-10-25.md`,
+    path: 'docs/BENCHMARK_2026-10-26.md · benchmarks/',
+    href: `${repositoryBase}/docs/BENCHMARK_2026-10-26.md`,
     responsibility:
       'Records the dated local run, reconciliation counts, partition profiles, cache latency, and explicit claim boundaries.',
     proof: 'Validated October 25, 2026',
@@ -362,10 +362,10 @@ export function SkillDemandArchitectureMap() {
           ))}
         </ol>
         <p className="skill-demand-map__artifact-note">
-          <strong>Validated invariant · October 25, 2026</strong>
+          <strong>Validated invariant · October 26, 2026</strong>
           <span>
-            120,000 input records · 107,330 canonical postings · 12,670
-            duplicate candidates · 40,001 matches · 73 skills
+            200,000 input records · 174,361 canonical postings · 25,639
+            duplicate candidates · 66,339 matches · 73 skills
           </span>
         </p>
       </section>
@@ -390,7 +390,7 @@ export function SkillDemandArchitectureMap() {
           />
           <FlowNode
             name="Redis cache-aside metrics"
-            detail="Canonical SHA-256 filter keys; 1,000/1,000 local warm hits measured at 0.858ms p95."
+            detail="Canonical SHA-256 filter keys; 1,000/1,000 local warm hits measured at 0.833ms p95."
             state="artifact"
           />
         </div>
@@ -421,7 +421,7 @@ export function SkillDemandArchitectureMap() {
           />
           <FlowNode
             name="Production scale"
-            detail="18% duplicates, 500+ skills, a 40→12 minute speedup, and cloud service levels remain withheld; the measured sample contains 120K records."
+            detail="18% duplicates, 500+ skills, a 40→12 minute speedup, and cloud service levels remain withheld; the measured sample contains 200K records."
             state="risk"
           />
         </div>

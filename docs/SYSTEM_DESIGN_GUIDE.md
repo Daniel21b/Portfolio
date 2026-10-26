@@ -161,4 +161,4 @@ flowchart TD
 | Redis cache | Reuse frequent aggregation results | A cache miss still reads the source-of-truth database |
 | Docker / GitHub Actions | Reproducible services and automated checks | Supports repeatable development and validation |
 
-October 25, 2026 update: the actual pipeline processed a pinned 120,000-record real-posting sample, retained 107,330 canonical records, flagged 12,670 duplicate candidates, and produced 40,001 matches across 73 skills. See [benchmark methodology and evidence](https://github.com/Daniel21b/Job-Market-Analytics/blob/main/docs/BENCHMARK_2026-10-25.md). Local timings do not establish a production SLA.
+October 26, 2026 update: the actual pipeline processed a pinned 200,000-record real-posting sample, retained 174,361 canonical records, flagged 25,639 duplicate candidates, and produced 66,339 matches across 73 skills. See [benchmark methodology and evidence](https://github.com/Daniel21b/Job-Market-Analytics/blob/main/docs/BENCHMARK_2026-10-26.md). Local timings do not establish a production SLA.

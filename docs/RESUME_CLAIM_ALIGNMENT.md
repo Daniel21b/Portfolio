@@ -17,11 +17,11 @@ Analytics has a separately recorded August 2026 local validation. Keep that evid
 Python, PySpark, FastAPI, PostgreSQL, Redis
 
 - Built an asynchronous Python/PySpark pipeline that normalizes job postings, identifies duplicate reposts and maps skill text into a shared taxonomy, with PostgreSQL persistence.
-- Implemented FastAPI aggregation endpoints and Redis caching; a local 1,000-request warm-cache benchmark measured 0.858 ms p95 on the populated local database.
+- Implemented FastAPI aggregation endpoints and Redis caching; a local 1,000-request warm-cache benchmark measured 0.833 ms p95 on the populated local database.
 
-Optional measured processing bullet: Validated the pipeline on 120,000 real posting records, producing 107,330 canonical postings and 40,001 skill matches across 73 skills.
+Optional measured processing bullet: Validated the pipeline on 200,000 real posting records, producing 174,361 canonical postings and 66,339 skill matches across 73 skills.
 
-The October follow-up processed exactly 120,000 real records and flagged 12,670 heuristic duplicate candidates (10.56%). It matched 73 skills, not 500+. This supersedes the older fixture measurements; it does not establish historical 2025 results. See [the reproducible benchmark](https://github.com/Daniel21b/Job-Market-Analytics/blob/main/docs/BENCHMARK_2026-10-25.md).
+The October follow-up processed exactly 200,000 real records and flagged 25,639 heuristic duplicate candidates (12.82%). It matched 73 skills, not 500+. This supersedes the older fixture measurements; it does not establish historical 2025 results. See [the reproducible benchmark](https://github.com/Daniel21b/Job-Market-Analytics/blob/main/docs/BENCHMARK_2026-10-26.md).
 
 ### Paper-to-Digital Invoice Intelligence Platform
 
@@ -43,11 +43,11 @@ Python, PostgreSQL, FastAPI, JavaScript, Apify, OpenAI
 
 Do not claim 50+ normalized municipal sites until reviewed-rule coverage is counted. Raw documents/chunks are not equivalent to reviewed rules. The owner confirms Supabase storage quota remains unresolved; live authentication, database and model connections require manual activation. A contact-for-access screen does not establish live bot functionality.
 
-## Evidence still required for original numerical claims
+## Evidence standards for numerical claims
 
 | Claim | What establishes it |
 | --- | --- |
-| 120,000+ job postings processed | Versioned input manifest plus successful run counts and output reconciliation |
+| 200,000+ job postings processed | Versioned input manifest plus successful run counts and output reconciliation |
 | 18% duplicate reposts removed | Same-run input/output counts and documented duplicate definition |
 | 500+ normalized skill tags | Distinguish taxonomy capacity from distinct tags actually matched in output |
 | Queries under 50 ms | Request count, p50/p95/p99, cache hit rate, hardware, concurrency and dataset size; do not imply an absolute guarantee |
