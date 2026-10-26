@@ -446,7 +446,7 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
     example:
       'Illustrative query: “Which skills appear in data engineer jobs in Maryland?” Example postings mention Python, SQL and a repeated advertisement; these are walkthrough inputs, not measured market findings.',
     status:
-      'Validated locally on a 120,000-record real-posting sample. Warm-cache timings are development measurements, not production guarantees. AWS execution adapters are implemented but deployment is not verified.',
+      'Validated locally on a 200,000-record real-posting sample. Warm-cache timings are development measurements, not production guarantees. AWS execution adapters are implemented but deployment is not verified.',
     lanes: [
       {
         name: '01 / Submit background work',
@@ -518,7 +518,7 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
         'Canonicalizes fields, classifies exact and bounded near-match reposts, and repartitions on company, title and location.',
         'Canonical postings and partition measurements.',
         'Two copies of the same ad can become one canonical posting.',
-        'Duplicate rules have boundaries. This sample flagged 12,670 candidates (10.56%); country-only locations can conflate distinct openings. This is not a market-wide duplicate percentage.',
+        'Duplicate rules have boundaries. This sample flagged 25,639 candidates (12.82%); country-only locations can conflate distinct openings. This is not a market-wide duplicate percentage.',
         'src/skill_analytics/spark/pipeline.py',
       ),
       stage(
