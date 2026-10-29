@@ -442,9 +442,9 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
   },
   'tech-skill-demand-platform': {
     story:
-      'Think of this as organizing a messy stack of job advertisements into a searchable skills index. A background worker cleans repeated postings and links different phrases to the same skill. The API then answers filtered questions from that prepared data, reusing cached answers when possible.',
+      'Think of this as organizing a messy stack of job advertisements into a searchable skills index. A background worker cleans repeated postings and links different phrases to the same skill. The API answers filtered questions from prepared data. A separate Next.js dashboard lets visitors explore an audited aggregate snapshot with charts and exports.',
     example:
-      'Illustrative query: “Which skills appear in data engineer jobs in Maryland?” Example postings mention Python, SQL and a repeated advertisement; these are walkthrough inputs, not measured market findings.',
+      'Dashboard example: select Python and a month range to see matching postings and their share of retained records. Counts describe this sample, not all hiring activity.',
     status:
       'Validated locally on a 200,000-record real-posting sample. Warm-cache timings are development measurements, not production guarantees. AWS execution adapters are implemented but deployment is not verified.',
     lanes: [
@@ -475,8 +475,38 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
         ],
         destination: 'JSON aggregation response → API consumer',
       },
+      {
+        name: '04 / Explore verified results',
+        note: 'The public dashboard reads aggregates from an audited run, not the local processing API.',
+        columns: [col('export'), col('frontend')],
+        destination:
+          'Snapshot → browser filters, charts and aggregate downloads',
+      },
     ],
     stages: [
+      stage(
+        'export',
+        'Audited snapshot exporter',
+        'Prepare safe public aggregates',
+        'A succeeded run, output files and reconciled PostgreSQL counts.',
+        'The exporter checks totals and groups records by skill and posting month.',
+        'Compact aggregate JSON with provenance and limitations.',
+        'The public site receives monthly counts, not raw descriptions or database credentials.',
+        'If the run or reconciliation fails, the snapshot must not publish.',
+        'benchmarks/export_dashboard_snapshot.py',
+      ),
+      stage(
+        'frontend',
+        'Next.js + React dashboard',
+        'Make results explorable',
+        'Versioned aggregate JSON loaded with the page.',
+        'TypeScript controls filter dates, skill names and categories; React updates charts and tables.',
+        'Responsive results, selected-skill trends, CSV and JSON exports.',
+        'A visitor chooses Python and downloads the filtered skill counts.',
+        'A snapshot is not a live vacancies feed. Country-only data and ambiguous aliases limit interpretation.',
+        'Portfolio: src/components/analytics-dashboard',
+      ),
+
       stage(
         'submit',
         'FastAPI run endpoint',
@@ -550,7 +580,7 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
         'Skill, role, location and date filters.',
         'Canonical filters produce a stable cache key, then Redis is checked.',
         'Either a cached payload or a database query path.',
-        'Equivalent Maryland/data-engineer filters address the same cached query.',
+        'Equivalent Python-skill and United States filters address the same cached query.',
         'A query does not launch Spark. Results depend on the most recently published batch.',
         'src/skill_analytics/api/routes/metrics.py',
       ),
@@ -572,7 +602,7 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
         'Filters with no matching cached response.',
         'Indexed PostgreSQL aggregations compute the response, which is stored in Redis with a TTL.',
         'Freshly computed aggregation and a reusable cache entry.',
-        'The first Maryland query reads the prepared posting-to-skill tables.',
+        'The first Python-skill query reads the prepared posting-to-skill tables.',
         'Cold query latency depends on data and indexes; it is not established by the warm-cache benchmark.',
         'src/skill_analytics/repository.py',
       ),
@@ -589,6 +619,18 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
       ),
     ],
     stack: [
+      tech(
+        'Next.js + React',
+        'Public frontend',
+        'Renders verified aggregates as interactive charts and tables.',
+        'Deploys on existing Vercel hosting without exposing the processing API.',
+      ),
+      tech(
+        'TypeScript + CSS modules',
+        'UI implementation',
+        'Defines snapshot types, filters, responsive layouts and exports.',
+        'Keeps the display contract explicit and the page lightweight.',
+      ),
       tech(
         'Python',
         'Language + worker',
@@ -639,6 +681,7 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
       ),
     ],
     walkthrough: [
+      'The public Next.js dashboard loads an audited JSON snapshot. It filters aggregates in the browser; it does not call an exposed job-submission endpoint.',
       'I separate the write-heavy batch system from the read-heavy API. A run gets a durable ID, enters Redis, and is processed by a worker.',
       'PySpark cleans postings, detects reposts and maps aliases to skills. The publisher commits normalized tables before invalidating cached results.',
       'For a query, FastAPI checks Redis. A hit returns immediately; a miss queries indexed PostgreSQL tables and caches the response.',

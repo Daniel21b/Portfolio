@@ -82,6 +82,9 @@ export const projects: Project[] = [
     technologies: [
       'Python',
       'PySpark',
+      'Next.js',
+      'React',
+      'TypeScript',
       'FastAPI',
       'PostgreSQL',
       'Redis',
@@ -90,6 +93,7 @@ export const projects: Project[] = [
     ],
     period: 'Jan–Mar 2025 · Updated Oct 2026',
     github: 'https://github.com/Daniel21b/Job-Market-Analytics',
+    liveDemo: 'https://danielberhane.vercel.app/en/analytics',
   },
 ];
 
@@ -103,6 +107,9 @@ export const homepageSecondaryProjects = [
     technologies: [
       'Python',
       'PySpark',
+      'Next.js',
+      'React',
+      'TypeScript',
       'FastAPI',
       'PostgreSQL',
       'Redis',

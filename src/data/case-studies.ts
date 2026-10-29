@@ -65,15 +65,15 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     shortTitle: 'Skill analytics',
     year: 'Jan–Mar 2025 · Updated Oct 2026',
     role: 'Independent distributed/backend builder',
-    scope: 'Distributed processing, REST API, caching, database, CI/CD',
+    scope: 'Processing, REST API, caching, database, results dashboard, CI/CD',
     evidenceStatus:
       '200,000 real records validated locally on October 26, 2026',
     outcome:
       'Validated an asynchronous Python and PySpark engine on 200,000 real posting records: 174,361 canonical postings, 66,339 skill matches across 73 canonical skills, and 0.833ms p95 over 1,000 populated sequential warm-cache Python-skill requests.',
     summary:
-      'The service cleans unstructured postings, removes duplicate reposts, distributes processing across Spark workers, persists indexed results in PostgreSQL, and uses Redis cache-aside reads for low-latency multi-attribute filters.',
+      'The service cleans unstructured postings, removes duplicate reposts, distributes processing across Spark workers, persists indexed results in PostgreSQL, and uses Redis cache-aside reads for filtered queries. A Next.js dashboard makes audited aggregate results explorable.',
     contributionSummary:
-      'I built the asynchronous processing service, FastAPI endpoints, Redis cache-aside layer, Spark partitioning strategy, PostgreSQL indexes, Docker packaging, and automated GitHub Actions tests.',
+      'I built the asynchronous processing service, FastAPI endpoints, Redis cache-aside layer, Spark partitioning strategy, PostgreSQL indexes, Docker packaging, automated GitHub Actions tests, and a Next.js/React results explorer.',
     architecture: [
       { name: 'FastAPI', detail: 'Async run submission' },
       { name: 'Redis', detail: 'Queue + cache-aside' },
@@ -81,6 +81,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       { name: 'Skill extraction', detail: '66,339 matches · 73 skills' },
       { name: 'PostgreSQL', detail: 'Indexed + idempotent' },
       { name: 'Metrics API', detail: '0.833ms p95 locally' },
+      { name: 'Next.js + React', detail: 'Audited snapshot explorer' },
     ],
     homepageLimitation:
       'Local 200K convenience sample; 12.82% heuristic duplicate candidates and 73 matched skills. No production SLA or optimization speedup claimed.',
@@ -103,6 +104,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       'Distributed joins can produce partition memory skew when high-cardinality keys are unevenly distributed.',
       'Multi-attribute aggregation queries need predictable latency without recomputing the same results.',
       'The processing, API, cache, and database services need repeatable local and CI environments.',
+      'Public results use audited aggregates without exposing raw descriptions or local database credentials.',
     ],
     contribution: [
       'Built an asynchronous Python and PySpark service that reconciled a 200,000-record real-posting sample into 174,361 canonical postings, recorded 25,639 heuristic duplicate candidates, and produced 66,339 matches across 73 canonical skills.',

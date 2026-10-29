@@ -225,7 +225,7 @@ const implementationMap = [
     href: `${repositoryBase}/docs/BENCHMARK_2026-10-26.md`,
     responsibility:
       'Records the dated local run, reconciliation counts, partition profiles, cache latency, and explicit claim boundaries.',
-    proof: 'Validated October 25, 2026',
+    proof: 'Dated run artifacts and checks',
   },
 ] as const;
 

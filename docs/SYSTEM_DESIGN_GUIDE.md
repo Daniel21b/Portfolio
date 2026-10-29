@@ -162,3 +162,7 @@ flowchart TD
 | Docker / GitHub Actions | Reproducible services and automated checks | Supports repeatable development and validation |
 
 October 26, 2026 update: the actual pipeline processed a pinned 200,000-record real-posting sample, retained 174,361 canonical records, flagged 25,639 duplicate candidates, and produced 66,339 matches across 73 skills. See [benchmark methodology and evidence](https://github.com/Daniel21b/Job-Market-Analytics/blob/main/docs/BENCHMARK_2026-10-26.md). Local timings do not establish a production SLA.
+
+## Analytics results frontend
+
+The public `/en/analytics` route uses Next.js, React and TypeScript. `export_dashboard_snapshot.py` checks completed-run and audit evidence, reconciles totals, and produces skill/month aggregates for the frontend. Browser filters, charts and CSV/JSON exports operate on that snapshot. The dashboard does not call the local run-submission API or expose database credentials. Active and archived postings are included and labeled; there is no invented city, salary or role-family breakdown.
