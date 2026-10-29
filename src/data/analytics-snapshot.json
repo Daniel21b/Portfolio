@@ -1,0 +1,6542 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-29T14:35:45.999855+00:00",
+  "benchmarkDate": "2026-10-29",
+  "runId": "9f90fed2-0aa7-44b0-aaea-784ba0f90500",
+  "sampleSha256": "e4d715afe69232f33454888abc37b74e7fd3a3a31d57a786656f2f263ce162b1",
+  "source": {
+    "name": "OpenJobData",
+    "url": "https://huggingface.co/datasets/scholarweave/Jobs-Dataset-v2",
+    "revision": "7675a78a63ea3d42d47515a350ac7650da972bd0",
+    "asOf": "2026-10-25T16:29:33.600029+00:00",
+    "country": "United States",
+    "sampling": "Active shards in numeric order, then closed archive in reverse path order when enabled; original row order; stop at target. Convenience sample, not representative.",
+    "statusCoverage": "Includes active and closed archived postings"
+  },
+  "metrics": {
+    "inputRows": 500000,
+    "canonicalRows": 411135,
+    "duplicateRows": 88865,
+    "skillMatchRows": 156491,
+    "matchedSkills": 73,
+    "postingsWithSkills": 63087,
+    "sparkDurationMs": 585748
+  },
+  "latency": {
+    "pythonWarmP95Ms": 0.738,
+    "requests": 1000,
+    "concurrency": 1,
+    "environment": "local"
+  },
+  "monthly": [
+    {
+      "month": "2025-01",
+      "postings": 2388,
+      "withSkills": 348
+    },
+    {
+      "month": "2025-02",
+      "postings": 3019,
+      "withSkills": 256
+    },
+    {
+      "month": "2025-03",
+      "postings": 2525,
+      "withSkills": 253
+    },
+    {
+      "month": "2025-04",
+      "postings": 18041,
+      "withSkills": 1195
+    },
+    {
+      "month": "2025-05",
+      "postings": 32995,
+      "withSkills": 2347
+    },
+    {
+      "month": "2025-06",
+      "postings": 4563,
+      "withSkills": 482
+    },
+    {
+      "month": "2025-07",
+      "postings": 4749,
+      "withSkills": 552
+    },
+    {
+      "month": "2025-08",
+      "postings": 3377,
+      "withSkills": 547
+    },
+    {
+      "month": "2025-09",
+      "postings": 5068,
+      "withSkills": 551
+    },
+    {
+      "month": "2025-10",
+      "postings": 5243,
+      "withSkills": 724
+    },
+    {
+      "month": "2025-11",
+      "postings": 4241,
+      "withSkills": 536
+    },
+    {
+      "month": "2025-12",
+      "postings": 4305,
+      "withSkills": 620
+    },
+    {
+      "month": "2026-01",
+      "postings": 6874,
+      "withSkills": 1055
+    },
+    {
+      "month": "2026-02",
+      "postings": 6629,
+      "withSkills": 1084
+    },
+    {
+      "month": "2026-03",
+      "postings": 8911,
+      "withSkills": 1653
+    },
+    {
+      "month": "2026-04",
+      "postings": 10090,
+      "withSkills": 1727
+    },
+    {
+      "month": "2026-05",
+      "postings": 12758,
+      "withSkills": 2340
+    },
+    {
+      "month": "2026-06",
+      "postings": 25537,
+      "withSkills": 4105
+    },
+    {
+      "month": "2026-07",
+      "postings": 26750,
+      "withSkills": 5596
+    },
+    {
+      "month": "2026-08",
+      "postings": 39715,
+      "withSkills": 8011
+    },
+    {
+      "month": "2026-09",
+      "postings": 73777,
+      "withSkills": 13313
+    },
+    {
+      "month": "2026-10",
+      "postings": 109580,
+      "withSkills": 15792
+    }
+  ],
+  "skills": [
+    {
+      "name": "airbyte",
+      "category": "data",
+      "postings": 55,
+      "monthly": [
+        {
+          "month": "2025-08",
+          "postings": 1
+        },
+        {
+          "month": "2025-11",
+          "postings": 2
+        },
+        {
+          "month": "2026-03",
+          "postings": 3
+        },
+        {
+          "month": "2026-04",
+          "postings": 3
+        },
+        {
+          "month": "2026-05",
+          "postings": 2
+        },
+        {
+          "month": "2026-06",
+          "postings": 2
+        },
+        {
+          "month": "2026-07",
+          "postings": 4
+        },
+        {
+          "month": "2026-08",
+          "postings": 5
+        },
+        {
+          "month": "2026-09",
+          "postings": 19
+        },
+        {
+          "month": "2026-10",
+          "postings": 14
+        }
+      ]
+    },
+    {
+      "name": "amazon ecs",
+      "category": "cloud",
+      "postings": 14,
+      "monthly": [
+        {
+          "month": "2025-11",
+          "postings": 2
+        },
+        {
+          "month": "2026-08",
+          "postings": 2
+        },
+        {
+          "month": "2026-09",
+          "postings": 4
+        },
+        {
+          "month": "2026-10",
+          "postings": 6
+        }
+      ]
+    },
+    {
+      "name": "amazon emr",
+      "category": "cloud",
+      "postings": 3,
+      "monthly": [
+        {
+          "month": "2026-09",
+          "postings": 3
+        }
+      ]
+    },
+    {
+      "name": "amazon rds",
+      "category": "cloud",
+      "postings": 21,
+      "monthly": [
+        {
+          "month": "2025-10",
+          "postings": 1
+        },
+        {
+          "month": "2026-04",
+          "postings": 1
+        },
+        {
+          "month": "2026-05",
+          "postings": 1
+        },
+        {
+          "month": "2026-06",
+          "postings": 1
+        },
+        {
+          "month": "2026-07",
+          "postings": 3
+        },
+        {
+          "month": "2026-08",
+          "postings": 4
+        },
+        {
+          "month": "2026-09",
+          "postings": 5
+        },
+        {
+          "month": "2026-10",
+          "postings": 5
+        }
+      ]
+    },
+    {
+      "name": "amazon s3",
+      "category": "cloud",
+      "postings": 835,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 1
+        },
+        {
+          "month": "2025-03",
+          "postings": 4
+        },
+        {
+          "month": "2025-04",
+          "postings": 7
+        },
+        {
+          "month": "2025-05",
+          "postings": 8
+        },
+        {
+          "month": "2025-06",
+          "postings": 6
+        },
+        {
+          "month": "2025-07",
+          "postings": 7
+        },
+        {
+          "month": "2025-08",
+          "postings": 13
+        },
+        {
+          "month": "2025-09",
+          "postings": 6
+        },
+        {
+          "month": "2025-10",
+          "postings": 12
+        },
+        {
+          "month": "2025-11",
+          "postings": 5
+        },
+        {
+          "month": "2025-12",
+          "postings": 8
+        },
+        {
+          "month": "2026-01",
+          "postings": 11
+        },
+        {
+          "month": "2026-02",
+          "postings": 16
+        },
+        {
+          "month": "2026-03",
+          "postings": 21
+        },
+        {
+          "month": "2026-04",
+          "postings": 18
+        },
+        {
+          "month": "2026-05",
+          "postings": 42
+        },
+        {
+          "month": "2026-06",
+          "postings": 50
+        },
+        {
+          "month": "2026-07",
+          "postings": 112
+        },
+        {
+          "month": "2026-08",
+          "postings": 119
+        },
+        {
+          "month": "2026-09",
+          "postings": 175
+        },
+        {
+          "month": "2026-10",
+          "postings": 194
+        }
+      ]
+    },
+    {
+      "name": "angular",
+      "category": "web",
+      "postings": 773,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 2
+        },
+        {
+          "month": "2025-02",
+          "postings": 5
+        },
+        {
+          "month": "2025-03",
+          "postings": 3
+        },
+        {
+          "month": "2025-04",
+          "postings": 8
+        },
+        {
+          "month": "2025-05",
+          "postings": 6
+        },
+        {
+          "month": "2025-06",
+          "postings": 2
+        },
+        {
+          "month": "2025-07",
+          "postings": 6
+        },
+        {
+          "month": "2025-08",
+          "postings": 8
+        },
+        {
+          "month": "2025-09",
+          "postings": 7
+        },
+        {
+          "month": "2025-10",
+          "postings": 9
+        },
+        {
+          "month": "2025-11",
+          "postings": 7
+        },
+        {
+          "month": "2025-12",
+          "postings": 9
+        },
+        {
+          "month": "2026-01",
+          "postings": 6
+        },
+        {
+          "month": "2026-02",
+          "postings": 6
+        },
+        {
+          "month": "2026-03",
+          "postings": 25
+        },
+        {
+          "month": "2026-04",
+          "postings": 21
+        },
+        {
+          "month": "2026-05",
+          "postings": 38
+        },
+        {
+          "month": "2026-06",
+          "postings": 53
+        },
+        {
+          "month": "2026-07",
+          "postings": 91
+        },
+        {
+          "month": "2026-08",
+          "postings": 98
+        },
+        {
+          "month": "2026-09",
+          "postings": 179
+        },
+        {
+          "month": "2026-10",
+          "postings": 184
+        }
+      ]
+    },
+    {
+      "name": "ansible",
+      "category": "platform",
+      "postings": 1172,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 6
+        },
+        {
+          "month": "2025-02",
+          "postings": 6
+        },
+        {
+          "month": "2025-03",
+          "postings": 1
+        },
+        {
+          "month": "2025-04",
+          "postings": 6
+        },
+        {
+          "month": "2025-05",
+          "postings": 12
+        },
+        {
+          "month": "2025-06",
+          "postings": 3
+        },
+        {
+          "month": "2025-07",
+          "postings": 2
+        },
+        {
+          "month": "2025-08",
+          "postings": 7
+        },
+        {
+          "month": "2025-09",
+          "postings": 3
+        },
+        {
+          "month": "2025-10",
+          "postings": 6
+        },
+        {
+          "month": "2025-11",
+          "postings": 4
+        },
+        {
+          "month": "2025-12",
+          "postings": 9
+        },
+        {
+          "month": "2026-01",
+          "postings": 14
+        },
+        {
+          "month": "2026-02",
+          "postings": 13
+        },
+        {
+          "month": "2026-03",
+          "postings": 31
+        },
+        {
+          "month": "2026-04",
+          "postings": 24
+        },
+        {
+          "month": "2026-05",
+          "postings": 44
+        },
+        {
+          "month": "2026-06",
+          "postings": 84
+        },
+        {
+          "month": "2026-07",
+          "postings": 126
+        },
+        {
+          "month": "2026-08",
+          "postings": 183
+        },
+        {
+          "month": "2026-09",
+          "postings": 290
+        },
+        {
+          "month": "2026-10",
+          "postings": 298
+        }
+      ]
+    },
+    {
+      "name": "apache airflow",
+      "category": "data",
+      "postings": 106,
+      "monthly": [
+        {
+          "month": "2025-03",
+          "postings": 2
+        },
+        {
+          "month": "2025-08",
+          "postings": 1
+        },
+        {
+          "month": "2025-09",
+          "postings": 2
+        },
+        {
+          "month": "2025-11",
+          "postings": 1
+        },
+        {
+          "month": "2026-01",
+          "postings": 1
+        },
+        {
+          "month": "2026-02",
+          "postings": 2
+        },
+        {
+          "month": "2026-03",
+          "postings": 9
+        },
+        {
+          "month": "2026-04",
+          "postings": 6
+        },
+        {
+          "month": "2026-05",
+          "postings": 6
+        },
+        {
+          "month": "2026-06",
+          "postings": 4
+        },
+        {
+          "month": "2026-07",
+          "postings": 8
+        },
+        {
+          "month": "2026-08",
+          "postings": 14
+        },
+        {
+          "month": "2026-09",
+          "postings": 31
+        },
+        {
+          "month": "2026-10",
+          "postings": 19
+        }
+      ]
+    },
+    {
+      "name": "apache flink",
+      "category": "data",
+      "postings": 20,
+      "monthly": [
+        {
+          "month": "2025-06",
+          "postings": 1
+        },
+        {
+          "month": "2025-08",
+          "postings": 1
+        },
+        {
+          "month": "2025-10",
+          "postings": 3
+        },
+        {
+          "month": "2026-01",
+          "postings": 1
+        },
+        {
+          "month": "2026-02",
+          "postings": 1
+        },
+        {
+          "month": "2026-03",
+          "postings": 1
+        },
+        {
+          "month": "2026-05",
+          "postings": 1
+        },
+        {
+          "month": "2026-07",
+          "postings": 1
+        },
+        {
+          "month": "2026-08",
+          "postings": 3
+        },
+        {
+          "month": "2026-09",
+          "postings": 5
+        },
+        {
+          "month": "2026-10",
+          "postings": 2
+        }
+      ]
+    },
+    {
+      "name": "apache kafka",
+      "category": "data",
+      "postings": 131,
+      "monthly": [
+        {
+          "month": "2025-05",
+          "postings": 1
+        },
+        {
+          "month": "2025-07",
+          "postings": 1
+        },
+        {
+          "month": "2025-08",
+          "postings": 1
+        },
+        {
+          "month": "2025-10",
+          "postings": 1
+        },
+        {
+          "month": "2025-11",
+          "postings": 1
+        },
+        {
+          "month": "2025-12",
+          "postings": 1
+        },
+        {
+          "month": "2026-02",
+          "postings": 3
+        },
+        {
+          "month": "2026-03",
+          "postings": 5
+        },
+        {
+          "month": "2026-04",
+          "postings": 3
+        },
+        {
+          "month": "2026-05",
+          "postings": 2
+        },
+        {
+          "month": "2026-06",
+          "postings": 12
+        },
+        {
+          "month": "2026-07",
+          "postings": 19
+        },
+        {
+          "month": "2026-08",
+          "postings": 27
+        },
+        {
+          "month": "2026-09",
+          "postings": 29
+        },
+        {
+          "month": "2026-10",
+          "postings": 25
+        }
+      ]
+    },
+    {
+      "name": "apache spark",
+      "category": "data",
+      "postings": 333,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 2
+        },
+        {
+          "month": "2025-02",
+          "postings": 1
+        },
+        {
+          "month": "2025-03",
+          "postings": 2
+        },
+        {
+          "month": "2025-04",
+          "postings": 3
+        },
+        {
+          "month": "2025-05",
+          "postings": 1
+        },
+        {
+          "month": "2025-06",
+          "postings": 2
+        },
+        {
+          "month": "2025-07",
+          "postings": 2
+        },
+        {
+          "month": "2025-08",
+          "postings": 5
+        },
+        {
+          "month": "2025-09",
+          "postings": 4
+        },
+        {
+          "month": "2025-10",
+          "postings": 5
+        },
+        {
+          "month": "2025-11",
+          "postings": 4
+        },
+        {
+          "month": "2025-12",
+          "postings": 2
+        },
+        {
+          "month": "2026-01",
+          "postings": 1
+        },
+        {
+          "month": "2026-02",
+          "postings": 6
+        },
+        {
+          "month": "2026-03",
+          "postings": 11
+        },
+        {
+          "month": "2026-04",
+          "postings": 16
+        },
+        {
+          "month": "2026-05",
+          "postings": 11
+        },
+        {
+          "month": "2026-06",
+          "postings": 16
+        },
+        {
+          "month": "2026-07",
+          "postings": 31
+        },
+        {
+          "month": "2026-08",
+          "postings": 48
+        },
+        {
+          "month": "2026-09",
+          "postings": 75
+        },
+        {
+          "month": "2026-10",
+          "postings": 85
+        }
+      ]
+    },
+    {
+      "name": "aws",
+      "category": "cloud",
+      "postings": 8182,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 28
+        },
+        {
+          "month": "2025-02",
+          "postings": 25
+        },
+        {
+          "month": "2025-03",
+          "postings": 33
+        },
+        {
+          "month": "2025-04",
+          "postings": 84
+        },
+        {
+          "month": "2025-05",
+          "postings": 110
+        },
+        {
+          "month": "2025-06",
+          "postings": 66
+        },
+        {
+          "month": "2025-07",
+          "postings": 58
+        },
+        {
+          "month": "2025-08",
+          "postings": 79
+        },
+        {
+          "month": "2025-09",
+          "postings": 63
+        },
+        {
+          "month": "2025-10",
+          "postings": 116
+        },
+        {
+          "month": "2025-11",
+          "postings": 78
+        },
+        {
+          "month": "2025-12",
+          "postings": 81
+        },
+        {
+          "month": "2026-01",
+          "postings": 127
+        },
+        {
+          "month": "2026-02",
+          "postings": 154
+        },
+        {
+          "month": "2026-03",
+          "postings": 223
+        },
+        {
+          "month": "2026-04",
+          "postings": 271
+        },
+        {
+          "month": "2026-05",
+          "postings": 385
+        },
+        {
+          "month": "2026-06",
+          "postings": 546
+        },
+        {
+          "month": "2026-07",
+          "postings": 837
+        },
+        {
+          "month": "2026-08",
+          "postings": 1132
+        },
+        {
+          "month": "2026-09",
+          "postings": 1734
+        },
+        {
+          "month": "2026-10",
+          "postings": 1952
+        }
+      ]
+    },
+    {
+      "name": "aws lambda",
+      "category": "cloud",
+      "postings": 673,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 1
+        },
+        {
+          "month": "2025-02",
+          "postings": 1
+        },
+        {
+          "month": "2025-03",
+          "postings": 1
+        },
+        {
+          "month": "2025-04",
+          "postings": 9
+        },
+        {
+          "month": "2025-05",
+          "postings": 10
+        },
+        {
+          "month": "2025-06",
+          "postings": 5
+        },
+        {
+          "month": "2025-07",
+          "postings": 4
+        },
+        {
+          "month": "2025-08",
+          "postings": 2
+        },
+        {
+          "month": "2025-09",
+          "postings": 4
+        },
+        {
+          "month": "2025-10",
+          "postings": 8
+        },
+        {
+          "month": "2025-11",
+          "postings": 5
+        },
+        {
+          "month": "2025-12",
+          "postings": 5
+        },
+        {
+          "month": "2026-01",
+          "postings": 8
+        },
+        {
+          "month": "2026-02",
+          "postings": 12
+        },
+        {
+          "month": "2026-03",
+          "postings": 13
+        },
+        {
+          "month": "2026-04",
+          "postings": 12
+        },
+        {
+          "month": "2026-05",
+          "postings": 31
+        },
+        {
+          "month": "2026-06",
+          "postings": 36
+        },
+        {
+          "month": "2026-07",
+          "postings": 86
+        },
+        {
+          "month": "2026-08",
+          "postings": 91
+        },
+        {
+          "month": "2026-09",
+          "postings": 160
+        },
+        {
+          "month": "2026-10",
+          "postings": 169
+        }
+      ]
+    },
+    {
+      "name": "azure",
+      "category": "cloud",
+      "postings": 5128,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 17
+        },
+        {
+          "month": "2025-02",
+          "postings": 21
+        },
+        {
+          "month": "2025-03",
+          "postings": 18
+        },
+        {
+          "month": "2025-04",
+          "postings": 45
+        },
+        {
+          "month": "2025-05",
+          "postings": 108
+        },
+        {
+          "month": "2025-06",
+          "postings": 28
+        },
+        {
+          "month": "2025-07",
+          "postings": 40
+        },
+        {
+          "month": "2025-08",
+          "postings": 39
+        },
+        {
+          "month": "2025-09",
+          "postings": 29
+        },
+        {
+          "month": "2025-10",
+          "postings": 65
+        },
+        {
+          "month": "2025-11",
+          "postings": 42
+        },
+        {
+          "month": "2025-12",
+          "postings": 60
+        },
+        {
+          "month": "2026-01",
+          "postings": 68
+        },
+        {
+          "month": "2026-02",
+          "postings": 84
+        },
+        {
+          "month": "2026-03",
+          "postings": 115
+        },
+        {
+          "month": "2026-04",
+          "postings": 140
+        },
+        {
+          "month": "2026-05",
+          "postings": 197
+        },
+        {
+          "month": "2026-06",
+          "postings": 342
+        },
+        {
+          "month": "2026-07",
+          "postings": 481
+        },
+        {
+          "month": "2026-08",
+          "postings": 695
+        },
+        {
+          "month": "2026-09",
+          "postings": 1115
+        },
+        {
+          "month": "2026-10",
+          "postings": 1379
+        }
+      ]
+    },
+    {
+      "name": "bash",
+      "category": "languages",
+      "postings": 1531,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 4
+        },
+        {
+          "month": "2025-02",
+          "postings": 3
+        },
+        {
+          "month": "2025-03",
+          "postings": 6
+        },
+        {
+          "month": "2025-04",
+          "postings": 9
+        },
+        {
+          "month": "2025-05",
+          "postings": 19
+        },
+        {
+          "month": "2025-06",
+          "postings": 2
+        },
+        {
+          "month": "2025-07",
+          "postings": 9
+        },
+        {
+          "month": "2025-08",
+          "postings": 12
+        },
+        {
+          "month": "2025-09",
+          "postings": 6
+        },
+        {
+          "month": "2025-10",
+          "postings": 11
+        },
+        {
+          "month": "2025-11",
+          "postings": 10
+        },
+        {
+          "month": "2025-12",
+          "postings": 23
+        },
+        {
+          "month": "2026-01",
+          "postings": 17
+        },
+        {
+          "month": "2026-02",
+          "postings": 24
+        },
+        {
+          "month": "2026-03",
+          "postings": 48
+        },
+        {
+          "month": "2026-04",
+          "postings": 46
+        },
+        {
+          "month": "2026-05",
+          "postings": 65
+        },
+        {
+          "month": "2026-06",
+          "postings": 115
+        },
+        {
+          "month": "2026-07",
+          "postings": 119
+        },
+        {
+          "month": "2026-08",
+          "postings": 216
+        },
+        {
+          "month": "2026-09",
+          "postings": 355
+        },
+        {
+          "month": "2026-10",
+          "postings": 412
+        }
+      ]
+    },
+    {
+      "name": "bigquery",
+      "category": "data",
+      "postings": 626,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 1
+        },
+        {
+          "month": "2025-02",
+          "postings": 1
+        },
+        {
+          "month": "2025-03",
+          "postings": 2
+        },
+        {
+          "month": "2025-04",
+          "postings": 2
+        },
+        {
+          "month": "2025-05",
+          "postings": 1
+        },
+        {
+          "month": "2025-06",
+          "postings": 2
+        },
+        {
+          "month": "2025-07",
+          "postings": 4
+        },
+        {
+          "month": "2025-08",
+          "postings": 7
+        },
+        {
+          "month": "2025-09",
+          "postings": 1
+        },
+        {
+          "month": "2025-10",
+          "postings": 5
+        },
+        {
+          "month": "2025-11",
+          "postings": 9
+        },
+        {
+          "month": "2025-12",
+          "postings": 2
+        },
+        {
+          "month": "2026-01",
+          "postings": 5
+        },
+        {
+          "month": "2026-02",
+          "postings": 10
+        },
+        {
+          "month": "2026-03",
+          "postings": 25
+        },
+        {
+          "month": "2026-04",
+          "postings": 8
+        },
+        {
+          "month": "2026-05",
+          "postings": 25
+        },
+        {
+          "month": "2026-06",
+          "postings": 54
+        },
+        {
+          "month": "2026-07",
+          "postings": 57
+        },
+        {
+          "month": "2026-08",
+          "postings": 95
+        },
+        {
+          "month": "2026-09",
+          "postings": 157
+        },
+        {
+          "month": "2026-10",
+          "postings": 153
+        }
+      ]
+    },
+    {
+      "name": "c#",
+      "category": "languages",
+      "postings": 1416,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 3
+        },
+        {
+          "month": "2025-02",
+          "postings": 6
+        },
+        {
+          "month": "2025-03",
+          "postings": 3
+        },
+        {
+          "month": "2025-04",
+          "postings": 13
+        },
+        {
+          "month": "2025-05",
+          "postings": 17
+        },
+        {
+          "month": "2025-06",
+          "postings": 7
+        },
+        {
+          "month": "2025-07",
+          "postings": 10
+        },
+        {
+          "month": "2025-08",
+          "postings": 16
+        },
+        {
+          "month": "2025-09",
+          "postings": 3
+        },
+        {
+          "month": "2025-10",
+          "postings": 16
+        },
+        {
+          "month": "2025-11",
+          "postings": 8
+        },
+        {
+          "month": "2025-12",
+          "postings": 14
+        },
+        {
+          "month": "2026-01",
+          "postings": 10
+        },
+        {
+          "month": "2026-02",
+          "postings": 8
+        },
+        {
+          "month": "2026-03",
+          "postings": 40
+        },
+        {
+          "month": "2026-04",
+          "postings": 46
+        },
+        {
+          "month": "2026-05",
+          "postings": 46
+        },
+        {
+          "month": "2026-06",
+          "postings": 97
+        },
+        {
+          "month": "2026-07",
+          "postings": 172
+        },
+        {
+          "month": "2026-08",
+          "postings": 193
+        },
+        {
+          "month": "2026-09",
+          "postings": 336
+        },
+        {
+          "month": "2026-10",
+          "postings": 352
+        }
+      ]
+    },
+    {
+      "name": "c++",
+      "category": "languages",
+      "postings": 3908,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 16
+        },
+        {
+          "month": "2025-02",
+          "postings": 13
+        },
+        {
+          "month": "2025-03",
+          "postings": 20
+        },
+        {
+          "month": "2025-04",
+          "postings": 25
+        },
+        {
+          "month": "2025-05",
+          "postings": 44
+        },
+        {
+          "month": "2025-06",
+          "postings": 26
+        },
+        {
+          "month": "2025-07",
+          "postings": 35
+        },
+        {
+          "month": "2025-08",
+          "postings": 48
+        },
+        {
+          "month": "2025-09",
+          "postings": 40
+        },
+        {
+          "month": "2025-10",
+          "postings": 56
+        },
+        {
+          "month": "2025-11",
+          "postings": 35
+        },
+        {
+          "month": "2025-12",
+          "postings": 55
+        },
+        {
+          "month": "2026-01",
+          "postings": 62
+        },
+        {
+          "month": "2026-02",
+          "postings": 63
+        },
+        {
+          "month": "2026-03",
+          "postings": 147
+        },
+        {
+          "month": "2026-04",
+          "postings": 130
+        },
+        {
+          "month": "2026-05",
+          "postings": 200
+        },
+        {
+          "month": "2026-06",
+          "postings": 308
+        },
+        {
+          "month": "2026-07",
+          "postings": 428
+        },
+        {
+          "month": "2026-08",
+          "postings": 612
+        },
+        {
+          "month": "2026-09",
+          "postings": 776
+        },
+        {
+          "month": "2026-10",
+          "postings": 769
+        }
+      ]
+    },
+    {
+      "name": "computer vision",
+      "category": "ml",
+      "postings": 1012,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 7
+        },
+        {
+          "month": "2025-02",
+          "postings": 6
+        },
+        {
+          "month": "2025-03",
+          "postings": 4
+        },
+        {
+          "month": "2025-04",
+          "postings": 6
+        },
+        {
+          "month": "2025-05",
+          "postings": 11
+        },
+        {
+          "month": "2025-06",
+          "postings": 4
+        },
+        {
+          "month": "2025-07",
+          "postings": 20
+        },
+        {
+          "month": "2025-08",
+          "postings": 14
+        },
+        {
+          "month": "2025-09",
+          "postings": 11
+        },
+        {
+          "month": "2025-10",
+          "postings": 20
+        },
+        {
+          "month": "2025-11",
+          "postings": 15
+        },
+        {
+          "month": "2025-12",
+          "postings": 20
+        },
+        {
+          "month": "2026-01",
+          "postings": 15
+        },
+        {
+          "month": "2026-02",
+          "postings": 31
+        },
+        {
+          "month": "2026-03",
+          "postings": 67
+        },
+        {
+          "month": "2026-04",
+          "postings": 49
+        },
+        {
+          "month": "2026-05",
+          "postings": 40
+        },
+        {
+          "month": "2026-06",
+          "postings": 75
+        },
+        {
+          "month": "2026-07",
+          "postings": 88
+        },
+        {
+          "month": "2026-08",
+          "postings": 125
+        },
+        {
+          "month": "2026-09",
+          "postings": 210
+        },
+        {
+          "month": "2026-10",
+          "postings": 174
+        }
+      ]
+    },
+    {
+      "name": "css",
+      "category": "web",
+      "postings": 1261,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 6
+        },
+        {
+          "month": "2025-02",
+          "postings": 4
+        },
+        {
+          "month": "2025-03",
+          "postings": 9
+        },
+        {
+          "month": "2025-04",
+          "postings": 16
+        },
+        {
+          "month": "2025-05",
+          "postings": 28
+        },
+        {
+          "month": "2025-06",
+          "postings": 11
+        },
+        {
+          "month": "2025-07",
+          "postings": 12
+        },
+        {
+          "month": "2025-08",
+          "postings": 15
+        },
+        {
+          "month": "2025-09",
+          "postings": 13
+        },
+        {
+          "month": "2025-10",
+          "postings": 12
+        },
+        {
+          "month": "2025-11",
+          "postings": 8
+        },
+        {
+          "month": "2025-12",
+          "postings": 17
+        },
+        {
+          "month": "2026-01",
+          "postings": 21
+        },
+        {
+          "month": "2026-02",
+          "postings": 17
+        },
+        {
+          "month": "2026-03",
+          "postings": 30
+        },
+        {
+          "month": "2026-04",
+          "postings": 53
+        },
+        {
+          "month": "2026-05",
+          "postings": 51
+        },
+        {
+          "month": "2026-06",
+          "postings": 92
+        },
+        {
+          "month": "2026-07",
+          "postings": 114
+        },
+        {
+          "month": "2026-08",
+          "postings": 164
+        },
+        {
+          "month": "2026-09",
+          "postings": 248
+        },
+        {
+          "month": "2026-10",
+          "postings": 320
+        }
+      ]
+    },
+    {
+      "name": "databricks",
+      "category": "data",
+      "postings": 1315,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 2
+        },
+        {
+          "month": "2025-02",
+          "postings": 4
+        },
+        {
+          "month": "2025-03",
+          "postings": 4
+        },
+        {
+          "month": "2025-04",
+          "postings": 8
+        },
+        {
+          "month": "2025-05",
+          "postings": 7
+        },
+        {
+          "month": "2025-06",
+          "postings": 6
+        },
+        {
+          "month": "2025-07",
+          "postings": 7
+        },
+        {
+          "month": "2025-08",
+          "postings": 8
+        },
+        {
+          "month": "2025-09",
+          "postings": 14
+        },
+        {
+          "month": "2025-10",
+          "postings": 21
+        },
+        {
+          "month": "2025-11",
+          "postings": 13
+        },
+        {
+          "month": "2025-12",
+          "postings": 11
+        },
+        {
+          "month": "2026-01",
+          "postings": 14
+        },
+        {
+          "month": "2026-02",
+          "postings": 16
+        },
+        {
+          "month": "2026-03",
+          "postings": 16
+        },
+        {
+          "month": "2026-04",
+          "postings": 24
+        },
+        {
+          "month": "2026-05",
+          "postings": 47
+        },
+        {
+          "month": "2026-06",
+          "postings": 73
+        },
+        {
+          "month": "2026-07",
+          "postings": 147
+        },
+        {
+          "month": "2026-08",
+          "postings": 189
+        },
+        {
+          "month": "2026-09",
+          "postings": 335
+        },
+        {
+          "month": "2026-10",
+          "postings": 349
+        }
+      ]
+    },
+    {
+      "name": "dbt",
+      "category": "data",
+      "postings": 1249,
+      "monthly": [
+        {
+          "month": "2025-02",
+          "postings": 3
+        },
+        {
+          "month": "2025-03",
+          "postings": 2
+        },
+        {
+          "month": "2025-04",
+          "postings": 31
+        },
+        {
+          "month": "2025-05",
+          "postings": 116
+        },
+        {
+          "month": "2025-06",
+          "postings": 11
+        },
+        {
+          "month": "2025-07",
+          "postings": 5
+        },
+        {
+          "month": "2025-08",
+          "postings": 6
+        },
+        {
+          "month": "2025-09",
+          "postings": 7
+        },
+        {
+          "month": "2025-10",
+          "postings": 11
+        },
+        {
+          "month": "2025-11",
+          "postings": 12
+        },
+        {
+          "month": "2025-12",
+          "postings": 7
+        },
+        {
+          "month": "2026-01",
+          "postings": 15
+        },
+        {
+          "month": "2026-02",
+          "postings": 15
+        },
+        {
+          "month": "2026-03",
+          "postings": 27
+        },
+        {
+          "month": "2026-04",
+          "postings": 23
+        },
+        {
+          "month": "2026-05",
+          "postings": 46
+        },
+        {
+          "month": "2026-06",
+          "postings": 89
+        },
+        {
+          "month": "2026-07",
+          "postings": 79
+        },
+        {
+          "month": "2026-08",
+          "postings": 135
+        },
+        {
+          "month": "2026-09",
+          "postings": 283
+        },
+        {
+          "month": "2026-10",
+          "postings": 326
+        }
+      ]
+    },
+    {
+      "name": "deep learning",
+      "category": "ml",
+      "postings": 773,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 4
+        },
+        {
+          "month": "2025-02",
+          "postings": 6
+        },
+        {
+          "month": "2025-03",
+          "postings": 3
+        },
+        {
+          "month": "2025-04",
+          "postings": 14
+        },
+        {
+          "month": "2025-05",
+          "postings": 6
+        },
+        {
+          "month": "2025-06",
+          "postings": 6
+        },
+        {
+          "month": "2025-07",
+          "postings": 18
+        },
+        {
+          "month": "2025-08",
+          "postings": 23
+        },
+        {
+          "month": "2025-09",
+          "postings": 9
+        },
+        {
+          "month": "2025-10",
+          "postings": 20
+        },
+        {
+          "month": "2025-11",
+          "postings": 18
+        },
+        {
+          "month": "2025-12",
+          "postings": 12
+        },
+        {
+          "month": "2026-01",
+          "postings": 12
+        },
+        {
+          "month": "2026-02",
+          "postings": 30
+        },
+        {
+          "month": "2026-03",
+          "postings": 30
+        },
+        {
+          "month": "2026-04",
+          "postings": 36
+        },
+        {
+          "month": "2026-05",
+          "postings": 39
+        },
+        {
+          "month": "2026-06",
+          "postings": 65
+        },
+        {
+          "month": "2026-07",
+          "postings": 70
+        },
+        {
+          "month": "2026-08",
+          "postings": 91
+        },
+        {
+          "month": "2026-09",
+          "postings": 141
+        },
+        {
+          "month": "2026-10",
+          "postings": 120
+        }
+      ]
+    },
+    {
+      "name": "django",
+      "category": "backend",
+      "postings": 306,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 3
+        },
+        {
+          "month": "2025-03",
+          "postings": 1
+        },
+        {
+          "month": "2025-04",
+          "postings": 1
+        },
+        {
+          "month": "2025-05",
+          "postings": 3
+        },
+        {
+          "month": "2025-06",
+          "postings": 9
+        },
+        {
+          "month": "2025-07",
+          "postings": 3
+        },
+        {
+          "month": "2025-08",
+          "postings": 4
+        },
+        {
+          "month": "2025-09",
+          "postings": 3
+        },
+        {
+          "month": "2025-10",
+          "postings": 10
+        },
+        {
+          "month": "2025-11",
+          "postings": 6
+        },
+        {
+          "month": "2025-12",
+          "postings": 3
+        },
+        {
+          "month": "2026-01",
+          "postings": 3
+        },
+        {
+          "month": "2026-02",
+          "postings": 7
+        },
+        {
+          "month": "2026-03",
+          "postings": 15
+        },
+        {
+          "month": "2026-04",
+          "postings": 16
+        },
+        {
+          "month": "2026-05",
+          "postings": 18
+        },
+        {
+          "month": "2026-06",
+          "postings": 22
+        },
+        {
+          "month": "2026-07",
+          "postings": 29
+        },
+        {
+          "month": "2026-08",
+          "postings": 29
+        },
+        {
+          "month": "2026-09",
+          "postings": 54
+        },
+        {
+          "month": "2026-10",
+          "postings": 67
+        }
+      ]
+    },
+    {
+      "name": "docker",
+      "category": "platform",
+      "postings": 3014,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 11
+        },
+        {
+          "month": "2025-02",
+          "postings": 12
+        },
+        {
+          "month": "2025-03",
+          "postings": 16
+        },
+        {
+          "month": "2025-04",
+          "postings": 21
+        },
+        {
+          "month": "2025-05",
+          "postings": 19
+        },
+        {
+          "month": "2025-06",
+          "postings": 20
+        },
+        {
+          "month": "2025-07",
+          "postings": 29
+        },
+        {
+          "month": "2025-08",
+          "postings": 43
+        },
+        {
+          "month": "2025-09",
+          "postings": 29
+        },
+        {
+          "month": "2025-10",
+          "postings": 44
+        },
+        {
+          "month": "2025-11",
+          "postings": 29
+        },
+        {
+          "month": "2025-12",
+          "postings": 40
+        },
+        {
+          "month": "2026-01",
+          "postings": 49
+        },
+        {
+          "month": "2026-02",
+          "postings": 55
+        },
+        {
+          "month": "2026-03",
+          "postings": 98
+        },
+        {
+          "month": "2026-04",
+          "postings": 117
+        },
+        {
+          "month": "2026-05",
+          "postings": 139
+        },
+        {
+          "month": "2026-06",
+          "postings": 203
+        },
+        {
+          "month": "2026-07",
+          "postings": 327
+        },
+        {
+          "month": "2026-08",
+          "postings": 453
+        },
+        {
+          "month": "2026-09",
+          "postings": 610
+        },
+        {
+          "month": "2026-10",
+          "postings": 650
+        }
+      ]
+    },
+    {
+      "name": "duckdb",
+      "category": "databases",
+      "postings": 52,
+      "monthly": [
+        {
+          "month": "2025-07",
+          "postings": 2
+        },
+        {
+          "month": "2025-08",
+          "postings": 2
+        },
+        {
+          "month": "2025-09",
+          "postings": 3
+        },
+        {
+          "month": "2025-10",
+          "postings": 1
+        },
+        {
+          "month": "2026-02",
+          "postings": 1
+        },
+        {
+          "month": "2026-04",
+          "postings": 2
+        },
+        {
+          "month": "2026-06",
+          "postings": 5
+        },
+        {
+          "month": "2026-07",
+          "postings": 7
+        },
+        {
+          "month": "2026-08",
+          "postings": 10
+        },
+        {
+          "month": "2026-09",
+          "postings": 10
+        },
+        {
+          "month": "2026-10",
+          "postings": 9
+        }
+      ]
+    },
+    {
+      "name": "elasticsearch",
+      "category": "databases",
+      "postings": 387,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 2
+        },
+        {
+          "month": "2025-02",
+          "postings": 1
+        },
+        {
+          "month": "2025-03",
+          "postings": 1
+        },
+        {
+          "month": "2025-04",
+          "postings": 4
+        },
+        {
+          "month": "2025-05",
+          "postings": 8
+        },
+        {
+          "month": "2025-06",
+          "postings": 7
+        },
+        {
+          "month": "2025-07",
+          "postings": 4
+        },
+        {
+          "month": "2025-08",
+          "postings": 2
+        },
+        {
+          "month": "2025-09",
+          "postings": 5
+        },
+        {
+          "month": "2025-10",
+          "postings": 7
+        },
+        {
+          "month": "2025-11",
+          "postings": 3
+        },
+        {
+          "month": "2025-12",
+          "postings": 4
+        },
+        {
+          "month": "2026-01",
+          "postings": 5
+        },
+        {
+          "month": "2026-02",
+          "postings": 5
+        },
+        {
+          "month": "2026-03",
+          "postings": 5
+        },
+        {
+          "month": "2026-04",
+          "postings": 8
+        },
+        {
+          "month": "2026-05",
+          "postings": 16
+        },
+        {
+          "month": "2026-06",
+          "postings": 24
+        },
+        {
+          "month": "2026-07",
+          "postings": 48
+        },
+        {
+          "month": "2026-08",
+          "postings": 59
+        },
+        {
+          "month": "2026-09",
+          "postings": 74
+        },
+        {
+          "month": "2026-10",
+          "postings": 95
+        }
+      ]
+    },
+    {
+      "name": "fastapi",
+      "category": "backend",
+      "postings": 388,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 3
+        },
+        {
+          "month": "2025-03",
+          "postings": 3
+        },
+        {
+          "month": "2025-04",
+          "postings": 1
+        },
+        {
+          "month": "2025-05",
+          "postings": 6
+        },
+        {
+          "month": "2025-06",
+          "postings": 8
+        },
+        {
+          "month": "2025-07",
+          "postings": 3
+        },
+        {
+          "month": "2025-08",
+          "postings": 8
+        },
+        {
+          "month": "2025-09",
+          "postings": 4
+        },
+        {
+          "month": "2025-10",
+          "postings": 8
+        },
+        {
+          "month": "2025-11",
+          "postings": 5
+        },
+        {
+          "month": "2025-12",
+          "postings": 7
+        },
+        {
+          "month": "2026-01",
+          "postings": 7
+        },
+        {
+          "month": "2026-02",
+          "postings": 12
+        },
+        {
+          "month": "2026-03",
+          "postings": 13
+        },
+        {
+          "month": "2026-04",
+          "postings": 15
+        },
+        {
+          "month": "2026-05",
+          "postings": 25
+        },
+        {
+          "month": "2026-06",
+          "postings": 27
+        },
+        {
+          "month": "2026-07",
+          "postings": 36
+        },
+        {
+          "month": "2026-08",
+          "postings": 41
+        },
+        {
+          "month": "2026-09",
+          "postings": 76
+        },
+        {
+          "month": "2026-10",
+          "postings": 80
+        }
+      ]
+    },
+    {
+      "name": "flask",
+      "category": "backend",
+      "postings": 182,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 3
+        },
+        {
+          "month": "2025-03",
+          "postings": 3
+        },
+        {
+          "month": "2025-04",
+          "postings": 1
+        },
+        {
+          "month": "2025-05",
+          "postings": 3
+        },
+        {
+          "month": "2025-06",
+          "postings": 1
+        },
+        {
+          "month": "2025-07",
+          "postings": 3
+        },
+        {
+          "month": "2025-08",
+          "postings": 2
+        },
+        {
+          "month": "2025-09",
+          "postings": 1
+        },
+        {
+          "month": "2025-10",
+          "postings": 5
+        },
+        {
+          "month": "2025-12",
+          "postings": 3
+        },
+        {
+          "month": "2026-01",
+          "postings": 2
+        },
+        {
+          "month": "2026-02",
+          "postings": 5
+        },
+        {
+          "month": "2026-03",
+          "postings": 9
+        },
+        {
+          "month": "2026-04",
+          "postings": 9
+        },
+        {
+          "month": "2026-05",
+          "postings": 6
+        },
+        {
+          "month": "2026-06",
+          "postings": 11
+        },
+        {
+          "month": "2026-07",
+          "postings": 13
+        },
+        {
+          "month": "2026-08",
+          "postings": 16
+        },
+        {
+          "month": "2026-09",
+          "postings": 40
+        },
+        {
+          "month": "2026-10",
+          "postings": 46
+        }
+      ]
+    },
+    {
+      "name": "github actions",
+      "category": "platform",
+      "postings": 863,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 2
+        },
+        {
+          "month": "2025-02",
+          "postings": 1
+        },
+        {
+          "month": "2025-03",
+          "postings": 2
+        },
+        {
+          "month": "2025-04",
+          "postings": 10
+        },
+        {
+          "month": "2025-05",
+          "postings": 9
+        },
+        {
+          "month": "2025-06",
+          "postings": 6
+        },
+        {
+          "month": "2025-07",
+          "postings": 5
+        },
+        {
+          "month": "2025-08",
+          "postings": 9
+        },
+        {
+          "month": "2025-09",
+          "postings": 5
+        },
+        {
+          "month": "2025-10",
+          "postings": 11
+        },
+        {
+          "month": "2025-11",
+          "postings": 5
+        },
+        {
+          "month": "2025-12",
+          "postings": 9
+        },
+        {
+          "month": "2026-01",
+          "postings": 11
+        },
+        {
+          "month": "2026-02",
+          "postings": 11
+        },
+        {
+          "month": "2026-03",
+          "postings": 31
+        },
+        {
+          "month": "2026-04",
+          "postings": 20
+        },
+        {
+          "month": "2026-05",
+          "postings": 47
+        },
+        {
+          "month": "2026-06",
+          "postings": 67
+        },
+        {
+          "month": "2026-07",
+          "postings": 76
+        },
+        {
+          "month": "2026-08",
+          "postings": 113
+        },
+        {
+          "month": "2026-09",
+          "postings": 184
+        },
+        {
+          "month": "2026-10",
+          "postings": 229
+        }
+      ]
+    },
+    {
+      "name": "go",
+      "category": "languages",
+      "postings": 28023,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 217
+        },
+        {
+          "month": "2025-02",
+          "postings": 127
+        },
+        {
+          "month": "2025-03",
+          "postings": 108
+        },
+        {
+          "month": "2025-04",
+          "postings": 694
+        },
+        {
+          "month": "2025-05",
+          "postings": 1349
+        },
+        {
+          "month": "2025-06",
+          "postings": 228
+        },
+        {
+          "month": "2025-07",
+          "postings": 220
+        },
+        {
+          "month": "2025-08",
+          "postings": 203
+        },
+        {
+          "month": "2025-09",
+          "postings": 234
+        },
+        {
+          "month": "2025-10",
+          "postings": 289
+        },
+        {
+          "month": "2025-11",
+          "postings": 221
+        },
+        {
+          "month": "2025-12",
+          "postings": 232
+        },
+        {
+          "month": "2026-01",
+          "postings": 549
+        },
+        {
+          "month": "2026-02",
+          "postings": 474
+        },
+        {
+          "month": "2026-03",
+          "postings": 715
+        },
+        {
+          "month": "2026-04",
+          "postings": 757
+        },
+        {
+          "month": "2026-05",
+          "postings": 912
+        },
+        {
+          "month": "2026-06",
+          "postings": 1807
+        },
+        {
+          "month": "2026-07",
+          "postings": 2430
+        },
+        {
+          "month": "2026-08",
+          "postings": 3409
+        },
+        {
+          "month": "2026-09",
+          "postings": 5862
+        },
+        {
+          "month": "2026-10",
+          "postings": 6986
+        }
+      ]
+    },
+    {
+      "name": "google cloud",
+      "category": "cloud",
+      "postings": 3994,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 12
+        },
+        {
+          "month": "2025-02",
+          "postings": 10
+        },
+        {
+          "month": "2025-03",
+          "postings": 21
+        },
+        {
+          "month": "2025-04",
+          "postings": 52
+        },
+        {
+          "month": "2025-05",
+          "postings": 45
+        },
+        {
+          "month": "2025-06",
+          "postings": 20
+        },
+        {
+          "month": "2025-07",
+          "postings": 29
+        },
+        {
+          "month": "2025-08",
+          "postings": 37
+        },
+        {
+          "month": "2025-09",
+          "postings": 45
+        },
+        {
+          "month": "2025-10",
+          "postings": 59
+        },
+        {
+          "month": "2025-11",
+          "postings": 31
+        },
+        {
+          "month": "2025-12",
+          "postings": 39
+        },
+        {
+          "month": "2026-01",
+          "postings": 69
+        },
+        {
+          "month": "2026-02",
+          "postings": 78
+        },
+        {
+          "month": "2026-03",
+          "postings": 115
+        },
+        {
+          "month": "2026-04",
+          "postings": 123
+        },
+        {
+          "month": "2026-05",
+          "postings": 171
+        },
+        {
+          "month": "2026-06",
+          "postings": 292
+        },
+        {
+          "month": "2026-07",
+          "postings": 417
+        },
+        {
+          "month": "2026-08",
+          "postings": 543
+        },
+        {
+          "month": "2026-09",
+          "postings": 830
+        },
+        {
+          "month": "2026-10",
+          "postings": 956
+        }
+      ]
+    },
+    {
+      "name": "grafana",
+      "category": "observability",
+      "postings": 957,
+      "monthly": [
+        {
+          "month": "2025-03",
+          "postings": 4
+        },
+        {
+          "month": "2025-04",
+          "postings": 2
+        },
+        {
+          "month": "2025-05",
+          "postings": 6
+        },
+        {
+          "month": "2025-06",
+          "postings": 7
+        },
+        {
+          "month": "2025-07",
+          "postings": 9
+        },
+        {
+          "month": "2025-08",
+          "postings": 6
+        },
+        {
+          "month": "2025-09",
+          "postings": 4
+        },
+        {
+          "month": "2025-10",
+          "postings": 12
+        },
+        {
+          "month": "2025-11",
+          "postings": 8
+        },
+        {
+          "month": "2025-12",
+          "postings": 5
+        },
+        {
+          "month": "2026-01",
+          "postings": 12
+        },
+        {
+          "month": "2026-02",
+          "postings": 19
+        },
+        {
+          "month": "2026-03",
+          "postings": 25
+        },
+        {
+          "month": "2026-04",
+          "postings": 35
+        },
+        {
+          "month": "2026-05",
+          "postings": 37
+        },
+        {
+          "month": "2026-06",
+          "postings": 69
+        },
+        {
+          "month": "2026-07",
+          "postings": 105
+        },
+        {
+          "month": "2026-08",
+          "postings": 119
+        },
+        {
+          "month": "2026-09",
+          "postings": 226
+        },
+        {
+          "month": "2026-10",
+          "postings": 247
+        }
+      ]
+    },
+    {
+      "name": "graphql",
+      "category": "backend",
+      "postings": 622,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 2
+        },
+        {
+          "month": "2025-02",
+          "postings": 6
+        },
+        {
+          "month": "2025-03",
+          "postings": 5
+        },
+        {
+          "month": "2025-04",
+          "postings": 8
+        },
+        {
+          "month": "2025-05",
+          "postings": 6
+        },
+        {
+          "month": "2025-06",
+          "postings": 6
+        },
+        {
+          "month": "2025-07",
+          "postings": 4
+        },
+        {
+          "month": "2025-08",
+          "postings": 7
+        },
+        {
+          "month": "2025-09",
+          "postings": 4
+        },
+        {
+          "month": "2025-10",
+          "postings": 10
+        },
+        {
+          "month": "2025-11",
+          "postings": 9
+        },
+        {
+          "month": "2025-12",
+          "postings": 10
+        },
+        {
+          "month": "2026-01",
+          "postings": 17
+        },
+        {
+          "month": "2026-02",
+          "postings": 12
+        },
+        {
+          "month": "2026-03",
+          "postings": 25
+        },
+        {
+          "month": "2026-04",
+          "postings": 25
+        },
+        {
+          "month": "2026-05",
+          "postings": 40
+        },
+        {
+          "month": "2026-06",
+          "postings": 53
+        },
+        {
+          "month": "2026-07",
+          "postings": 74
+        },
+        {
+          "month": "2026-08",
+          "postings": 58
+        },
+        {
+          "month": "2026-09",
+          "postings": 123
+        },
+        {
+          "month": "2026-10",
+          "postings": 118
+        }
+      ]
+    },
+    {
+      "name": "grpc",
+      "category": "backend",
+      "postings": 341,
+      "monthly": [
+        {
+          "month": "2025-02",
+          "postings": 2
+        },
+        {
+          "month": "2025-03",
+          "postings": 1
+        },
+        {
+          "month": "2025-04",
+          "postings": 2
+        },
+        {
+          "month": "2025-05",
+          "postings": 2
+        },
+        {
+          "month": "2025-06",
+          "postings": 2
+        },
+        {
+          "month": "2025-07",
+          "postings": 6
+        },
+        {
+          "month": "2025-08",
+          "postings": 4
+        },
+        {
+          "month": "2025-09",
+          "postings": 1
+        },
+        {
+          "month": "2025-10",
+          "postings": 9
+        },
+        {
+          "month": "2025-12",
+          "postings": 5
+        },
+        {
+          "month": "2026-01",
+          "postings": 3
+        },
+        {
+          "month": "2026-02",
+          "postings": 3
+        },
+        {
+          "month": "2026-03",
+          "postings": 12
+        },
+        {
+          "month": "2026-04",
+          "postings": 13
+        },
+        {
+          "month": "2026-05",
+          "postings": 11
+        },
+        {
+          "month": "2026-06",
+          "postings": 31
+        },
+        {
+          "month": "2026-07",
+          "postings": 46
+        },
+        {
+          "month": "2026-08",
+          "postings": 45
+        },
+        {
+          "month": "2026-09",
+          "postings": 72
+        },
+        {
+          "month": "2026-10",
+          "postings": 71
+        }
+      ]
+    },
+    {
+      "name": "html",
+      "category": "web",
+      "postings": 1850,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 3
+        },
+        {
+          "month": "2025-02",
+          "postings": 6
+        },
+        {
+          "month": "2025-03",
+          "postings": 9
+        },
+        {
+          "month": "2025-04",
+          "postings": 14
+        },
+        {
+          "month": "2025-05",
+          "postings": 30
+        },
+        {
+          "month": "2025-06",
+          "postings": 20
+        },
+        {
+          "month": "2025-07",
+          "postings": 20
+        },
+        {
+          "month": "2025-08",
+          "postings": 11
+        },
+        {
+          "month": "2025-09",
+          "postings": 13
+        },
+        {
+          "month": "2025-10",
+          "postings": 19
+        },
+        {
+          "month": "2025-11",
+          "postings": 14
+        },
+        {
+          "month": "2025-12",
+          "postings": 22
+        },
+        {
+          "month": "2026-01",
+          "postings": 27
+        },
+        {
+          "month": "2026-02",
+          "postings": 44
+        },
+        {
+          "month": "2026-03",
+          "postings": 60
+        },
+        {
+          "month": "2026-04",
+          "postings": 63
+        },
+        {
+          "month": "2026-05",
+          "postings": 80
+        },
+        {
+          "month": "2026-06",
+          "postings": 118
+        },
+        {
+          "month": "2026-07",
+          "postings": 159
+        },
+        {
+          "month": "2026-08",
+          "postings": 228
+        },
+        {
+          "month": "2026-09",
+          "postings": 365
+        },
+        {
+          "month": "2026-10",
+          "postings": 525
+        }
+      ]
+    },
+    {
+      "name": "hugging face",
+      "category": "ml",
+      "postings": 185,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 1
+        },
+        {
+          "month": "2025-04",
+          "postings": 1
+        },
+        {
+          "month": "2025-05",
+          "postings": 1
+        },
+        {
+          "month": "2025-06",
+          "postings": 2
+        },
+        {
+          "month": "2025-07",
+          "postings": 2
+        },
+        {
+          "month": "2025-08",
+          "postings": 2
+        },
+        {
+          "month": "2025-09",
+          "postings": 1
+        },
+        {
+          "month": "2025-10",
+          "postings": 8
+        },
+        {
+          "month": "2025-12",
+          "postings": 2
+        },
+        {
+          "month": "2026-01",
+          "postings": 4
+        },
+        {
+          "month": "2026-02",
+          "postings": 6
+        },
+        {
+          "month": "2026-03",
+          "postings": 9
+        },
+        {
+          "month": "2026-04",
+          "postings": 4
+        },
+        {
+          "month": "2026-05",
+          "postings": 6
+        },
+        {
+          "month": "2026-06",
+          "postings": 5
+        },
+        {
+          "month": "2026-07",
+          "postings": 14
+        },
+        {
+          "month": "2026-08",
+          "postings": 35
+        },
+        {
+          "month": "2026-09",
+          "postings": 31
+        },
+        {
+          "month": "2026-10",
+          "postings": 51
+        }
+      ]
+    },
+    {
+      "name": "java",
+      "category": "languages",
+      "postings": 3049,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 9
+        },
+        {
+          "month": "2025-02",
+          "postings": 13
+        },
+        {
+          "month": "2025-03",
+          "postings": 13
+        },
+        {
+          "month": "2025-04",
+          "postings": 46
+        },
+        {
+          "month": "2025-05",
+          "postings": 54
+        },
+        {
+          "month": "2025-06",
+          "postings": 22
+        },
+        {
+          "month": "2025-07",
+          "postings": 22
+        },
+        {
+          "month": "2025-08",
+          "postings": 51
+        },
+        {
+          "month": "2025-09",
+          "postings": 29
+        },
+        {
+          "month": "2025-10",
+          "postings": 42
+        },
+        {
+          "month": "2025-11",
+          "postings": 34
+        },
+        {
+          "month": "2025-12",
+          "postings": 22
+        },
+        {
+          "month": "2026-01",
+          "postings": 38
+        },
+        {
+          "month": "2026-02",
+          "postings": 43
+        },
+        {
+          "month": "2026-03",
+          "postings": 84
+        },
+        {
+          "month": "2026-04",
+          "postings": 100
+        },
+        {
+          "month": "2026-05",
+          "postings": 127
+        },
+        {
+          "month": "2026-06",
+          "postings": 191
+        },
+        {
+          "month": "2026-07",
+          "postings": 321
+        },
+        {
+          "month": "2026-08",
+          "postings": 419
+        },
+        {
+          "month": "2026-09",
+          "postings": 666
+        },
+        {
+          "month": "2026-10",
+          "postings": 703
+        }
+      ]
+    },
+    {
+      "name": "javascript",
+      "category": "languages",
+      "postings": 4068,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 16
+        },
+        {
+          "month": "2025-02",
+          "postings": 26
+        },
+        {
+          "month": "2025-03",
+          "postings": 23
+        },
+        {
+          "month": "2025-04",
+          "postings": 34
+        },
+        {
+          "month": "2025-05",
+          "postings": 44
+        },
+        {
+          "month": "2025-06",
+          "postings": 33
+        },
+        {
+          "month": "2025-07",
+          "postings": 41
+        },
+        {
+          "month": "2025-08",
+          "postings": 54
+        },
+        {
+          "month": "2025-09",
+          "postings": 41
+        },
+        {
+          "month": "2025-10",
+          "postings": 79
+        },
+        {
+          "month": "2025-11",
+          "postings": 47
+        },
+        {
+          "month": "2025-12",
+          "postings": 59
+        },
+        {
+          "month": "2026-01",
+          "postings": 76
+        },
+        {
+          "month": "2026-02",
+          "postings": 84
+        },
+        {
+          "month": "2026-03",
+          "postings": 138
+        },
+        {
+          "month": "2026-04",
+          "postings": 133
+        },
+        {
+          "month": "2026-05",
+          "postings": 185
+        },
+        {
+          "month": "2026-06",
+          "postings": 269
+        },
+        {
+          "month": "2026-07",
+          "postings": 408
+        },
+        {
+          "month": "2026-08",
+          "postings": 514
+        },
+        {
+          "month": "2026-09",
+          "postings": 825
+        },
+        {
+          "month": "2026-10",
+          "postings": 939
+        }
+      ]
+    },
+    {
+      "name": "jenkins",
+      "category": "platform",
+      "postings": 1010,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 2
+        },
+        {
+          "month": "2025-02",
+          "postings": 3
+        },
+        {
+          "month": "2025-03",
+          "postings": 3
+        },
+        {
+          "month": "2025-04",
+          "postings": 9
+        },
+        {
+          "month": "2025-05",
+          "postings": 117
+        },
+        {
+          "month": "2025-06",
+          "postings": 3
+        },
+        {
+          "month": "2025-07",
+          "postings": 4
+        },
+        {
+          "month": "2025-08",
+          "postings": 7
+        },
+        {
+          "month": "2025-09",
+          "postings": 5
+        },
+        {
+          "month": "2025-10",
+          "postings": 11
+        },
+        {
+          "month": "2025-11",
+          "postings": 5
+        },
+        {
+          "month": "2025-12",
+          "postings": 7
+        },
+        {
+          "month": "2026-01",
+          "postings": 25
+        },
+        {
+          "month": "2026-02",
+          "postings": 6
+        },
+        {
+          "month": "2026-03",
+          "postings": 30
+        },
+        {
+          "month": "2026-04",
+          "postings": 31
+        },
+        {
+          "month": "2026-05",
+          "postings": 42
+        },
+        {
+          "month": "2026-06",
+          "postings": 78
+        },
+        {
+          "month": "2026-07",
+          "postings": 66
+        },
+        {
+          "month": "2026-08",
+          "postings": 138
+        },
+        {
+          "month": "2026-09",
+          "postings": 206
+        },
+        {
+          "month": "2026-10",
+          "postings": 212
+        }
+      ]
+    },
+    {
+      "name": "kubernetes",
+      "category": "platform",
+      "postings": 4537,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 15
+        },
+        {
+          "month": "2025-02",
+          "postings": 16
+        },
+        {
+          "month": "2025-03",
+          "postings": 23
+        },
+        {
+          "month": "2025-04",
+          "postings": 24
+        },
+        {
+          "month": "2025-05",
+          "postings": 30
+        },
+        {
+          "month": "2025-06",
+          "postings": 32
+        },
+        {
+          "month": "2025-07",
+          "postings": 46
+        },
+        {
+          "month": "2025-08",
+          "postings": 54
+        },
+        {
+          "month": "2025-09",
+          "postings": 43
+        },
+        {
+          "month": "2025-10",
+          "postings": 67
+        },
+        {
+          "month": "2025-11",
+          "postings": 39
+        },
+        {
+          "month": "2025-12",
+          "postings": 48
+        },
+        {
+          "month": "2026-01",
+          "postings": 68
+        },
+        {
+          "month": "2026-02",
+          "postings": 86
+        },
+        {
+          "month": "2026-03",
+          "postings": 139
+        },
+        {
+          "month": "2026-04",
+          "postings": 177
+        },
+        {
+          "month": "2026-05",
+          "postings": 236
+        },
+        {
+          "month": "2026-06",
+          "postings": 322
+        },
+        {
+          "month": "2026-07",
+          "postings": 513
+        },
+        {
+          "month": "2026-08",
+          "postings": 644
+        },
+        {
+          "month": "2026-09",
+          "postings": 889
+        },
+        {
+          "month": "2026-10",
+          "postings": 1026
+        }
+      ]
+    },
+    {
+      "name": "large language models",
+      "category": "ml",
+      "postings": 4391,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 11
+        },
+        {
+          "month": "2025-02",
+          "postings": 10
+        },
+        {
+          "month": "2025-03",
+          "postings": 12
+        },
+        {
+          "month": "2025-04",
+          "postings": 20
+        },
+        {
+          "month": "2025-05",
+          "postings": 32
+        },
+        {
+          "month": "2025-06",
+          "postings": 32
+        },
+        {
+          "month": "2025-07",
+          "postings": 39
+        },
+        {
+          "month": "2025-08",
+          "postings": 35
+        },
+        {
+          "month": "2025-09",
+          "postings": 56
+        },
+        {
+          "month": "2025-10",
+          "postings": 58
+        },
+        {
+          "month": "2025-11",
+          "postings": 63
+        },
+        {
+          "month": "2025-12",
+          "postings": 38
+        },
+        {
+          "month": "2026-01",
+          "postings": 74
+        },
+        {
+          "month": "2026-02",
+          "postings": 70
+        },
+        {
+          "month": "2026-03",
+          "postings": 111
+        },
+        {
+          "month": "2026-04",
+          "postings": 142
+        },
+        {
+          "month": "2026-05",
+          "postings": 220
+        },
+        {
+          "month": "2026-06",
+          "postings": 315
+        },
+        {
+          "month": "2026-07",
+          "postings": 488
+        },
+        {
+          "month": "2026-08",
+          "postings": 636
+        },
+        {
+          "month": "2026-09",
+          "postings": 924
+        },
+        {
+          "month": "2026-10",
+          "postings": 1005
+        }
+      ]
+    },
+    {
+      "name": "machine learning",
+      "category": "ml",
+      "postings": 5252,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 32
+        },
+        {
+          "month": "2025-02",
+          "postings": 24
+        },
+        {
+          "month": "2025-03",
+          "postings": 24
+        },
+        {
+          "month": "2025-04",
+          "postings": 35
+        },
+        {
+          "month": "2025-05",
+          "postings": 59
+        },
+        {
+          "month": "2025-06",
+          "postings": 40
+        },
+        {
+          "month": "2025-07",
+          "postings": 45
+        },
+        {
+          "month": "2025-08",
+          "postings": 71
+        },
+        {
+          "month": "2025-09",
+          "postings": 53
+        },
+        {
+          "month": "2025-10",
+          "postings": 72
+        },
+        {
+          "month": "2025-11",
+          "postings": 62
+        },
+        {
+          "month": "2025-12",
+          "postings": 58
+        },
+        {
+          "month": "2026-01",
+          "postings": 81
+        },
+        {
+          "month": "2026-02",
+          "postings": 98
+        },
+        {
+          "month": "2026-03",
+          "postings": 163
+        },
+        {
+          "month": "2026-04",
+          "postings": 172
+        },
+        {
+          "month": "2026-05",
+          "postings": 201
+        },
+        {
+          "month": "2026-06",
+          "postings": 367
+        },
+        {
+          "month": "2026-07",
+          "postings": 519
+        },
+        {
+          "month": "2026-08",
+          "postings": 739
+        },
+        {
+          "month": "2026-09",
+          "postings": 1108
+        },
+        {
+          "month": "2026-10",
+          "postings": 1229
+        }
+      ]
+    },
+    {
+      "name": "mlops",
+      "category": "ml",
+      "postings": 589,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 2
+        },
+        {
+          "month": "2025-02",
+          "postings": 1
+        },
+        {
+          "month": "2025-03",
+          "postings": 1
+        },
+        {
+          "month": "2025-04",
+          "postings": 2
+        },
+        {
+          "month": "2025-05",
+          "postings": 2
+        },
+        {
+          "month": "2025-06",
+          "postings": 2
+        },
+        {
+          "month": "2025-07",
+          "postings": 5
+        },
+        {
+          "month": "2025-08",
+          "postings": 6
+        },
+        {
+          "month": "2025-09",
+          "postings": 5
+        },
+        {
+          "month": "2025-10",
+          "postings": 11
+        },
+        {
+          "month": "2025-11",
+          "postings": 11
+        },
+        {
+          "month": "2025-12",
+          "postings": 6
+        },
+        {
+          "month": "2026-01",
+          "postings": 7
+        },
+        {
+          "month": "2026-02",
+          "postings": 9
+        },
+        {
+          "month": "2026-03",
+          "postings": 21
+        },
+        {
+          "month": "2026-04",
+          "postings": 18
+        },
+        {
+          "month": "2026-05",
+          "postings": 26
+        },
+        {
+          "month": "2026-06",
+          "postings": 36
+        },
+        {
+          "month": "2026-07",
+          "postings": 50
+        },
+        {
+          "month": "2026-08",
+          "postings": 97
+        },
+        {
+          "month": "2026-09",
+          "postings": 133
+        },
+        {
+          "month": "2026-10",
+          "postings": 138
+        }
+      ]
+    },
+    {
+      "name": "mongodb",
+      "category": "databases",
+      "postings": 606,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 5
+        },
+        {
+          "month": "2025-02",
+          "postings": 4
+        },
+        {
+          "month": "2025-03",
+          "postings": 7
+        },
+        {
+          "month": "2025-04",
+          "postings": 7
+        },
+        {
+          "month": "2025-05",
+          "postings": 6
+        },
+        {
+          "month": "2025-06",
+          "postings": 1
+        },
+        {
+          "month": "2025-07",
+          "postings": 13
+        },
+        {
+          "month": "2025-08",
+          "postings": 12
+        },
+        {
+          "month": "2025-09",
+          "postings": 9
+        },
+        {
+          "month": "2025-10",
+          "postings": 10
+        },
+        {
+          "month": "2025-11",
+          "postings": 7
+        },
+        {
+          "month": "2025-12",
+          "postings": 11
+        },
+        {
+          "month": "2026-01",
+          "postings": 8
+        },
+        {
+          "month": "2026-02",
+          "postings": 20
+        },
+        {
+          "month": "2026-03",
+          "postings": 23
+        },
+        {
+          "month": "2026-04",
+          "postings": 21
+        },
+        {
+          "month": "2026-05",
+          "postings": 30
+        },
+        {
+          "month": "2026-06",
+          "postings": 32
+        },
+        {
+          "month": "2026-07",
+          "postings": 78
+        },
+        {
+          "month": "2026-08",
+          "postings": 83
+        },
+        {
+          "month": "2026-09",
+          "postings": 113
+        },
+        {
+          "month": "2026-10",
+          "postings": 106
+        }
+      ]
+    },
+    {
+      "name": "mysql",
+      "category": "databases",
+      "postings": 700,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 2
+        },
+        {
+          "month": "2025-02",
+          "postings": 4
+        },
+        {
+          "month": "2025-03",
+          "postings": 6
+        },
+        {
+          "month": "2025-04",
+          "postings": 8
+        },
+        {
+          "month": "2025-05",
+          "postings": 13
+        },
+        {
+          "month": "2025-06",
+          "postings": 6
+        },
+        {
+          "month": "2025-07",
+          "postings": 8
+        },
+        {
+          "month": "2025-08",
+          "postings": 5
+        },
+        {
+          "month": "2025-09",
+          "postings": 10
+        },
+        {
+          "month": "2025-10",
+          "postings": 4
+        },
+        {
+          "month": "2025-11",
+          "postings": 9
+        },
+        {
+          "month": "2025-12",
+          "postings": 10
+        },
+        {
+          "month": "2026-01",
+          "postings": 8
+        },
+        {
+          "month": "2026-02",
+          "postings": 16
+        },
+        {
+          "month": "2026-03",
+          "postings": 20
+        },
+        {
+          "month": "2026-04",
+          "postings": 19
+        },
+        {
+          "month": "2026-05",
+          "postings": 40
+        },
+        {
+          "month": "2026-06",
+          "postings": 52
+        },
+        {
+          "month": "2026-07",
+          "postings": 72
+        },
+        {
+          "month": "2026-08",
+          "postings": 89
+        },
+        {
+          "month": "2026-09",
+          "postings": 123
+        },
+        {
+          "month": "2026-10",
+          "postings": 176
+        }
+      ]
+    },
+    {
+      "name": "natural language processing",
+      "category": "ml",
+      "postings": 594,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 2
+        },
+        {
+          "month": "2025-02",
+          "postings": 6
+        },
+        {
+          "month": "2025-03",
+          "postings": 1
+        },
+        {
+          "month": "2025-04",
+          "postings": 11
+        },
+        {
+          "month": "2025-05",
+          "postings": 5
+        },
+        {
+          "month": "2025-06",
+          "postings": 5
+        },
+        {
+          "month": "2025-07",
+          "postings": 19
+        },
+        {
+          "month": "2025-08",
+          "postings": 9
+        },
+        {
+          "month": "2025-09",
+          "postings": 13
+        },
+        {
+          "month": "2025-10",
+          "postings": 10
+        },
+        {
+          "month": "2025-11",
+          "postings": 6
+        },
+        {
+          "month": "2025-12",
+          "postings": 10
+        },
+        {
+          "month": "2026-01",
+          "postings": 11
+        },
+        {
+          "month": "2026-02",
+          "postings": 8
+        },
+        {
+          "month": "2026-03",
+          "postings": 21
+        },
+        {
+          "month": "2026-04",
+          "postings": 18
+        },
+        {
+          "month": "2026-05",
+          "postings": 29
+        },
+        {
+          "month": "2026-06",
+          "postings": 38
+        },
+        {
+          "month": "2026-07",
+          "postings": 50
+        },
+        {
+          "month": "2026-08",
+          "postings": 74
+        },
+        {
+          "month": "2026-09",
+          "postings": 122
+        },
+        {
+          "month": "2026-10",
+          "postings": 126
+        }
+      ]
+    },
+    {
+      "name": "net",
+      "category": "backend",
+      "postings": 6280,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 27
+        },
+        {
+          "month": "2025-02",
+          "postings": 18
+        },
+        {
+          "month": "2025-03",
+          "postings": 21
+        },
+        {
+          "month": "2025-04",
+          "postings": 95
+        },
+        {
+          "month": "2025-05",
+          "postings": 630
+        },
+        {
+          "month": "2025-06",
+          "postings": 28
+        },
+        {
+          "month": "2025-07",
+          "postings": 104
+        },
+        {
+          "month": "2025-08",
+          "postings": 50
+        },
+        {
+          "month": "2025-09",
+          "postings": 65
+        },
+        {
+          "month": "2025-10",
+          "postings": 64
+        },
+        {
+          "month": "2025-11",
+          "postings": 43
+        },
+        {
+          "month": "2025-12",
+          "postings": 54
+        },
+        {
+          "month": "2026-01",
+          "postings": 80
+        },
+        {
+          "month": "2026-02",
+          "postings": 97
+        },
+        {
+          "month": "2026-03",
+          "postings": 104
+        },
+        {
+          "month": "2026-04",
+          "postings": 147
+        },
+        {
+          "month": "2026-05",
+          "postings": 206
+        },
+        {
+          "month": "2026-06",
+          "postings": 373
+        },
+        {
+          "month": "2026-07",
+          "postings": 515
+        },
+        {
+          "month": "2026-08",
+          "postings": 736
+        },
+        {
+          "month": "2026-09",
+          "postings": 1206
+        },
+        {
+          "month": "2026-10",
+          "postings": 1617
+        }
+      ]
+    },
+    {
+      "name": "next js",
+      "category": "web",
+      "postings": 540,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 4
+        },
+        {
+          "month": "2025-02",
+          "postings": 4
+        },
+        {
+          "month": "2025-03",
+          "postings": 4
+        },
+        {
+          "month": "2025-04",
+          "postings": 5
+        },
+        {
+          "month": "2025-05",
+          "postings": 8
+        },
+        {
+          "month": "2025-06",
+          "postings": 7
+        },
+        {
+          "month": "2025-07",
+          "postings": 14
+        },
+        {
+          "month": "2025-08",
+          "postings": 11
+        },
+        {
+          "month": "2025-09",
+          "postings": 16
+        },
+        {
+          "month": "2025-10",
+          "postings": 19
+        },
+        {
+          "month": "2025-11",
+          "postings": 5
+        },
+        {
+          "month": "2025-12",
+          "postings": 12
+        },
+        {
+          "month": "2026-01",
+          "postings": 16
+        },
+        {
+          "month": "2026-02",
+          "postings": 10
+        },
+        {
+          "month": "2026-03",
+          "postings": 25
+        },
+        {
+          "month": "2026-04",
+          "postings": 17
+        },
+        {
+          "month": "2026-05",
+          "postings": 23
+        },
+        {
+          "month": "2026-06",
+          "postings": 33
+        },
+        {
+          "month": "2026-07",
+          "postings": 52
+        },
+        {
+          "month": "2026-08",
+          "postings": 64
+        },
+        {
+          "month": "2026-09",
+          "postings": 95
+        },
+        {
+          "month": "2026-10",
+          "postings": 96
+        }
+      ]
+    },
+    {
+      "name": "node js",
+      "category": "web",
+      "postings": 1122,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 6
+        },
+        {
+          "month": "2025-02",
+          "postings": 7
+        },
+        {
+          "month": "2025-03",
+          "postings": 12
+        },
+        {
+          "month": "2025-04",
+          "postings": 11
+        },
+        {
+          "month": "2025-05",
+          "postings": 11
+        },
+        {
+          "month": "2025-06",
+          "postings": 8
+        },
+        {
+          "month": "2025-07",
+          "postings": 12
+        },
+        {
+          "month": "2025-08",
+          "postings": 20
+        },
+        {
+          "month": "2025-09",
+          "postings": 16
+        },
+        {
+          "month": "2025-10",
+          "postings": 24
+        },
+        {
+          "month": "2025-11",
+          "postings": 22
+        },
+        {
+          "month": "2025-12",
+          "postings": 24
+        },
+        {
+          "month": "2026-01",
+          "postings": 18
+        },
+        {
+          "month": "2026-02",
+          "postings": 31
+        },
+        {
+          "month": "2026-03",
+          "postings": 33
+        },
+        {
+          "month": "2026-04",
+          "postings": 43
+        },
+        {
+          "month": "2026-05",
+          "postings": 70
+        },
+        {
+          "month": "2026-06",
+          "postings": 67
+        },
+        {
+          "month": "2026-07",
+          "postings": 124
+        },
+        {
+          "month": "2026-08",
+          "postings": 132
+        },
+        {
+          "month": "2026-09",
+          "postings": 200
+        },
+        {
+          "month": "2026-10",
+          "postings": 231
+        }
+      ]
+    },
+    {
+      "name": "numpy",
+      "category": "data",
+      "postings": 299,
+      "monthly": [
+        {
+          "month": "2025-03",
+          "postings": 1
+        },
+        {
+          "month": "2025-04",
+          "postings": 1
+        },
+        {
+          "month": "2025-05",
+          "postings": 1
+        },
+        {
+          "month": "2025-06",
+          "postings": 5
+        },
+        {
+          "month": "2025-07",
+          "postings": 2
+        },
+        {
+          "month": "2025-08",
+          "postings": 3
+        },
+        {
+          "month": "2025-09",
+          "postings": 2
+        },
+        {
+          "month": "2025-10",
+          "postings": 5
+        },
+        {
+          "month": "2025-11",
+          "postings": 4
+        },
+        {
+          "month": "2025-12",
+          "postings": 1
+        },
+        {
+          "month": "2026-01",
+          "postings": 3
+        },
+        {
+          "month": "2026-02",
+          "postings": 5
+        },
+        {
+          "month": "2026-03",
+          "postings": 6
+        },
+        {
+          "month": "2026-04",
+          "postings": 7
+        },
+        {
+          "month": "2026-05",
+          "postings": 20
+        },
+        {
+          "month": "2026-06",
+          "postings": 21
+        },
+        {
+          "month": "2026-07",
+          "postings": 27
+        },
+        {
+          "month": "2026-08",
+          "postings": 37
+        },
+        {
+          "month": "2026-09",
+          "postings": 76
+        },
+        {
+          "month": "2026-10",
+          "postings": 72
+        }
+      ]
+    },
+    {
+      "name": "opentelemetry",
+      "category": "observability",
+      "postings": 327,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 1
+        },
+        {
+          "month": "2025-05",
+          "postings": 3
+        },
+        {
+          "month": "2025-06",
+          "postings": 3
+        },
+        {
+          "month": "2025-07",
+          "postings": 3
+        },
+        {
+          "month": "2025-08",
+          "postings": 3
+        },
+        {
+          "month": "2025-09",
+          "postings": 4
+        },
+        {
+          "month": "2025-10",
+          "postings": 6
+        },
+        {
+          "month": "2025-11",
+          "postings": 2
+        },
+        {
+          "month": "2025-12",
+          "postings": 3
+        },
+        {
+          "month": "2026-01",
+          "postings": 4
+        },
+        {
+          "month": "2026-02",
+          "postings": 9
+        },
+        {
+          "month": "2026-03",
+          "postings": 7
+        },
+        {
+          "month": "2026-04",
+          "postings": 11
+        },
+        {
+          "month": "2026-05",
+          "postings": 16
+        },
+        {
+          "month": "2026-06",
+          "postings": 28
+        },
+        {
+          "month": "2026-07",
+          "postings": 29
+        },
+        {
+          "month": "2026-08",
+          "postings": 55
+        },
+        {
+          "month": "2026-09",
+          "postings": 67
+        },
+        {
+          "month": "2026-10",
+          "postings": 73
+        }
+      ]
+    },
+    {
+      "name": "pandas",
+      "category": "data",
+      "postings": 452,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 2
+        },
+        {
+          "month": "2025-03",
+          "postings": 1
+        },
+        {
+          "month": "2025-04",
+          "postings": 2
+        },
+        {
+          "month": "2025-05",
+          "postings": 7
+        },
+        {
+          "month": "2025-06",
+          "postings": 3
+        },
+        {
+          "month": "2025-07",
+          "postings": 3
+        },
+        {
+          "month": "2025-08",
+          "postings": 3
+        },
+        {
+          "month": "2025-09",
+          "postings": 4
+        },
+        {
+          "month": "2025-10",
+          "postings": 6
+        },
+        {
+          "month": "2025-11",
+          "postings": 3
+        },
+        {
+          "month": "2025-12",
+          "postings": 2
+        },
+        {
+          "month": "2026-01",
+          "postings": 5
+        },
+        {
+          "month": "2026-02",
+          "postings": 7
+        },
+        {
+          "month": "2026-03",
+          "postings": 12
+        },
+        {
+          "month": "2026-04",
+          "postings": 14
+        },
+        {
+          "month": "2026-05",
+          "postings": 33
+        },
+        {
+          "month": "2026-06",
+          "postings": 27
+        },
+        {
+          "month": "2026-07",
+          "postings": 44
+        },
+        {
+          "month": "2026-08",
+          "postings": 64
+        },
+        {
+          "month": "2026-09",
+          "postings": 98
+        },
+        {
+          "month": "2026-10",
+          "postings": 112
+        }
+      ]
+    },
+    {
+      "name": "postgresql",
+      "category": "databases",
+      "postings": 2526,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 8
+        },
+        {
+          "month": "2025-02",
+          "postings": 13
+        },
+        {
+          "month": "2025-03",
+          "postings": 19
+        },
+        {
+          "month": "2025-04",
+          "postings": 32
+        },
+        {
+          "month": "2025-05",
+          "postings": 32
+        },
+        {
+          "month": "2025-06",
+          "postings": 24
+        },
+        {
+          "month": "2025-07",
+          "postings": 30
+        },
+        {
+          "month": "2025-08",
+          "postings": 28
+        },
+        {
+          "month": "2025-09",
+          "postings": 41
+        },
+        {
+          "month": "2025-10",
+          "postings": 42
+        },
+        {
+          "month": "2025-11",
+          "postings": 33
+        },
+        {
+          "month": "2025-12",
+          "postings": 28
+        },
+        {
+          "month": "2026-01",
+          "postings": 62
+        },
+        {
+          "month": "2026-02",
+          "postings": 63
+        },
+        {
+          "month": "2026-03",
+          "postings": 85
+        },
+        {
+          "month": "2026-04",
+          "postings": 91
+        },
+        {
+          "month": "2026-05",
+          "postings": 122
+        },
+        {
+          "month": "2026-06",
+          "postings": 171
+        },
+        {
+          "month": "2026-07",
+          "postings": 291
+        },
+        {
+          "month": "2026-08",
+          "postings": 327
+        },
+        {
+          "month": "2026-09",
+          "postings": 453
+        },
+        {
+          "month": "2026-10",
+          "postings": 531
+        }
+      ]
+    },
+    {
+      "name": "powershell",
+      "category": "languages",
+      "postings": 1253,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 5
+        },
+        {
+          "month": "2025-02",
+          "postings": 4
+        },
+        {
+          "month": "2025-03",
+          "postings": 4
+        },
+        {
+          "month": "2025-04",
+          "postings": 12
+        },
+        {
+          "month": "2025-05",
+          "postings": 28
+        },
+        {
+          "month": "2025-06",
+          "postings": 3
+        },
+        {
+          "month": "2025-07",
+          "postings": 7
+        },
+        {
+          "month": "2025-08",
+          "postings": 2
+        },
+        {
+          "month": "2025-09",
+          "postings": 4
+        },
+        {
+          "month": "2025-10",
+          "postings": 10
+        },
+        {
+          "month": "2025-11",
+          "postings": 10
+        },
+        {
+          "month": "2025-12",
+          "postings": 12
+        },
+        {
+          "month": "2026-01",
+          "postings": 11
+        },
+        {
+          "month": "2026-02",
+          "postings": 19
+        },
+        {
+          "month": "2026-03",
+          "postings": 30
+        },
+        {
+          "month": "2026-04",
+          "postings": 25
+        },
+        {
+          "month": "2026-05",
+          "postings": 32
+        },
+        {
+          "month": "2026-06",
+          "postings": 78
+        },
+        {
+          "month": "2026-07",
+          "postings": 91
+        },
+        {
+          "month": "2026-08",
+          "postings": 169
+        },
+        {
+          "month": "2026-09",
+          "postings": 309
+        },
+        {
+          "month": "2026-10",
+          "postings": 388
+        }
+      ]
+    },
+    {
+      "name": "prometheus",
+      "category": "observability",
+      "postings": 748,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 1
+        },
+        {
+          "month": "2025-02",
+          "postings": 1
+        },
+        {
+          "month": "2025-03",
+          "postings": 3
+        },
+        {
+          "month": "2025-04",
+          "postings": 1
+        },
+        {
+          "month": "2025-05",
+          "postings": 5
+        },
+        {
+          "month": "2025-06",
+          "postings": 6
+        },
+        {
+          "month": "2025-07",
+          "postings": 10
+        },
+        {
+          "month": "2025-08",
+          "postings": 4
+        },
+        {
+          "month": "2025-09",
+          "postings": 7
+        },
+        {
+          "month": "2025-10",
+          "postings": 10
+        },
+        {
+          "month": "2025-11",
+          "postings": 10
+        },
+        {
+          "month": "2025-12",
+          "postings": 5
+        },
+        {
+          "month": "2026-01",
+          "postings": 11
+        },
+        {
+          "month": "2026-02",
+          "postings": 21
+        },
+        {
+          "month": "2026-03",
+          "postings": 20
+        },
+        {
+          "month": "2026-04",
+          "postings": 33
+        },
+        {
+          "month": "2026-05",
+          "postings": 29
+        },
+        {
+          "month": "2026-06",
+          "postings": 53
+        },
+        {
+          "month": "2026-07",
+          "postings": 84
+        },
+        {
+          "month": "2026-08",
+          "postings": 91
+        },
+        {
+          "month": "2026-09",
+          "postings": 163
+        },
+        {
+          "month": "2026-10",
+          "postings": 180
+        }
+      ]
+    },
+    {
+      "name": "python",
+      "category": "languages",
+      "postings": 14768,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 46
+        },
+        {
+          "month": "2025-02",
+          "postings": 46
+        },
+        {
+          "month": "2025-03",
+          "postings": 51
+        },
+        {
+          "month": "2025-04",
+          "postings": 92
+        },
+        {
+          "month": "2025-05",
+          "postings": 124
+        },
+        {
+          "month": "2025-06",
+          "postings": 86
+        },
+        {
+          "month": "2025-07",
+          "postings": 105
+        },
+        {
+          "month": "2025-08",
+          "postings": 153
+        },
+        {
+          "month": "2025-09",
+          "postings": 126
+        },
+        {
+          "month": "2025-10",
+          "postings": 167
+        },
+        {
+          "month": "2025-11",
+          "postings": 157
+        },
+        {
+          "month": "2025-12",
+          "postings": 164
+        },
+        {
+          "month": "2026-01",
+          "postings": 221
+        },
+        {
+          "month": "2026-02",
+          "postings": 267
+        },
+        {
+          "month": "2026-03",
+          "postings": 444
+        },
+        {
+          "month": "2026-04",
+          "postings": 447
+        },
+        {
+          "month": "2026-05",
+          "postings": 689
+        },
+        {
+          "month": "2026-06",
+          "postings": 1061
+        },
+        {
+          "month": "2026-07",
+          "postings": 1498
+        },
+        {
+          "month": "2026-08",
+          "postings": 2159
+        },
+        {
+          "month": "2026-09",
+          "postings": 3227
+        },
+        {
+          "month": "2026-10",
+          "postings": 3438
+        }
+      ]
+    },
+    {
+      "name": "pytorch",
+      "category": "ml",
+      "postings": 1237,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 9
+        },
+        {
+          "month": "2025-02",
+          "postings": 8
+        },
+        {
+          "month": "2025-03",
+          "postings": 5
+        },
+        {
+          "month": "2025-04",
+          "postings": 14
+        },
+        {
+          "month": "2025-05",
+          "postings": 15
+        },
+        {
+          "month": "2025-06",
+          "postings": 11
+        },
+        {
+          "month": "2025-07",
+          "postings": 24
+        },
+        {
+          "month": "2025-08",
+          "postings": 30
+        },
+        {
+          "month": "2025-09",
+          "postings": 13
+        },
+        {
+          "month": "2025-10",
+          "postings": 32
+        },
+        {
+          "month": "2025-11",
+          "postings": 24
+        },
+        {
+          "month": "2025-12",
+          "postings": 15
+        },
+        {
+          "month": "2026-01",
+          "postings": 29
+        },
+        {
+          "month": "2026-02",
+          "postings": 29
+        },
+        {
+          "month": "2026-03",
+          "postings": 61
+        },
+        {
+          "month": "2026-04",
+          "postings": 59
+        },
+        {
+          "month": "2026-05",
+          "postings": 70
+        },
+        {
+          "month": "2026-06",
+          "postings": 81
+        },
+        {
+          "month": "2026-07",
+          "postings": 129
+        },
+        {
+          "month": "2026-08",
+          "postings": 159
+        },
+        {
+          "month": "2026-09",
+          "postings": 218
+        },
+        {
+          "month": "2026-10",
+          "postings": 202
+        }
+      ]
+    },
+    {
+      "name": "react",
+      "category": "web",
+      "postings": 4570,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 21
+        },
+        {
+          "month": "2025-02",
+          "postings": 26
+        },
+        {
+          "month": "2025-03",
+          "postings": 41
+        },
+        {
+          "month": "2025-04",
+          "postings": 119
+        },
+        {
+          "month": "2025-05",
+          "postings": 127
+        },
+        {
+          "month": "2025-06",
+          "postings": 87
+        },
+        {
+          "month": "2025-07",
+          "postings": 53
+        },
+        {
+          "month": "2025-08",
+          "postings": 47
+        },
+        {
+          "month": "2025-09",
+          "postings": 45
+        },
+        {
+          "month": "2025-10",
+          "postings": 107
+        },
+        {
+          "month": "2025-11",
+          "postings": 55
+        },
+        {
+          "month": "2025-12",
+          "postings": 85
+        },
+        {
+          "month": "2026-01",
+          "postings": 87
+        },
+        {
+          "month": "2026-02",
+          "postings": 87
+        },
+        {
+          "month": "2026-03",
+          "postings": 140
+        },
+        {
+          "month": "2026-04",
+          "postings": 133
+        },
+        {
+          "month": "2026-05",
+          "postings": 197
+        },
+        {
+          "month": "2026-06",
+          "postings": 317
+        },
+        {
+          "month": "2026-07",
+          "postings": 413
+        },
+        {
+          "month": "2026-08",
+          "postings": 541
+        },
+        {
+          "month": "2026-09",
+          "postings": 848
+        },
+        {
+          "month": "2026-10",
+          "postings": 994
+        }
+      ]
+    },
+    {
+      "name": "redis",
+      "category": "databases",
+      "postings": 645,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 2
+        },
+        {
+          "month": "2025-02",
+          "postings": 1
+        },
+        {
+          "month": "2025-03",
+          "postings": 2
+        },
+        {
+          "month": "2025-04",
+          "postings": 5
+        },
+        {
+          "month": "2025-05",
+          "postings": 4
+        },
+        {
+          "month": "2025-06",
+          "postings": 10
+        },
+        {
+          "month": "2025-07",
+          "postings": 9
+        },
+        {
+          "month": "2025-08",
+          "postings": 16
+        },
+        {
+          "month": "2025-09",
+          "postings": 11
+        },
+        {
+          "month": "2025-10",
+          "postings": 16
+        },
+        {
+          "month": "2025-11",
+          "postings": 7
+        },
+        {
+          "month": "2025-12",
+          "postings": 10
+        },
+        {
+          "month": "2026-01",
+          "postings": 13
+        },
+        {
+          "month": "2026-02",
+          "postings": 15
+        },
+        {
+          "month": "2026-03",
+          "postings": 23
+        },
+        {
+          "month": "2026-04",
+          "postings": 23
+        },
+        {
+          "month": "2026-05",
+          "postings": 28
+        },
+        {
+          "month": "2026-06",
+          "postings": 29
+        },
+        {
+          "month": "2026-07",
+          "postings": 64
+        },
+        {
+          "month": "2026-08",
+          "postings": 92
+        },
+        {
+          "month": "2026-09",
+          "postings": 119
+        },
+        {
+          "month": "2026-10",
+          "postings": 146
+        }
+      ]
+    },
+    {
+      "name": "redshift",
+      "category": "data",
+      "postings": 335,
+      "monthly": [
+        {
+          "month": "2025-03",
+          "postings": 3
+        },
+        {
+          "month": "2025-05",
+          "postings": 5
+        },
+        {
+          "month": "2025-06",
+          "postings": 1
+        },
+        {
+          "month": "2025-07",
+          "postings": 1
+        },
+        {
+          "month": "2025-08",
+          "postings": 3
+        },
+        {
+          "month": "2025-09",
+          "postings": 2
+        },
+        {
+          "month": "2025-10",
+          "postings": 3
+        },
+        {
+          "month": "2025-11",
+          "postings": 6
+        },
+        {
+          "month": "2025-12",
+          "postings": 3
+        },
+        {
+          "month": "2026-01",
+          "postings": 4
+        },
+        {
+          "month": "2026-02",
+          "postings": 2
+        },
+        {
+          "month": "2026-03",
+          "postings": 11
+        },
+        {
+          "month": "2026-04",
+          "postings": 9
+        },
+        {
+          "month": "2026-05",
+          "postings": 16
+        },
+        {
+          "month": "2026-06",
+          "postings": 33
+        },
+        {
+          "month": "2026-07",
+          "postings": 23
+        },
+        {
+          "month": "2026-08",
+          "postings": 58
+        },
+        {
+          "month": "2026-09",
+          "postings": 69
+        },
+        {
+          "month": "2026-10",
+          "postings": 83
+        }
+      ]
+    },
+    {
+      "name": "rest api",
+      "category": "backend",
+      "postings": 253,
+      "monthly": [
+        {
+          "month": "2025-03",
+          "postings": 1
+        },
+        {
+          "month": "2025-05",
+          "postings": 3
+        },
+        {
+          "month": "2025-06",
+          "postings": 1
+        },
+        {
+          "month": "2025-07",
+          "postings": 3
+        },
+        {
+          "month": "2025-08",
+          "postings": 2
+        },
+        {
+          "month": "2025-09",
+          "postings": 4
+        },
+        {
+          "month": "2025-10",
+          "postings": 3
+        },
+        {
+          "month": "2025-11",
+          "postings": 2
+        },
+        {
+          "month": "2025-12",
+          "postings": 2
+        },
+        {
+          "month": "2026-01",
+          "postings": 5
+        },
+        {
+          "month": "2026-02",
+          "postings": 6
+        },
+        {
+          "month": "2026-03",
+          "postings": 10
+        },
+        {
+          "month": "2026-04",
+          "postings": 5
+        },
+        {
+          "month": "2026-05",
+          "postings": 7
+        },
+        {
+          "month": "2026-06",
+          "postings": 21
+        },
+        {
+          "month": "2026-07",
+          "postings": 21
+        },
+        {
+          "month": "2026-08",
+          "postings": 38
+        },
+        {
+          "month": "2026-09",
+          "postings": 55
+        },
+        {
+          "month": "2026-10",
+          "postings": 64
+        }
+      ]
+    },
+    {
+      "name": "rust",
+      "category": "languages",
+      "postings": 1355,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 6
+        },
+        {
+          "month": "2025-02",
+          "postings": 5
+        },
+        {
+          "month": "2025-03",
+          "postings": 9
+        },
+        {
+          "month": "2025-04",
+          "postings": 20
+        },
+        {
+          "month": "2025-05",
+          "postings": 13
+        },
+        {
+          "month": "2025-06",
+          "postings": 13
+        },
+        {
+          "month": "2025-07",
+          "postings": 17
+        },
+        {
+          "month": "2025-08",
+          "postings": 17
+        },
+        {
+          "month": "2025-09",
+          "postings": 22
+        },
+        {
+          "month": "2025-10",
+          "postings": 34
+        },
+        {
+          "month": "2025-11",
+          "postings": 14
+        },
+        {
+          "month": "2025-12",
+          "postings": 21
+        },
+        {
+          "month": "2026-01",
+          "postings": 28
+        },
+        {
+          "month": "2026-02",
+          "postings": 29
+        },
+        {
+          "month": "2026-03",
+          "postings": 47
+        },
+        {
+          "month": "2026-04",
+          "postings": 62
+        },
+        {
+          "month": "2026-05",
+          "postings": 81
+        },
+        {
+          "month": "2026-06",
+          "postings": 110
+        },
+        {
+          "month": "2026-07",
+          "postings": 124
+        },
+        {
+          "month": "2026-08",
+          "postings": 204
+        },
+        {
+          "month": "2026-09",
+          "postings": 228
+        },
+        {
+          "month": "2026-10",
+          "postings": 251
+        }
+      ]
+    },
+    {
+      "name": "scala",
+      "category": "languages",
+      "postings": 347,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 1
+        },
+        {
+          "month": "2025-02",
+          "postings": 1
+        },
+        {
+          "month": "2025-03",
+          "postings": 4
+        },
+        {
+          "month": "2025-04",
+          "postings": 1
+        },
+        {
+          "month": "2025-05",
+          "postings": 6
+        },
+        {
+          "month": "2025-06",
+          "postings": 2
+        },
+        {
+          "month": "2025-07",
+          "postings": 4
+        },
+        {
+          "month": "2025-08",
+          "postings": 5
+        },
+        {
+          "month": "2025-09",
+          "postings": 4
+        },
+        {
+          "month": "2025-10",
+          "postings": 3
+        },
+        {
+          "month": "2025-11",
+          "postings": 4
+        },
+        {
+          "month": "2025-12",
+          "postings": 1
+        },
+        {
+          "month": "2026-01",
+          "postings": 1
+        },
+        {
+          "month": "2026-02",
+          "postings": 4
+        },
+        {
+          "month": "2026-03",
+          "postings": 12
+        },
+        {
+          "month": "2026-04",
+          "postings": 17
+        },
+        {
+          "month": "2026-05",
+          "postings": 9
+        },
+        {
+          "month": "2026-06",
+          "postings": 30
+        },
+        {
+          "month": "2026-07",
+          "postings": 42
+        },
+        {
+          "month": "2026-08",
+          "postings": 60
+        },
+        {
+          "month": "2026-09",
+          "postings": 71
+        },
+        {
+          "month": "2026-10",
+          "postings": 65
+        }
+      ]
+    },
+    {
+      "name": "scikit learn",
+      "category": "ml",
+      "postings": 316,
+      "monthly": [
+        {
+          "month": "2025-04",
+          "postings": 3
+        },
+        {
+          "month": "2025-05",
+          "postings": 2
+        },
+        {
+          "month": "2025-06",
+          "postings": 4
+        },
+        {
+          "month": "2025-07",
+          "postings": 3
+        },
+        {
+          "month": "2025-08",
+          "postings": 4
+        },
+        {
+          "month": "2025-10",
+          "postings": 2
+        },
+        {
+          "month": "2025-11",
+          "postings": 4
+        },
+        {
+          "month": "2026-01",
+          "postings": 5
+        },
+        {
+          "month": "2026-02",
+          "postings": 3
+        },
+        {
+          "month": "2026-03",
+          "postings": 8
+        },
+        {
+          "month": "2026-04",
+          "postings": 9
+        },
+        {
+          "month": "2026-05",
+          "postings": 21
+        },
+        {
+          "month": "2026-06",
+          "postings": 24
+        },
+        {
+          "month": "2026-07",
+          "postings": 37
+        },
+        {
+          "month": "2026-08",
+          "postings": 51
+        },
+        {
+          "month": "2026-09",
+          "postings": 68
+        },
+        {
+          "month": "2026-10",
+          "postings": 68
+        }
+      ]
+    },
+    {
+      "name": "snowflake",
+      "category": "data",
+      "postings": 1766,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 2
+        },
+        {
+          "month": "2025-02",
+          "postings": 1
+        },
+        {
+          "month": "2025-03",
+          "postings": 5
+        },
+        {
+          "month": "2025-04",
+          "postings": 7
+        },
+        {
+          "month": "2025-05",
+          "postings": 10
+        },
+        {
+          "month": "2025-06",
+          "postings": 7
+        },
+        {
+          "month": "2025-07",
+          "postings": 10
+        },
+        {
+          "month": "2025-08",
+          "postings": 10
+        },
+        {
+          "month": "2025-09",
+          "postings": 15
+        },
+        {
+          "month": "2025-10",
+          "postings": 12
+        },
+        {
+          "month": "2025-11",
+          "postings": 28
+        },
+        {
+          "month": "2025-12",
+          "postings": 12
+        },
+        {
+          "month": "2026-01",
+          "postings": 14
+        },
+        {
+          "month": "2026-02",
+          "postings": 23
+        },
+        {
+          "month": "2026-03",
+          "postings": 33
+        },
+        {
+          "month": "2026-04",
+          "postings": 51
+        },
+        {
+          "month": "2026-05",
+          "postings": 67
+        },
+        {
+          "month": "2026-06",
+          "postings": 109
+        },
+        {
+          "month": "2026-07",
+          "postings": 153
+        },
+        {
+          "month": "2026-08",
+          "postings": 262
+        },
+        {
+          "month": "2026-09",
+          "postings": 477
+        },
+        {
+          "month": "2026-10",
+          "postings": 458
+        }
+      ]
+    },
+    {
+      "name": "spring boot",
+      "category": "backend",
+      "postings": 327,
+      "monthly": [
+        {
+          "month": "2025-03",
+          "postings": 1
+        },
+        {
+          "month": "2025-04",
+          "postings": 10
+        },
+        {
+          "month": "2025-05",
+          "postings": 3
+        },
+        {
+          "month": "2025-06",
+          "postings": 3
+        },
+        {
+          "month": "2025-07",
+          "postings": 3
+        },
+        {
+          "month": "2025-10",
+          "postings": 11
+        },
+        {
+          "month": "2025-11",
+          "postings": 2
+        },
+        {
+          "month": "2025-12",
+          "postings": 3
+        },
+        {
+          "month": "2026-01",
+          "postings": 2
+        },
+        {
+          "month": "2026-02",
+          "postings": 5
+        },
+        {
+          "month": "2026-03",
+          "postings": 11
+        },
+        {
+          "month": "2026-04",
+          "postings": 7
+        },
+        {
+          "month": "2026-05",
+          "postings": 18
+        },
+        {
+          "month": "2026-06",
+          "postings": 19
+        },
+        {
+          "month": "2026-07",
+          "postings": 31
+        },
+        {
+          "month": "2026-08",
+          "postings": 55
+        },
+        {
+          "month": "2026-09",
+          "postings": 71
+        },
+        {
+          "month": "2026-10",
+          "postings": 72
+        }
+      ]
+    },
+    {
+      "name": "sql",
+      "category": "languages",
+      "postings": 8229,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 17
+        },
+        {
+          "month": "2025-02",
+          "postings": 18
+        },
+        {
+          "month": "2025-03",
+          "postings": 19
+        },
+        {
+          "month": "2025-04",
+          "postings": 63
+        },
+        {
+          "month": "2025-05",
+          "postings": 115
+        },
+        {
+          "month": "2025-06",
+          "postings": 38
+        },
+        {
+          "month": "2025-07",
+          "postings": 50
+        },
+        {
+          "month": "2025-08",
+          "postings": 49
+        },
+        {
+          "month": "2025-09",
+          "postings": 48
+        },
+        {
+          "month": "2025-10",
+          "postings": 59
+        },
+        {
+          "month": "2025-11",
+          "postings": 72
+        },
+        {
+          "month": "2025-12",
+          "postings": 51
+        },
+        {
+          "month": "2026-01",
+          "postings": 100
+        },
+        {
+          "month": "2026-02",
+          "postings": 106
+        },
+        {
+          "month": "2026-03",
+          "postings": 171
+        },
+        {
+          "month": "2026-04",
+          "postings": 184
+        },
+        {
+          "month": "2026-05",
+          "postings": 281
+        },
+        {
+          "month": "2026-06",
+          "postings": 563
+        },
+        {
+          "month": "2026-07",
+          "postings": 780
+        },
+        {
+          "month": "2026-08",
+          "postings": 1197
+        },
+        {
+          "month": "2026-09",
+          "postings": 1999
+        },
+        {
+          "month": "2026-10",
+          "postings": 2249
+        }
+      ]
+    },
+    {
+      "name": "sql server",
+      "category": "databases",
+      "postings": 872,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 1
+        },
+        {
+          "month": "2025-02",
+          "postings": 4
+        },
+        {
+          "month": "2025-03",
+          "postings": 3
+        },
+        {
+          "month": "2025-04",
+          "postings": 11
+        },
+        {
+          "month": "2025-05",
+          "postings": 31
+        },
+        {
+          "month": "2025-06",
+          "postings": 2
+        },
+        {
+          "month": "2025-07",
+          "postings": 6
+        },
+        {
+          "month": "2025-08",
+          "postings": 5
+        },
+        {
+          "month": "2025-09",
+          "postings": 8
+        },
+        {
+          "month": "2025-10",
+          "postings": 10
+        },
+        {
+          "month": "2025-11",
+          "postings": 6
+        },
+        {
+          "month": "2025-12",
+          "postings": 11
+        },
+        {
+          "month": "2026-01",
+          "postings": 5
+        },
+        {
+          "month": "2026-02",
+          "postings": 6
+        },
+        {
+          "month": "2026-03",
+          "postings": 22
+        },
+        {
+          "month": "2026-04",
+          "postings": 13
+        },
+        {
+          "month": "2026-05",
+          "postings": 24
+        },
+        {
+          "month": "2026-06",
+          "postings": 52
+        },
+        {
+          "month": "2026-07",
+          "postings": 91
+        },
+        {
+          "month": "2026-08",
+          "postings": 103
+        },
+        {
+          "month": "2026-09",
+          "postings": 212
+        },
+        {
+          "month": "2026-10",
+          "postings": 246
+        }
+      ]
+    },
+    {
+      "name": "tensorflow",
+      "category": "ml",
+      "postings": 597,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 5
+        },
+        {
+          "month": "2025-02",
+          "postings": 5
+        },
+        {
+          "month": "2025-03",
+          "postings": 1
+        },
+        {
+          "month": "2025-04",
+          "postings": 10
+        },
+        {
+          "month": "2025-05",
+          "postings": 8
+        },
+        {
+          "month": "2025-06",
+          "postings": 4
+        },
+        {
+          "month": "2025-07",
+          "postings": 11
+        },
+        {
+          "month": "2025-08",
+          "postings": 26
+        },
+        {
+          "month": "2025-09",
+          "postings": 6
+        },
+        {
+          "month": "2025-10",
+          "postings": 17
+        },
+        {
+          "month": "2025-11",
+          "postings": 13
+        },
+        {
+          "month": "2025-12",
+          "postings": 7
+        },
+        {
+          "month": "2026-01",
+          "postings": 13
+        },
+        {
+          "month": "2026-02",
+          "postings": 16
+        },
+        {
+          "month": "2026-03",
+          "postings": 26
+        },
+        {
+          "month": "2026-04",
+          "postings": 34
+        },
+        {
+          "month": "2026-05",
+          "postings": 25
+        },
+        {
+          "month": "2026-06",
+          "postings": 34
+        },
+        {
+          "month": "2026-07",
+          "postings": 57
+        },
+        {
+          "month": "2026-08",
+          "postings": 66
+        },
+        {
+          "month": "2026-09",
+          "postings": 107
+        },
+        {
+          "month": "2026-10",
+          "postings": 106
+        }
+      ]
+    },
+    {
+      "name": "terraform",
+      "category": "platform",
+      "postings": 2606,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 7
+        },
+        {
+          "month": "2025-02",
+          "postings": 5
+        },
+        {
+          "month": "2025-03",
+          "postings": 10
+        },
+        {
+          "month": "2025-04",
+          "postings": 8
+        },
+        {
+          "month": "2025-05",
+          "postings": 25
+        },
+        {
+          "month": "2025-06",
+          "postings": 18
+        },
+        {
+          "month": "2025-07",
+          "postings": 21
+        },
+        {
+          "month": "2025-08",
+          "postings": 27
+        },
+        {
+          "month": "2025-09",
+          "postings": 24
+        },
+        {
+          "month": "2025-10",
+          "postings": 42
+        },
+        {
+          "month": "2025-11",
+          "postings": 21
+        },
+        {
+          "month": "2025-12",
+          "postings": 28
+        },
+        {
+          "month": "2026-01",
+          "postings": 44
+        },
+        {
+          "month": "2026-02",
+          "postings": 34
+        },
+        {
+          "month": "2026-03",
+          "postings": 70
+        },
+        {
+          "month": "2026-04",
+          "postings": 86
+        },
+        {
+          "month": "2026-05",
+          "postings": 124
+        },
+        {
+          "month": "2026-06",
+          "postings": 187
+        },
+        {
+          "month": "2026-07",
+          "postings": 294
+        },
+        {
+          "month": "2026-08",
+          "postings": 375
+        },
+        {
+          "month": "2026-09",
+          "postings": 544
+        },
+        {
+          "month": "2026-10",
+          "postings": 612
+        }
+      ]
+    },
+    {
+      "name": "typescript",
+      "category": "languages",
+      "postings": 8070,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 25
+        },
+        {
+          "month": "2025-02",
+          "postings": 34
+        },
+        {
+          "month": "2025-03",
+          "postings": 37
+        },
+        {
+          "month": "2025-04",
+          "postings": 70
+        },
+        {
+          "month": "2025-05",
+          "postings": 85
+        },
+        {
+          "month": "2025-06",
+          "postings": 58
+        },
+        {
+          "month": "2025-07",
+          "postings": 64
+        },
+        {
+          "month": "2025-08",
+          "postings": 124
+        },
+        {
+          "month": "2025-09",
+          "postings": 82
+        },
+        {
+          "month": "2025-10",
+          "postings": 118
+        },
+        {
+          "month": "2025-11",
+          "postings": 89
+        },
+        {
+          "month": "2025-12",
+          "postings": 93
+        },
+        {
+          "month": "2026-01",
+          "postings": 123
+        },
+        {
+          "month": "2026-02",
+          "postings": 170
+        },
+        {
+          "month": "2026-03",
+          "postings": 241
+        },
+        {
+          "month": "2026-04",
+          "postings": 243
+        },
+        {
+          "month": "2026-05",
+          "postings": 393
+        },
+        {
+          "month": "2026-06",
+          "postings": 518
+        },
+        {
+          "month": "2026-07",
+          "postings": 798
+        },
+        {
+          "month": "2026-08",
+          "postings": 1104
+        },
+        {
+          "month": "2026-09",
+          "postings": 1744
+        },
+        {
+          "month": "2026-10",
+          "postings": 1857
+        }
+      ]
+    },
+    {
+      "name": "vue js",
+      "category": "web",
+      "postings": 154,
+      "monthly": [
+        {
+          "month": "2025-01",
+          "postings": 3
+        },
+        {
+          "month": "2025-02",
+          "postings": 1
+        },
+        {
+          "month": "2025-03",
+          "postings": 1
+        },
+        {
+          "month": "2025-04",
+          "postings": 3
+        },
+        {
+          "month": "2025-05",
+          "postings": 4
+        },
+        {
+          "month": "2025-06",
+          "postings": 3
+        },
+        {
+          "month": "2025-07",
+          "postings": 1
+        },
+        {
+          "month": "2025-08",
+          "postings": 1
+        },
+        {
+          "month": "2025-10",
+          "postings": 3
+        },
+        {
+          "month": "2025-11",
+          "postings": 3
+        },
+        {
+          "month": "2025-12",
+          "postings": 3
+        },
+        {
+          "month": "2026-01",
+          "postings": 1
+        },
+        {
+          "month": "2026-02",
+          "postings": 2
+        },
+        {
+          "month": "2026-03",
+          "postings": 7
+        },
+        {
+          "month": "2026-04",
+          "postings": 8
+        },
+        {
+          "month": "2026-05",
+          "postings": 6
+        },
+        {
+          "month": "2026-06",
+          "postings": 11
+        },
+        {
+          "month": "2026-07",
+          "postings": 13
+        },
+        {
+          "month": "2026-08",
+          "postings": 17
+        },
+        {
+          "month": "2026-09",
+          "postings": 35
+        },
+        {
+          "month": "2026-10",
+          "postings": 28
+        }
+      ]
+    }
+  ],
+  "evidenceUrl": "https://github.com/Daniel21b/Job-Market-Analytics/blob/main/docs/BENCHMARK_2026-10-29.md",
+  "limitations": [
+    "Verified aggregate snapshot, not a live job feed.",
+    "Convenience sample; monthly source dates do not measure market-wide hiring growth.",
+    "Country-only location; no city, salary or role-family breakdown is inferred.",
+    "Skills overlap across postings; skill counts cannot be summed to count distinct jobs.",
+    "Alias matching can be ambiguous (for example, go); skill precision is not audited.",
+    "Duplicate candidates are heuristic decisions, not audited true duplicates.",
+    "Latency is local, sequential and cached; it is not a production SLA."
+  ]
+}

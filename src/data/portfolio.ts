@@ -78,10 +78,13 @@ export const projects: Project[] = [
   {
     title: 'Job Posting Skill Demand Analyzer Engine & REST API',
     description:
-      'Validated an asynchronous Python and PySpark service on 200,000 real posting records, producing 174,361 canonical postings and 66,339 skill matches across 73 skills; 1,000 populated sequential warm-cache Python-skill requests measured 0.833ms p95 locally.',
+      'Validated an asynchronous Python and PySpark service on 500,000 real posting records, producing 411,135 canonical postings and 156,491 skill matches across 73 skills; 1,000 populated sequential warm-cache Python-skill requests measured 0.738ms p95 locally.',
     technologies: [
       'Python',
       'PySpark',
+      'Next.js',
+      'React',
+      'TypeScript',
       'FastAPI',
       'PostgreSQL',
       'Redis',
@@ -90,6 +93,7 @@ export const projects: Project[] = [
     ],
     period: 'Jan–Mar 2025 · Updated Oct 2026',
     github: 'https://github.com/Daniel21b/Job-Market-Analytics',
+    liveDemo: 'https://danielberhane.vercel.app/en/analytics',
   },
 ];
 
@@ -98,11 +102,14 @@ export const homepageSecondaryProjects = [
   {
     name: 'Job Posting Skill Demand Analyzer Engine & REST API',
     description:
-      'Reconciled 200,000 real posting records into 174,361 canonical postings with PySpark, matched 73 skills, and served populated warm-cache FastAPI filters at 0.833ms p95 over 1,000 local requests.',
+      'Reconciled 500,000 real posting records into 411,135 canonical postings with PySpark, matched 73 skills, and served populated warm-cache FastAPI filters at 0.738ms p95 over 1,000 local requests.',
     url: 'https://github.com/Daniel21b/Job-Market-Analytics',
     technologies: [
       'Python',
       'PySpark',
+      'Next.js',
+      'React',
+      'TypeScript',
       'FastAPI',
       'PostgreSQL',
       'Redis',
