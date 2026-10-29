@@ -446,7 +446,7 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
     example:
       'Dashboard example: select Python and a month range to see matching postings and their share of retained records. Counts describe this sample, not all hiring activity.',
     status:
-      'Validated locally on a 200,000-record real-posting sample. Warm-cache timings are development measurements, not production guarantees. AWS execution adapters are implemented but deployment is not verified.',
+      'Validated locally on a 500,000-record real-posting sample. Warm-cache timings are development measurements, not production guarantees. AWS execution adapters are implemented but deployment is not verified.',
     lanes: [
       {
         name: '01 / Submit background work',
@@ -548,7 +548,7 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
         'Canonicalizes fields, classifies exact and bounded near-match reposts, and repartitions on company, title and location.',
         'Canonical postings and partition measurements.',
         'Two copies of the same ad can become one canonical posting.',
-        'Duplicate rules have boundaries. This sample flagged 25,639 candidates (12.82%); country-only locations can conflate distinct openings. This is not a market-wide duplicate percentage.',
+        'Duplicate rules have boundaries. This sample flagged 88,865 candidates (17.77%); country-only locations can conflate distinct openings. This is not a market-wide duplicate percentage.',
         'src/skill_analytics/spark/pipeline.py',
       ),
       stage(
