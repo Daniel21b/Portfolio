@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+/* Generated reports and binary benchmark data are not UI class sources. */
+@source not '../../artifacts';
+@source not '../../output';
+
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
