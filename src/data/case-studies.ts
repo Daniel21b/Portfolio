@@ -210,7 +210,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     year: 'Jul–Sep 2025 · Updated Oct 2026',
     role: 'Independent backend builder',
     scope:
-      'Python, PostgreSQL, Lambda, Step Functions, S3, Textract, Amazon Bedrock, Streamlit',
+      'Python, PostgreSQL, Lambda, Step Functions, S3, Textract, Amazon Bedrock, Streamlit, Google OAuth/OIDC',
     evidenceStatus:
       'Implementation added October 2026; local tests, cloud validation pending',
     outcome:
@@ -220,6 +220,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
     contributionSummary:
       'Built a serverless invoice pipeline with AWS CDK and Step Functions coordinating Textract extraction and Lambda processing. Added a Streamlit review screen that keeps uncertain extractions out of PostgreSQL until a reviewer validates them. Added Amazon Bedrock fallback extraction for missing or low-confidence fields using the existing invoice schema.',
     architecture: [
+      { name: 'Google OAuth / OIDC', detail: 'Approved reviewer sign-in' },
       {
         name: 'S3',
         detail: 'Private invoice upload',
@@ -258,6 +259,7 @@ export const selectedCaseStudies: readonly CaseStudy[] = [
       'Initial project: July–September 2025. Further development in October 2026 added Step Functions orchestration, human review and Bedrock fallback.',
     ],
     contribution: [
+      'Added Google OAuth/OIDC sign-in with verified-email allowlisting, explicit user-ID attribution and authorization checks before every portal data page. Live callback testing awaits owner configuration.',
       'Built a serverless invoice pipeline with AWS CDK and Step Functions coordinating Textract extraction and Lambda processing.',
       'Added a Streamlit review screen that keeps uncertain extractions out of PostgreSQL until a reviewer validates them.',
       'Added Amazon Bedrock fallback extraction for missing or low-confidence fields using the existing invoice schema.',
