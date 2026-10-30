@@ -26,6 +26,8 @@ Bedrock can propose values for missing or uncertain fields, but its suggestions
 must be reviewed. Streamlit lets a reviewer correct and approve those values.
 Only valid, sufficiently trusted or approved fields reach PostgreSQL.
 
+Google OAuth/OpenID Connect authenticates reviewers. Every portal data page checks the verified identity, token expiry and an approved-email-to-user-ID mapping before AWS/database access. The old shared-password login is removed. Local authorization and Streamlit tests pass; Google client settings and live callback verification remain pending. See [owner setup](https://github.com/Daniel21b/invoice_pipeline/blob/master/docs/GOOGLE_OAUTH_SETUP.md).
+
 The important design decision is the database boundary: extraction is not the
 same as acceptance. Candidates stay in S3 until validation or human review.
 CDK defines the AWS infrastructure. Cloud deployment and live provider checks

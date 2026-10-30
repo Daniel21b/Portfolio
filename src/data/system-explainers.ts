@@ -67,8 +67,15 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
     example:
       'Illustrative invoice: INV-1042 from Cedar Supply, dated 2026-10-01, total $240.00. Suppose the total is difficult to read.',
     status:
-      'Locally tested implementation. AWS deployment and live provider validation remain pending; the current path accepts single-page PDFs and supported images.',
+      'Locally tested implementation with Google OAuth/OIDC reviewer sign-in. Google client configuration, live sign-in, AWS deployment and provider validation remain pending; the current path accepts single-page PDFs and supported images.',
     lanes: [
+      {
+        name: '00 / Verify the reviewer',
+        note: 'Google confirms identity; the portal separately decides who may access invoices.',
+        columns: [col('google-auth')],
+        destination:
+          'Approved, unexpired identity → portal upload and review pages',
+      },
       {
         name: '01 / Read the document',
         note: 'A versioned source becomes an extraction artifact. The workflow passes references, not the whole document.',
@@ -91,6 +98,18 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
       },
     ],
     stages: [
+      stage(
+        'google-auth',
+        'Google OAuth / OpenID Connect',
+        'Authenticate and authorize reviewers',
+        'Google sign-in through Streamlit and a private approved-email mapping.',
+        'Streamlit validates the callback. Each page checks Google issuer, verified email, subject and expiry, then maps the approved email to a distinct database user ID.',
+        'Authorized portal session with explicit audit attribution.',
+        'An approved reviewer signs in with Google before opening pending extractions.',
+        'Unlisted or expired identities and missing configuration are denied before S3 or database access. Live Google callback testing is pending owner configuration.',
+        'src/web_portal/authentication.py · docs/GOOGLE_OAUTH_SETUP.md',
+      ),
+
       stage(
         'upload',
         'S3 upload',
@@ -170,6 +189,12 @@ export const systemExplainers: Record<CaseSlug, SystemExplainerData> = {
       ),
     ],
     stack: [
+      tech(
+        'Google OAuth / OIDC',
+        'Reviewer identity',
+        'Authenticates Google accounts; a server-side allowlist controls portal access.',
+        'Avoids a shared application password while preserving explicit access and audit mapping.',
+      ),
       tech(
         'Python',
         'Language',
